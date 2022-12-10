@@ -47,7 +47,7 @@ permalink: /about/
 </tbody>
 </table>
 <p><strong>Analyst</strong>
-<p><p><img src="https://static.wixstatic.com/media/b91c06_02017691199b4d6f95be20bc178c4e5a~mv2_d_10098_5579_s_4_2.png/v1/crop/x_0,y_42,w_10098,h_5453/fill/w_360,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/LOGO%20PERPI%20ok.png" width="40" />&nbsp; <a href="https://www.perpi.or.id/"><strong>(Perhimpunan Riset Pemasaran Indonesia)</strong></a> <em> | Jakarta, Indonesia</em> | Sep 2019 &ndash; Feb 2020</p>
+<p><p><img src="https://static.wixstatic.com/media/b91c06_02017691199b4d6f95be20bc178c4e5a~mv2_d_10098_5579_s_4_2.png/v1/crop/x_0,y_42,w_10098,h_5453/fill/w_360,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/LOGO%20PERPI%20ok.png" width="40" />&nbsp; <a href="https://www.perpi.or.id/"><strong>(PERPI)</strong></a> <em> | Jakarta, Indonesia</em> | Sep 2019 &ndash; Feb 2020</p>
 <ul>
 <li>Create questionnaire &amp; deck analysis for <a href="https://www.perpi.or.id/event-details/indonesia-market-behavior-outlook-2020"> Indonesia Market Behavior Outlook 2020</a>. Also, present a topic of mobility ecosystem.</li>
 </ul>
