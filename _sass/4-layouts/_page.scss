@@ -34,7 +34,7 @@
 .page__content {
   margin-bottom: 45px;
   p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: normal;
     color: $gray;
     img {
@@ -44,6 +44,7 @@
   ul li,
   ol li {
     margin-bottom: 15px;
+    font-size: 16px;
     line-height: normal;
   }
 }
