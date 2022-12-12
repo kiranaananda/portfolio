@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Resume
+title: Publication
 permalink: /publication/
 ---
 
-Academic projects
+<p style="text-align: center;">Academic projects</p>
 
 <table style="height: 170px;" width="559">
 <tbody>
