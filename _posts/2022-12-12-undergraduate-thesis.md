@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "TL;DR: Undergraduate Thesis" 
-date:
-image:
+date: 2022-12-12 18:05:55 +0300
+image: '/assets/img/01.jpg'
 tags: research
 ---
 
