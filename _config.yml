@@ -1,6 +1,6 @@
 title: Kirana Ananda - Researcher
 logo:  # you can add own logo.
-description: Passionate about applied psychological research
+description: 
 baseurl: "/portfolio" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
@@ -10,7 +10,7 @@ author:
   name: Kirana Ananda
   image: '/assets/img/kirana.jpg'
   job: Sr. Market Research Analyst at Bukalapak
-  bio: I am new in coding and super interested in scraping projects!
+  bio: Enthusiastic about applied psychological research in tech field!
   email: kiranadwima@gmail.com
 
 
