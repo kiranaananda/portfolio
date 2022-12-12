@@ -1,12 +1,10 @@
 ---
 layout: post
-title:  "TL;DR: Undergraduate Thesis" 
+title:  "Undergraduate Thesis: Benevolence is more favoured than integrity and ability in collaboration" 
 date: 2018-11-10 18:05:55 +0300
-image: "https://media.licdn.com/dms/image/C5112AQEiKwzU2ww6TA/article-cover_image-shrink_720_1280/0/1540386207128?e=1676505600&v=beta&t=TlmgtUOptPcX3e-jw30YHCs9KQKDhdk_gJv37PSHwM8"
 tags: research
 ---
 
-## Benevolence is more favoured than integrity and ability in collaboration
 <img src= "https://media.licdn.com/dms/image/C5112AQEiKwzU2ww6TA/article-cover_image-shrink_720_1280/0/1540386207128?e=1676505600&v=beta&t=TlmgtUOptPcX3e-jw30YHCs9KQKDhdk_gJv37PSHwM8">
 
 Integration and connectedness are keys to organizational development alongside with data-driven decision making and intelligent network. To compensate the transformational changes, most of the human resources departments claim their fond for the situation by reforming their framework into collaboration and collegiality settings. Those variables are believed to make everything more efficient and convenient yet friendly towards informational uncertainty.
