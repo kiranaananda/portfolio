@@ -1,9 +1,6 @@
 ---
 layout: post
-title:  TL;DR: Undergraduate Thesis
-date:   
-image: 
-tags:   
+title:  TL;DR: Undergraduate Thesis 
 ---
 ## Benevolence is more favoured than integrity and ability in collaboration
 <img src= "https://media.licdn.com/dms/image/C5112AQEiKwzU2ww6TA/article-cover_image-shrink_720_1280/0/1540386207128?e=1676505600&v=beta&t=TlmgtUOptPcX3e-jw30YHCs9KQKDhdk_gJv37PSHwM8"> </img>
