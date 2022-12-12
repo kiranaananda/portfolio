@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Undergraduate Thesis: Benevolence is more favoured than integrity and ability in collaboration" 
+title:  "Undergraduate thesis: Benevolence is more favoured than integrity and ability in collaboration" 
 date: 2018-11-10 18:05:55 +0300
 image: '/assets/img/benevolence.jpg'
 tags: research
