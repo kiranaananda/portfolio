@@ -2,11 +2,13 @@
 layout: post
 title:  "How market research consultants turn Venn diagram concept to derived importance analysis"
 date:   2020-02-03 18:05:55 +0300
-image:  '/assets/img/importance_analysis.jpg'
+image:  '/assets/img/derived_analysis.jpg'
 tags:   research
 ---
 
 The brand-marketing team typically considers "the imagery" while launching a product and/or updating the marketing strategy. As a key factor influencing consumers to consider making a purchase, it is important to make sure that brand image is consistent with consumer thought. Ideally, prospective brand image inquired from qualitative study and later it is relaunched in a wider sample with quantitative approach. 
+
+<p><img src="https://kiranaananda.github.io/portfolio/assets/img/importance_analysis.jpg" style="vertical-align:middle;margin:0px 0px" /></p>
 
 In the interest of getting better picture of attribute competitiveness, market researcher needs to address each score of (1) stated importance and (2) derived importance first before suggesting on what should be listed for baseline in creating a unique-value-positioning.  The score of (1) stated importance and (2) derived importance later poured into 4 quadrants:
 
@@ -20,7 +22,7 @@ Periphery area
 
 One of familiar way to address derived importance could use Jaccard similarity coefficient. Jaccard similarity is written in set notation using the intersection and union:
 
-<p style="text-align: center;"><img src="https://i2.wp.com/www.displayr.com/wp-content/uploads/2018/09/Jaccard-formula.png?zoom=1.5&amp;resize=137%2C55&amp;ssl=1" alt="" width="150" height="60" /></p>
+<p style="text-align: center;"><img src="https://i2.wp.com/www.displayr.com/wp-content/uploads/2018/09/Jaccard-formula.png?zoom=1.5&amp;resize=137%2C55&amp;ssl=1" alt="" width="150" height="60" style="vertical-align:middle;margin:0px 0px"/></p>
 
 The implication of the formula is:
 - A= brands used in the past month(s), e.g. “Which, if any, of the following pasteurized milk brands do you consume in the past 1 month?”
@@ -28,7 +30,7 @@ The implication of the formula is:
 
 **How to Run**
 
-Here is the dataset (due to confidentiality I can not show the real brand name) that performed to obtain the importance analysis. Basically, the step is just calculating the percent of those who have matching score between brand used and imagery portrayed within respective brand.
+<a href="https://docs.google.com/spreadsheets/d/1qKEw-h1_iaIZQ-4PTzTFkp3-qVxk0uGD/edit?usp=share_link&amp;ouid=106328679956588939832&amp;rtpof=true&amp;sd=true">Here</a> is the dataset (due to confidentiality I can not show the real brand name) that performed to obtain the importance analysis. Basically, the step is just calculating the percent of those who have matching score between brand used and imagery portrayed within respective brand.
 Another way to do it in python scripts can be done with:
 
 {% highlight ruby %}
