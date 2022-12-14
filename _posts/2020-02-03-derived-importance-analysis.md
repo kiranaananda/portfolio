@@ -7,9 +7,7 @@ tags:   research
 ---
 
 The brand-marketing team typically considers "the imagery" while launching a product and/or updating the marketing strategy. As a key factor influencing consumers to consider making a purchase, it is important to make sure that brand image is consistent with consumer thought. Ideally, prospective brand image inquired from qualitative study and later it is relaunched in a wider sample with quantitative approach. 
-
-<img src= '/assets/img/importance_analysis.jpg' style="vertical-align:middle;margin:0px 0px">
-
+<img src= 'https://github.com/kiranaananda/portfolio/blob/gh-pages/assets/img/importance_analysis.jpg' style="vertical-align:middle;margin:0px 0px">
 In the interest of getting better picture of attribute competitiveness, market researcher needs to address each score of (1) stated importance and (2) derived importance first before suggesting on what should be listed for baseline in creating a unique-value-positioning.  The score of (1) stated importance and (2) derived importance later poured into 4 quadrants:
 
 Spotlight area
@@ -21,9 +19,7 @@ Periphery area
 - Low priority	: (1) & (2) both below average
 
 One of familiar way to address derived importance could use Jaccard similarity coefficient. Jaccard similarity is written in set notation using the intersection and union:
-
 <p style="text-align: center;"><img src="https://i2.wp.com/www.displayr.com/wp-content/uploads/2018/09/Jaccard-formula.png?zoom=1.5&amp;resize=137%2C55&amp;ssl=1" alt="" width="150" height="60" style="vertical-align:middle;margin:0px 0px"/></p>
-
 The implication of the formula is:
 - A= brands used in the past month(s), e.g. “Which, if any, of the following pasteurized milk brands do you consume in the past 1 month?”
 - B = attributes by brand, e.g. “Which, if any, of the following attributes do you think owned by the brands below?” 
