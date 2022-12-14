@@ -8,7 +8,7 @@ tags:   research
 
 The brand-marketing team typically considers "the imagery" while launching a product and/or updating the marketing strategy. As a key factor influencing consumers to consider making a purchase, it is important to make sure that brand image is consistent with consumer thought. Ideally, prospective brand image inquired from qualitative study and later it is relaunched in a wider sample with quantitative approach. 
 
-<p><img src="https://kiranaananda.github.io/portfolio/assets/img/importance_analysis.jpg" style="vertical-align:middle;margin:0px 0px" /></p>
+<p><img src="assets/img/importance_analysis.jpg" style="vertical-align:middle;margin:0px 0px" /></p>
 
 In the interest of getting better picture of attribute competitiveness, market researcher needs to address each score of (1) stated importance and (2) derived importance first before suggesting on what should be listed for baseline in creating a unique-value-positioning.  The score of (1) stated importance and (2) derived importance later poured into 4 quadrants:
 
