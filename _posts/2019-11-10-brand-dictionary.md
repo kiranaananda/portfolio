@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  'Cost Reduction 101: Simple Code to Code Top of Mind'
+title:  'Cost reduction 101: python code to code top of mind'
 date:   2019-11-10 18:05:55 +0300
 image:  '/assets/img/brand%20dictionary.jpg'
 tags:   research
