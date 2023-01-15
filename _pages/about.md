@@ -11,8 +11,11 @@ permalink: /about/
 </tr>
 </tbody>
 </table>
+
+<img src="https://static.vecteezy.com/system/resources/previews/002/318/221/non_2x/content-research-icon-free-vector.jpg" alt="" width="35" height="35" style="vertical-align:middle;margin:0px 0px"/><a href="https://drive.google.com/file/d/1taV3iLbXQ0pWNBm5LIo6I2TarTjj0J-l/view?usp=sharing">PDF version</a>
+
 <p>&nbsp;</p>
-<p>I have been in a research field for 4+ years as market research consultant and consumer insight in client-side. I utilize my quantitative and data science skills almost daily, and qualitative only when it needed. I&rsquo;m interested in topics that relate to decision-making, social media, marketing impact and product development.</p>
+<p>I have been in a research field for 4+ years as market research consultant and consumer insight in client-side. I utilize my quantitative and data science skills almost daily, and qualitative occasionally. I am interested in fields of consumers decision-making, social media, marketing impact and product development. </p>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
 <tbody>
@@ -26,7 +29,7 @@ permalink: /about/
 <ul>
 <li>Create and present bi-weekly analysis from company database, consumer&rsquo;s survey, media monitoring, and social listening to showcase brand activity of owned product verticals and its competitors to marketing &amp; management team</li>
 <li>Conduct 4-7 primary &amp; secondary ad hoc research every quarter, typically in form of go-to-market, segmentation, attitude, product concept, creative evaluation, market sizing, brand health and market fit for mainly O2O, SaaS, fintech, re-commerce, and gaming sectors</li>
-<li>Analyse the database that combine marketing investment and consumer&rsquo;s point of view to streamline media planning, including scrap competitor&rsquo;s campaign to keep up with their product highlight through free python package which then reduce company cost for data subscribe</li>
+<li>o	Analyse the database to streamline media planning, including scraping and dashboarding competitor&rsquo;s campaigns to keep up with their product highlights using a free Python package that can reduce company costs for data subscription e</li>
 <li>Plan, direct and oversee week-to-week task of 1 freelance researcher</li>
 </ul>
 <p>&nbsp;</p>
@@ -72,5 +75,5 @@ permalink: /about/
 </table>
 <p><strong>Bachelor of Psychology </strong>(<em>S.Psi</em>), 2014-2018, GPA:&nbsp; 3.89 of 4.00 (cum laude)</p>
 <p>Universitas Gadjah Mada, Yogyakarta, Indonesia</p>
-<p>Won a silver medal in national psychometrics competition<em>. </em>Participating 2 international conferences (ICP &amp; AAICP) by being a fellow in CICP UGM. Team leader of 21 mentors for peer counsellor program. Student unit member of disaster volunteer and journalistic club. Part-timing as teaching assistant in the final year.</p>
+<p>Won a silver medal in national psychometrics competition<em>. </em>Participating 2 international conferences (ICP &amp; AAICP) by being a fellow in CICP UGM. Team leader of 21 mentors for peer counsellor program. Student unit member of disaster volunteer and journalistic club. Part-timing as teaching & research assistant in the final year.</p>
 
