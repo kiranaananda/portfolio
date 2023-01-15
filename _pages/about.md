@@ -3,7 +3,13 @@ layout: page
 title: Resume
 permalink: /about/
 ---
-
+<table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr style>
+<td style="text-align: center"><img src="https://static.vecteezy.com/system/resources/previews/002/318/221/non_2x/content-research-icon-free-vector.jpg" alt="" width="35" height="35" style="vertical-align:middle;margin:0px 0px"/><a href="https://drive.google.com/file/d/1taV3iLbXQ0pWNBm5LIo6I2TarTjj0J-l/view?usp=sharing">PDF version</a></td>
+</tr>
+</tbody>
+</table>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
 <tbody>
 <tr style>
@@ -11,9 +17,6 @@ permalink: /about/
 </tr>
 </tbody>
 </table>
-
-<img src="https://static.vecteezy.com/system/resources/previews/002/318/221/non_2x/content-research-icon-free-vector.jpg" alt="" width="35" height="35" style="vertical-align:middle;margin:0px 0px"/><a href="https://drive.google.com/file/d/1taV3iLbXQ0pWNBm5LIo6I2TarTjj0J-l/view?usp=sharing">PDF version</a>
-
 <p>&nbsp;</p>
 <p>I have been in a research field for 4+ years as market research consultant and consumer insight in client-side. I utilize my quantitative and data science skills almost daily, and qualitative occasionally. I am interested in fields of consumers decision-making, social media, marketing impact and product development. </p>
 <p>&nbsp;</p>
@@ -75,5 +78,5 @@ permalink: /about/
 </table>
 <p><strong>Bachelor of Psychology </strong>(<em>S.Psi</em>), 2014-2018, GPA:&nbsp; 3.89 of 4.00 (cum laude)</p>
 <p>Universitas Gadjah Mada, Yogyakarta, Indonesia</p>
-<p>Won a silver medal in national psychometrics competition<em>. </em>Participating 2 international conferences (ICP &amp; AAICP) by being a fellow in CICP UGM. Team leader of 21 mentors for peer counsellor program. Student unit member of disaster volunteer and journalistic club. Part-timing as teaching & research assistant in the final year.</p>
+<p>Won a silver medal in national psychometrics competition<em>. </em>Participating 2 international conferences (ICP &amp; AAICP) by being a fellow researcher in CICP UGM. Team leader of 21 mentors for peer counsellor program. Student unit member of disaster volunteer and journalistic club. Part-timing as teaching & research assistant in the final year.</p>
 
