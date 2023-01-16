@@ -3,7 +3,7 @@ layout: page
 title: Resume
 permalink: /about/
 ---
-<table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
+<table style="background-color: #ffffff; margin-left: auto; margin-right: auto;">
 <tbody>
 <tr style>
 <td style="text-align: center"><img src="https://static.vecteezy.com/system/resources/previews/002/318/221/non_2x/content-research-icon-free-vector.jpg" alt="" width="35" height="35" style="vertical-align:middle;margin:0px 0px"/><a href="https://drive.google.com/file/d/1taV3iLbXQ0pWNBm5LIo6I2TarTjj0J-l/view?usp=sharing">PDF version</a></td>
@@ -32,7 +32,7 @@ permalink: /about/
 <ul>
 <li>Create and present bi-weekly analysis from company database, consumer&rsquo;s survey, media monitoring, and social listening to showcase brand activity of owned product verticals and its competitors to marketing &amp; management team</li>
 <li>Conduct 4-7 primary &amp; secondary ad hoc research every quarter, typically in form of go-to-market, segmentation, attitude, product concept, creative evaluation, market sizing, brand health and market fit for mainly O2O, SaaS, fintech, re-commerce, and gaming sectors</li>
-<li>o	Analyse the database to streamline media planning, including scraping and dashboarding competitor&rsquo;s campaigns to keep up with their product highlights using a free Python package that can reduce company costs for data subscription e</li>
+<li>Analyse the database to streamline media planning, including scraping and dashboarding competitor&rsquo;s campaigns to keep up with their product highlights using a free Python package that can reduce company costs for data subscription e</li>
 <li>Plan, direct and oversee week-to-week task of 1 freelance researcher</li>
 </ul>
 <p>&nbsp;</p>
