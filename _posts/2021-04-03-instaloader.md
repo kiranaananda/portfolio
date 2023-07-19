@@ -6,17 +6,16 @@ image:  '/assets/img/instaloader.jpg'
 tags:   research
 ---
 
-After working with YouGov for the past 2 years, I decided to move to tech company because I found it thrilling working on tracking reports with them. My experience with Gojek somewhat made me wonder regarding what the client would do next with the data. I believed that in order to get the answers, I needed to move to client-side and understand the overall pattern about research use case.
-I joined Bukalapak, an e-commerce company which YouGov client at the time. I sit in a position called Marketing Data Insight, where I collaborate closely with data scientist and brand analyst. My very first independent yet mesmerizing project was social media data scraping.
+After working with YouGov for the past 2 years, I decided to move to a tech company because I found it thrilling working on tracking reports with them. My experience with Gojek somewhat made me wonder what the client would do next with the data. I believed that in order to get the answers, I needed to move to the client side and understand the overall pattern of the research use case. I joined Bukalapak, an e-commerce company that was a YouGov client at the time. I sit in a position called Marketing Data Insight, where I collaborate closely with data scientists and brand analysts. My very first independent yet mesmerizing project was social media data scraping.
 
 **Background**
 
-E-commerce is a very fast market, and campaigns can run very quickly in a daily timeframe. Bukalapak is not the market leader at the time, and the team would like to better understand what campaigns the competitors are putting effort into, so that we do not fall into the stream and instead establish our own unique position.
+E-commerce is a very fast market, and campaigns can run very quickly in a daily timeframe. Bukalapak is not the market leader at the time, and the team would like to better understand what campaigns the competitors are putting effort into so that we do not fall into the stream and instead establish our own unique position.
 
 **How to**
 
 
-I coincidentally found a library called Instaloader and I started to read the documentation. There were several walkthroughs that could be followed easily and here was my script after compiling some of the expert suggestion in the discussion.
+I coincidentally found a library called Instaloader, and I started to read the documentation. There were several walkthroughs that could be followed easily, and here is my script after compiling some of the expert suggestions in the discussion.
 {% highlight ruby %}
 from argparse import ArgumentParser
 from glob import glob
@@ -107,9 +106,9 @@ d_data.to_excel('bukalapak.xlsx', index=False)
 
 **Final Leg**
 
-It was the time to put researcher worked on content analysis: categorizing the post (could put judgement by either picture, caption, or both) to make the data quantifiable. I categorized it based on definition in our database categories along with
+It was time to put the researcher to work on content analysis: categorizing the post (by either picture, caption, or both) to make the data quantifiable. I categorized it based on the definition in our database categories, along with
 -	Engagement: product display
 -	Engagement: education
 -	Engagement: game
-Later on, I extracted it to Google Studio and created editable dashboard to count the number of interaction by time, brand campaign, category promoted, post per timeframe, and engagement rate. There should be a more advanced method that can be used by involving Artificial Intelligence Research Team to replace manual content analysis. However, due to post range is very dynamic to relatedness between engagement and single product, hence not it is not being pursued at the moment. 
+Later on, I extracted it to Google Studio and created an editable dashboard to count the number of interactions by time, brand campaign, category promoted, post per timeframe, and engagement rate. There should be a more advanced method that can be used by involving the Artificial Intelligence Research Team to replace manual content analysis. However, due to the fact that the post range is very dynamic due to the high relatedness between engagement and single products, it is not being pursued at the moment.
 
