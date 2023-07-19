@@ -2,7 +2,7 @@
 layout: post
 title:  "Pilot study: Inducing first-time investor"
 date:   2021-11-03 15:05:25 +0300
-image:  '/assets/img/bibit.jpg'
+image:  '/assets/img/bibit-cover.jpg'
 tags:   research
 ---
 
@@ -110,27 +110,34 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
        <li>Product knowledge: apply prior knowledge about investment.</li>
        <li>App: easy registration (paperless process), easy order process, fast trading time</li>
        <li>Feature: none (do not care enough at first)</li>
-      </ul>
+     </ul>
+   </li>
    <li>Mutual fund (Bareksa)
      <ul>
        <li>Product knowledge: mutual funds (fixed income) are more stable.</li>
        <li>App: no-lag app</li>
        <li>Feature: sort by profit, various investment managers, various mutual-fund types</li>
      </ul>
+   </li>
    <li>Switching the portfolio ratio from stock to mutual fund
    <ul>
      <li>No time to learn like professional trader</li>
-    </ul>
+     </ul>
    </li>
  <li>Switching behaviours: He is pen to switching but do not have any brands in mind yet. 
    <ul>
      <li>Reason to switch: if there is an app that gives an up-to-date feature such as better visibility (chart or UI design), easy to use (sleekness), and leading brands have been figured out.</li>
+     </ul>
+   </li>
 </ul>
+
 <hr>
 
 **Psychological dynamics**
 
 <p><img src="https://kiranaananda.github.io/portfolio/assets/img/bibit.jpg" style="vertical-align:middle;margin:0px 0px" /></p>
+
+<hr>
 
 **Summary and way forwards**
 
