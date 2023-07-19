@@ -13,11 +13,11 @@ Bibit is a mutual fund investment platform focusing primarily on first-time inve
 
 <h3>Background and assumptions</h3>
 
-Background
+<h4>Background</h4>
 - Bibit has achieved 5 million users and is planning sustainable user growth among first-time investors.
 - Bibit is in search of the right brand positioning to engage with its target market and win over competitors.
 
-Assumptions to formulate problem statements
+<h4>Assumptions to formulate problem statements</h4>
 - The right segment leads to the right brand positioning. When brand positioning has not been made, it may be true that Bibit is still searching for the right segment too.
 - The market size tells the growth direction: internet penetration is 73.7% (202 million), but Bibit share is 2.5% among the general population. Despite the fact that a real market size would be accountable once the right segment (targeted population) has been met, 5 million must not be saturated yet.
 - Brand must map the needs and attitudes of its segment in order to create brand positioning. Baker et al. (2018) suggest one can classify investors through social demographics: age, gender, and wealth to be applied as initial criteria, but of course that’s not enough, so it’s our chance to comprehend the findings.
@@ -25,14 +25,14 @@ Assumptions to formulate problem statements
 
 <h3>Research designs and questions</h3>
 
-Research questions
+<h4>Research questions</h4>
 - How are the characteristics of our segment?
 - How are the decision steps (this includes but is not limited to the dynamics of psychological processes, trigger identification, and barrier identification) of their investing behavior?
 - What are the comparative motives (pre and post thoughts) of their investing behavior?
 - What are the important attributes (key drivers, hygiene, and opportunity) for the investment sector?
 - What brand image that is already owned or can be strengthen by any of investment brands?
 
-Research design
+<h4>Research design</h4>
 
 The main objectives above actually lie in how to tap into the target market. In order to deepen the knowledge and avoid heuristics, I propose to have a two-phase study: qualitative (especially when we do not have enough clarity on the sector) and quantitative (as a guide for business decisions in a more reliable manner).
 <hr>
@@ -58,7 +58,7 @@ Timeline: 1-1.5 months
 - synthesis with thematic analysis: 2-5 days
 - reporting: 5 days
 
-Main questions
+<h4>Main questions</h4>
 - As you have said that you are (mention the characteristics: e.g., have joined Ajaib in 6 months / currently have 2 stocks and 2 mutual funds in Ajaib / are always adding more funding on a monthly basis, are actively reading the investment news)... can I ask you to go back to the state when you first had the idea about investing and tell me how it has gone from that point to now?
 - Could you please explain to me in any form what you know about your current brand?
 - What makes you stay with your current brand as well as your investment instruments?
@@ -74,7 +74,7 @@ Design: survey with 35-45 questions.
 
 Sample size: a minimum of n = 385 (MoE 5%), but strongly suggest n = 1000 (MoE 3%) for readable segments.
 
-Questionnaire skeleton:
+<h4>Questionnaire skeleton:</h4>
 <ul>
  <li>Brand performance: top of mind, awareness, current used brand, brand used most often, future consideration</li>
  <li>Brand importance and image: a list of attributes gathered from qualitative data</li>
@@ -95,7 +95,7 @@ Analysis: cross-tabulation, reliability test, and hierarchial clustering
 
 <h3>Pilot results</h3>
 
-Respondents Profile: Meet Andreas!
+<h4>Meet Andreas!</h4>
 
 <blockquote>
 Andreas is a single man, aged 25 years old. He works for a tech company as a data scientist. The spending-saving ratio is 3:7, and the monthly income is more than IDR 10 million. He has a net worth above IDR 200 million. He spends his spare time playing computer games and reading.
