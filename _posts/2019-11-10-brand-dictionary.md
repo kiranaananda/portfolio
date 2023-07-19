@@ -6,16 +6,16 @@ image:  '/assets/img/brand%20dictionary.jpg'
 tags:   research
 ---
 
-Unlike offline survey where question is being read and the interviewer coded the answers during assessment, in online survey, it is very less likely for a platform to store pre-coded response of an open question. While it is possible with machine learning, I think that the cost to build with NLP will not be smaller than leaving the junior researcher to code the answers manually when the report demands quantified result. 
+Unlike an offline survey where questions are read and the interviewer codes the answers during assessment, in an online survey, it is very unlikely for a platform to store pre-coded responses to an open question. While it is possible with machine learning, I think that the cost to build with NLP will not be cheaper than leaving the junior researcher to code the answers manually when the report demands quantified results.
 
-Maybe the task still doable in countries where literacy number is above average, but this is something far from expectation when someone is being a researcher with Indonesia participants.  Indonesia language has complexity in formal and informal style in form of articles, direct conversation, and digital communication. Here is the example to say, “I think that this would help in improving your logic skills”.
+Maybe the task is still doable in countries where literacy numbers are above average, but this is far from expected when Indonesian participants give gibberish answers. The Indonesian language has complexity in both formal and informal styles in the form of articles, direct conversation, and digital communication. Here is the example to say, "I think that this would help in improving your logic skills".
 - Formal (articles): Menurutku hal ini akan membantumu meningkatkan kemampuan logika.
 - Informal (direct conversation - general): Menurutku ini akan ngebantu ningkatin skill logika kamu.
 - Informal (digital conversation – Jakartan style): Ini bakal ngebantu lo ningkatin skill logika.
 - Informal (digital communication –2010+): Ini bkal ngebntu lo nngkatin skill logic.
 - Informal (digital communication –2010-): iN1 BkAL nGeBnTu LoE NiNgKtn SkiL LogiK4 qMue
 
-With that quick volution in language styling, it is most likely to happen that people are making typo due to the history that typing incorrectly was viral back then. So, in a survey, possible to happen that a response consists of some variation of brand name. I will use a brand “Frisian Flag” as example. Possible typing that come when aiming to answers with “Frisian Flag” would be:
+With that quick evolution in language styling, it is most likely to happen that people make typos due to the fact that typing incorrectly was viral back then. So, in a survey where a response consists of some variation of the brand name, it is possible to get the common spelling inaccuracy. I will use the brand "Frisian Flag" as an example. Possible typing that comes up when aiming to answer with "Frisian Flag" would be:
 - Fresyen fleg
 - Frsan flag
 - Frisian pleg
@@ -25,7 +25,7 @@ With that quick volution in language styling, it is most likely to happen that p
 - Fr1sian
 and many more…
 
-Hence, when handling a tracking study, I usually done it with python and store the typo as future reference for the upcoming wave. Usually, it cost Rp 175 per cell if involving vendor to help to code it, and approximately 1/2 seconds to put the code via spreadsheet if done standalone. However, with python, it could be quicker than doing manually. I save many hours by this method.
+Hence, when handling a tracking study, I usually do it with Python and store the typo as a future reference for the upcoming wave. Usually, it costs Rp 175 per cell if involving a vendor to help code it, and approximately 1/2 second to put the code into a cell if done standalone. However, with Python, it could be quicker than doing it manually. I save many hours by using this method.
 
 {% highlight ruby %}
 import re
