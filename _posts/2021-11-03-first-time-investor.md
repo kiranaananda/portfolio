@@ -94,9 +94,11 @@ Analysis: cross-tabulation, reliability test, and hierarchial clustering
 **Pilot results**
 
 Respondents Profile: Meet Andreas!
+
 <blockquote>
 Andreas is a single man, aged 25 years old. He works for a tech company as a data scientist. The spending-saving ratio is 3:7, and the monthly income is more than IDR 10 million. He has a net worth above IDR 200 million. He spends his spare time playing computer games and reading.
 </blockquote>
+
 <ul>
  <li>Andreas is an active user of Bareksa (mutual fund, fixed income: IDR 40 mios, 5 items) and Indopremier (stock, IDR 3 mios, 1 item).</li>
  <li>Investment milestones: Andreas has been investing since January 2020 in stocks and then expanding his instrument to mutual funds since May 2021. He plans to increase the assets in mutual funds to IDR 100 million and stock to IDR 20 million by 2022.</li>
@@ -107,7 +109,7 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
      <ul>
        <li>Product knowledge: apply prior knowledge about investment.</li>
        <li>App: easy registration (paperless process), easy order process, fast trading time</li>
-       <li>Feature: none (do not care enough at first)</li></li>
+       <li>Feature: none (do not care enough at first)</li>
       </ul>
    <li>Mutual fund (Bareksa)
      <ul>
@@ -117,14 +119,12 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
      </ul>
    <li>Switching the portfolio ratio from stock to mutual fund
    <ul>
-     <li>No time to learn like professional trader</li></li>
+     <li>No time to learn like professional trader</li>
     </ul>
    </li>
- </ul>
  <li>Switching behaviours: He is pen to switching but do not have any brands in mind yet. 
    <ul>
      <li>Reason to switch: if there is an app that gives an up-to-date feature such as better visibility (chart or UI design), easy to use (sleekness), and leading brands have been figured out.</li>
-    </ul>
 </ul>
 <hr>
 
