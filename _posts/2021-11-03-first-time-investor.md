@@ -66,7 +66,7 @@ Main questions
 - Are you considering switching to another brand? If yes, what are the brand activities that might move you?
 <hr>
 
-<h3>Research plan phase 2: quantitative</h3>h3>
+<h3>Research plan phase 2: quantitative</h3>
 
 Criteria follow the qualitative one.
 
@@ -168,7 +168,7 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
     <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">In spite of app and feature primacy, a brand can emphasize the psychological benefits (trust, fear, security, knowledge addition, etc.) to overcome low economic gains as "learners and growth seekers" understand that this is the farthest return they can receive from a small investment.</span></td>
   </tr>
   <tr>
-    <td class="tg-2hpu"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#616161;background-color:transparent">What brand image is already owned or can be strengthened by any of the investment brands??</span></td>
+    <td class="tg-2hpu"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#616161;background-color:transparent">What brand image is already owned or can be strengthened by any of the investment brands?</span></td>
     <td class="tg-0lax"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Can’t be answered at this stage; we need a quantitative study to get the insights through brand equity analysis..</span></td>
   </tr>
 </tbody>
