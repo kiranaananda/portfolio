@@ -115,7 +115,7 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
      <ul>
        <li>Product knowledge: mutual funds (fixed income) are more stable.</li>
        <li>App: no-lag app</li>
-       <li>Feature: sort by profit, various investment managers, various mutual-fund types</li></li>
+       <li>Feature: sort by profit, various investment managers, various mutual-fund types</li>
      </ul>
    <li>Switching the portfolio ratio from stock to mutual fund
    <ul>
@@ -129,9 +129,11 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
 <hr>
 
 **Psychological dynamics**
+
 <p><img src="https://kiranaananda.github.io/portfolio/assets/img/bibit.jpg" style="vertical-align:middle;margin:0px 0px" /></p>
 
 **Summary and way forwards**
+
 <table class="tg">
 <thead>
   <tr>
