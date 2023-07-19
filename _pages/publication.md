@@ -6,7 +6,7 @@ permalink: /publication/
 
 <p style="text-align: center;">Academic projects</p>
 
-<table style="height: 170px;" width="559">
+<table style="height: 170px; width: 800px;">
 <tbody>
 <tr>
 <td style="width: 400px; text-align: center;">
