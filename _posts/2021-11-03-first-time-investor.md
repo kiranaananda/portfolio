@@ -6,10 +6,12 @@ image:  '/assets/img/bibit-cover.jpg'
 tags:   research
 ---
 
-The case: Bibit is a mutual fund investment platform focusing primarily on first-time investors. Our group vision is to help Indonesians manage their personal finances and invest in the right products so that they can improve their lives by achieving their goals and needs in the future. This year, Bibit has reached 5 Million users. To continue our leads in Indonesia, the goal is to help us gather insights from the people's perspective of Bibit as a brand and how we should position ourselves as compared to our competitors.
+<h3>The case</h3>
+
+Bibit is a mutual fund investment platform focusing primarily on first-time investors. Our group vision is to help Indonesians manage their personal finances and invest in the right products so that they can improve their lives by achieving their goals and needs in the future. This year, Bibit has reached 5 Million users. To continue our leads in Indonesia, the goal is to help us gather insights from the people's perspective of Bibit as a brand and how we should position ourselves as compared to our competitors.
 <hr>
 
-**Background and assumptions**
+<h3>Background and assumptions</h3>
 
 Background
 - Bibit has achieved 5 million users and is planning sustainable user growth among first-time investors.
@@ -21,7 +23,7 @@ Assumptions to formulate problem statements
 - Brand must map the needs and attitudes of its segment in order to create brand positioning. Baker et al. (2018) suggest one can classify investors through social demographics: age, gender, and wealth to be applied as initial criteria, but of course that’s not enough, so it’s our chance to comprehend the findings.
 <hr>
 
-**Research designs and questions**
+<h3>Research designs and questions</h3>
 
 Research questions
 - How are the characteristics of our segment?
@@ -35,7 +37,7 @@ Research design
 The main objectives above actually lie in how to tap into the target market. In order to deepen the knowledge and avoid heuristics, I propose to have a two-phase study: qualitative (especially when we do not have enough clarity on the sector) and quantitative (as a guide for business decisions in a more reliable manner).
 <hr>
 
-**Research plan phase 1: qualitative**
+<h3>Research plan phase 1: qualitative</h3>
 
 Purposive sampling, with criteria: 
 - First-time investor from Baker et al. (2018)
@@ -64,7 +66,7 @@ Main questions
 - Are you considering switching to another brand? If yes, what are the brand activities that might move you?
 <hr>
 
-**Research plan phase 2: quantitative**
+<h3>Research plan phase 2: quantitative</h3>h3>
 
 Criteria follow the qualitative one.
 
@@ -91,7 +93,7 @@ Questionnaire skeleton:
 Analysis: cross-tabulation, reliability test, and hierarchial clustering
 <hr>
 
-**Pilot results**
+<h3>Pilot results</h3>
 
 Respondents Profile: Meet Andreas!
 
@@ -133,13 +135,13 @@ Andreas is a single man, aged 25 years old. He works for a tech company as a dat
 
 <hr>
 
-**Psychological dynamics**
+<h3>Psychological dynamics</h3>
 
 <p><img src="https://kiranaananda.github.io/portfolio/assets/img/bibit.jpg" style="vertical-align:middle;margin:0px 0px" /></p>
 
 <hr>
 
-**Summary and way forwards**
+<h3>Summary and way forwards</h3>
 
 <table class="tg">
 <thead>
