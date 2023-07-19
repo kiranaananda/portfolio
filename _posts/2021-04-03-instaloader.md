@@ -110,5 +110,6 @@ It was time to put the researcher to work on content analysis: categorizing the 
 -	Engagement: product display
 -	Engagement: education
 -	Engagement: game
+
 Later on, I extracted it to Google Studio and created an editable dashboard to count the number of interactions by time, brand campaign, category promoted, post per timeframe, and engagement rate. There should be a more advanced method that can be used by involving the Artificial Intelligence Research Team to replace manual content analysis. However, due to the fact that the post range is very dynamic due to the high relatedness between engagement and single products, it is not being pursued at the moment.
 
