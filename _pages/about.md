@@ -18,7 +18,7 @@ permalink: /about/
 </tbody>
 </table>
 <p>&nbsp;</p>
-<p>I have been in a research field for 4+ years as market research consultant and consumer insight in client-side. I utilize my quantitative and data science skills almost daily, and qualitative occasionally. I am interested in fields of consumers decision-making, social media, marketing impact and product development. </p>
+<p>I have been in the research field for 4+ years as a market research consultant and consumer insight consultant on the client side. I utilize my quantitative and data science skills almost daily and my qualitative skills occasionally. I am interested in the fields of consumer decision-making, social media, marketing impact, and product development.</p>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
 <tbody>
@@ -30,19 +30,18 @@ permalink: /about/
 <p><strong>Senior Market Research Analyst</strong></p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Bukalapak_%282020%29.svg" width="100" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://about.bukalapak.com/en/about-us/" ><strong>(PT. Bukalapak.com Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Jan 2021 &ndash; present</p>
 <ul>
-<li>Create and present bi-weekly analysis from company database, consumer&rsquo;s survey, media monitoring, and social listening to showcase brand activity of owned product verticals and its competitors to marketing &amp; management team</li>
-<li>Conduct 4-7 primary &amp; secondary ad hoc research every quarter, typically in form of go-to-market, segmentation, attitude, product concept, creative evaluation, market sizing, brand health and market fit for mainly O2O, SaaS, fintech, re-commerce, and gaming sectors</li>
-<li>Analyse the database to streamline media planning, including scraping and dashboarding competitor&rsquo;s campaigns to keep up with their product highlights using a free Python package that can reduce company costs for data subscription e</li>
-<li>Plan, direct and oversee week-to-week task of 1 freelance researcher</li>
+<li>Create and present bi-weekly analysis from company database, consumer survey, media monitoring, and social listening to showcase the brand activity of owned product verticals and their competitors to the marketing and management team.</li>
+<li>Conduct 4 –7 primary and secondary ad hoc studies every quarter, typically in the form of go-to-market, segmentation, attitude, product concept, creative evaluation, market sizing, brand health, and market fit for mainly B2B and B2C sectors, such as O2O, SaaS, fintech, re-commerce, fashion, groceries, and gaming.</li>
+<li>Analyse social media data, including scraping and dashboarding competitor's campaigns to keep up with their product highlights, using a free Python package that could reduce company costs for data subscriptions.</li>
+<li>Lead, plan, and evaluate the week-to-week tasks of 1 freelance researcher.</li>
 </ul>
 <p>&nbsp;</p>
 <p><strong>Junior Research Executive</strong></p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/YouGov_logo-red_July2019.png/798px-YouGov_logo-red_July2019.png" width="60" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://yougov.com"><strong>(PT. YouGov Consulting Indonesia)</strong></a><em> | Jakarta, Indonesia</em> | Dec 2018 &ndash; Jan 2021</p>
 <ul>
-<li>An omnibus research-type coordinator and have managed to shorten the timeline and improved project management to increase fastness as selling point</li>
-<li>Conduct research from questionnaire design, statistical analysis, dashboard, and ad-hoc report</li>
-<li>Create pager / infographics to provide research case for business development team</li>
-<li>Field of quantitative research that has been conducted covers brand health, NPS, product test, campaign evaluation, profile study in over 20+ projects from various sectors i.e., FMCG, bank / fintech, e-commerce, marketing agency and telemedicine</li>
+<li>An omnibus research-type coordinator and had managed to shorten the timeline and improved project management to increase speed as selling point.</li>
+<li>Conducted research from questionnaire design, statistical analysis, dashboards, and ad-hoc report filling. The field of quantitative research that had been conducted covers brand health, NPS, product testing, campaign evaluation, and profile study in over 20+ projects from various sectors such as FMCG, banking / fintech, e-commerce, marketing agencies and telemedicine.</li>
+<li>Designed pagers / infographics to provide research cases for the business development team.</li>
 </ul>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
@@ -55,7 +54,7 @@ permalink: /about/
 <p><strong>Analyst</strong>
 <p><p><img src="https://static.wixstatic.com/media/b91c06_02017691199b4d6f95be20bc178c4e5a~mv2_d_10098_5579_s_4_2.png/v1/crop/x_0,y_42,w_10098,h_5453/fill/w_360,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/LOGO%20PERPI%20ok.png" width="40" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.perpi.or.id/" ><strong>(PERPI)</strong></a> <em> | Jakarta, Indonesia</em> | Sep 2019 &ndash; Feb 2020</p>
 <ul>
-<li>Create questionnaire &amp; deck analysis for <a href="https://www.perpi.or.id/event-details/indonesia-market-behavior-outlook-2020"> Indonesia Market Behavior Outlook 2020</a>. Also, present a topic of mobility ecosystem.</li>
+<li>Create a questionnaire and deck analysis for <a href="https://www.perpi.or.id/event-details/indonesia-market-behavior-outlook-2020"> Indonesia Market Behavior Outlook 2020</a>, and presented a topic on the mobility ecosystem.</li>
 </ul>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
@@ -76,7 +75,7 @@ permalink: /about/
 </tr>
 </tbody>
 </table>
-<p><strong>Bachelor of Psychology </strong>(<em>S.Psi</em>), 2014-2018, GPA:&nbsp; 3.89 of 4.00 (cum laude)</p>
+<p><strong>Bachelor of Psychology </strong>(<em>S.Psi</em>), 2014-2018, cummulative GPA:&nbsp; 3.89 of 4.00 (cum laude)</p>
 <p>Universitas Gadjah Mada, Yogyakarta, Indonesia</p>
-<p>Won a silver medal in national psychometrics competition<em>. </em>Participating 2 international conferences (ICP &amp; AAICP) by being a fellow researcher in CICP UGM. Team leader of 21 mentors for peer counsellor program. Student unit member of disaster volunteer and journalistic club. Part-timing as teaching & research assistant in the final year.</p>
+<p>Won a silver medal in the national psychometrics competition. Participating in two international conferences (ICP and AAICP) as a fellow researcher in CICP UGM Team leader of 21 mentors for the peer counselor program. Student unit members of disaster volunteer and journalistic clubs Part-timing as a teaching and research assistant in the final year.</p>
 
