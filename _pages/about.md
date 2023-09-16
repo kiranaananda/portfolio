@@ -28,7 +28,7 @@ permalink: /about/
 </tbody>
 </table>
 <p><strong>Senior Customer Experience Researcher</strong></p>
-<p><img src="https://www.allobank.com/assets/logo-allo.png" width="100" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.allobank.com/" ><strong>(PT. Allo Bank Indonesia Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Sep 2023 &ndash; present</p>
+<p><img src="https://www.allobank.com/assets/logo-allo.png" width="70" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.allobank.com/" ><strong>(PT. Allo Bank Indonesia Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Sep 2023 &ndash; present</p>
 <ul>
 <li>Lead, conduct, and present qualitative and quantitative research findings to stakeholders and provide actionable recommendations for business strategy.</li>
 <li>Develop and maintain customer personas, journey maps, complaints, and other research deliverables.</li>
