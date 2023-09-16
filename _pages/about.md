@@ -6,7 +6,7 @@ permalink: /about/
 <table style="background-color: #ffffff; margin-left: auto; margin-right: auto;">
 <tbody>
 <tr style>
-<td style="text-align: center"><img src="https://static.vecteezy.com/system/resources/previews/002/318/221/non_2x/content-research-icon-free-vector.jpg" alt="" width="35" height="35" style="vertical-align:middle;margin:0px 0px"/><a href="https://drive.google.com/file/d/1taV3iLbXQ0pWNBm5LIo6I2TarTjj0J-l/view?usp=sharing">PDF version</a></td>
+<td style="text-align: center"><img src="https://static.vecteezy.com/system/resources/previews/002/318/221/non_2x/content-research-icon-free-vector.jpg" alt="" width="35" height="35" style="vertical-align:middle;margin:0px 0px"/><a href="https://www.linkedin.com/in/kiranaananda">LinkedIn version</a></td>
 </tr>
 </tbody>
 </table>
@@ -18,7 +18,7 @@ permalink: /about/
 </tbody>
 </table>
 <p>&nbsp;</p>
-<p>I have been in the research field for 4+ years as a market research consultant and consumer insight consultant on the client side. I utilize my quantitative and data science skills almost daily and my qualitative skills occasionally. I am interested in the fields of consumer decision-making, social media, marketing impact, and product development.</p>
+<p>I have been in the research field for 4+ years as a market research consultant and consumer insight on the client side. I utilize my quantitative and data science skills almost daily to analyze complex data sets to evaluate business performance, develop insights, provide recommendations, and utilize my qualitative skills to explain consumer behaviors. I’m interested in the fields of consumer decision-making, business analytics, brand management, marketing impact, and product development. Please leave me a message to discuss a new opportunity.</p>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
 <tbody>
@@ -27,19 +27,28 @@ permalink: /about/
 </tr>
 </tbody>
 </table>
-<p><strong>Senior Market Research Analyst</strong></p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Bukalapak_%282020%29.svg" width="100" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://about.bukalapak.com/en/about-us/" ><strong>(PT. Bukalapak.com Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Jan 2021 &ndash; present</p>
+<p><strong>Senior Customer Experience Researcher</strong></p>
+<p><img src="https://www.allobank.com/assets/logo-allo.png" width="100" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.allobank.com/" ><strong>(PT. Allo Bank Indonesia Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Sep 2023 &ndash; present</p>
 <ul>
-<li>Create and present bi-weekly analysis from company database, consumer survey, media monitoring, and social listening to showcase the brand activity of owned product verticals and their competitors to the marketing and management team.</li>
-<li>Conduct 4 –7 primary and secondary ad hoc studies every quarter, typically in the form of go-to-market, segmentation, attitude, product concept, creative evaluation, market sizing, brand health, and market fit for mainly B2B and B2C sectors, such as O2O, SaaS, fintech, re-commerce, fashion, groceries, and gaming.</li>
-<li>Analyse social media data, including scraping and dashboarding competitor's campaigns to keep up with their product highlights, using a free Python package that could reduce company costs for data subscriptions.</li>
-<li>Lead, plan, and evaluate the week-to-week tasks of 1 freelance researcher.</li>
+<li>Lead, conduct, and present qualitative and quantitative research findings to stakeholders and provide actionable recommendations for business strategy.</li>
+<li>Develop and maintain customer personas, journey maps, complaints, and other research deliverables.</li>
+<li>Work closely with cross-functional teams to ensure customer-centric decision-making across the company.</li>
+<li>Mentor 1 junior researcher, provide feedback, and maintain the process and output of research.</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Senior Market Research Analyst</strong></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Bukalapak_%282020%29.svg" width="100" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://about.bukalapak.com/en/about-us/" ><strong>(PT. Bukalapak.com Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Jan 2021 &ndash; Aug 2023</p>
+<ul>
+<li>Create and present bi-weekly market landscape from the company database, consumer survey, media monitoring, and social listening to showcase brand activities of owned product verticals and their competitors to the marketing and management teams.</li>
+<li>Conduct 4–7 primary and secondary ad hoc studies every quarter, typically in the form of go-to-market, segmentation, user behaviors, new product development, creative evaluation, market sizing, brand health, and product-market fit for mainly B2B (O2O, SaaS, and fintech for MSMEs) and B2C (re-commerce, fashion, groceries, and gaming for end customers) with actionable items.</li>
+<li>Analyze social media data, including scraping and dashboarding competitor's campaigns to keep up with product highlights using a free Python package that reduces company costs for data subscriptions.</li>
+<li>Lead, plan, and evaluate the week-to-week tasks of 1 freelance researcher.archer.</li>
 </ul>
 <p>&nbsp;</p>
 <p><strong>Junior Research Executive</strong></p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/YouGov_logo-red_July2019.png/798px-YouGov_logo-red_July2019.png" width="60" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://yougov.com"><strong>(PT. YouGov Consulting Indonesia)</strong></a><em> | Jakarta, Indonesia</em> | Dec 2018 &ndash; Jan 2021</p>
 <ul>
-<li>An omnibus research-type coordinator and had managed to shorten the timeline and improved project management to increase speed as selling point.</li>
+<li>Managed omnibus studies, streamlining project management to reduce turnaround time from 5 to 3 days per week, enhancing speed as a competitive advantage.</li>
 <li>Conducted research from questionnaire design, statistical analysis, dashboards, and ad-hoc report filling. The field of quantitative research that had been conducted covers brand health, NPS, product testing, campaign evaluation, and profile study in over 20+ projects from various sectors such as FMCG, banking / fintech, e-commerce, marketing agencies and telemedicine.</li>
 <li>Designed pagers / infographics to provide research cases for the business development team.</li>
 </ul>
