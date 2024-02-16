@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Project Category
-permalink: /publication/
+permalink: /category/
 ---
 
 <p style="text-align: center;">Academic projects</p>
