@@ -4,8 +4,20 @@ title: Project Category
 permalink: /category/
 ---
 
-<p style="text-align: center;">Academic projects</p>
+<h2>UX / CX/ Market Research Project</h2>
+<hr></hr>
+<p><a href="https://kiranaananda.github.io/portfolio/2021/11/03/first-time-investor">Pilot study: Inducing first-time investor</a></p>
+<p><a href="https://kiranaananda.github.io/portfolio/2023/03/07/brand-health-tracking-fmcg">Brand health tracking: Leverage brand position</a></p>
+<p><a href="https://kiranaananda.github.io/portfolio/2023/05/28/5G-overview/">Desk research: 5G Overview</a></p>
 
+<h2>Programming and Data Analytics</h2>
+<hr></hr>
+<p><a href="https://kiranaananda.github.io/portfolio/2021/04/03/instaloader/">Social media data scraping</a></p>
+<p><a href="https://kiranaananda.github.io/portfolio/2019/11/10/brand-dictionary/">Cost reduction 101: python code to code top of mind</a></p>
+<p><a href="https://kiranaananda.github.io/portfolio/2020/02/03/derived-importance-analysis/">How market research consultants turn Venn diagram concept to derived importance analysis</a></p>
+
+<h2>Academic projects</h2>
+<hr></hr>
 <table style="height: 170px; width: 800px;">
 <tbody>
 <tr>
