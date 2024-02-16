@@ -56,9 +56,15 @@
   font-size: 16px;
   line-height: 28px;
   text-decoration: italic;
-  color: $gray-dark;
-  background-color: #70cfc8;
+  color: $white;
+  background-color: #588b8b;
   padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.read-more:hover {
+  background-color: #1c3738;
+  color: #f4fff8;
 }
