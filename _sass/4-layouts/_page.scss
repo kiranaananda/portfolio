@@ -16,7 +16,10 @@
   margin-bottom: 30px;
   font-size: 36px;
   line-height: normal;
+}
+.page__title {
   background: linear-gradient(180deg,rgba(255,255,255,0) 50%, #588b8b 50%);
+  display: inline;
 }
 
 .page-image {
