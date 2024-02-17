@@ -85,6 +85,6 @@ permalink: /about/
 </tbody>
 </table>
 <p><strong>Bachelor of Psychology </strong>(<em>S.Psi</em>), 2014-2018, cummulative GPA:&nbsp; 3.89 of 4.00 (cum laude)</p>
-<p>Universitas Gadjah Mada, Yogyakarta, Indonesia</p>
+<p><img src="https://static.igem.org/mediawiki/2021/1/13/T--UGM_Indonesia--img--sponsor-ugm.png" width="70" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://ugm.ac.id/en/"> Universitas Gadjah Mada</a>, Yogyakarta, Indonesia</p>
 <p>Won a silver medal in the national psychometrics competition. Participating in two international conferences (ICP and AAICP) as a fellow researcher in CICP UGM Team leader of 21 mentors for the peer counselor program. Student unit members of disaster volunteer and journalistic clubs Part-timing as a teaching and research assistant in the final year.</p>
 
