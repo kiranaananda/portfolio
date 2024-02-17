@@ -16,41 +16,7 @@
   margin-bottom: 30px;
   font-size: 36px;
   line-height: normal;
-}
-
-.page__title:before{
-  content:"";
-  z-index:-1;
-  left:0em;
-  top:0em;
-  border-width:2px;
-  border-style:solid;
-  border-color:$primary-color;
-  position:absolute;
-  border-right-color:transparent;
-  width:100%;
-  height:1em;
-  transform:rotate(2deg);
-  opacity:0.5;
-  border-radius:0.25em;
-}
-
-.page__title:after{
-  content:"";
-  z-index:-1;
-  left:0em;
-  top:0em;
-  border-width:2px;
-  border-style:solid;
-  border-color:$primary-color;
-  border-left-color:transparent;
-  border-top-color:transparent;
-  position:absolute;
-  width:100%;
-  height:1em;
-  transform:rotate(-1deg);
-  opacity:0.5;
-  border-radius:0.25em;
+  background: linear-gradient(180deg,rgba(255,255,255,0) 50%, #588b8b 50%);
 }
 
 .page-image {
