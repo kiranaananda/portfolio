@@ -27,13 +27,13 @@ permalink: /about/
 </tr>
 </tbody>
 </table>
-<p><strong>Senior Customer Experience Researcher</strong></p>
-<p><img src="https://www.allobank.com/assets/logo-allo.png" width="70" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.allobank.com/" ><strong>(PT. Allo Bank Indonesia Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Sep 2023 &ndash; present</p>
+<p><strong>Customer Research</strong></p>
+<p><img src="https://www.allobank.com/assets/logo-allo.png" width="70" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.allobank.com/" ><strong>(PT. Allo Bank Indonesia Tbk)</strong></a><em> | Jakarta, Indonesia</em> | Sep 2023 &ndash; Jan 2024</p>
 <ul>
-<li>Lead, conduct, and present qualitative and quantitative research findings to stakeholders and provide actionable recommendations for business strategy.</li>
-<li>Develop and maintain customer personas, journey maps, complaints, and other research deliverables.</li>
-<li>Work closely with cross-functional teams to ensure customer-centric decision-making across the company.</li>
-<li>Mentor 1 junior researcher, provide feedback, and maintain the process and output of research.</li>
+<li>Leaded, conducted, and presented qualitative and quantitative research findings to stakeholders and provided actionable recommendations for business strategy.</li>
+<li>Developed and maintained customer personas, journey maps, complaints, and other research deliverables.</li>
+<li>Worked closely with cross-functional teams to ensure customer-centric decision-making across the company.</li>
+<li>Mentored 1 junior researcher, provided feedback, and maintained the process and output of research.</li>
 </ul>
 <p>&nbsp;</p>
 <p><strong>Senior Market Research Analyst</strong></p>
@@ -84,6 +84,10 @@ permalink: /about/
 </tr>
 </tbody>
 </table>
+<p><strong>Social and Consumer Psychology </strong>(<em>M.A.</em>), 2024-2025,</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Nyu_short_color.svg/2560px-Nyu_short_color.svg.png" width="70" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.nyu.edu/"><strong> New York University </strong></a>, New York, United States</p>
+<p>Current courses: Statistics, Psychology of Social Media, Game Design for Education & Research</p>
+<p>&nbsp;</p>
 <p><strong>Bachelor of Psychology </strong>(<em>S.Psi</em>), 2014-2018, cummulative GPA:&nbsp; 3.89 of 4.00 (cum laude)</p>
 <p><img src="https://static.igem.org/mediawiki/2021/1/13/T--UGM_Indonesia--img--sponsor-ugm.png" width="70" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://ugm.ac.id/en/"><strong> Universitas Gadjah Mada</strong></a>, Yogyakarta, Indonesia</p>
 <p>Won a silver medal in the national psychometrics competition. Participating in two international conferences (ICP and AAICP) as a fellow researcher in CICP UGM Team leader of 21 mentors for the peer counselor program. Student unit members of disaster volunteer and journalistic clubs Part-timing as a teaching and research assistant in the final year.</p>
