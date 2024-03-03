@@ -63,7 +63,8 @@ permalink: /about/
 <p><strong>Analyst</strong>
 <p><p><img src="https://static.wixstatic.com/media/b91c06_02017691199b4d6f95be20bc178c4e5a~mv2_d_10098_5579_s_4_2.png/v1/crop/x_0,y_42,w_10098,h_5453/fill/w_360,h_195,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/LOGO%20PERPI%20ok.png" width="40" style="vertical-align:middle;margin:0px 0px" />&nbsp; <a href="https://www.perpi.or.id/" ><strong>(PERPI)</strong></a> <em> | Jakarta, Indonesia</em> | Sep 2019 &ndash; Feb 2020</p>
 <ul>
-<li>Create a questionnaire and deck analysis for <a href="https://www.perpi.or.id/event-details/indonesia-market-behavior-outlook-2020"> Indonesia Market Behavior Outlook 2020</a>, and presented a topic on the mobility ecosystem.</li>
+<li>Created a questionnaire and deck analysis for <a href="https://www.perpi.or.id/event-details/indonesia-market-behavior-outlook-2020"> Indonesia Market Behavior Outlook 2020</a></li>
+<li>Presented a topic on the mobility ecosystem.</li>
 </ul>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
@@ -72,10 +73,34 @@ permalink: /about/
 <td style="text-align: center"><strong>SKILLS</strong></td>
 </tr>
 </tbody>
+  
 </table>
-<p><strong>Language</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : English (fluent), Bahasa Indonesia (native)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p><strong>Software</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Microsoft Excel, Microsoft PowerPoint, Google Workspace, Looker, Data Studio, SPSS, Python 3</p>
-<p><strong>Research</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Intermediate statistics (include but not limited to &ndash; correlation, regression, ANOVA, clustering, Jaccard, factor, &amp; conjoint), qualitative content-thematic analysis, interview &amp; discussion</p>
+<table class="tg">
+  <tr>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Quantitative</span></th>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</span></th>
+  <tr>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Qualitative</span></td>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">In-depth interview, focus group discussion (FGD)</span></td>
+  </tr>
+  <tr>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Computer</span></td>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Looker, Data Studio, Metabase, Redash, SPSS, JASP, SQL, RStudio, beginner Python (web scraping and pandas), Microsoft Excel, Microsoft PowerPoint, and Google Workspace</span></td>
+  </tr>
+  <tr>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Prototyping</span></td>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Figma, Scratch</span></td>
+  </tr>
+  <tr>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Interpersonal</span></td>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Leadership, project management, teaching</span></td>
+  </tr>
+  <tr>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Language</span></td>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">English (fluent), Indonesian (native)</span></td>
+  </tr>
+</table>
+
 <p><strong>&nbsp;</strong></p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
 <tbody>
