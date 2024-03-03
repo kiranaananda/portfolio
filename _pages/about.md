@@ -73,12 +73,12 @@ permalink: /about/
 <td style="text-align: center"><strong>SKILLS</strong></td>
 </tr>
 </tbody>
-  
-</table>
+
 <table class="tg">
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Quantitative</span></th>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</span></th>
+    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Quantitative</span></td>
+    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</span></td>
+  </tr>
   <tr>
     <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Qualitative</span></td>
     <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">In-depth interview, focus group discussion (FGD)</span></td>
