@@ -18,7 +18,7 @@ permalink: /about/
 </tbody>
 </table>
 <p>&nbsp;</p>
-<p>I have been in the research field for 4+ years as a market research consultant and consumer insight on the client side. I utilize my quantitative and data science skills almost daily to analyze complex data sets to evaluate business performance, develop insights, provide recommendations, and utilize my qualitative skills to explain consumer behaviors. I’m interested in the fields of consumer decision-making, business analytics, brand management, marketing impact, and product development. Please leave me a message to discuss a new opportunity.</p>
+<p>I have been in the research field for 5 years as an external market research consultant and consumer insight on the client side. I utilize my quantitative, data science, and qualitative skills to analyze complex data sets, explain consumer behaviors, evaluate business performance, develop insights, and provide recommendations. I’m interested in the fields of consumer decision-making, business analytics, brand management, marketing impact, and product development. Feel free to leave me a message to discuss a new opportunity or say hello.</p>
 <p>&nbsp;</p>
 <table style="background-color: #f1f0f0; margin-left: auto; margin-right: auto;">
 <tbody>
@@ -76,28 +76,28 @@ permalink: /about/
 
 <table class="tg">
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Quantitative</span></td>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</span></td>
+    <td class="tg-73oq"; vertical-align: top>Quantitative</td>
+    <td class="tg-73oq"; vertical-align: top>Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</td>
   </tr>
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Qualitative</span></td>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">In-depth interview, focus group discussion (FGD)</span></td>
+    <td class="tg-73oq"; vertical-align: top>Qualitative</td>
+    <td class="tg-73oq"; vertical-align: top>In-depth interview, focus group discussion (FGD)</td>
   </tr>
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Computer</span></td>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Looker, Data Studio, Metabase, Redash, SPSS, JASP, SQL, RStudio, beginner Python (web scraping and pandas), Microsoft Excel, Microsoft PowerPoint, and Google Workspace</span></td>
+    <td class="tg-73oq"; vertical-align: top>Computer</td>
+    <td class="tg-73oq"; vertical-align: top>Looker, Data Studio, Metabase, Redash, SPSS, JASP, SQL, RStudio, beginner Python (web scraping and pandas), Microsoft Excel, Microsoft PowerPoint, and Google Workspace</td>
   </tr>
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Prototyping</span></td>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Figma, Scratch</span></td>
+    <td class="tg-73oq"; vertical-align: top>Prototyping</td>
+    <td class="tg-73oq"; vertical-align: top>Figma, Scratch</td>
   </tr>
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Interpersonal</span></td>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Leadership, project management, teaching</span></td>
+    <td class="tg-73oq"; vertical-align: top>Interpersonal</td>
+    <td class="tg-73oq"; vertical-align: top>Leadership, project management, teaching</td>
   </tr>
   <tr>
-    <td class="tg-73oq"><span style="font-weight:700;font-style:normal;text-decoration:none;color:#000;background-color:transparent">Language</span></td>
-    <td class="tg-73oq"><span style="font-weight:400;font-style:normal;text-decoration:none;color:#000;background-color:transparent">English (fluent), Indonesian (native)</span></td>
+    <td class="tg-73oq"; vertical-align: top>Language</td>
+    <td class="tg-73oq"; vertical-align: top>English (fluent), Indonesian (native)</td>
   </tr>
 </table>
 
