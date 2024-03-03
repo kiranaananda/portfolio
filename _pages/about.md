@@ -76,28 +76,28 @@ permalink: /about/
 
 <table>
   <tr>
-    <td vertical-align: top>Quantitative</td>
-    <td vertical-align: top>Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</td>
+    <td style="vertical-align: top;">Quantitative</td>
+    <td style="vertical-align: top;">Survey design (SurveyMonkey, Typeform, Qualtrics), questionnaire design, and intermediate statistics (including but not limited to cross-tabulation, correlation, regression, ANOVA, clustering, factor analysis, market basket analysis, and conjoint analysis)</td>
   </tr>
   <tr>
-    <td vertical-align: top>Qualitative</td>
-    <td vertical-align: top>In-depth interview, focus group discussion (FGD)</td>
+    <td style="vertical-align: top;">Qualitative</td>
+    <td style="vertical-align: top;">In-depth interview, focus group discussion (FGD)</td>
   </tr>
   <tr>
-    <td vertical-align: top>Computer</td>
-    <td vertical-align: top>Looker, Data Studio, Metabase, Redash, SPSS, JASP, SQL, RStudio, beginner Python (web scraping and pandas), Microsoft Excel, Microsoft PowerPoint, and Google Workspace</td>
+    <td style="vertical-align: top;">Computer</td>
+    <td style="vertical-align: top;">Looker, Data Studio, Metabase, Redash, SPSS, JASP, SQL, RStudio, beginner Python (web scraping and pandas), Microsoft Excel, Microsoft PowerPoint, and Google Workspace</td>
   </tr>
   <tr>
-    <td vertical-align: top>Prototyping</td>
-    <td vertical-align: top>Figma, Scratch</td>
+    <td style="vertical-align: top;">Prototyping</td>
+    <td style="vertical-align: top;">Figma, Scratch</td>
   </tr>
   <tr>
-    <td vertical-align: top>Interpersonal</td>
-    <td vertical-align: top>Leadership, project management, teaching</td>
+    <td style="vertical-align: top;">Interpersonal</td>
+    <td style="vertical-align: top;">Leadership, project management, teaching</td>
   </tr>
   <tr>
-    <td vertical-align: top>Language</td>
-    <td vertical-align: top>English (fluent), Indonesian (native)</td>
+    <td style="vertical-align: top;">Language</td>
+    <td style="vertical-align: top;">English (fluent), Indonesian (native)</td>
   </tr>
 </table>
 
