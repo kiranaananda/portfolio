@@ -92,7 +92,7 @@ permalink: /about/
     <td style="vertical-align: top;">Figma, Scratch</td>
   </tr>
   <tr>
-    <td style="vertical-align: top;"><strong>Interpersonal  </strong></td>
+    <td style="vertical-align: top;"><strong>Interpersonal&nbsp;&nbsp;</strong></td>
     <td style="vertical-align: top;">Leadership, project management, teaching</td>
   </tr>
   <tr>
