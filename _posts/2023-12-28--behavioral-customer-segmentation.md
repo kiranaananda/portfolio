@@ -12,5 +12,5 @@ tags:   research
 <p><italic>N.B pdf sometimes won't load in non-desktop view</italic></p>
 
 <p> </p>
-<p><embed src="https://kiranaananda.github.io/portfolio/assets/pdf/Segmentation_Digital_Banking.pdf.pdf" style="vertical-align:middle;margin:0px 0px" /></p>
+<p><embed src="https://kiranaananda.github.io/portfolio/assets/pdf/Segmentation_Digital_Banking.pdf" style="vertical-align:middle;margin:0px 0px" /></p>
 <p> </p>
