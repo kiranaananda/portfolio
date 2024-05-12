@@ -5,7 +5,7 @@ permalink: /category/
 ---
 
 <h2>UX/CX/market research projects</h2>
-<p><img src="https://static.thenounproject.com/png/4084340-200.png" alt="" width="20" height="20" style="vertical-align:middle;margin:0px 0px" /><a href="https://kiranaananda.github.io/portfolio/2023/05/28/5G-overview/">  Behavioral customer segmentation</a></p>
+<p><img src="https://static.thenounproject.com/png/4084340-200.png" alt="" width="20" height="20" style="vertical-align:middle;margin:0px 0px" /><a href="https://kiranaananda.github.io/portfolio/2023/12/28/behavioral-customer-segmentation/">  Behavioral customer segmentation</a></p>
 <p><img src="https://static.thenounproject.com/png/4084340-200.png" alt="" width="20" height="20" style="vertical-align:middle;margin:0px 0px" /><a href="https://kiranaananda.github.io/portfolio/2021/11/03/first-time-investor">  Pilot study: Inducing first-time investor</a></p>
 <p><img src="https://static.thenounproject.com/png/4084340-200.png" alt="" width="20" height="20" style="vertical-align:middle;margin:0px 0px" /><a href="https://kiranaananda.github.io/portfolio/2023/03/07/brand-health-tracking-fmcg">  Brand health tracking: Leverage brand position</a></p>
 <p><img src="https://static.thenounproject.com/png/4084340-200.png" alt="" width="20" height="20" style="vertical-align:middle;margin:0px 0px" /><a href="https://kiranaananda.github.io/portfolio/2023/05/28/5G-overview/">  Desk research: 5G Overview</a></p>
