@@ -52,14 +52,25 @@
 }
 
 .read-more {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
-  text-decoration: italic;
-  color: $white;
+  // font-weight: 400;
+  // font-size: 16px;
+  // line-height: 28px;
+  // text-decoration: italic;
+  // color: $white;
+  // background-color: #588b8b;
+  // padding: 4px 8px;
+  // border-radius: 4px;
+  // display: inline-block;
+  // transition: background-color 0.3s, color 0.3s;
+
+  color: #fff;
+  line-height: inherit;
+  cursor: pointer;
   background-color: #588b8b;
-  padding: 4px 8px;
-  border-radius: 4px;
+  border: 0;
+  border-radius: 0;
+  padding: 9px 15px;
+  text-decoration: none;
   display: inline-block;
   transition: background-color 0.3s, color 0.3s;
 }
