@@ -1,4 +1,4 @@
-title: Kirana Ananda - Researcher
+title: Kirana Ananda - Portfolio
 logo:  # you can add own logo.
 description: 
 baseurl: "/portfolio" # the subpath of your site, e.g. /blog
@@ -7,10 +7,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Author Settings
 author:
-  name: Kirana Ananda
+  name: Portfolio
   image: '/assets/img/headshot.jpg'
-  job: Researcher
-  bio: Enthusiastic about applied psychological research in tech field!
+  job: Kirana Ananda
+  bio: Enthusiastic about applying psychological research to drive innovation in the tech industry! Experienced in consumer insights, data analysis, and user behavior. Check out my sample project below.
   email: kiranadwima@gmail.com
 
 
