@@ -595,105 +595,6 @@ textarea.w-input, textarea.w-select {
   line-height: normal;
 }
 
-.w-file-upload {
-  margin-bottom: 10px;
-  display: block;
-}
-
-.w-file-upload-input {
-  width: .1px;
-  height: .1px;
-  opacity: 0;
-  z-index: -100;
-  position: absolute;
-  overflow: hidden;
-}
-
-.w-file-upload-default, .w-file-upload-uploading, .w-file-upload-success {
-  color: #333;
-  display: inline-block;
-}
-
-.w-file-upload-error {
-  margin-top: 10px;
-  display: block;
-}
-
-.w-file-upload-default.w-hidden, .w-file-upload-uploading.w-hidden, .w-file-upload-error.w-hidden, .w-file-upload-success.w-hidden {
-  display: none;
-}
-
-.w-file-upload-uploading-btn {
-  cursor: pointer;
-  background-color: #fafafa;
-  border: 1px solid #ccc;
-  margin: 0;
-  padding: 8px 12px;
-  font-weight: normal;
-  display: flex;
-}
-
-.w-file-upload-file {
-  background-color: #fafafa;
-  border: 1px solid #ccc;
-  flex-grow: 1;
-  justify-content: space-between;
-  margin: 0;
-  padding: 8px 9px 8px 11px;
-  display: flex;
-}
-
-.w-file-upload-file-name {
-  font-weight: normal;
-  display: block;
-}
-
-.w-file-remove-link {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-  margin-top: 3px;
-  margin-left: 10px;
-  padding: 3px;
-  display: block;
-}
-
-.w-icon-file-upload-remove {
-  margin: auto;
-}
-
-.w-file-upload-error-msg {
-  color: #ea384c;
-  padding: 2px 0;
-  display: inline-block;
-}
-
-.w-file-upload-info {
-  padding: 0 12px;
-  line-height: 38px;
-  display: inline-block;
-}
-
-.w-file-upload-label {
-  cursor: pointer;
-  background-color: #fafafa;
-  border: 1px solid #ccc;
-  margin: 0;
-  padding: 8px 12px;
-  font-weight: normal;
-  display: inline-block;
-}
-
-.w-icon-file-upload-icon, .w-icon-file-upload-uploading {
-  width: 20px;
-  margin-right: 8px;
-  display: inline-block;
-}
-
-.w-icon-file-upload-uploading {
-  height: 20px;
-}
-
 .w-container {
   max-width: 940px;
   margin-left: auto;
@@ -2485,222 +2386,82 @@ textarea.w-input, textarea.w-select {
   }
 }
 
-/* ------------------------------------------------------------------------------- resume --------------------------------------------- */
-.seamless-resume {
-  background-color: #f5f7fa;
-}
-/* --- RESUME WRAPPER --- */
-  .resume-flow-wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    color: #333;
-  }
-  .resume-header-row { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    width:100%;
-  }
-
-  /* --- SECTION LAYOUT --- */
-  .resume-row {
-    display: flex;
-    margin-bottom: 80px;
-  }
-
-  .resume-side {
-    flex: 0 0 150px;
-  }
-
-  .side-label {
-    font-family: 'Playpen Sans', cursive;
-    color: #aaa;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 5px;
-  }
-
-  .resume-main {
-    flex: 1;
-    position: relative;
-  }
-
-  /* --- EXPERIENCE ENTRIES --- */
-  .experience-entry {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 50px;
-  }
-
-  .logo-timeline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 0 0 80px;
-  }
-
-  .company-logo {
-    width: 100%;
-    height: auto;
-    max-height: 40px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease;
-  }
-
-  .company-logo:hover {
-    filter: grayscale(0%);
-  }
-
-  .timeline-line {
-    width: 1px;
-    flex-grow: 1;
-    background-color: #eee;
-    min-height: 30px;
-  }
-
-  .experience-details {
-    flex: 1;
-  }
-
-  .entry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 5px;
-  }
-
-  .role-title {
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .entry-date {
-    color: #888;
-  }
-
-  .company-info {
-    color: #555;
-    margin: 0 0 15px 0;
-    font-style: italic;
-  }
-
-  .bullet-list {
-    padding-left: 18px;
-    margin: 0;
-    color: #444;
-    line-height: 1.6;
-  }
-
-  .bullet-list li {
-    margin-bottom: 8px;
-  }
-
-  /* --- SKILLS GRID --- */
-  .skills-grid-seamless {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    padding-left: 30px;
-  }
-
-  .skill-cat-title {
-    font-family: 'Playpen Sans', cursive;
-    margin: 0 0 8px 0;
-    color: #333;
-  }
-
-  .skill-text {
-    line-height: 1.6;
-    color: #666;
-    margin: 0;
-  }
-
-  /* --- EDUCATION SPECIAL STYLING --- */
-  .edu-details {
-    color: #666;
-    line-height: 1.5;
-    margin-top: 10px;
-    padding: 12px;
-    background-color: #fcfcfc;
-    border-left: 3px solid #eee;
-    border-radius: 4px;
-  }
-
-  /* --- RESPONSIVE FIXES --- */
-  @media (max-width: 850px) {
-    .resume-row {
-      flex-direction: column;
-    }
-    .resume-side {
-      margin-bottom: 30px;
-    }
-    .skills-grid-seamless {
-      grid-template-columns: 1fr;
-      padding-left: 0;
-    }
-    .entry-header {
-      flex-direction: column;
-      gap: 4px;
-    }
-    .logo-timeline {
-      flex: 0 0 60px;
-    }
-    .timeline-line {
-      display: none;
-    }
-  }
 /* --------------------------------------------------------------- feature card --------------------------------------------------------- */
 
-.feature-card {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  transition: border-color 0.3s ease;
+.case-study-list {
+  max-width: 1000px;
+  margin: 100px auto;
+  padding: 0 40px;
 }
 
-.feature-card:hover {
-  border-color: #0f172a;
-}
-
-.card-header-row {
+.project-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  padding: 40px 0;
+  border-bottom: 1px solid #000;
+  text-decoration: none;
+  color: #000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.small-icon {
-  width: 40px !important;
-  height: 40px !important;
-  margin-bottom: 0 !important;
+.project-item:hover {
+  background-color: #0f172a;
+  color: #fff;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.pill {
-  display: inline-block;
-  padding: 8px 16px;
-  margin: 5px;
-  border-radius: 50px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  cursor: default;
-  border: 1px solid #eee;
+.project-info {
+  display: flex;
+  align-items: baseline;
+  gap: 40px;
 }
 
-.pill:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.project-number {
+  font-family: serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  opacity: 0.5;
 }
 
-.quant { background-color: #e3f2fd; color: #1976d2; }
-.qual { background-color: #f1f8e9; color: #388e3c; }
-.tool { background-color: #fff3e0; color: #f57c00; }
+.project-heading {
+  font-size: 2.5rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.project-hashtags {
+  font-family: monospace;
+  font-size: 13px;
+  margin-top: 8px;
+  opacity: 0.6;
+}
+
+.project-meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-impact {
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 12px;
+  background: #000;
+  color: #fff;
+  padding: 4px 8px;
+}
+
+.project-item:hover .project-impact {
+  background: #fff;
+  color: #0f172a;
+}
+
+
 /* ----------------------------------------------------------------- thought cloud --------------------------------------------------- */
 .thought-cloud-section {
   background-color: #f5f7fa;
