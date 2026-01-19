@@ -50,88 +50,71 @@ ul {
 }
 
 /* =========================================
-   2. NAVBAR STYLES (Cleaned)
+   2. NAVBAR STYLES
    ========================================= */
 .navbar-logo-left {
-  position: relative;
-  z-index: 1000;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: #fff;
-  padding: 15px 0;
-  border-bottom: 1px solid #f0f0f0;
 }
 
 .navbar-logo-left-container {
   z-index: 5;
-  width: 1030px;
-  max-width: 100%;
-  background-color: rgba(0, 0, 0, 0);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px 20px;
+  background-color: transparent;
 }
 
-.navbar-logo-left-container.shadow-three {
-  width: 100%;
-  max-width: 1140px;
-  margin-bottom: 0;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.container {
-  max-width: 940px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.navbar-top {
+.navbar-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-}
-
-.navbar-brand {
-  float: left;
-  color: #333;
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.nav-menu-wrapper {
-  float: right;
 }
 
 .nav-menu-two {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
-  gap: 30px;
+  margin-bottom: 0px;
 }
 
 .nav-link {
-  color: #555;
-  font-size: 14px;
+  color: #1a1b1f;
   font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: color 0.2s ease;
+  letter-spacing: 0.25px;
+  text-decoration: none;
+  margin-left: 20px;
+  margin-right: 20px;
   padding: 5px 10px;
+  transition: all 0.2s ease;
+  font-size: 14px;
 }
 
 .nav-link:hover {
-  color: #000;
+  color: #333;
+  opacity: 0.7;
+}
+
+.nav-link-accent {
+  color: #1a1b1f;
+  font-weight: 700;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
 }
 
 .nav-divider {
   width: 1px;
-  height: 20px;
-  background-color: #e0e0e0;
+  height: 24px;
+  background-color: #e4ebf3;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.nav-link-accent {
-  color: #0f172a;
-  font-weight: 600;
-  font-size: 14px;
+.container {
+  width: 100%;
+  max-width: 940px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 /* Mobile Menu Button (Hidden on Desktop) */
@@ -140,7 +123,7 @@ ul {
 }
 
 /* =========================================
-   3. PORTFOLIO LIST (The High-End View)
+   3. PORTFOLIO LIST
    ========================================= */
 /* Matches your <main class="case-study-list"> */
 .case-study-list {
