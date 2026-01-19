@@ -361,9 +361,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   padding-left: 30px;        /* Slides the whole row right */
   padding-right: 30px;
 }
-.project-heading:hover {
-  color: #fff;               /* Text turns white */
-}
 
 .project-info {
   display: flex;
@@ -383,6 +380,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   margin: 0;
   text-transform: uppercase;
   letter-spacing: -1px;
+  color: inherit;
 }
 
 .project-hashtags {
