@@ -2712,7 +2712,7 @@ textarea.w-input, textarea.w-select {
 }
 
 
-.button-primary-3-w-button {
+.button-primary {
   display: inline-block;
   margin-top: 20px;
   text-decoration: none;
@@ -2720,7 +2720,7 @@ textarea.w-input, textarea.w-select {
   transition: opacity 0.3s ease;
 }
 
-.button-primary-3-w-button:hover {
+.button-primary:hover {
   opacity: 0.8;
 }
 
