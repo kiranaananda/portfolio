@@ -2653,19 +2653,6 @@ textarea.w-input, textarea.w-select {
     }
   }
 /* --------------------------------------------------------------- feature card --------------------------------------------------------- */
-.features-section {
-  background-color: #ffffff;
-  padding: 60px 20px;
-}
-
-.features-grid {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
 .feature-card {
   background-color: #f8f9fb;
   border-radius: 24px;
@@ -2677,43 +2664,27 @@ textarea.w-input, textarea.w-select {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.feature-icon {
-  background-color: #0f172a;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-
-.feature-icon img {
-  width: 24px;
-  height: 24px;
-}
-
-.card-keywords {
-  margin-bottom: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+.feature-card p {
+  flex-grow: 1; 
+  margin-bottom: 20px;
 }
 
 .keyword-tag {
+  display: inline-block;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: #64748b;
   background-color: #e2e8f0;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: 100px;
+  margin-bottom: 8px; 
+  line-height: 1; 
 }
-
 /* ----------------------------------------------------------------- thought cloud --------------------------------------------------- */
 .thought-cloud-section {
   background-color: #f5f7fa;
