@@ -82,13 +82,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   border-radius: 0;
 }
 
-/* --- Link --- */
-.nav-link.w--current, 
-.nav-link-accent.w--current,
-.w-nav-brand.w--current {
-  color: #1a1a1a !important;
-  text-decoration: none !important;
-}
 /* ==========================================================================
    3. NAVBAR SYSTEM
    ========================================================================== */
@@ -213,7 +206,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     .nav-link, .nav-link-accent { font-size: 10px; padding: 4px 6px; }
   }
 }
-
 
 /* ==========================================================================
    4. FOOTER STYLES
@@ -345,111 +337,77 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* =========================================
    6. PORTFOLIO LIST
    ========================================= */
-/* Matches your <main class="case-study-list"> */
 .case-study-list {
-  max-width: 940px;
-  margin: 60px auto;
-  padding: 0 20px;
+  max-width: 1000px;
+  margin: 100px auto;
+  padding: 0 40px;
 }
 
-/* Matches <a class="project-item"> */
 .project-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 45px 0;
-  border-bottom: 1px solid #e2e2e2;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
+  padding: 40px 0;
+  border-bottom: 1px solid #000; /* Sharp black line for a clean look */
+  text-decoration: none;
+  color: #000;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover Effect */
+/* THE HOVER EFFECT */
 .project-item:hover {
-  background-color: #0f172a;
-  color: #ffffff;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 8px;
-  border-bottom-color: transparent;
+  background-color: #0f172a; /* Switches to your dark theme color */
+  color: #fff;               /* Text turns white */
+  padding-left: 30px;        /* Slides the whole row right */
+  padding-right: 30px;
 }
 
 .project-info {
   display: flex;
   align-items: baseline;
   gap: 40px;
-  flex: 1; /* Allows text to take available space */
 }
 
 .project-number {
-  font-family: "Playpen Sans", cursive;
+  font-family: serif;
+  font-style: italic;
   font-size: 1.2rem;
-  color: #a0a0a0;
-  font-weight: 400;
-  min-width: 30px;
-}
-
-.title-group {
-  display: flex;
-  flex-direction: column;
+  opacity: 0.5;
 }
 
 .project-heading {
-  font-size: 2rem;
-  margin: 0 0 8px 0;
-  line-height: 1.1;
-  color: inherit; /* Inherits hover color */
+  font-size: 2.5rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 
 .project-hashtags {
-  font-family: monospace; /* Code-style font */
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  color: #64748b;
-  margin: 0;
-  letter-spacing: 0.5px;
-}
-
-/* Update hashtag color on hover */
-.project-item:hover .project-hashtags {
-  color: #94a3b8;
+  font-family: monospace;
+  font-size: 13px;
+  margin-top: 8px;
+  opacity: 0.6;
 }
 
 .project-meta {
+  text-align: right;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-  text-align: right;
-  min-width: 140px;
+  gap: 10px;
 }
 
 .project-impact {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 800;
   letter-spacing: 1px;
-  background-color: #0f172a;
+  text-transform: uppercase;
+  font-size: 12px;
+  background: #000;
   color: #fff;
-  padding: 6px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
+  padding: 4px 8px;
 }
 
-/* Invert impact badge on hover */
+/* If the item is hovered, make the impact badge white */
 .project-item:hover .project-impact {
-  background-color: #ffffff;
+  background: #fff;
   color: #0f172a;
-}
-
-.view-link {
-  font-size: 0.9rem;
-  font-weight: 600;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s ease;
-}
-
-.project-item:hover .view-link {
-  opacity: 1;
-  transform: translateX(0);
 }
