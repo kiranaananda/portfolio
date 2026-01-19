@@ -82,6 +82,13 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   border-radius: 0;
 }
 
+/* --- Link --- */
+.nav-link.w--current, 
+.nav-link-accent.w--current,
+.w-nav-brand.w--current {
+  color: #1a1a1a !important;
+  text-decoration: none !important;
+}
 /* ==========================================================================
    3. NAVBAR SYSTEM
    ========================================================================== */
