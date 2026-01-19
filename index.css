@@ -2485,7 +2485,7 @@ textarea.w-input, textarea.w-select {
   }
 }
 
-/* -------------- resume ------------ */
+/* ------------------------------------------------------------------------------- resume --------------------------------------------- */
 .seamless-resume {
   background-color: #f5f7fa;
 }
@@ -2652,7 +2652,7 @@ textarea.w-input, textarea.w-select {
       display: none;
     }
   }
-/* -------------- feature card -------------------- */
+/* --------------------------------------------------------------- feature card --------------------------------------------------------- */
 .features-section {
   background-color: #ffffff;
   padding: 60px 20px;
@@ -2693,7 +2693,45 @@ textarea.w-input, textarea.w-select {
   height: 24px;
 }
 
-/* -------------- thought cloud -------------------- */
+.card-keywords {
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.keyword-tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b; /* Slate grey */
+  background-color: #e2e8f0; /* Light grey pill */
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+
+.button-primary-3-w-button {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+}
+
+.button-primary-3-w-button:hover {
+  opacity: 0.8;
+}
+
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ----------------------------------------------------------------- thought cloud --------------------------------------------------- */
 .thought-cloud-section {
   background-color: #f5f7fa;
 }
