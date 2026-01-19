@@ -2681,27 +2681,26 @@ textarea.w-input, textarea.w-select {
   margin-bottom: 0 !important;
 }
 
-/* Breadcrumb-style Keywords at the top */
-.card-keywords {
-  margin-bottom: 12px;
-  display: flex;
-  gap: 12px;
+.pill {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: default;
+  border: 1px solid #eee;
 }
 
-.keyword-tag {
-  font-size: 10px;
-  font-weight: 700;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.keyword-tag:not(:last-child):after {
-  content: "•";
-  margin-left: 12px;
-  color: #cbd5e1;
-}
-
+.quant { background-color: #e3f2fd; color: #1976d2; }
+.qual { background-color: #f1f8e9; color: #388e3c; }
+.tool { background-color: #fff3e0; color: #f57c00; }
 /* ----------------------------------------------------------------- thought cloud --------------------------------------------------- */
 .thought-cloud-section {
   background-color: #f5f7fa;
