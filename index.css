@@ -2705,7 +2705,6 @@ textarea.w-input, textarea.w-select {
   list-style: none;
 }
 
-/* Individual Tag Styling */
 .keyword-tag {
   display: inline-block !important;
   font-size: 10px;
