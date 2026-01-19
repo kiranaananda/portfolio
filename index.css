@@ -2697,21 +2697,27 @@ textarea.w-input, textarea.w-select {
 }
 
 .card-keywords {
-  margin-bottom: 16px;
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
   gap: 8px;
+  margin: 12px 0 20px 0;
+  padding: 0;
+  list-style: none;
 }
 
+/* Individual Tag Styling */
 .keyword-tag {
-  font-size: 11px;
-  font-weight: 600;
+  display: inline-block !important;
+  font-size: 10px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #64748b; /* Slate grey */
-  background-color: #e2e8f0;
-  padding: 4px 10px;
-  border-radius: 100px;
+  letter-spacing: 0.8px;
+  color: #475569;
+  background-color: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 50px;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 /* ----------------------------------------------------------------- thought cloud --------------------------------------------------- */
