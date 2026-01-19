@@ -355,7 +355,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 }
 
 /* THE HOVER EFFECT */
-.project-item:hover {
+.project-item:hover .project-heading .project-hashtags {
   background-color: #0f172a; /* Switches to your dark theme color */
   color: #fff;               /* Text turns white */
   padding-left: 30px;        /* Slides the whole row right */
