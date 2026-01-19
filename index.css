@@ -412,3 +412,9 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   background: #fff;
   color: #0f172a;
 }
+.project-item:hover .project-heading {
+  color: #ffffff !important;
+}
+.project-item:hover .project-hashtags {
+  color: #e2e2e2 !important; /* Slightly dimmed white */
+}
