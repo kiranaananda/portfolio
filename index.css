@@ -337,7 +337,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* =========================================
    6. PORTFOLIO LIST
    ========================================= */
-
 .case-study-list {
   max-width: 1000px;
   margin: 100px auto;
@@ -355,7 +354,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* THE HOVER EFFECT: This makes it 'Not Plain' */
+/* THE HOVER EFFECT */
 .project-item:hover {
   background-color: #0f172a; /* Switches to your dark theme color */
   color: #fff;               /* Text turns white */
@@ -370,17 +369,18 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 }
 
 .project-number {
-  font-family: serif; /* Academic/Sophisticated look */
+  font-family: serif;
   font-style: italic;
   font-size: 1.2rem;
   opacity: 0.5;
 }
 
 .project-heading {
-  font-size: 2.5rem; /* Large, bold typography */
+  font-size: 2.5rem;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: -1px;
+  color: inherit;
 }
 
 .project-hashtags {
@@ -411,4 +411,10 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 .project-item:hover .project-impact {
   background: #fff;
   color: #0f172a;
+}
+.project-item:hover .project-heading {
+  color: #ffffff !important;
+}
+.project-item:hover .project-hashtags {
+  color: #e2e2e2 !important; /* Slightly dimmed white */
 }
