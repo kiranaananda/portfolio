@@ -369,23 +369,17 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 }
 
 .project-number {
-  font-family: serif;
   font-style: italic;
-  font-size: 1.2rem;
   opacity: 0.5;
 }
 
 .project-heading {
-  font-size: 2.5rem;
   margin: 0;
-  text-transform: uppercase;
   letter-spacing: -1px;
   color: inherit;
 }
 
 .project-hashtags {
-  font-family: monospace;
-  font-size: 13px;
   margin-top: 8px;
   opacity: 0.6;
 }
