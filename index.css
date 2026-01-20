@@ -17,6 +17,7 @@ body {
   background-color: #fffff;
   font-size: 1rem;
   line-height: 1.2;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -46,6 +47,12 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* ==========================================================================
    2. REQUIRED WEBFLOW COMPONENTS
    ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 /* --- Icons --- */
 @font-face {
