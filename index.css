@@ -423,48 +423,30 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* =========================================
    7. PROJECT CONTENT
    ========================================= */
+
 <style>
-  /* --- 1. GLOBAL RESET --- */
-  *, *::before, *::after {
-    box-sizing: border-box; 
+  /* --- 1. SETUP --- */
+  * { box-sizing: border-box; }
+
+  /* --- 2. THE SECTION  --- */
+  /* This centers ONLY these specific sections without changing the whole page */
+  .impact-section, 
+  .source-material-section, 
+  .project-footer {
+    max-width: 1000px;    /* Stops it from being too wide on big screens */
+    margin-left: auto;    /* Centers it horizontally */
+    margin-right: auto;   /* Centers it horizontally */
+    padding-left: 2rem;   /* Safe space on the left */
+    padding-right: 2rem;  /* Safe space on the right */
+    width: 100%;          /* Ensures it takes up space available */
   }
 
-  /* --- 2. THE BODY AS CONTAINER --- */
-  body {
-    /* Color Palette matching "Enough Thinking" */
-    background-color: #FDFBF7;   /* Cream */
-    color: #2F4F4F;              /* Dark Slate */
-    font-family: 'Inter', sans-serif;
-    
-    /* THE MARGIN FIX */
-    max-width: 900px;            /* Restricts width so it looks like a document */
-    margin: 0 auto;              /* Centers the page in the browser window */
-    padding: 2rem;               /* Adds breathing room on sides */
-    overflow-x: hidden;          /* Prevents horizontal scrolling */
-  }
-
-  /* --- 3. COLOR VARIABLES --- */
-  :root {
-    --accent-green: #6B8E23;     /* Forest Green */
-    --border-color: #D4C5A9;     /* Tan/Cardboard */
-  }
-
-  /* --- 4. TYPOGRAPHY --- */
-  h1, h2, h3, h5 {
-    color: #2F4F4F;
-    font-family: 'Playpen Sans', cursive; /* Your custom font */
-  }
-  
-  a {
-    color: var(--accent-green);
-  }
-
-  /* --- 5. THE CARDS (Restoring the "Full" look) --- */
+  /* --- 3. THE "FULL" CARD DESIGN --- */
   .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin: 2rem 0;
+    margin-top: 2rem;
   }
 
   .stitch-card {
@@ -472,7 +454,8 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     border: 2px dashed var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    height: 100%;
   }
 
   /* The Middle Green Card */
@@ -481,60 +464,65 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     border: 2px solid var(--accent-green);
     color: white;
   }
-  
-  /* Fix text color inside the green card */
-  .highlight-card h3, 
-  .highlight-card p, 
-  .highlight-card small,
-  .highlight-card .strong {
+
+  /* Text color fixes for the Green Card */
+  .highlight-card h3, .highlight-card p, .highlight-card small, .highlight-card .strong {
     color: white !important;
   }
 
-  /* --- 6. PDF & FOOTER SPACING --- */
+  /* --- 4. ICONS --- */
+  .icon-box {
+    width: 48px; 
+    height: 48px;
+    background-color: #F0F4E8;
+    color: var(--accent-green);
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .highlight-card .icon-box {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  /* --- 5. PDF SECTION STYLING --- */
   .source-material-section {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 2px solid #EAEAEA;
+    margin-top: 4rem; /* Space above the PDF section */
   }
 
   .pdf-header-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1rem;
   }
 
   .download-pill {
     background-color: var(--accent-green);
     color: white;
     padding: 8px 16px;
-    border-radius: 20px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: bold;
   }
 
-  /* FORCE PDF TO FIT */
   .pdf-window {
     width: 100%;
-    max-width: 100%; /* Ensures it never overflows the body margin */
+    height: 600px;
     border: 2px solid var(--border-color);
     background: white;
-    padding: 5px;
     border-radius: 8px;
-    height: 600px;
-  }
-
-  .pdf-window object {
-    display: block;
-    width: 100%;
-    height: 100%;
+    padding: 5px;
   }
 
   .project-footer {
-    margin-top: 3rem;
+    margin-top: 5rem;
     text-align: center;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
   }
 </style>
