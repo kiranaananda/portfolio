@@ -423,53 +423,81 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* =========================================
    7. PROJECT CONTENT
    ========================================= */
-/* The Grid Layout */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+/* --- 1. THE LAYOUT FIX (CRITICAL) --- */
+/* This stops the boxes from sticking out of the screen */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-/* The "Stitch" Look */
+body {
+  margin: 0;
+  overflow-x: hidden; /* Prevents side-scroll */
+}
+
+/* --- 2. THE GRID SETUP --- */
+.card-grid {
+  display: grid;
+  /* This makes them responsive: min 280px wide, max fits space */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* --- 3. THE "FULL" CARD DESIGN --- */
 .stitch-card {
-  border: var(--border-style); /* The dashed line */
-  border-radius: 12px;
-  padding: 1.5rem;
-  background: white;
+  background-color: #FFFFFF;      
+  border: 2px dashed #D4C5A9;     
+  border-radius: 12px;           
+  padding: 1.5rem;            
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08); 
   transition: transform 0.2s ease;
+  height: 100%;               
+  display: flex;
+  flex-direction: column;
 }
 
 .stitch-card:hover {
   transform: translateY(-5px);
-  border-color: var(--accent-green);
+  border-color: #f5f7fa;          /* Border turns green on hover */
 }
 
-/* Highlight the "Strategy" card slightly */
+/* --- 4. THE HIGHLIGHT CARD (MIDDLE) --- */
 .highlight-card {
-  background-color: var(--accent-soft);
-  border-style: solid; /* Make the main strategy card solid, not dashed */
-  border-color: var(--accent-green);
+  background-color: #f5f7fa;      
+  border: 2px solid #f5f7fa;      
+  color: black;
+  box-shadow: 0 10px 20px rgba(107, 142, 35, 0.3); /* Green glow shadow */
 }
 
-/* The "Code Window" look for the chart */
-.chart-container {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin: 2rem 0;
+/* --- 5. THE ICONS (SVG Styling) --- */
+.icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #f5f7fa;      /*Circle */
+  color: #e4ebf3;                 /*Icon */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-/* The "Cute" Font Class */
-.font-hand {
-  font-family: 'Playpen Sans', cursive;
+/* Special Icon Colors for the Highlight Card */
+.highlight-card .icon-box {
+  background-color: rgba(255,255,255,0.2); /* Semi-transparent white */
+  color: #FFFFFF;                          /* White Icon */
 }
 
-/* The Layout Container */
-.case-study-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+/* Typography Tweaks */
+.stitch-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.highlight-card .strong {
+  color: #FDFBF7; /* Cream color for the key phrase */
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
