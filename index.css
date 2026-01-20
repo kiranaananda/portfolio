@@ -344,6 +344,9 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* =========================================
    6. PORTFOLIO LIST
    ========================================= */
+.impact-section{
+  background-color: #f5f7fa;
+}
 .case-study-list {
   max-width: 1000px;
   margin: 100px auto;
@@ -465,9 +468,9 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 
   /* The Middle Green Card */
   .highlight-card {
-    background-color: var(--accent-green);
-    border: 2px solid var(--accent-green);
-    color: white;
+    background-color:white;
+    border: 2px solid white;
+    color: black;
   }
 
   /* Text color fixes for the Green Card */
