@@ -433,20 +433,29 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   .impact-section, 
   .source-material-section, 
   .project-footer {
-    max-width: 1000px;    /* Stops it from being too wide on big screens */
+    max-width: 100%;
     margin-left: auto;    /* Centers it horizontally */
     margin-right: auto;   /* Centers it horizontally */
     padding-left: 2rem;   /* Safe space on the left */
     padding-right: 2rem;  /* Safe space on the right */
-    width: 100%;          /* Ensures it takes up space available */
+    width: 100%;
   }
 
   /* --- 3. THE "FULL" CARD DESIGN --- */
   .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+     background-color: #f8f9fb;
+     border-radius: 24px;
+     padding: 30px;
+     flex: 1 1 280px;
+     min-width: 20%;
+     max-width: 100%;
+     text-align: left;
+     box-sizing: border-box;
+     display: flex;
+     justify-content: center;
+     gap: 24px;
+     flex-wrap: wrap;
+     width: 100%;
   }
 
   .stitch-card {
