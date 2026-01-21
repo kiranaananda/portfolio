@@ -477,13 +477,13 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 }
 
 .tag {
-  background-color: #E6F0DC; /* Soft Pale Green */
-  color: #4A6B15;            /* Darker Green Text */
+  background-color: #E4EBF3;
+  color: #43464D;
   padding: 6px 16px;         /* Plumps up the pill */
   border-radius: 50px;       /* Makes it fully round */
   font-size: 0.85rem;
   font-weight: 700;
-  text-transform: uppercase; /* Makes it look professional */
+  text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
@@ -492,25 +492,25 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem auto 3rem auto; /* Spacing: slightly closer to title, far from body */
+  margin: 1rem auto 3rem auto;
   width: 100%;
-  max-width: 400px;            /* Width of the line (doesn't touch edges) */
+  max-width: 400px;
 }
 
 /* The Dashed Lines (Left and Right) */
 .section-divider::before,
 .section-divider::after {
   content: "";
-  flex: 1;                     /* Takes up available space */
-  border-bottom: 2px dashed #D4C5A9; /* Matches your card border color */
+  flex: 1;
+  border-bottom: 2px dashed #E4EBF3;
 }
 
 /* The Middle Symbol (The "Knot") */
 .section-divider .knot {
-  padding: 0 15px;             /* White space around the symbol */
-  color: #6B8E23;              /* Accent Green */
-  font-size: 1.2rem;           /* Size of the symbol */
-  font-family: monospace;      /* Ensures it looks like a clean geometric shape */
+  padding: 0 15px;
+  color: #699ECD;
+  font-size: 1.2rem;
+  font-family: monospace;
 }
 
   /* --- 3. THE "FULL" CARD DESIGN --- */
@@ -524,7 +524,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 
   .stitch-card {
   background-color: #FFFFFF;
-  border: 2px dashed #D4C5A9;
+  border: 2px dashed #E0E0E0;
   border-radius: 24px;
   padding: 30px;
   /* Layout inside the card */
@@ -535,13 +535,12 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   box-sizing: border-box;
   }
 
-  /* The Middle Green Card */
+  /* The Middle Card */
   .highlight-card {
-    background-color:#F0F4E8;
-    border: 2px solid #F0F4E8;
+    background-color:#E4EBF3;
+    border: 2px solid #E4EBF3;
   }
 
-  /* Text color fixes for the Green Card */
   .highlight-card h3, .highlight-card p, .highlight-card small, .highlight-card .strong {
     color: black;
   }
@@ -550,7 +549,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   .icon-box {
     width: 48px; 
     height: 48px;
-    background-color: #F0F4E8;
+    background-color: #F8F9FB;
     color: black;
     border-radius: 50%;
     display: flex; 
