@@ -442,6 +442,58 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     width: 100%;
   }
 
+.project-header {
+  text-align: center;       /* Centers everything */
+  padding: 4rem 0 3rem 0;   /* Big spacing top and bottom */
+  max-width: 800px;         /* Keeps text from getting too wide to read */
+  margin: 0 auto;           /* Centers the block itself */
+}
+
+.tags-row {
+  display: flex;
+  justify-content: center;  /* Centers the tags */
+  gap: 10px;                /* Space between tags */
+  margin-bottom: 1.5rem;    /* Space between tags and title */
+  flex-wrap: wrap;          /* wrap if screen is small */
+}
+
+.tag {
+  background-color: #E6F0DC; /* Soft Pale Green */
+  color: #4A6B15;            /* Darker Green Text */
+  padding: 6px 16px;         /* Plumps up the pill */
+  border-radius: 50px;       /* Makes it fully round */
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase; /* Makes it look professional */
+  letter-spacing: 0.5px;
+}
+
+/* --- 2. THE STITCHED DIVIDER --- */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto 3rem auto; /* Spacing: slightly closer to title, far from body */
+  width: 100%;
+  max-width: 400px;            /* Width of the line (doesn't touch edges) */
+}
+
+/* The Dashed Lines (Left and Right) */
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;                     /* Takes up available space */
+  border-bottom: 2px dashed #D4C5A9; /* Matches your card border color */
+}
+
+/* The Middle Symbol (The "Knot") */
+.section-divider .knot {
+  padding: 0 15px;             /* White space around the symbol */
+  color: #6B8E23;              /* Accent Green */
+  font-size: 1.2rem;           /* Size of the symbol */
+  font-family: monospace;      /* Ensures it looks like a clean geometric shape */
+}
+
   /* --- 3. THE "FULL" CARD DESIGN --- */
   .card-grid {
    display: grid;
