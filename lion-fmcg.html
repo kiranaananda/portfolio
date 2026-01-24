@@ -322,58 +322,68 @@ async function drawCompetitorChart(containerId, csvFilePath) {
 // =========================================================
 async function drawBrandChart(containerId, csvFilePath) {
     const data = await d3.csv(csvFilePath);
-    // These must match your CSV headers exactly!
     const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
 
-    // Parse Data
+    // 1. Parse Data
     data.forEach(d => {
         d.Date = dateParser(d.Date);
         metrics.forEach(m => d[m] = +d[m]);
     });
 
-    // Setup Dimensions (Smaller height for grid)
-    const wrapper = document.querySelector(containerId);
-    if (!wrapper) return;
-    const width = 400;
-    const height = 350;
-    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+    // 2. SETUP FLUID DIMENSIONS
+    // We draw on a virtual canvas of 450x300. 
+    // This aspect ratio (3:2) looks good in columns.
+    const width = 450; 
+    const height = 300; 
+    const margin = { top: 20, right: 15, bottom: 40, left: 35 };
+
     const boundsWidth = width - margin.left - margin.right;
     const boundsHeight = height - margin.top - margin.bottom;
 
-    // Draw SVG
+    // 3. DRAW SVG (Responsive)
     d3.select(containerId).html("");
+    
     const svg = d3.select(containerId).append("svg")
-        // FIXED: Use 'width' and 'height' directly, not 'dimensions.width'
-        .attr("viewBox", `0 0 ${width} ${height}`) 
+        .attr("viewBox", `0 0 ${width} ${height}`)
         .style("width", "100%")
-        .style("height", "auto");
-      
+        .style("height", "auto")
+        .style("display", "block"); // Removes bottom whitespace
+
     const bounds = svg.append("g")
         .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
 
-    // Scales
+    // 4. SCALES
     const xScale = d3.scaleTime()
         .domain(d3.extent(data, d => d.Date))
         .range([0, boundsWidth]);
     
-    // Funnel usually 0 to 100, or max value found
     const allValues = data.flatMap(d => metrics.map(m => d[m]));
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(allValues)*1.1])
+        .domain([0, d3.max(allValues) * 1.1])
         .range([boundsHeight, 0]);
 
-    // Metric Colors (Blue -> Teal -> Yellow -> Red)
     const colorScale = d3.scaleOrdinal()
         .domain(metrics)
         .range(["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"]);
 
-    // Axes
-    bounds.append("g").call(d3.axisLeft(yScale).ticks(5));
-    bounds.append("g").style("transform", `translateY(${boundsHeight}px)`)
-        .call(d3.axisBottom(xScale).ticks(4).tickFormat(d3.timeFormat("%b %y")))
-        .style("font-size", "10px");
+    // 5. DRAW AXES (With slightly smaller text for clean look)
+    const yAxis = d3.axisLeft(yScale).ticks(5);
+    bounds.append("g")
+        .call(yAxis)
+        .style("font-size", "10px") 
+        .style("color", "#888");
 
-    // Lines
+    const xAxis = d3.axisBottom(xScale)
+        .ticks(4) // Only 4 dates to prevent overlapping
+        .tickFormat(d3.timeFormat("%b %y")); // Short date (e.g., Apr 16)
+        
+    bounds.append("g")
+        .style("transform", `translateY(${boundsHeight}px)`)
+        .call(xAxis)
+        .style("font-size", "10px")
+        .style("color", "#888");
+
+    // 6. DRAW LINES
     const lineGenerator = d3.line()
         .x(d => xScale(d.Date))
         .y(d => yScale(d.value))
@@ -388,11 +398,12 @@ async function drawBrandChart(containerId, csvFilePath) {
         .data(formattedData).enter().append("path")
         .attr("class", "line-path")
         .attr("fill", "none")
-        .attr("stroke-width", 2.5)
+        .attr("stroke-width", 2) // Thinner lines look cleaner in small columns
         .attr("d", d => lineGenerator(d.values))
         .attr("stroke", d => colorScale(d.name));
 
-    // Interaction
+    // 7. INTERACTION
+    // We pass the boundsWidth/Height so the hover line matches the SVG coordinates
     addInteraction(bounds, boundsWidth, boundsHeight, data, xScale, metrics, colorScale);
 }
 
