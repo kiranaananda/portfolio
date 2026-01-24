@@ -108,15 +108,10 @@
   </section>
   
   <section class="data-section">
-    <div class="text-content">
-      <h5 class="font-hand">Diagnosing the Decline</h5>
-      <p>Using a 3-year longitudinal study, I pinpointed the exact month consumer sentiment shifted.</p>
-    </div>
-
     <div class="chart-container">
     <div class="project-row" style="display: block;">
     <div style="margin-bottom: 20px;">
-        <h6>Performance Trends (2016–2018)</h6>
+        <h6>Performance Trends </h6>
         <p class="project-meta">D3.js • Multi-Line Time Series</p>
         <p>A comparative analysis of monthly performance metrics for Lion, Olio, and Festo.</p>
     </div>
@@ -124,8 +119,6 @@
     <div id="wrapper" style="width: 100%; min-height: 400px;"></div>
 </div>
     </div>
-    
-    <p class="caption">Fig 1. Interactive view of Volume vs. Value trends (2016-2018)</p>
   </section>
   
 <section class="source-material-section">
@@ -287,6 +280,7 @@ async function drawMultiLineChart() {
         .enter()
         .append("path")
         .attr("class", d => `line-path line-${d.name}`) // Assigns class "line-Lion", etc.
+        .attr("fill", "none")
         .attr("d", d => lineGenerator(d.values))
         .attr("stroke", d => colorScale(d.name));
 
