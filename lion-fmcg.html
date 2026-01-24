@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
 
 </head>
 
@@ -93,8 +94,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6" y2="6"></line><line x1="6" y1="18" x2="6" y2="18"></line></svg>
         </div>
         <h5>The Strategy</h5>
-        <p class="strong">Pack Diversification</p>
-        <p>Shift from single-serving to multi-serving.</p>
+        <p class="strong">Pack diversification: shift from single-serving to multi-serving.</p>
       </div>
 
       <div class="stitch-card">
@@ -114,13 +114,15 @@
     </div>
 
     <div class="chart-container">
-      <div class="chart-toolbar">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-        <span class="filename">lion-vs-festo-sales.js</span>
-      </div>
-      <canvas id="marketChart"></canvas>
+    <div class="project-row" style="display: block;">
+    <div style="margin-bottom: 20px;">
+        <h6>Performance Trends (2016–2018)</h6>
+        <p class="project-meta">D3.js • Multi-Line Time Series</p>
+        <p>A comparative analysis of monthly performance metrics for Lion, Olio, and Festo.</p>
+    </div>
+
+    <div id="wrapper" style="width: 100%; min-height: 400px;"></div>
+</div>
     </div>
     
     <p class="caption">Fig 1. Interactive view of Volume vs. Value trends (2016-2018)</p>
@@ -191,6 +193,125 @@
     </nav>
   </div>
 </div>
+
+<script>
+async function drawMultiLineChart() {
+
+    // 1. ACCESS DATA
+    let data = await d3.csv("./data.csv");
+
+    // Define the list of companies (keys) excluding the Date column
+    const companies = ["Lion", "Olio", "Festo"];
+    
+    // Parse the date string into a Date object
+    const dateParser = d3.timeParse("%Y-%m-%d");
+    
+    // Format data: Convert strings to Numbers & Dates
+    data.forEach(d => {
+        d.Date = dateParser(d.Date);
+        companies.forEach(c => d[c] = +d[c]); // Convert "79617.2" to 79617.2
+    });
+
+    // 2. CHART DIMENSIONS
+    const wrapper = document.getElementById("wrapper");
+    // Ensure it fits within your container width
+    const width = wrapper.clientWidth > 800 ? 800 : wrapper.clientWidth;
+    const height = 400;
+
+    const dimensions = {
+        width: width,
+        height: height,
+        margin: { top: 30, right: 100, bottom: 50, left: 60 }, // Extra right margin for Legend
+    };
+
+    dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right;
+    dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom;
+
+    // 3. DRAW CANVAS
+    d3.select("#wrapper").html(""); // Clear old chart
+    
+    const svg = d3.select("#wrapper")
+        .append("svg")
+        .attr("width", dimensions.width)
+        .attr("height", dimensions.height);
+
+    const bounds = svg.append("g")
+        .style("transform", `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`);
+
+    // 4. SCALES
+
+    // X Scale: Time
+    const xScale = d3.scaleTime()
+        .domain(d3.extent(data, d => d.Date))
+        .range([0, dimensions.boundedWidth]);
+
+    // Y Scale: Find the Min and Max across ALL companies to set the vertical range
+    const allValues = data.flatMap(d => companies.map(c => d[c]));
+    const yScale = d3.scaleLinear()
+        .domain([d3.min(allValues) * 0.9, d3.max(allValues) * 1.1]) // Add breathing room
+        .range([dimensions.boundedHeight, 0]);
+
+    // Color Scale (Matches CSS classes)
+    const colorScale = d3.scaleOrdinal()
+        .domain(companies)
+        .range(["#FF6B6B", "#4ECDC4", "#FFE66D"]);
+
+    // 5. DRAW AXES
+
+    const yAxisGenerator = d3.axisLeft().scale(yScale).ticks(5);
+    const xAxisGenerator = d3.axisBottom().scale(xScale).ticks(6);
+
+    bounds.append("g").call(yAxisGenerator);
+    bounds.append("g")
+        .style("transform", `translateY(${dimensions.boundedHeight}px)`)
+        .call(xAxisGenerator);
+
+    // 6. DRAW THE LINES
+
+    const lineGenerator = d3.line()
+        .x(d => xScale(d.Date))
+        .y(d => yScale(d.value))
+        .curve(d3.curveMonotoneX); // Smooth curves
+
+    // We need to reshape the data for D3: One array per company
+    const formattedData = companies.map(company => {
+        return {
+            name: company,
+            values: data.map(d => ({ Date: d.Date, value: d[company] }))
+        };
+    });
+
+    // Draw the lines
+    bounds.selectAll(".line-path")
+        .data(formattedData)
+        .enter()
+        .append("path")
+        .attr("class", d => `line-path line-${d.name}`) // Assigns class "line-Lion", etc.
+        .attr("d", d => lineGenerator(d.values))
+        .attr("stroke", d => colorScale(d.name));
+
+    // 7. ADD LEGEND (Labels at the end of lines)
+    
+    bounds.selectAll(".legend-text")
+        .data(formattedData)
+        .enter()
+        .append("text")
+        .attr("x", dimensions.boundedWidth + 10)
+        .attr("y", d => {
+            // Find the last data point's Y position to place the label
+            const lastPoint = d.values[d.values.length - 1];
+            return yScale(lastPoint.value);
+        })
+        .text(d => d.name)
+        .style("fill", d => colorScale(d.name))
+        .style("font-weight", "bold")
+        .style("font-size", "12px")
+        .attr("alignment-baseline", "middle");
+}
+
+drawMultiLineChart();
+</script>
+    
 </body>
 
 </html>
