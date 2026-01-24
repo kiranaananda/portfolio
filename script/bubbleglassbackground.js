@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", function() {
     
     const canvas = document.getElementById('watercolor-canvas');
@@ -144,4 +143,3 @@ document.addEventListener("DOMContentLoaded", function() {
     init();
 
 });
-</script>
