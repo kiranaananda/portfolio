@@ -106,21 +106,50 @@
       </div>
     </div>
   </section>
-  
+    
+<!-- --------------------------------------------------- -->
+
   <section class="data-section">
-    <div class="chart-container">
-    <div class="project-row" style="display: block;">
+<div class="project-row" style="display: block; margin-bottom: 60px;">
     <div style="margin-bottom: 20px;">
-        <h6>Performance Trends </h6>
-        <p class="project-meta">D3.js • Multi-Line Time Series</p>
-        <p>A comparative analysis of value sales (billion IDR) for Lion, Olio, and Festo.</p>
+        <h5>Performance Trends</h5>
+        <p class="project-meta"> Value Sales (billion IDR) • Lion vs Olio vs Festo</p>
+    </div>
+    <div id="wrapper-revenue" style="width: 100%; height: 400px;"></div>
+</div>
+
+<div class="project-row" style="display: block;">
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h5>Brand Health Profiles</h5>
+        <p class="project-meta">Funnel Metrics (Awareness → Loyalty)</p>
+        
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+            <div style="font-size: 11px; color: #555;"><span style="color:#A0C4FF;">●</span> Top of Mind</div>
+            <div style="font-size: 11px; color: #555;"><span style="color:#72EFDD;">●</span> Spontaneous</div>
+            <div style="font-size: 11px; color: #555;"><span style="color:#FFD166;">●</span> Regularly</div>
+            <div style="font-size: 11px; color: #555;"><span style="color:#EF476F;">●</span> Most Often</div>
+        </div>
     </div>
 
-    <div id="wrapper" style="width: 100%; min-height: 400px;"></div>
-</div>
+    <div class="brand-grid">
+        <div>
+            <div class="brand-header" style="color: #FF6B6B;">Lion</div>
+            <div id="chart-lion" style="width: 100%; height: 350px;"></div>
+        </div>
+        <div>
+            <div class="brand-header" style="color: #4ECDC4;">Olio</div>
+            <div id="chart-olio" style="width: 100%; height: 350px;"></div>
+        </div>
+        <div>
+            <div class="brand-header" style="color: #FFE66D;">Festo</div>
+            <div id="chart-festo" style="width: 100%; height: 350px;"></div>
+        </div>
     </div>
+</div>
   </section>
-  
+
+<!-- --------------------------------------------------- -->
+    
 <section class="source-material-section">
   <div class="pdf-header-row">
     <h5 class="font-hand">The Original Manuscript</h5>
