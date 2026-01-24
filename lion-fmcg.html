@@ -340,9 +340,11 @@ async function drawBrandChart(containerId, csvFilePath) {
     // Draw SVG
     d3.select(containerId).html("");
     const svg = d3.select(containerId).append("svg")
-        .attr("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`)
+        // FIXED: Use 'width' and 'height' directly, not 'dimensions.width'
+        .attr("viewBox", `0 0 ${width} ${height}`) 
         .style("width", "100%")
-        .style("height", "auto");     
+        .style("height", "auto");
+      
     const bounds = svg.append("g")
         .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
 
