@@ -331,7 +331,7 @@ async function drawBrandChart(containerId, csvFilePath) {
     // Setup Dimensions (Smaller height for grid)
     const wrapper = document.querySelector(containerId);
     if (!wrapper) return;
-    const width = wrapper.clientWidth;
+    const width = 400;
     const height = 350;
     const margin = { top: 20, right: 20, bottom: 40, left: 40 };
     const boundsWidth = width - margin.left - margin.right;
@@ -340,7 +340,9 @@ async function drawBrandChart(containerId, csvFilePath) {
     // Draw SVG
     d3.select(containerId).html("");
     const svg = d3.select(containerId).append("svg")
-        .attr("width", width).attr("height", height);
+        .attr("viewBox", `0 0 ${dimensions.width} ${dimensions.height}`)
+        .style("width", "100%")
+        .style("height", "auto");     
     const bounds = svg.append("g")
         .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
 
