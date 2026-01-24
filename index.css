@@ -649,3 +649,30 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     text-align: center;
     padding-bottom: 3rem;
   }
+
+/* =========================================
+   8. LINE CHART
+   ========================================= */
+
+/* --- MULTI-LINE CHART STYLING --- */
+
+.line-path {
+    fill: none;
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+/* Specific Colors for each Company */
+.line-Lion { stroke: #FF6B6B; }  /* Soft Red */
+.line-Olio { stroke: #4ECDC4; }  /* Teal */
+.line-Festo { stroke: #FFE66D; } /* Yellow */
+
+/* Axis Styling */
+.y-axis-label { fill: #666; font-size: 11px; }
+.x-axis-text { font-size: 10px; fill: #888; }
+.domain, .tick line { stroke: #ddd; } /* Softer grid lines */
+
+/* Legend Styling */
+.legend { font-size: 12px; font-family: sans-serif; cursor: pointer;}
+.legend-dot { stroke-width: 2px; }
