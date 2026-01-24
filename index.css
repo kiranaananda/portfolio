@@ -467,7 +467,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     }
 
 /* LAYER 1: The Moving Watercolor (Deepest Layer) */
-.watercolor-canvas {
+#watercolor-canvas {
     position: fixed;
     top: 0;
     left: 0;
