@@ -676,3 +676,50 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* Legend Styling */
 .legend { font-size: 12px; font-family: sans-serif; cursor: pointer;}
 .legend-dot { stroke-width: 2px; }
+
+/* TOOLTIP STYLES */
+#tooltip {
+    position: absolute;
+    opacity: 0; /* Hidden by default */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    pointer-events: none; /* Let mouse pass through */
+    font-size: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: opacity 0.1s;
+    z-index: 10;
+    font-family: sans-serif;
+}
+.tooltip-date {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+}
+.tooltip-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    min-width: 120px;
+}
+.color-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+}
+/* The vertical line that follows the mouse */
+.hover-line {
+    stroke: #999;
+    stroke-width: 1px;
+    stroke-dasharray: 5 5;
+    opacity: 0;
+    pointer-events: none;
+}
