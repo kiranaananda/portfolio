@@ -115,7 +115,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* --- 1. Base Structure (The Shell) --- */
 .w-nav {
   position: relative;
-  background: #ffffff;
   z-index: 1000;
   width: 100%;
 }
@@ -240,7 +239,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* The Outer Wrapper */
 .footer-custom-wrapper {
   padding: 40px 0;
-  background-color: #ffffff;
   border-top: 1px solid #f0f0f0;
   width: 100%;
 }
