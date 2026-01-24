@@ -192,37 +192,35 @@ async function drawMultiLineChart() {
 
     // 1. ACCESS DATA
     let data = await d3.csv("./data.csv");
-
-    // Define the list of companies (keys) excluding the Date column
     const companies = ["Lion", "Olio", "Festo"];
-    
-    // Parse the date string into a Date object
     const dateParser = d3.timeParse("%Y-%m-%d");
+    const dateFormatter = d3.timeFormat("%B %Y"); // e.g., "April 2016"
     
-    // Format data: Convert strings to Numbers & Dates
     data.forEach(d => {
         d.Date = dateParser(d.Date);
-        companies.forEach(c => d[c] = +d[c]); // Convert "79617.2" to 79617.2
+        companies.forEach(c => d[c] = +d[c]);
     });
 
-    // 2. CHART DIMENSIONS
+    // 2. DIMENSIONS
     const wrapper = document.getElementById("wrapper");
-    // Ensure it fits within your container width
     const width = wrapper.clientWidth > 800 ? 800 : wrapper.clientWidth;
     const height = 400;
 
     const dimensions = {
         width: width,
         height: height,
-        margin: { top: 30, right: 100, bottom: 50, left: 60 }, // Extra right margin for Legend
+        margin: { top: 30, right: 80, bottom: 50, left: 60 },
     };
 
     dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right;
     dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom;
 
     // 3. DRAW CANVAS
-    d3.select("#wrapper").html(""); // Clear old chart
+    d3.select("#wrapper").html(""); 
     
+    // Create the tooltip div (if it doesn't exist)
+    const tooltip = d3.select("body").append("div").attr("id", "tooltip");
+
     const svg = d3.select("#wrapper")
         .append("svg")
         .attr("width", dimensions.width)
@@ -232,41 +230,31 @@ async function drawMultiLineChart() {
         .style("transform", `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`);
 
     // 4. SCALES
-
-    // X Scale: Time
     const xScale = d3.scaleTime()
         .domain(d3.extent(data, d => d.Date))
         .range([0, dimensions.boundedWidth]);
 
-    // Y Scale: Find the Min and Max across ALL companies to set the vertical range
     const allValues = data.flatMap(d => companies.map(c => d[c]));
     const yScale = d3.scaleLinear()
-        .domain([d3.min(allValues) * 0.9, d3.max(allValues) * 1.1]) // Add breathing room
+        .domain([d3.min(allValues) * 0.9, d3.max(allValues) * 1.1])
         .range([dimensions.boundedHeight, 0]);
 
-    // Color Scale (Matches CSS classes)
     const colorScale = d3.scaleOrdinal()
         .domain(companies)
         .range(["#FF6B6B", "#4ECDC4", "#FFE66D"]);
 
-    // 5. DRAW AXES
-
-    const yAxisGenerator = d3.axisLeft().scale(yScale).ticks(5);
-    const xAxisGenerator = d3.axisBottom().scale(xScale).ticks(6);
-
-    bounds.append("g").call(yAxisGenerator);
+    // 5. AXES
+    bounds.append("g").call(d3.axisLeft().scale(yScale).ticks(5));
     bounds.append("g")
         .style("transform", `translateY(${dimensions.boundedHeight}px)`)
-        .call(xAxisGenerator);
+        .call(d3.axisBottom().scale(xScale));
 
-    // 6. DRAW THE LINES
-
+    // 6. DRAW LINES
     const lineGenerator = d3.line()
         .x(d => xScale(d.Date))
         .y(d => yScale(d.value))
-        .curve(d3.curveMonotoneX); // Smooth curves
+        .curve(d3.curveMonotoneX);
 
-    // We need to reshape the data for D3: One array per company
     const formattedData = companies.map(company => {
         return {
             name: company,
@@ -274,33 +262,97 @@ async function drawMultiLineChart() {
         };
     });
 
-    // Draw the lines
     bounds.selectAll(".line-path")
         .data(formattedData)
-        .enter()
-        .append("path")
-        .attr("class", d => `line-path line-${d.name}`) // Assigns class "line-Lion", etc.
+        .enter().append("path")
+        .attr("class", "line-path")
         .attr("fill", "none")
+        .attr("stroke-width", 3)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
         .attr("d", d => lineGenerator(d.values))
         .attr("stroke", d => colorScale(d.name));
 
-    // 7. ADD LEGEND (Labels at the end of lines)
-    
+    // 7. LABELS
     bounds.selectAll(".legend-text")
         .data(formattedData)
-        .enter()
-        .append("text")
+        .enter().append("text")
         .attr("x", dimensions.boundedWidth + 10)
-        .attr("y", d => {
-            // Find the last data point's Y position to place the label
-            const lastPoint = d.values[d.values.length - 1];
-            return yScale(lastPoint.value);
-        })
+        .attr("y", d => yScale(d.values[d.values.length - 1].value))
         .text(d => d.name)
         .style("fill", d => colorScale(d.name))
         .style("font-weight", "bold")
         .style("font-size", "12px")
         .attr("alignment-baseline", "middle");
+
+    // ---------------------------------------------------------
+    // 8. INTERACTION (THE NEW PART)
+    // ---------------------------------------------------------
+
+    // A. Add a vertical line that we will move around
+    const hoverLine = bounds.append("line")
+        .attr("class", "hover-line")
+        .attr("y1", 0)
+        .attr("y2", dimensions.boundedHeight);
+
+    // B. Create a transparent rectangle on top to catch mouse events
+    const listeningRect = bounds.append("rect")
+        .attr("class", "listening-rect")
+        .attr("width", dimensions.boundedWidth)
+        .attr("height", dimensions.boundedHeight)
+        .attr("fill", "transparent") // Invisible
+        .on("mousemove", onMouseMove)
+        .on("mouseleave", onMouseLeave);
+
+    // C. Logic to find the closest data point
+    function onMouseMove(event) {
+        const mousePosition = d3.pointer(event);
+        const hoveredDate = xScale.invert(mousePosition[0]);
+
+        // Find the closest date in our dataset
+        const getDistanceFromHoveredDate = d => Math.abs(d.Date - hoveredDate);
+        const closestIndex = d3.scan(data, (a, b) => getDistanceFromHoveredDate(a) - getDistanceFromHoveredDate(b));
+        const closestDataPoint = data[closestIndex];
+        
+        // If we found a point
+        if (closestDataPoint) {
+            const x = xScale(closestDataPoint.Date);
+            const y = mousePosition[1]; // Use mouse Y for tooltip height
+
+            // 1. Show the vertical line
+            hoverLine.style("opacity", 1)
+                .attr("x1", x).attr("x2", x);
+
+            // 2. Prepare Tooltip HTML
+            // Sort companies by value (highest on top) for readability
+            const sortedCompanies = companies.slice().sort((a, b) => closestDataPoint[b] - closestDataPoint[a]);
+            
+            let tooltipHtml = `<span class="tooltip-date">${dateFormatter(closestDataPoint.Date)}</span>`;
+            
+            sortedCompanies.forEach(company => {
+                tooltipHtml += `
+                    <div class="tooltip-row">
+                        <span>
+                            <span class="color-dot" style="background: ${colorScale(company)}"></span>
+                            ${company}
+                        </span>
+                        <b>${closestDataPoint[company].toLocaleString()}</b>
+                    </div>
+                `;
+            });
+
+            // 3. Move and Show Tooltip
+            tooltip.style("opacity", 1)
+                .html(tooltipHtml)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 15) + "px");
+        }
+    }
+
+    function onMouseLeave() {
+        hoverLine.style("opacity", 0);
+        tooltip.style("opacity", 0);
+    }
 }
 
 drawMultiLineChart();
