@@ -389,8 +389,8 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 
 .project-visual {
     flex-shrink: 0;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
 }
 
 .project-visual img {
@@ -436,7 +436,10 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 
 /* Mobile Fix */
 @media (max-width: 600px) {
-    .project-row {
+    .main-container {
+    padding: 1rem 1rem;
+   }
+   .project-row {
         flex-direction: column;
         gap: 20px;
     }
@@ -451,6 +454,10 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     }
 }
 
+/* =========================================
+   6. BUBBLE BACKGROUND GLASS LOOK
+   ========================================= */
+
 /* 1. RESET & BASIC SETUP */
     body {
         margin: 0;
@@ -460,7 +467,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     }
 
 /* LAYER 1: The Moving Watercolor (Deepest Layer) */
-#watercolor-canvas {
+.watercolor-canvas {
     position: fixed;
     top: 0;
     left: 0;
