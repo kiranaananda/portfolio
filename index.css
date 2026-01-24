@@ -37,7 +37,7 @@ p { margin-top: 0; margin-bottom: 10px; }
 blockquote { border-left: 5px solid #e2e2e2; margin: 0 0 10px; padding: 10px 20px; line-height: 1.2; font-family: "Playpen Sans", sans-serif; }
 figure { margin: 1em 40px; }
 img { border: 0; max-width: 100%; vertical-align: middle; display: inline-block; }
-a { background-color: transparent; }
+a { background-color: transparent; text-decoration: none; }
 a:active, a:hover { outline: 0; }
 ul, ol { margin-top: 0; margin-bottom: 10px; padding-left: 40px; }
 button { overflow: visible; text-transform: none; }
@@ -363,83 +363,146 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 /* =========================================
    6. PORTFOLIO LIST
    ========================================= */
-.impact-section{
-  background-color: #f5f7fa;
-}
-.case-study-list {
-  max-width: 1000px;
-  margin: 100px auto;
-  padding: 0 40px;
+
+/* Container Logic */
+.main-container {
+    max-width: 100%; /* Standard width from Index */
+    margin: 0 auto;
+    padding: 2rem 10rem;
 }
 
-.project-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 0;
-  border-bottom: 1px solid #000; /* Sharp black line for a clean look */
-  text-decoration: none;
-  color: #000;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+/* Header Consistency */
+.portfolio-header {
+    margin-bottom: 60px;
+    border-bottom: 1px solid #eee; /* Subtle divider */
+    padding-bottom: 20px;
+    text-align: center;
 }
 
-/* THE HOVER EFFECT */
-.project-item:hover {
-  background-color: #0f172a; /* Switches to your dark theme color */
-  color: #fff;               /* Text turns white */
-  padding-left: 30px;        /* Slides the whole row right */
-  padding-right: 30px;
+/* The "Experience" Layout */
+.project-row {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    align-items: flex-start;
 }
 
-.project-info {
-  display: flex;
-  align-items: baseline;
-  gap: 40px;
+.project-visual {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
 }
 
-.project-number {
-  font-style: italic;
-  opacity: 0.5;
+.project-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px; /* Matches the rounded look of logos */
+    border: 1px solid #f0f0f0;
 }
 
-.project-heading {
-  margin: 0;
-  letter-spacing: -1px;
-  color: inherit;
+.project-details {
+    flex-grow: 1;
 }
 
-.project-hashtags {
-  margin-top: 8px;
-  opacity: 0.6;
+.project-title {
+    text-decoration: none;
 }
 
 .project-meta {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 10px;
+    font-family: monospace; /* Adds a tiny bit of "Technical" flair */
 }
 
-.project-impact {
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 12px;
-  background: #000;
-  color: #fff;
-  padding: 4px 8px;
+.project-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 15px;
 }
 
-/* If the item is hovered, make the impact badge white */
-.project-item:hover .project-impact {
-  background: #fff;
-  color: #0f172a;
+  .highlight-word {
+    background: linear-gradient(120deg, #FFF7AE 0%, #CDE7FF 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em; /* Underline only */
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+    cursor: default;
+  }
+
+  .highlight-word:hover {
+    background-size: 100% 88%; /* Fills up like a highlighter */
+  }
+
+/* Divider */
+.section-divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 40px 0;
 }
-.project-item:hover .project-heading {
-  color: #ffffff !important;
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+    .project-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .project-visual {
+        width: 100%;
+        height: auto;
+    }
+
+    .project-visual img {
+        max-width: 100px; /* Keep it logo-sized on mobile */
+    }
 }
-.project-item:hover .project-hashtags {
-  color: #e2e2e2 !important; /* Slightly dimmed white */
+
+/* 1. RESET & BASIC SETUP */
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background-color: transparent; /* Let canvas show through */
+        font-family: sans-serif;
+    }
+
+/* LAYER 1: The Moving Watercolor (Deepest Layer) */
+#watercolor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2; /* Puts it at the very bottom */
+    background: #ffffff;
+}
+
+/* LAYER 2: The Frosted Glass (Middle Layer) */
+.full-screen-glass {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Sits on top of canvas (-2), but behind text (1) */
+    
+    /* A. The Blur */
+    backdrop-filter: blur(10px); /* Increased blur for smoother wash */
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* C. The Tint */
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* LAYER 3: The Content (Top Layer) */
+.content {
+    position: relative;
+    z-index: 1; /* Ensures text is clickable and sharp */
+    padding: 50px;
+    color: #1a1a1a; /* Sharp black/grey for contrast */
 }
 
 /* =========================================
