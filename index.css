@@ -436,13 +436,6 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
     background-size: 100% 88%; /* Fills up like a highlighter */
   }
 
-/* Divider */
-.section-divider {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin: 40px 0;
-}
-
 /* Mobile Fix */
 @media (max-width: 600px) {
     .project-row {
