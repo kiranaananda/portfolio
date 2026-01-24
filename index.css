@@ -694,10 +694,11 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
 .brand-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; /* 3 Columns */
-    gap: 20px;
+    gap: 15px;
     margin-top: 30px;
+    width: 100%;
 }
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .brand-grid { grid-template-columns: 1fr; } /* Stack on mobile */
 }
 
