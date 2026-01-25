@@ -17,7 +17,6 @@ body {
   font-size: 1rem;
   line-height: 1.2;
   overflow-x: hidden;
-  max-width: 1100px;
 }
 
 h1,
@@ -512,6 +511,7 @@ input[type="reset"] {
   /* Standard width from Index */
   margin: 0 auto;
   padding: 2rem 10rem;
+  max-width: 1100px;
 }
 
 /* Header Consistency */
@@ -979,6 +979,7 @@ body {
 /* --- SECTIONS --- */
 .section-white {
   padding: 60px 0;
+  max-width: 1100px;
 }
 
 .section-gray {
@@ -986,6 +987,7 @@ body {
   background: rgba(248, 249, 250, 0.5);
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  max-width: 1100px;
 }
 
 /* --- HERO SECTION --- */
@@ -994,6 +996,7 @@ body {
   background: linear-gradient(135deg, #FF5A5F 0%, #FF385C 100%);
   /* Airbnb Red Gradient */
   color: white;
+  max-width: 1100px;
 }
 
 .hero-section h1 {
