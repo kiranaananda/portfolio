@@ -14,7 +14,6 @@ body {
   font-weight: 500;
   min-height: 100%;
   color: #333;
-  background-color: #fffff;
   font-size: 1rem;
   line-height: 1.2;
   overflow-x: hidden;
@@ -121,6 +120,7 @@ button,
 html input[type="button"],
 input[type="reset"] {
   -webkit-appearance: button;
+  appearance: button;
   cursor: pointer;
 }
 
