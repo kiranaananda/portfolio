@@ -356,6 +356,7 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
   .container, .w-container {
     max-width: none;
   }
+  .project-visual, .project-visual img { display: none; }
 }
 
 /* =========================================
@@ -451,6 +452,8 @@ button, html input[type="button"], input[type="reset"] { -webkit-appearance: but
         max-width: 100px; /* Keep it logo-sized on mobile */
     }
 }
+
+
 
 /* =========================================
    6. BUBBLE BACKGROUND GLASS LOOK
