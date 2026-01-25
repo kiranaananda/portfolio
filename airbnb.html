@@ -82,29 +82,24 @@
 <div class="section-divider">
   <span class="knot">✦</span> 
 </div>
-    
-<section class="impact-section">
-            <div class="meta-grid">
-                <div><strong>Role</strong><br>Data Analyst</div>
-                <div><strong>Tools</strong><br>Python, Pandas, Scikit-learn</div>
-                <div><strong>Method</strong><br>Hierarchical Clustering</div>
-            </div>
-        </div>
-    </header>
+  
+ <div class="meta-grid">
+    <div><strong>Role</strong><br>Data Analyst</div>
+    <div><strong>Tools</strong><br>Python, Pandas, Scikit-learn</div>
+    <div><strong>Method</strong><br>Hierarchical Clustering</div>
+ </div>
 
     <section class="section-white">
-        <div class="container">
+        <div class="data-section">
             <h5>The Challenge</h5>
             <p class="lead-text">
-                Chicago was identified as an <strong>"Underperforming Favorite."</strong> It had high distinctiveness but low demand conversion. Generic marketing wasn't moving the needle. 
-                <br><br>
-                The goal was to move beyond price-based segmentation and understand <em>who</em> was actually visiting based on behavior and amenities.
+                Chicago was identified as an <strong>"Underperforming Favorite."</strong> It had high distinctiveness but low demand conversion. Generic marketing wasn't moving the needle. The goal was to move beyond price-based segmentation and understand <em>who</em> was actually visiting based on behavior and amenities.
             </p>
         </div>
     </section>
 
     <section class="section-gray">
-        <div class="container">
+        <div class="data-section">
             <h5>The Approach</h5>
             <div class="two-col-grid">
                 <div class="text-content">
@@ -136,7 +131,7 @@ model = AgglomerativeClustering(
     </section>
 
     <section class="section-white">
-        <div class="container">
+        <div class="data-section">
             <h5>The Discovery: 4 Key Personas</h5>
             <p>The model revealed four distinct traveler types that generic marketing had missed.</p>
             
@@ -174,7 +169,7 @@ model = AgglomerativeClustering(
     </section>
 
     <section class="section-gray">
-        <div class="container">
+        <div class="data-section">
             <h5>The Solution: Seasonal Content Calendar</h5>
             <p>I translated these clusters into a targeted marketing schedule to maximize seasonal demand.</p>
             
@@ -204,44 +199,42 @@ model = AgglomerativeClustering(
         </div>
     </section>
 </section>
-
-       <div class="container">
-            <h6>See the Details</h6>
-            <div class="button-row">
-                <a href="https://docs.google.com/presentation/d/1ZPiHaXCkwiAVpwFoMQB0geXMeABLp7aUPN95BPbudyI/edit?usp=sharing" class="highlight-word">View Presentation Deck (PDF)</a>
-            </div>
-        </div>  
+ <section>
+       <div class="data-section">
+         <h5><center>See the Details</center></h5>
+                <a href="https://docs.google.com/presentation/d/1ZPiHaXCkwiAVpwFoMQB0geXMeABLp7aUPN95BPbudyI/edit?usp=sharing" class="highlight-word"><center>View Presentation Deck</center></a>
+        </div> 
+  </section>
   
 <!-- --------------------------------------------------- -->
     
-
+ <div class="data-section">
 <footer class="project-footer">
   <h5 class="font-hand">Retrospective</h5>
   <p>Every analysis has constraints. If I were to expand this project, here is how I would address current limitations:</p>
-            
             <div class="two-col-grid">
                 <div>
                     <h6>1. The "Demand" Proxy</h6>
-                    <p>
+                    <p style="text-align: left">
                         <strong>The Limitation:</strong> Public Airbnb data does not show actual transactions. I used "Review Count" and "Calendar Availability" as proxies for demand.<br>
                         <strong>The Fix:</strong> With internal access, I would validate these clusters against actual <em>conversion rates</em> and <em>booking value</em> to confirm that "Active Leisure" listings truly generate higher revenue.
                     </p>
                 </div>
                 <div>
                     <h6>2. Scalability</h6>
-                    <p>
-                        <strong>The Limitation:</strong> Hierarchical Clustering is computationally expensive ($O(n^3)$), making it slow for large datasets.<br>
+                    <p style="text-align: left">
+                        <strong>The Limitation:</strong> Hierarchical Clustering is computationally expensive, making it slow for large datasets.<br>
                         <strong>The Fix:</strong> To scale this strategy to the entire US market (1M+ listings), I would switch to <strong>K-Means</strong> or <strong>DBSCAN</strong>, using the centroids identified in this Chicago pilot as the starting seed.
                     </p>
                 </div>
             </div>
-  <div>
-  </div>
+
     
 <div class="section-divider">
   <span class="knot">✦</span> 
 </div>
-    
+
+
     <a href="/portfolio" class="button-primary-3 w-button"> <center>Back to Project List</center></a>
   </footer>
 
