@@ -1065,7 +1065,10 @@ body {
 
 /* --- TABLET & BELOW (max-width: 991px) --- */
 @media screen and (max-width: 991px) {
-
+  
+  * {
+    padding: 1rem !important;
+  }
 
   /* --- hero --- */
 
@@ -1088,6 +1091,10 @@ body {
 
 /* --- MOBILE LANDSCAPE (max-width: 767px) --- */
 @media screen and (max-width: 767px) {
+  
+  * {
+    padding: 1rem !important;
+  }
 
   /* --- hero --- */
   .hero-without-image {
@@ -1141,6 +1148,9 @@ body {
 /* --- MOBILE PORTRAIT (max-width: 479px) --- */
 @media screen and (max-width: 479px) {
 
+  * {
+    padding: 1rem !important;
+  }
   .container,
   .w-container {
     max-width: none;
