@@ -1080,7 +1080,8 @@ body {
     margin-bottom: 40px;
     padding: 0 15px;
   }
-  .main-container{
+
+  .main-container {
     padding: 1rem 1rem;
   }
 }
@@ -1131,9 +1132,18 @@ body {
     width: 100%;
   }
 
-  .main-container{
+  .main-container {
     padding: 1rem 1rem;
   }
+  
+  .source-material-section, .impact-section, .source-material-section, .data-section, .project-footer {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    width: 100%;
+}
 
 }
 
@@ -1150,7 +1160,20 @@ body {
     display: none;
   }
 
-  .main-container{
+  .main-container {
     padding: 1rem 1rem;
+  }
+
+  .source-material-section,
+  .impact-section,
+  .source-material-section,
+  .data-section,
+  .project-footer {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    width: 100%;
   }
 }
