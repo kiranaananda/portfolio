@@ -415,104 +415,6 @@ input[type="reset"] {
 }
 
 /* =========================================
-   5. MOBILE RESPONSIVENESS
-   ========================================= */
-
-
-/* --- TABLET & BELOW (max-width: 991px) --- */
-@media screen and (max-width: 991px) {
-
-
-  /* --- hero --- */
-
-  .hero-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-split {
-    max-width: 100%;
-    margin-bottom: 40px;
-    padding: 0 15px;
-  }
-  .main-container{
-    padding: 1rem 1rem;
-  }
-}
-
-/* --- MOBILE LANDSCAPE (max-width: 767px) --- */
-@media screen and (max-width: 767px) {
-
-  /* --- hero --- */
-  .hero-without-image {
-    padding: 60px 15px;
-  }
-
-  .hero-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-split {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 30px;
-    padding: 0 15px;
-  }
-
-  /* --- feature cards --- */
-  .features-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  /* --- resume --- */
-  .resume-row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .resume-side {
-    width: 100%;
-    margin-bottom: 20px;
-    text-align: left;
-    border-right: none;
-  }
-
-  .resume-main {
-    width: 100%;
-  }
-
-  .main-container{
-    padding: 1rem 1rem;
-  }
-
-}
-
-/* --- MOBILE PORTRAIT (max-width: 479px) --- */
-@media screen and (max-width: 479px) {
-
-  .container,
-  .w-container {
-    max-width: none;
-  }
-
-  .project-visual,
-  .project-visual img {
-    display: none;
-  }
-
-  .main-container{
-    padding: 1rem 1rem;
-  }
-}
-
-/* =========================================
    6. PORTFOLIO LIST
    ========================================= */
 
@@ -594,7 +496,7 @@ input[type="reset"] {
 
 /* Mobile Fix */
 @media (max-width: 600px) {
-  
+
   .project-row {
     flex-direction: column;
     gap: 20px;
@@ -1152,5 +1054,104 @@ body {
 
   .season {
     margin-bottom: 5px;
+  }
+}
+
+
+/* =========================================
+   5. MOBILE RESPONSIVENESS
+   ========================================= */
+
+
+/* --- TABLET & BELOW (max-width: 991px) --- */
+@media screen and (max-width: 991px) {
+
+
+  /* --- hero --- */
+
+  .hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-split {
+    max-width: 100%;
+    margin-bottom: 40px;
+    padding: 0 15px;
+  }
+  .main-container{
+    padding: 1rem 1rem;
+  }
+}
+
+/* --- MOBILE LANDSCAPE (max-width: 767px) --- */
+@media screen and (max-width: 767px) {
+
+  /* --- hero --- */
+  .hero-without-image {
+    padding: 60px 15px;
+  }
+
+  .hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-split {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+    padding: 0 15px;
+  }
+
+  /* --- feature cards --- */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* --- resume --- */
+  .resume-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resume-side {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+    border-right: none;
+  }
+
+  .resume-main {
+    width: 100%;
+  }
+
+  .main-container{
+    padding: 1rem 1rem;
+  }
+
+}
+
+/* --- MOBILE PORTRAIT (max-width: 479px) --- */
+@media screen and (max-width: 479px) {
+
+  .container,
+  .w-container {
+    max-width: none;
+  }
+
+  .project-visual,
+  .project-visual img {
+    display: none;
+  }
+
+  .main-container{
+    padding: 1rem 1rem;
   }
 }
