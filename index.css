@@ -437,6 +437,9 @@ input[type="reset"] {
     margin-bottom: 40px;
     padding: 0 15px;
   }
+  .main-container{
+    padding: 1rem 1rem;
+  }
 }
 
 /* --- MOBILE LANDSCAPE (max-width: 767px) --- */
@@ -485,6 +488,10 @@ input[type="reset"] {
     width: 100%;
   }
 
+  .main-container{
+    padding: 1rem 1rem;
+  }
+
 }
 
 /* --- MOBILE PORTRAIT (max-width: 479px) --- */
@@ -498,6 +505,10 @@ input[type="reset"] {
   .project-visual,
   .project-visual img {
     display: none;
+  }
+
+  .main-container{
+    padding: 1rem 1rem;
   }
 }
 
@@ -583,10 +594,7 @@ input[type="reset"] {
 
 /* Mobile Fix */
 @media (max-width: 600px) {
-  .main-container {
-    padding: 1rem 1rem;
-  }
-
+  
   .project-row {
     flex-direction: column;
     gap: 20px;
