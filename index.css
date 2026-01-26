@@ -949,6 +949,8 @@ body {
   border-radius: 8px;
   font-family: 'Courier New', monospace;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 /* --- PERSONA CARDS --- */
@@ -1135,15 +1137,32 @@ body {
   .main-container {
     padding: 1rem 1rem;
   }
-  
-  .source-material-section, .impact-section, .source-material-section, .data-section, .project-footer {
+
+  .source-material-section,
+  .impact-section,
+  .source-material-section,
+  .data-section,
+  .project-footer {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-left: 0rem;
     padding-right: 0rem;
     width: 100%;
-}
+  }
+
+  .two-col-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .text-content {
+    order: 1;
+  }
+  .code-block {
+    order: 2;
+    width: 100%;
+    margin-top: 10px;
+  }
 
 }
 
