@@ -52,8 +52,8 @@
             </ul>
           </nav>
 
-          <div class="menu-button w-nav-button" style="-webkit-user-select: text; user-select: text;" aria-label="menu" role="button"
-            tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+          <div class="menu-button w-nav-button" style="-webkit-user-select: text; user-select: text;" aria-label="menu"
+            role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
             <div class="w-icon-nav-menu"></div>
           </div>
         </div>
@@ -74,56 +74,122 @@
   <div class="main-container">
   </div>
   <script src="script/bubbleglassbackground.js"></script>
+
   <!-- --------------------------- MAIN PORTFOLIO --------------------- -->
+  <section class="portfolio-header">
+    <h4>Selected Works</h4>
+    <p>Strategic analysis and technical projects driving business growth.</p>
+  </section>
+
+  <ul data-tabs>
+    <li><a data-tabby-default href="#casestudy">Case Study</a></li>
+    <li><a href="#reading">Reading Carousel</a></li>
+  </ul>
 
   <div class="main-container">
 
-    <section class="portfolio-header">
-      <h4>Selected Works</h4>
-      <p>Strategic analysis and technical projects driving business growth.</p>
-    </section>
-
-
-    <div class="project-row">
-      <div class="project-visual">
-        <a href="lion-fmcg.html">
-          <img src="assets/fmcg.svg" alt="The Lion Share">
-        </a>
+    <div id="casestudy">
+      <div class="project-row">
+        <div class="project-visual">
+          <a href="lion-fmcg.html">
+            <img src="assets/fmcg.svg" alt="The Lion Share">
+          </a>
+        </div>
+        <div class="project-details">
+          <a href="lion-fmcg.html" class="project-title">
+            <h6>The Lion Share: A Strategic Turnoaround Analysis</h6>
+          </a>
+          <p class="project-meta">Market Strategy • Data Visualization • Consumer Insights</p>
+          <p class="project-desc">
+            Assessed advertising effectiveness across FMCG brands, identifying store activation and messaging strategies
+            that contributed to increased consideration and market share gains.
+          </p>
+          <a href="lion-fmcg.html" class="highlight-word"> View Case Study </a>
+        </div>
       </div>
-      <div class="project-details">
-        <a href="lion-fmcg.html" class="project-title">
-          <h6>The Lion Share: A Strategic Turnoaround Analysis</h6>
-        </a>
-        <p class="project-meta">Market Strategy • Data Visualization • Consumer Insights</p>
-        <p class="project-desc">
-          Assessed advertising effectiveness across FMCG brands, identifying store activation and messaging strategies
-          that contributed to increased consideration and market share gains.
-        </p>
-        <a href="lion-fmcg.html" class="highlight-word"> View Case Study </a>
+
+
+      <div class="project-row">
+        <div class="project-visual">
+          <a href="airbnb.html">
+            <img src="assets/vacation.svg" alt="Airbnb Project">
+          </a>
+        </div>
+        <div class="project-details">
+          <a href="airbnb.html" class="project-title">
+            <h6>Right Message, Right Audience: Optimizing Airbnb’s Campaign with Segmentation</h6>
+          </a>
+          <p class="project-meta"> Python • Marketing Campaign • Market Segmentation </p>
+          <p class="project-desc">
+            Designed a persona-based content calendar (Spring/Summer/Fall/Winter) targeting specific amenities, moving
+            away from generic pricing strategies to value-based messaging.
+          </p>
+          <a href="airbnb.html" class="highlight-word"> View Case Study </a>
+        </div>
+
+
       </div>
     </div>
 
+    <div id="reading">
+      <section class="linkedin-gallery-section">
+        <div class="carousel-grid">
 
-    <div class="project-row">
-      <div class="project-visual">
-        <a href="airbnb.html">
-          <img src="assets/vacation.svg" alt="Airbnb Project">
-        </a>
-      </div>
-      <div class="project-details">
-        <a href="airbnb.html" class="project-title">
-          <h6>Right Message, Right Audience: Optimizing Airbnb’s Campaign with Segmentation</h6>
-        </a>
-        <p class="project-meta"> Python • Marketing Campaign • Market Segmentation </p>
-        <p class="project-desc">
-          Designed a persona-based content calendar (Spring/Summer/Fall/Winter) targeting specific amenities, moving
-          away from generic pricing strategies to value-based messaging.
-        </p>
-        <a href="airbnb.html" class="highlight-word"> View Case Study </a>
-      </div>
+          <div class="linkedin-card">
+            <div class="card-header">
+              <h6 class="post-title">Synthesis Week</h6>
+            </div>
+            <div class="slider-window">
+              <div class="slide-track">
+                <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80"
+                  alt="Workshop" class="slide-img">
+                <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80"
+                  alt="Wireframes" class="slide-img">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+                  alt="Team" class="slide-img">
+              </div>
+              <div class="slide-hint">Swipe →</div>
+            </div>
+          </div>
 
+          <div class="linkedin-card">
+            <div class="card-header">
+              <h6 class="post-title">Data Viz Patterns</h6>
+            </div>
+            <div class="slider-window">
+              <div class="slide-track">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80"
+                  alt="Data" class="slide-img">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+                  alt="Code" class="slide-img">
+                <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80"
+                  alt="Analysis" class="slide-img">
+              </div>
+              <div class="slide-hint">Swipe →</div>
+            </div>
+          </div>
 
+          <div class="linkedin-card">
+            <div class="card-header">
+              <span class="post-date">Aug 05</span>
+              <h3 class="post-title">In the Field</h3>
+            </div>
+            <div class="slider-window">
+              <div class="slide-track">
+                <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=600&q=80"
+                  alt="Interview" class="slide-img">
+                <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=600&q=80"
+                  alt="City" class="slide-img">
+              </div>
+              <div class="slide-hint">Swipe →</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
     </div>
+
+
   </div>
 
 
@@ -155,6 +221,13 @@
       </ul>
     </nav>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/gh/cferdinandi/tabby/dist/js/tabby.polyfills.min.js"></script>
+
+  <script>
+    var tabs = new Tabby('[data-tabs]');
+  </script>
+
 </body>
 
 </html>
