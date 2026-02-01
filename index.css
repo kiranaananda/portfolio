@@ -799,7 +799,6 @@ body {
 /* --- THE GRID LAYOUT --- */
 .carousel-grid {
   display: grid;
-  /* Force exactly 2 columns on large screens */
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   /* Bigger gap for a cleaner look */
@@ -838,7 +837,6 @@ body {
 .slider-window {
   width: 100%;
   aspect-ratio: 4 / 5;
-  /* Keeps it strictly rectangular like LinkedIn */
   position: relative;
   background-color: #f1f5f9;
 }
@@ -849,9 +847,7 @@ body {
   width: 100%;
   height: 100%;
   overflow-x: auto;
-  /* Allows horizontal scrolling */
   scroll-snap-type: x mandatory;
-  /* Forces images to snap into place */
 
   /* Hides scrollbar but allows scrolling */
   scrollbar-width: none;
@@ -865,12 +861,10 @@ body {
 /* --- THE IMAGES --- */
 .slide-img {
   flex: 0 0 100%;
-  /* Image is 100% width of the card */
   height: 100%;
   object-fit: cover;
-  /* Crops image nicely to fit */
   scroll-snap-align: center;
-  /* Snaps image to center */
+  scroll-snap-stop: always;
 }
 
 /* --- THE "SWIPE" BUTTON --- */
@@ -885,14 +879,12 @@ body {
   font-size: 11px;
   font-weight: 600;
   pointer-events: none;
-  /* Allows clicks to pass through */
   opacity: 0.8;
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media screen and (max-width: 767px) {
   .carousel-grid {
-    /* Switch to 1 column on mobile/tablet so it's not squished */
     grid-template-columns: 1fr;
     gap: 30px;
   }
