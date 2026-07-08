@@ -466,7 +466,7 @@ input[type="reset"] {
   font-size: 0.85rem;
   color: #666;
   margin-bottom: 10px;
-  font-family: monospace;
+  font-family: "Courier", monospace;
   /* Adds a tiny bit of "Technical" flair */
 }
 
