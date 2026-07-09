@@ -421,9 +421,10 @@ input[type="reset"] {
 /* Container Logic */
 .main-container {
   max-width: 100%;
-  /* Standard width from Index */
   margin: 0 auto;
   padding: 2rem 10rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Header Consistency */
