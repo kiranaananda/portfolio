@@ -354,64 +354,119 @@ input[type="reset"] {
 }
 
 /* ==========================================================================
-   4. FOOTER STYLES
+   5. FOOTER SYSTEMS
    ========================================================================== */
-
-/* The Outer Wrapper */
 .footer-custom-wrapper {
-  padding: 40px 0;
-  border-top: 1px solid #f0f0f0;
+  position: relative;
+  padding: 100px 0 30px;
   width: 100%;
+  background-color: var(--bg-white, #ffffff);
+  border-top: 1px solid rgba(0, 0, 0, 0.02);
+  overflow: hidden; /* Keeps the moving bubbles contained */
 }
 
-/* The List Container */
+/* 1. THE MOVING BUBBLES LAYER */
+.footer-custom-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  
+  /* The colors */
+  background-image: 
+    radial-gradient(circle at 80% 100%, rgb(255, 247, 174) 0%, transparent 60%), /* Yellow */
+    radial-gradient(circle at 20% 100%, rgb(205, 231, 255) 0%, transparent 60%), /* Blue */
+    radial-gradient(circle at 50% 80%, rgb(235, 245, 220) 0%, transparent 50%);  /* Green */
+    
+  /* Make it larger than the footer so it has room to pan around */
+  background-size: 150% 150%; 
+  
+  /* The animation: 15 seconds, smooth easing, infinite looping back and forth */
+  animation: floatBubbles 15s ease-in-out infinite alternate;
+}
+
+/* 2. THE STATIC WHITE FADE (Keeps the top edge perfectly blended) */
+.footer-custom-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  background-image: linear-gradient(to bottom, var(--bg-white, #ffffff) 0%, rgba(255,255,255,0) 30%);
+  pointer-events: none; /* Lets you click links through the invisible parts */
+}
+
+/* 3. THE ANIMATION KEYFRAMES */
+@keyframes floatBubbles {
+  0%   { background-position: 0% 100%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 50% 100%; }
+}
+
+/* Keeps your text above the backgrounds */
+.footer-content-layer {
+  position: relative;
+  z-index: 1; 
+}
+
+/* --- Content Styling --- */
+.footer-intro {
+  max-width: 600px;
+  margin: 0 auto 40px auto; 
+}
+
+.footer-intro h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: var(--text-dark, #222);
+}
+
+.footer-intro p {
+  color: #555; 
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
 .footer-nav-list {
   display: flex;
   flex-direction: row;
-  /* Stays horizontal */
   justify-content: center;
   align-items: center;
   gap: 25px;
   list-style: none;
-  padding: 20px 0;
-  margin: 20px 0;
+  padding: 0;
+  margin: 0 0 50px 0; 
 }
 
-/* Individual Links */
-.footer-nav-link,
-.footer-nav-accent {
+.footer-nav-link, .footer-nav-accent {
   display: flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: #333;
-  transition: opacity 0.2s ease;
+  color: var(--text-dark, #222);
+  font-weight: 500;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.footer-nav-link:hover,
-.footer-nav-accent:hover {
-  opacity: 0.7;
+.footer-nav-link:hover, .footer-nav-accent:hover { 
+  opacity: 0.6; 
+  transform: translateY(-2px); 
 }
 
-/* The Divider Bar */
 .footer-nav-divider {
   width: 1px;
   height: 20px;
-  background-color: #e0e0e0;
+  background-color: rgba(0, 0, 0, 0.1); 
 }
 
-/* MOBILE: Keep it horizontal until the screen is very small */
-@media (max-width: 479px) {
-  .footer-nav-list {
-    flex-wrap: wrap;
-    /* Allows it to wrap if the phone is tiny */
-    gap: 15px;
-  }
+.footer-copyright {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 25px;
+}
 
-  .footer-nav-divider-item {
-    display: none;
-    /* Hides divider on mobile for a cleaner look */
-  }
+.footer-copyright p {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.85rem;
+  margin: 0;
 }
 
 /* =========================================
