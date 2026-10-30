@@ -1,22 +1,58 @@
 /* ==========================================================================
-   1. GLOBAL & TYPOGRAPHY
+   0. DESIGN SYSTEM & VARIABLES
    ========================================================================== */
+:root {
+  /* Typography */
+  --font-sans: "Helvetica Neue", "Arial", sans-serif;
+  --font-display: "Playpen Sans", sans-serif;
+
+  /* Colors */
+  --text-dark: #333333;
+  --text-heading: #1a1a1a;
+  --text-muted: #666666;
+  --text-light: #aaaaaa;
+
+  --bg-white: #ffffff;
+  --bg-light: #f5f7fa;
+  --bg-card: #f8f9fb;
+  --bg-dark: #1a1b1f;
+
+  /* Accent Systems */
+  --accent-outer: #00695C;
+  --accent-outer-bg: #E0F2F1;
+  --accent-outer-border: #B2DFDB;
+  
+  --accent-middle: #F57F17;
+  --accent-middle-bg: #FFFDE7;
+  --accent-middle-border: #FFF176;
+  
+  --accent-pink: #C2185B;
+  --accent-pink-bg: #FCE4EC;
+  --accent-pink-border: #F48FB1;
+  --accent-pink-deep: #880E4F;
+}
+
+
+/* ==========================================================================
+   1. GLOBAL RESETS & TYPOGRAPHY
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
 
 html {
-  -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", "Arial" , sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   min-height: 100%;
-  color: #333;
+  color: var(--text-dark);
   font-size: 1rem;
   line-height: 1.2;
-  overflow-x: hidden;
 }
 
 h1,
@@ -27,8 +63,8 @@ h5,
 h6 {
   margin-bottom: 0.75rem;
   font-weight: bold;
-  color: #1a1a1a;
-  font-family: "Playpen Sans", sans-serif;
+  color: var(--text-heading);
+  font-family: var(--font-display);
 }
 
 h1 {
@@ -80,7 +116,7 @@ blockquote {
   margin: 0 0 10px;
   padding: 10px 20px;
   line-height: 1.2;
-  font-family: "Playpen Sans", sans-serif;
+  font-family: var(--font-display);
 }
 
 figure {
@@ -119,57 +155,18 @@ button {
 button,
 html input[type="button"],
 input[type="reset"] {
-  -webkit-appearance: button;
   appearance: button;
+  -webkit-appearance: button;
   cursor: pointer;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.button-primary-3 {
-  color: #fff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background-color: #1a1b1f;
-  padding: 12px 25px;
-  line-height: 20px;
-  transition: all .2s;
-}
-
-.button-primary-3:hover {
-  color: #fff;
-  background-color: #32343a;
-}
-
-.button-primary-3:active {
-  background-color: #43464d;
-}
 
 /* ==========================================================================
-   2. REQUIRED WEBFLOW COMPONENTS
+   2. REUSABLE COMPONENTS & UTILITIES
    ========================================================================== */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* --- Icons --- */
-@font-face {
-  font-family: webflow-icons;
-  src: url("data:application/x-font-ttf;charset=utf-8;base64,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") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* --- Layout Utilities --- */
+.container,
 .w-container {
-  max-width: 940px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -178,7 +175,6 @@ input[type="reset"] {
 .w-container:after {
   content: " ";
   display: table;
-  grid-area: 1 / 1 / 2 / 2;
 }
 
 .w-container:after {
@@ -203,7 +199,7 @@ input[type="reset"] {
   display: none;
 }
 
-/* --- Buttons --- */
+/* Global Buttons */
 .w-button {
   display: inline-block;
   padding: 9px 15px;
@@ -215,6 +211,40 @@ input[type="reset"] {
   cursor: pointer;
   border-radius: 0;
 }
+
+.button-primary-3 {
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background-color: #1a1b1f;
+  padding: 12px 25px;
+  line-height: 1.8;
+  transition: all .2s;
+}
+
+.button-primary-3:hover {
+  color: #fff;
+  background-color: #32343a;
+}
+
+.button-primary-3:active {
+  background-color: #43464d;
+}
+
+/* Dynamic Highlighter Link Interaction */
+.highlight-word {
+  background: linear-gradient(120deg, #FFF7AE 0%, #CDE7FF 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  background-position: 0 88%;
+  transition: background-size 0.25s ease-in;
+  cursor: default;
+}
+
+.highlight-word:hover {
+  background-size: 100% 88%;
+}
+
 
 /* =========================================
    6. PORTFOLIO LIST
