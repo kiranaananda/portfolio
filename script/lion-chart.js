@@ -369,9 +369,67 @@ function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
 // =========================================================
 // EXECUTE (Handles DOM ready timing safely)
 // =========================================================
+// SHARED INTERACTION LOGIC (The Hover Magic)
+// =========================================================
+function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
+    const tooltip = getTooltip();
+    
+    const hoverLine = bounds.append("line")
+        .attr("y1", 0).attr("y2", h)
+        .attr("stroke", "#999")
+        .attr("stroke-dasharray", "4 4")
+        .style("opacity", 0);
+
+    const listeningRect = bounds.append("rect")
+        .attr("width", w).attr("height", h)
+        .attr("fill", "transparent")
+        .on("mousemove", function(event) {
+            const [mouseX] = d3.pointer(event);
+            const hoveredDate = xScale.invert(mouseX);
+            
+            // Find closest date (handles D3 v7 leastIndex & legacy scan)
+            const getDist = d => Math.abs(d.Date - hoveredDate);
+            const closestIndex = d3.leastIndex 
+                ? d3.leastIndex(data, (a, b) => getDist(a) - getDist(b))
+                : (d3.scan ? d3.scan(data, (a, b) => getDist(a) - getDist(b)) : 0);
+                
+            const d = data[closestIndex];
+
+            if (d) {
+                const x = xScale(d.Date);
+                hoverLine.style("opacity", 1).attr("x1", x).attr("x2", x);
+                
+                // Sort keys by value (highest on top)
+                const sortedKeys = keys.slice().sort((a, b) => d[b] - d[a]);
+
+                let html = `<span class="tooltip-date">${dateFormatter(d.Date)}</span>`;
+                sortedKeys.forEach(k => {
+                    html += `<div class="tooltip-row">
+                        <span><span class="color-dot" style="background:${colorScale(k)}"></span>${k}</span>
+                        <b>${d[k] ? d[k].toLocaleString() : 0}</b>
+                    </div>`;
+                });
+
+                tooltip.style("opacity", 1).html(html)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 15) + "px");
+            }
+        })
+        .on("mouseleave", () => {
+            hoverLine.style("opacity", 0);
+            tooltip.style("opacity", 0);
+        });
+}
+
+// =========================================================
+// EXECUTE
+// =========================================================
+
 function initCharts() {
+    // 1. Draw the Competitor Chart
     drawCompetitorChart("#wrapper-revenue", "data/data_revenue.csv");
 
+    // 2. Draw the Brand Charts
     drawBrandChart("#chart-lion",  "data/data_lion.csv");
     drawBrandChart("#chart-olio",  "data/data_olio.csv");
     drawBrandChart("#chart-festo", "data/data_festo.csv");
