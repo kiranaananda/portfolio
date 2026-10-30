@@ -1,0 +1,279 @@
+<!-- ==========================================================================
+     FOOTER STYLES
+     ========================================================================== -->
+<style>
+  /* Base Container */
+  .footer-custom-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 100px 0 30px;
+    background-color: transparent;
+    border-top: transparent;
+    overflow: hidden; /* Clips background ambient animated bubbles */
+  }
+
+  /* Layer 1: Animated Gradient Ambient Bubbles */
+  .footer-custom-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-image:
+      radial-gradient(circle at 80% 100%, rgb(255, 247, 174) 0%, transparent 60%), /* Subtle Yellow */
+      radial-gradient(circle at 20% 100%, rgb(205, 231, 255) 0%, transparent 60%), /* Soft Blue */
+      radial-gradient(circle at 50% 80%, rgb(235, 245, 220) 0%, transparent 50%);  /* Soft Green */
+    background-size: 150% 150%;
+    animation: floatBubbles 15s ease-in-out infinite alternate;
+  }
+
+  /* Layer 2: Top Edge Fade Blend */
+  .footer-custom-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-image: linear-gradient(to bottom, var(--bg-white, #ffffff) 0%, rgba(255, 255, 255, 0) 30%);
+    pointer-events: none;
+  }
+
+  /* Background Gradient Float Animation */
+  @keyframes floatBubbles {
+    0% {
+      background-position: 0% 100%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 50% 100%;
+    }
+  }
+
+  /* Layout Grid Structure */
+  .footer-content-layer {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 120px 1fr 240px;
+    align-items: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Column 2: Center Middle Content */
+  .footer-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Intro Text */
+  .footer-intro {
+    max-width: 100%;
+    margin: 0 auto 30px;
+    color: var(--text-dark, #222222);
+    text-align: center !important;
+  }
+
+  /* Navigation Links List */
+  .footer-nav-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin: 0 0 50px;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Interactive Navigation Item Styling */
+  .footer-nav-link,
+  .footer-nav-accent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dark, #222222);
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .footer-nav-link:hover,
+  .footer-nav-accent:hover {
+    opacity: 0.6;
+    transform: translateY(-2px);
+  }
+
+  /* Link Divider Line */
+  .footer-nav-divider {
+    width: 1px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Copyright Section */
+  .footer-copyright {
+    padding-top: 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center !important;
+  }
+
+  .footer-copyright p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 0.85rem;
+  }
+
+  /* Column 3: Side Location Info */
+  .footer-side {
+    padding-left: 30px;
+    border-left: 1px solid #dddddd;
+  }
+
+  .footer-side p:first-child {
+    margin-bottom: 12px;
+    color: #222222;
+    font-weight: 600;
+  }
+
+  .footer-side p:last-child {
+    margin: 0;
+    color: #666666;
+  }
+
+  /* Mobile & Tablet Responsiveness */
+  @media (max-width: 850px) {
+    .footer-custom-wrapper {
+      padding: 60px 20px 30px;
+    }
+
+    .footer-content-layer {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: 40px;
+    }
+
+    .footer-logo,
+    .footer-side,
+    .footer-nav-divider-item {
+      display: none;
+    }
+
+    .footer-nav-list {
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .footer-nav-link,
+    .footer-nav-accent {
+      gap: 5px;
+      font-size: 0.85rem;
+    }
+
+    .footer-nav-link img,
+    .footer-nav-accent img {
+      width: 18px;
+    }
+  }
+</style>
+
+
+<!-- ==========================================================================
+     FOOTER HTML COMPONENT
+     ========================================================================== -->
+<footer class="footer-custom-wrapper">
+  <div class="container footer-content-layer">
+
+    <!-- Column 1: Logo Spacer -->
+    <div class="footer-logo"></div>
+
+    <!-- Column 2: Center Main Content -->
+    <div class="footer-middle">
+      
+      <!-- Headline & Subtitle -->
+      <div class="footer-intro">
+        <h5>We all have assumptions.</h5>
+        <p>Research gives us a chance to see beyond them.</p>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="footer-nav-container" aria-label="Footer Navigation">
+        <ul role="list" class="footer-nav-list">
+          
+          <!-- LinkedIn Link -->
+          <li>
+            <a 
+              href="https://www.linkedin.com/in/kiranaananda/" 
+              class="footer-nav-link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img src="https://static.thenounproject.com/png/2386251-200.png" alt="" aria-hidden="true" width="20">
+              LinkedIn
+            </a>
+          </li>
+
+          <!-- Instagram Link -->
+          <li>
+            <a 
+              href="https://www.instagram.com/kiranaananda/" 
+              class="footer-nav-link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img src="https://static.thenounproject.com/png/3350460-200.png" alt="" aria-hidden="true" width="20">
+              Instagram
+            </a>
+          </li>
+
+          <!-- Visual Divider -->
+          <li class="footer-nav-divider-item" aria-hidden="true">
+            <div class="footer-nav-divider"></div>
+          </li>
+
+          <!-- Email Contact -->
+          <li>
+            <a href="mailto:kiranadwima@gmail.com" class="footer-nav-accent">
+              <img src="https://static.thenounproject.com/png/303076-200.png" alt="" aria-hidden="true" width="25">
+              Email Me
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <!-- Copyright Information -->
+      <div class="footer-copyright">
+        <p>&copy; 2026 Kirana Krzyzak</p>
+      </div>
+
+    </div>
+
+    <!-- Column 3: Location / Status Sidebar -->
+    <div class="footer-side">
+      <p><strong>Based in New York, NY</strong></p>
+      <p>Open to opportunities<br>and good conversations.</p>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ==========================================================================
+     DEPENDENCY SCRIPTS & INITIALIZATION
+     ========================================================================== -->
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/tabby/dist/js/tabby.polyfills.min.js"></script>
+<script>
+  var tabs = new Tabby('[data-tabs]');
+</script> 
