@@ -1,5 +1,4 @@
 // --- SHARED UTILS ---
-const dateParser = d3.timeParse("%Y-%m-%d");
 const dateFormatter = d3.timeFormat("%b %Y"); 
 
 function getTooltip() {
@@ -10,13 +9,69 @@ function getTooltip() {
     return tooltip;
 }
 
-// Helper to safely load CSV with fallback data
-async function loadData(csvFilePath, fallbackKey) {
-    const fileName = csvFilePath.split('/').pop();
+// Flexible Date Parser handling various CSV date formats
+function parseFlexibleDate(dateStr) {
+    if (!dateStr) return null;
+    if (dateStr instanceof Date) return dateStr;
+    const str = String(dateStr).trim();
     
-    // Candidate path resolution to support GitHub Pages subfolder (/portfolio/) & relative paths
+    const formats = [
+        d3.timeParse("%Y-%m-%d"),
+        d3.timeParse("%Y/%m/%d"),
+        d3.timeParse("%d-%m-%Y"),
+        d3.timeParse("%d/%m/%Y"),
+        d3.timeParse("%m/%d/%Y"),
+        d3.timeParse("%b %Y"),
+        d3.timeParse("%b %y"),
+        d3.timeParse("%b-%Y"),
+        d3.timeParse("%b-%y"),
+        d3.timeParse("%Y-%m")
+    ];
+
+    for (const fmt of formats) {
+        const parsed = fmt(str);
+        if (parsed && !isNaN(parsed.getTime())) return parsed;
+    }
+
+    const jsDate = new Date(str);
+    if (!isNaN(jsDate.getTime())) return jsDate;
+
+    return null;
+}
+
+// Safe case-insensitive getter for CSV row keys
+function getRowValue(row, colName) {
+    if (row[colName] !== undefined && !isNaN(+row[colName])) return +row[colName];
+    const target = colName.toLowerCase().trim();
+    for (const key of Object.keys(row)) {
+        if (key.toLowerCase().trim() === target) {
+            return +row[key] || 0;
+        }
+    }
+    return 0;
+}
+
+// Find Date column safely regardless of header casing
+function getRowDate(row) {
+    for (const key of Object.keys(row)) {
+        if (key.toLowerCase().trim() === "date") {
+            return parseFlexibleDate(row[key]);
+        }
+    }
+    return parseFlexibleDate(row.Date || row.date);
+}
+
+// Helper to safely load CSV across candidate paths
+async function loadData(csvFilePath) {
+    const fileName = csvFilePath.split('/').pop();
+    const currentPath = window.location.pathname;
+    const currentDir = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+
+    // Candidate path resolution for GitHub Pages subfolders (/portfolio/) & local servers
     const candidatePaths = [
         csvFilePath,
+        `${currentDir}${fileName}`,
+        `${currentDir}data/${fileName}`,
         `data/${fileName}`,
         `./data/${fileName}`,
         `/portfolio/data/${fileName}`,
@@ -29,34 +84,65 @@ async function loadData(csvFilePath, fallbackKey) {
         try {
             const rawData = await d3.csv(path);
             if (rawData && rawData.length > 0) {
+                console.log(`[Chart Success] Loaded CSV from: ${path}`);
+                // Clean up BOM and whitespace in column keys
+                rawData.forEach(row => {
+                    Object.keys(row).forEach(key => {
+                        const cleanKey = key.trim().replace(/^\uFEFF/, '');
+                        if (cleanKey !== key) {
+                            row[cleanKey] = row[key];
+                        }
+                    });
+                });
                 return rawData;
             }
         } catch (e) {
-            // Try next candidate path
+            // Try next path
         }
     }
 
-    console.warn(`Could not fetch ${csvFilePath} from candidate paths, using embedded fallback dataset.`);
-    if (fallbackKey === 'revenue') return JSON.parse(JSON.stringify(FALLBACK_REVENUE));
-    return JSON.parse(JSON.stringify(FALLBACK_BRAND_PROFILES[fallbackKey] || FALLBACK_BRAND_PROFILES.lion));
+    console.error(`[Chart Error] Could not fetch "${csvFilePath}". Tried paths:`, uniquePaths);
+    return [];
 }
 
 // =========================================================
 // CHART TYPE A: COMPETITOR COMPARISON (Lion vs Olio vs Festo)
 // =========================================================
 async function drawCompetitorChart(containerId, csvFilePath) {
-    const data = await loadData(csvFilePath, 'revenue');
+    const data = await loadData(csvFilePath);
+    if (!data || data.length === 0) {
+        console.warn(`[Chart Warning] No data available for ${containerId}`);
+        return;
+    }
     const companies = ["Lion", "Olio", "Festo"];
     
-    // Parse Data
+    // Parse & Validate Data
+    const cleanData = [];
     data.forEach(d => {
-        if (typeof d.Date === 'string') d.Date = dateParser(d.Date) || new Date(d.Date);
-        companies.forEach(c => d[c] = +d[c]);
+        const parsedDate = getRowDate(d);
+        if (parsedDate) {
+            const rowObj = { Date: parsedDate };
+            companies.forEach(c => {
+                rowObj[c] = getRowValue(d, c);
+            });
+            cleanData.push(rowObj);
+        }
     });
+
+    if (cleanData.length === 0) {
+        console.error(`[Chart Error] Failed to parse valid dates in ${csvFilePath}`);
+        return;
+    }
+
+    // Sort chronologically
+    cleanData.sort((a, b) => a.Date - b.Date);
 
     // Setup Dimensions
     const wrapper = document.querySelector(containerId);
-    if (!wrapper) return;
+    if (!wrapper) {
+        console.error(`[Chart Error] Element ${containerId} not found in DOM`);
+        return;
+    }
     const width = wrapper.clientWidth || 800;
     const height = 380;
     const margin = { top: 20, right: 80, bottom: 40, left: 60 };
@@ -74,12 +160,15 @@ async function drawCompetitorChart(containerId, csvFilePath) {
 
     // Scales
     const xScale = d3.scaleTime()
-        .domain(d3.extent(data, d => d.Date))
+        .domain(d3.extent(cleanData, d => d.Date))
         .range([0, boundsWidth]);
     
-    const allValues = data.flatMap(d => companies.map(c => d[c]));
+    const allValues = cleanData.flatMap(d => companies.map(c => d[c]));
+    const minY = d3.min(allValues) || 0;
+    const maxY = d3.max(allValues) || 100;
+
     const yScale = d3.scaleLinear()
-        .domain([d3.min(allValues) * 0.9, d3.max(allValues) * 1.1])
+        .domain([minY * 0.9, maxY * 1.1])
         .range([boundsHeight, 0]);
 
     const colorScale = d3.scaleOrdinal()
@@ -100,7 +189,7 @@ async function drawCompetitorChart(containerId, csvFilePath) {
 
     const formattedData = companies.map(c => ({
         name: c,
-        values: data.map(d => ({ Date: d.Date, value: d[c] }))
+        values: cleanData.map(d => ({ Date: d.Date, value: d[c] }))
     }));
 
     bounds.selectAll(".line-path")
@@ -123,21 +212,32 @@ async function drawCompetitorChart(containerId, csvFilePath) {
         .attr("alignment-baseline", "middle");
 
     // Interaction
-    addInteraction(bounds, boundsWidth, boundsHeight, data, xScale, companies, colorScale);
+    addInteraction(bounds, boundsWidth, boundsHeight, cleanData, xScale, companies, colorScale);
 }
 
 // =========================================================
 // CHART TYPE B: BRAND PROFILE (Top of Mind vs Loyalty...)
 // =========================================================
-async function drawBrandChart(containerId, csvFilePath, brandKey) {
-    const data = await loadData(csvFilePath, brandKey);
+async function drawBrandChart(containerId, csvFilePath) {
+    const data = await loadData(csvFilePath);
+    if (!data || data.length === 0) return;
     const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
 
-    // Parse Data
+    // Parse & Validate Data
+    const cleanData = [];
     data.forEach(d => {
-        if (typeof d.Date === 'string') d.Date = dateParser(d.Date) || new Date(d.Date);
-        metrics.forEach(m => d[m] = +d[m]);
+        const parsedDate = getRowDate(d);
+        if (parsedDate) {
+            const rowObj = { Date: parsedDate };
+            metrics.forEach(m => {
+                rowObj[m] = getRowValue(d, m);
+            });
+            cleanData.push(rowObj);
+        }
     });
+
+    if (cleanData.length === 0) return;
+    cleanData.sort((a, b) => a.Date - b.Date);
 
     // Dimensions
     const width = 450; 
@@ -161,12 +261,14 @@ async function drawBrandChart(containerId, csvFilePath, brandKey) {
 
     // Scales
     const xScale = d3.scaleTime()
-        .domain(d3.extent(data, d => d.Date))
+        .domain(d3.extent(cleanData, d => d.Date))
         .range([0, boundsWidth]);
     
-    const allValues = data.flatMap(d => metrics.map(m => d[m]));
+    const allValues = cleanData.flatMap(d => metrics.map(m => d[m]));
+    const maxY = d3.max(allValues) || 100;
+
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(allValues) * 1.1])
+        .domain([0, maxY * 1.1])
         .range([boundsHeight, 0]);
 
     const colorScale = d3.scaleOrdinal()
@@ -198,7 +300,7 @@ async function drawBrandChart(containerId, csvFilePath, brandKey) {
 
     const formattedData = metrics.map(m => ({
         name: m,
-        values: data.map(d => ({ Date: d.Date, value: d[m] }))
+        values: cleanData.map(d => ({ Date: d.Date, value: d[m] }))
     }));
 
     bounds.selectAll(".line-path")
@@ -210,11 +312,11 @@ async function drawBrandChart(containerId, csvFilePath, brandKey) {
         .attr("stroke", d => colorScale(d.name));
 
     // Interaction
-    addInteraction(bounds, boundsWidth, boundsHeight, data, xScale, metrics, colorScale);
+    addInteraction(bounds, boundsWidth, boundsHeight, cleanData, xScale, metrics, colorScale);
 }
 
 // =========================================================
-// SHARED INTERACTION LOGIC (Fixed for D3 v7)
+// SHARED INTERACTION LOGIC
 // =========================================================
 function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
     const tooltip = getTooltip();
@@ -235,7 +337,6 @@ function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
             // Distance calculation
             const getDist = d => Math.abs(d.Date - hoveredDate);
             
-            // FIXED FOR D3 v7: Replaced deprecated `d3.scan` with `d3.leastIndex`
             const closestIndex = d3.leastIndex ? d3.leastIndex(data, (a, b) => getDist(a) - getDist(b)) : 0;
             const d = data[closestIndex];
 
@@ -266,12 +367,18 @@ function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
 }
 
 // =========================================================
-// EXECUTE
+// EXECUTE (Handles DOM ready timing safely)
 // =========================================================
-document.addEventListener("DOMContentLoaded", function () {
+function initCharts() {
     drawCompetitorChart("#wrapper-revenue", "data/data_revenue.csv");
 
-    drawBrandChart("#chart-lion",  "data/data_lion.csv", "lion");
-    drawBrandChart("#chart-olio",  "data/data_olio.csv", "olio");
-    drawBrandChart("#chart-festo", "data/data_festo.csv", "festo");
-});
+    drawBrandChart("#chart-lion",  "data/data_lion.csv");
+    drawBrandChart("#chart-olio",  "data/data_olio.csv");
+    drawBrandChart("#chart-festo", "data/data_festo.csv");
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCharts);
+} else {
+    initCharts();
+}
