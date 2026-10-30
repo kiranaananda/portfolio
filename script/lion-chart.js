@@ -238,9 +238,9 @@ function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
 // =========================================================
 
 // 1. Draw the Competitor Chart
-drawCompetitorChart("#wrapper-revenue", "./data_revenue.csv");
+drawCompetitorChart("#wrapper-revenue", "./data/data_revenue.csv");
 
 // 2. Draw the Brand Charts
-drawBrandChart("#chart-lion",  "./data_lion.csv");
-drawBrandChart("#chart-olio",  "./data_olio.csv");
-drawBrandChart("#chart-festo", "./data_festo.csv");
+drawBrandChart("#chart-lion",  "./data/data_lion.csv");
+drawBrandChart("#chart-olio",  "./data/data_olio.csv");
+drawBrandChart("#chart-festo", "./data/data_festo.csv");
