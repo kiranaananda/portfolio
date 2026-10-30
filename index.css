@@ -298,3 +298,430 @@ body {
   color: #1a1a1a;
   /* Sharp black/grey for contrast */
 }
+
+/* =========================================
+   6. PORTFOLIO LIST
+   ========================================= */
+
+/* Container Logic */
+.main-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem 10rem;
+}
+
+/* Header Consistency */
+.portfolio-header {
+  text-align: center;
+}
+.casestudy {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* The "Experience" Layout */
+.project-row {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+.project-visual {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.project-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  /* Matches the rounded look of logos */
+  border: none;
+}
+
+.project-details {
+  flex-grow: 1;
+}
+
+.project-title {
+  text-decoration: none;
+}
+
+.project-meta {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 10px;
+  font-family: "Courier", monospace;
+  /* Adds a tiny bit of "Technical" flair */
+}
+
+.project-desc {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.highlight-word {
+  background: linear-gradient(120deg, #FFF7AE 0%, #CDE7FF 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 0.2em;
+  /* Underline only */
+  background-position: 0 88%;
+  transition: background-size 0.25s ease-in;
+  cursor: default;
+}
+
+.highlight-word:hover {
+  background-size: 100% 88%;
+  /* Fills up like a highlighter */
+}
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+
+  .project-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .project-visual {
+    width: 100%;
+    height: auto;
+  }
+
+  .project-visual img {
+    max-width: 100px;
+    /* Keep it logo-sized on mobile */
+  }
+}
+
+
+
+
+/* =========================================
+   7. PROJECT CONTENT
+   ========================================= */
+
+/* --- 1. SETUP --- */
+* {
+  box-sizing: border-box;
+}
+
+.source-material-section,
+.impact-section,
+.source-material-section,
+.data-section,
+.project-footer {
+  max-width: 100%;
+  margin-left: auto;
+  /* Centers it horizontally */
+  margin-right: auto;
+  /* Centers it horizontally */
+  padding-left: 2rem;
+  /* Safe space on the left */
+  padding-right: 2rem;
+  /* Safe space on the right */
+  width: 100%;
+}
+
+.project-header {
+  text-align: center;
+  /* Centers everything */
+  padding: 4rem 0 3rem 0;
+  /* Big spacing top and bottom */
+  margin: 0 auto;
+  /* Centers the block itself */
+}
+
+.tags-row {
+  display: flex;
+  justify-content: center;
+  /* Centers the tags */
+  gap: 10px;
+  /* Space between tags */
+  margin-bottom: 1.5rem;
+  /* Space between tags and title */
+  flex-wrap: wrap;
+  /* wrap if screen is small */
+}
+
+.tag {
+  background-color: #E4EBF3;
+  color: #43464D;
+  padding: 6px 16px;
+  /* Plumps up the pill */
+  border-radius: 50px;
+  /* Makes it fully round */
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- 2. THE STITCHED DIVIDER --- */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto 3rem auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* The Dashed Lines (Left and Right) */
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px dashed #E4EBF3;
+}
+
+/* The Middle Symbol (The "Knot") */
+.section-divider .knot {
+  padding: 0 15px;
+  color: #699ECD;
+  font-size: 1.2rem;
+  font-family: monospace;
+}
+
+/* --- 3. THE "FULL" CARD DESIGN --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.stitch-card {
+  background-color: #FFFFFF;
+  border: 2px dashed #E0E0E0;
+  border-radius: 24px;
+  padding: 30px;
+  /* Layout inside the card */
+  display: flex;
+  flex-direction: column;
+  /* Stack icon on top of text */
+  text-align: left;
+  height: 100%;
+  /* Ensures all 3 cards are same height */
+  box-sizing: border-box;
+}
+
+/* The Middle Card */
+.highlight-card {
+  background-color: #E4EBF3;
+  border: 2px solid #E4EBF3;
+}
+
+.highlight-card h3,
+.highlight-card p,
+.highlight-card small,
+.highlight-card .strong {
+  color: black;
+}
+
+/* --- 4. ICONS --- */
+.icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #F8F9FB;
+  color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+
+/* --- 5. PDF SECTION STYLING --- */
+.source-material-section {
+  margin-top: 2rem;
+  /* Space above the PDF section */
+}
+
+.project-header {
+  padding: 40px 16px;
+}
+
+.pdf-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pdf-window {
+  width: 100%;
+  height: 600px;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.project-footer {
+  margin-top: 3rem;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+/* =========================================
+   7B. LINKEDIN POST GALLERY
+   ========================================= */
+
+/* --- TABBY TABS STYLING --- */
+
+/* The List Container */
+[data-tabs] {
+  list-style: none;
+  padding-bottom:20px;
+  margin: 20px auto 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  max-width: 1200px;
+}
+
+/* The Individual List Items */
+[data-tabs] li {
+  margin-bottom: -1px; /* Overlap the border */
+}
+
+/* The Links (The actual Tabs) */
+[data-tabs] a {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-family: "Playpen Sans", sans-serif;
+  font-size: 1.1rem;
+  color: #64748b;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+/* Hover State */
+[data-tabs] a:hover {
+  color: #0f172a;
+}
+
+/* THE ACTIVE STATE (Tabby adds aria-selected="true") */
+[data-tabs] a[aria-selected="true"] {
+  color: #0f172a;
+  font-weight: bold;
+  border-bottom: 3px solid #0f172a; /* The active underline */
+}
+
+/* Hide content that is not active */
+[hidden] {
+  display: none !important;
+}
+
+/* --- CONTAINER --- */
+.linkedin-gallery-section {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* --- THE GRID LAYOUT --- */
+.carousel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  /* Bigger gap for a cleaner look */
+}
+
+/* --- CARD DESIGN --- */
+.linkedin-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  /* Keeps images inside the round corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.linkedin-card:hover {
+  transform: translateY(-5px);
+  /* Moves up slightly on hover */
+}
+
+.card-header {
+  padding: 15px 20px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.post-title {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* --- THE SLIDER WINDOW (The "TV Screen") --- */
+.slider-window {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  position: relative;
+  background-color: #f1f5f9;
+}
+
+/* --- THE SCROLLING TRACK --- */
+.slide-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+
+  /* Hides scrollbar but allows scrolling */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.slide-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- THE IMAGES --- */
+.slide-img {
+  flex: 0 0 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+/* --- THE "SWIPE" BUTTON --- */
+.slide-hint {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media screen and (max-width: 767px) {
+  .carousel-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
