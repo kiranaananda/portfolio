@@ -20,6 +20,149 @@
        MAIN CONTENT
        ========================================================================== -->
   <main>
+    <style>
+            /* =========================================
+         8. LINE CHART
+         ========================================= */
+      
+      /* --- MULTI-LINE CHART STYLING --- */
+      
+      .line-path {
+        fill: none;
+        stroke-width: 3px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+      }
+      
+      /* Specific Colors for each Company */
+      .line-Lion {
+        stroke: #FF6B6B;
+      }
+      
+      /* Soft Red */
+      .line-Olio {
+        stroke: #4ECDC4;
+      }
+      
+      /* Teal */
+      .line-Festo {
+        stroke: #FFE66D;
+      }
+      
+      /* Yellow */
+      
+      /* Axis Styling */
+      .y-axis-label {
+        fill: #666;
+        font-size: 11px;
+      }
+      
+      .x-axis-text {
+        font-size: 10px;
+        fill: #888;
+      }
+      
+      .domain,
+      .tick line {
+        stroke: #ddd;
+      }
+      
+      /* Softer grid lines */
+      
+      /* Legend Styling */
+      .legend {
+        font-size: 12px;
+        font-family: sans-serif;
+        cursor: pointer;
+      }
+      
+      .legend-dot {
+        stroke-width: 2px;
+      }
+      
+      /* TOOLTIP STYLES */
+      
+      /* The vertical line that follows the mouse */
+      .hover-line {
+        stroke: #999;
+        stroke-width: 1px;
+        stroke-dasharray: 5 5;
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      ----
+      
+      /* --- LAYOUT GRID --- */
+      .brand-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        /* 3 Columns */
+        gap: 15px;
+        margin-top: 30px;
+        width: 100%;
+      }
+      
+      @media (max-width: 768px) {
+        .brand-grid {
+          grid-template-columns: 1fr;
+        }
+      
+        /* Stack on mobile */
+      }
+      
+      /* --- CHART TEXT --- */
+      .brand-header {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      
+      /* --- SHARED TOOLTIP --- */
+      #global-tooltip {
+        position: absolute;
+        opacity: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(4px);
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        pointer-events: none;
+        /* Mouse ignores it */
+        font-size: 12px;
+        border-radius: 8px;
+        z-index: 100;
+        font-family: sans-serif;
+        transition: opacity 0.1s, top 0.1s, left 0.1s;
+      }
+      
+      .tooltip-date {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 4px;
+        color: #333;
+      }
+      
+      .tooltip-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 3px;
+      }
+      
+      .color-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+    </style>
+    
     <section class="impact-section">
       <div class="main-container">
         <header class="project-header">
