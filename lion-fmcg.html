@@ -27,25 +27,6 @@
        ========================================================================== -->
   <main>
     <style>
-      .meta-grid {
-        display: flex;
-        gap: 4rem;
-        margin-top: 2rem;
-        padding-top: 2rem;
-        justify-content: center;
-        text-align: center;
-      }
-      
-      .meta-grid div {
-        color: #1a1a1a;
-      }
-      
-      .meta-grid strong {
-        color: #1a1a1a;
-        display: block;
-        margin-bottom: 3px;
-      }
-
       /* Multi-Line Chart Path Styling */
       .line-path {
         fill: none;
@@ -148,28 +129,37 @@
       <div class="main-container">
         <header class="project-header">
           <div class="tags-row">
-            <span class="tag">Market Strategy</span>
-            <span class="tag">Data Visualization</span>
-            <span class="tag">Consumer Insights</span>
+            <span class="tag">FMCG Strategy</span>
+            <span class="tag">Market Research</span>
+            <span class="tag">Brand Management</span>
+            <span class="tag">Media & Channel Planning</span>
           </div>
 
-          <h4 class="font-hand">The Lion Share: A Strategic Turnaround Analysis</h4>
-          <p class="subtitle">Revitalizing a heritage brand through strategic pack diversification.</p>
+          <h4 class="font-hand">FMCG Market Assessment & Brand Revival Strategy: Lion Biscuits</h4>
+          <p class="subtitle">Biscuito International led the Indonesian biscuit category in 2010 with Lion as its flagship product and Olio as a secondary line-up. Following a sales deterioration starting in 2015, a comprehensive diagnostic of 2016–2018 market data was conducted to re-establish Lion’s category dominance</p>
         </header>
 
         <div class="section-divider">
           <span class="knot">✦</span>
         </div>
-        
-        <div class="meta-grid">
-          <div><strong>Role</strong>Market Research</div>
-          <div><strong>Tools</strong>Survey & D3.js</div>
-          <div><strong>Method</strong>Cross-tabulation</div>
-        </div>
-        
+      
+        <section class="data-section" style="margin-top: 3rem;">
+          <h5>APAC FMCG vs. Indonesia Biscuit Growth</h5>
+          <p>While overall FMCG nominal growth across APAC decelerated from 13.1% in 2016 down to 6.4% in 2018, Indonesia’s biscuit market demonstrated strong resilience 
+            with 9.4% value sales growth in 2018. However, value growth outpaced volume sales growth (2.3% volume growth in 2018), indicating that overall market value was 
+            increasingly driven by price adjustments or reduced promotional frequency rather than pure volume expansion.</p>  
+        </section>
+        <!-- CHART DATA SECTION -->
+        <section class="data-section" style="margin-top: 4rem;">
+          <div class="project-row" style="display: block;">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <h5>Performance Trends</h5>
+              <p class="project-meta">Value Sales (Billion IDR) • Lion vs Olio vs Festo</p>
+              <div id="wrapper-revenue" style="width: 100%; height: 400px; position: relative;"></div>
+            </div>
+          </div>
         <section class="impact-section" style="margin-top: 3rem;">
-          <h4 class="font-hand section-title" style="margin-bottom: 1rem; text-align: center;">At a Glance</h4>
-
+          <h5 class="font-hand section-title" style="margin-bottom: 1rem; text-align: center;">Key Diagnostic Findings</h5>
           <div class="card-grid">
             <div class="stitch-card">
               <div class="icon-box">
@@ -179,8 +169,10 @@
                   <polyline points="17 18 23 18 23 12"></polyline>
                 </svg>
               </div>
-              <h5>The Dip</h5>
-              <p>Market share lost to competitors focusing on "Family" values.</p>
+              <h5>Media Share of Voice (SOV) Erosion</h5>
+              <p>Competitor Festo outspent rivals on TV advertising General Rating Points (GRPs), expanding its Share of Voice (SOV) from 32% in Q1 2016 to 42% in Q4 2016. 
+                Over the same period, Lion’s SOV plummeted from 13% to 8%, while Olio dropped to 3%. <bold>Impact:</bold> Festo paired heavy Above-The-Line (ATL) advertising with aggressive in-store activations, 
+                directly capturing market share from both Lion and Olio</p>
             </div>
 
             <div class="stitch-card highlight-card">
@@ -193,8 +185,10 @@
                   <line x1="6" y1="18" x2="6" y2="18"></line>
                 </svg>
               </div>
-              <h5>The Strategy</h5>
-              <p class="strong">Pack diversification: shift from single-serving to multi-serving format.</p>
+              <h5>The Emotional Messaging Gap</h5>
+              <p class="strong">Lion’s "Be Passionate" TV campaign focused strictly on child empowerment (“Gives my kid passion to do what he loves”). Meanwhile, competitors Festo and Olio 
+                deployed ads emphasizing family togetherness (“Inspires creating family moments” / “Everyone loves Festo”). <bold>Impact:</bold> Campaigns featuring family togetherness and sharing moments 
+                generated higher purchase consideration than child-centered empowerment messaging</p>
             </div>
 
             <div class="stitch-card">
@@ -205,22 +199,28 @@
                   <line x1="4" y1="22" x2="4" y2="15"></line>
                 </svg>
               </div>
-              <h5>The Outcome</h5>
-              <p>Roadmap to reclaim leadership via emotional storytelling.</p>
+              <h5>Brand Imagery Priority Paradox</h5>
+              <p>Lion retained top-tier performance in high-priority category drivers, leading in Brand Trust (82%), Favorite Brand (63%), and Great Taste (66%). However, 
+                Festo achieved market growth by dominating low-priority attributes where Lion was weak, such as "Is suitable for the whole family" (55% vs. Lion’s 47%) and 
+                "Enlighten the family moment" (52% vs. Lion’s 53%). <bold>Impact:</bold> By monopolizing family-sharing perceptions, Festo built broad household appeal despite lower baseline brand trust</p>
             </div>
           </div>
+              <div class="stitch-card highlight-card">
+              <div class="icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6" y2="6"></line>
+                  <line x1="6" y1="18" x2="6" y2="18"></line>
+                </svg>
+              </div>
+              <h5>Pack Size Limitation & Declining Repetition</h5>
+              <p class="strong">Lion experienced a steady decline in purchase repetition because its product portfolio was limited strictly to single-serving format packs (e.g., 17g, 20g, 21g, and 23g)
+                <bold>Impact:</bold> Single-serving packs restricted Lion to individual consumption occasions, preventing the brand from capturing multi-person household sharing moments</p>
+            </div>
         </section>
-
-        <!-- CHART DATA SECTION -->
-        <section class="data-section" style="margin-top: 4rem;">
-          <div class="project-row" style="display: block;">
-            <div style="text-align: center; margin-bottom: 20px;">
-              <h5>Performance Trends</h5>
-              <p class="project-meta">Value Sales (Billion IDR) • Lion vs Olio vs Festo</p>
-              <div id="wrapper-revenue" style="width: 100%; height: 400px; position: relative;"></div>
-            </div>
-          </div>
-
+          
           <div class="project-row" style="display: block; margin-top: 3rem;">
             <div style="text-align: center; margin-bottom: 20px;">
               <h5>Brand Health Profiles</h5>
@@ -252,7 +252,64 @@
             </div>
           </div>
         </section>
+        <section class="data-section" style="margin-top: 3rem;">
+          <h5>Strategic Action Plan (The Way Forward)</h5>
+<section class="activation-roadmap">
+  <h2>1. Channel &amp; Activation Roadmap</h2>
+  <ul>
+    <li>
+      <strong>E-Commerce Growth:</strong>
+      Establish formal e-commerce partnerships to capitalize on FMCG online
+      share, projected to grow from <strong>7.3% in 2017 to 15% by 2025</strong>.
+    </li>
+    <li>
+      <strong>In-Store &amp; Price Promotions:</strong>
+      Deploy targeted in-store promotions to boost consumer purchasing power
+      in response to value sales growing faster than volume.
+    </li>
+    <li>
+      <strong>Upper-Funnel Social Ads:</strong>
+      Implement desktop and mobile display advertising on Facebook and Instagram
+      to rebuild upper-funnel brand awareness.
+    </li>
+  </ul>
+</section>
 
+<section class="creative-narrative">
+  <h2>2. Creative Narrative Refinement</h2>
+  <ul>
+    <li>
+      <strong>Bridging Passion &amp; Family:</strong>
+      Evolve the <em>"Be Passionate"</em> narrative to explain <em>why</em>
+      passion matters within the family context, improving emotional relevance.
+    </li>
+    <li>
+      <strong>Functional Benefit Layering:</strong>
+      Complement emotional storytelling with explicit functional health claims,
+      such as highlighting
+      <strong>"Fortified with Vitamins and Minerals"</strong>
+      alongside energy benefits.
+    </li>
+  </ul>
+</section>
+
+<section class="product-packaging">
+  <h2>3. Product Packaging Diversification</h2>
+  <ul>
+    <li>
+      <strong>Multi-Serving Offerings:</strong>
+      Introduce multi-serving family packs alongside single-serving options.
+    </li>
+    <li>
+      <strong>Household Sharing Position:</strong>
+      Frame multi-person household consumption as a cognitive shortcut for
+      purchasing the safest, most versatile family snack, directly driving
+      purchase repetition.
+    </li>
+  </ul>
+</section>
+        </section>
+        
         <section class="data-section" style="margin-top: 3rem;">
           <p>Although I do not have data on purchase volume by brand, I can infer patterns based on advertising
             effectiveness, as outlined in the documents. Store activation emerged as a key driver of the market share
