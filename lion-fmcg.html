@@ -1,614 +1,370 @@
+Claude
+
+
+Lion fmcg · HTML
 ---
 ---
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
   {% include head.html %}
-
-  <!-- Load D3.js Library -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
-
+ 
 <body>
-
+ 
   {% include navbar.html %}
-
-  <!-- Ambient Background Elements -->
+ 
   <canvas id="watercolor-canvas"></canvas>
   <div class="full-screen-glass"></div>
   <script src="/script/bubbleglassbackground.js"></script>
-
-  <!-- Global Tooltip for D3 Charts -->
+ 
   <div id="global-tooltip"></div>
-
-  <!-- ==========================================================================
-       MAIN CONTENT
-       ========================================================================== -->
+ 
   <main>
     <style>
-      /* Multi-Line Chart Path Styling */
-      .line-path {
-        fill: none;
-        stroke-width: 3px;
-        stroke-linejoin: round;
-        stroke-linecap: round;
+      /* ---------- Scoped layout (everything lives under .lion-case) ---------- */
+      .lion-case { --gap: clamp(16px, 2.5vw, 28px); --block: clamp(2.5rem, 6vw, 4.5rem); --muted: #5f6368; --line: #e3e3e3; }
+      .lion-case .block { margin-top: var(--block); }
+      .lion-case .block > h5, .lion-case .block-head h5 { margin-bottom: .5rem; }
+      .lion-case .block-head { text-align: center; max-width: 60ch; margin: 0 auto 1.5rem; }
+      .lion-case .lede, .lion-case .prose { max-width: 70ch; line-height: 1.65; }
+      .lion-case .prose { margin-left: auto; margin-right: auto; }
+      .lion-case .project-header { text-align: center; }
+      .lion-case .project-header .lede { margin: 1rem auto 0; }
+      .lion-case .tags-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 1rem; }
+ 
+      /* Key figures */
+      .lion-case .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-top: 2rem; padding: 1.25rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .lion-case .stat strong { display: block; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
+      .lion-case .stat span { display: block; margin-top: .35rem; font-size: .85rem; color: var(--muted); line-height: 1.4; }
+ 
+      /* Charts */
+      .lion-case .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: .75rem 0 0; font-size: 12px; color: #555; }
+      .lion-case .chart-legend .color-dot { margin-right: 5px; }
+      .lion-case .chart-box { width: 100%; position: relative; }
+      .lion-case .chart-box svg { display: block; width: 100%; height: auto; overflow: visible; }
+      .lion-case .chart-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: .9rem; }
+ 
+      /* Findings: 2 x 2 */
+      .lion-case .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); align-items: stretch; }
+      .lion-case .card-grid .stitch-card { margin: 0; height: 100%; display: flex; flex-direction: column; }
+      .lion-case .card-grid .stitch-card p { line-height: 1.6; }
+      .lion-case .impact { display: block; margin-top: auto; padding-top: .9rem; font-size: .92rem; }
+      .lion-case .impact b { display: block; margin-bottom: .2rem; }
+ 
+      /* Brand funnels */
+      .lion-case .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); width: 100%; }
+      .lion-case .brand-grid > div { min-width: 0; }
+      .lion-case .brand-header { text-align: center; font-weight: bold; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+ 
+      /* Action plan: 3 columns */
+      .lion-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+      .lion-case .plan-col { padding-top: 1rem; border-top: 3px solid var(--accent, #999); }
+      .lion-case .plan-col h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
+      .lion-case .plan-col ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .8rem; line-height: 1.55; }
+      .lion-case .plan-col:nth-child(1) { --accent: #4ECDC4; }
+      .lion-case .plan-col:nth-child(2) { --accent: #FF6B6B; }
+      .lion-case .plan-col:nth-child(3) { --accent: #FFE66D; }
+ 
+      /* Analyst note */
+      .lion-case .note { max-width: 70ch; margin: 0 auto; padding: 1.1rem 1.4rem; border-left: 3px solid #bbb; background: rgba(255,255,255,.55); line-height: 1.65; }
+      .lion-case .note h5 { margin: 0 0 .4rem; }
+ 
+      /* PDF */
+      .lion-case .pdf-window { margin-top: 1rem; border: 1px solid #ccc; border-radius: 12px; overflow: hidden; }
+      .lion-case .pdf-window iframe { display: block; width: 100%; height: clamp(420px, 75vh, 800px); border: 0; }
+      .lion-case .pdf-link { display: inline-block; margin-top: .75rem; font-size: .9rem; }
+ 
+      .lion-case .project-footer { text-align: center; }
+      .lion-case .project-footer p { max-width: 60ch; margin-left: auto; margin-right: auto; line-height: 1.65; }
+ 
+      /* Tooltip */
+      #global-tooltip { position: absolute; opacity: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(6px); padding: 12px 16px; border: 1px solid #e0e0e0; box-shadow: 0 8px 20px rgba(0,0,0,.12); pointer-events: none; font-size: 12px; border-radius: 8px; z-index: 1000; font-family: var(--font-sans, sans-serif); transition: opacity .15s ease; }
+      .tooltip-date { display: block; font-weight: bold; margin-bottom: 6px; border-bottom: 1px solid #eee; padding-bottom: 4px; color: #333; }
+      .tooltip-row { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 4px; }
+      .color-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+      .line-path { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+      .lion-case .axis text { fill: #666; }
+      .lion-case .axis .domain, .lion-case .axis .tick line { stroke: #ddd; }
+ 
+      /* ---------- Breakpoints ---------- */
+      @media (max-width: 1000px) {
+        .lion-case .brand-grid, .lion-case .plan-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+        .lion-case .stat-strip { grid-template-columns: repeat(2, 1fr); }
       }
-      
-      .line-Lion { stroke: #FF6B6B; }
-      .line-Olio { stroke: #4ECDC4; }
-      .line-Festo { stroke: #FFE66D; }
-      
-      .y-axis-label, .x-axis-text {
-        fill: #666;
-        font-size: 11px;
-      }
-      
-      .domain, .tick line {
-        stroke: #ddd;
-      }
-      
-      /* Hover Guidance Line */
-      .hover-line {
-        stroke: #888;
-        stroke-width: 1.5px;
-        stroke-dasharray: 4 4;
-        opacity: 0;
-        pointer-events: none;
-      }
-      
-      /* Layout Grid for Brand Profiles */
-      .brand-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        margin-top: 30px;
-        width: 100%;
-      }
-      
-      @media (max-width: 768px) {
-        .brand-grid {
-          grid-template-columns: 1fr;
-        }
-        .meta-grid {
-          gap: 1.5rem;
-        }
-      }
-      
-      .brand-header {
-        text-align: center;
-        font-weight: bold;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-      
-      /* Shared Hover Tooltip Styling */
-      #global-tooltip {
-        position: absolute;
-        opacity: 0;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(6px);
-        padding: 12px 16px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        pointer-events: none;
-        font-size: 12px;
-        border-radius: 8px;
-        z-index: 1000;
-        font-family: var(--font-sans, sans-serif);
-        transition: opacity 0.15s ease;
-      }
-      
-      .tooltip-date {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 6px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 4px;
-        color: #333;
-      }
-      
-      .tooltip-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 4px;
-      }
-      
-      .color-dot {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        margin-right: 6px;
+      @media (max-width: 700px) {
+        .lion-case .card-grid { grid-template-columns: 1fr; }
       }
     </style>
-
-    <section class="impact-section">
+ 
+    <section class="impact-section lion-case">
       <div class="main-container">
+ 
+        <!-- HEADER -->
         <header class="project-header">
           <div class="tags-row">
             <span class="tag">FMCG Strategy</span>
             <span class="tag">Market Research</span>
             <span class="tag">Brand Management</span>
-            <span class="tag">Media & Channel Planning</span>
+            <span class="tag">Media &amp; Channel Planning</span>
           </div>
-
-          <h4 class="font-hand">FMCG Market Assessment & Brand Revival Strategy: Lion Biscuits</h4>
-          <p class="subtitle">Biscuito International led the Indonesian biscuit category in 2010 with Lion as its flagship product and Olio as a secondary line-up. Following a sales deterioration starting in 2015, a comprehensive diagnostic of 2016–2018 market data was conducted to re-establish Lion’s category dominance</p>
+          <h4 class="font-hand">FMCG Market Assessment &amp; Brand Revival Strategy: Lion Biscuits</h4>
+          <p class="subtitle lede">Biscuito International led the Indonesian biscuit category in 2010 with Lion as its flagship product and Olio as a secondary line-up. Following a sales deterioration starting in 2015, a comprehensive diagnostic of 2016–2018 market data was conducted to re-establish Lion’s category dominance.</p>
+ 
+          <div class="stat-strip" role="list">
+            <div class="stat" role="listitem"><strong>13.1% → 6.4%</strong><span>APAC FMCG nominal growth, 2016 to 2018</span></div>
+            <div class="stat" role="listitem"><strong>9.4% vs 2.3%</strong><span>Indonesia biscuit value vs volume growth, 2018</span></div>
+            <div class="stat" role="listitem"><strong>32% → 42%</strong><span>Festo share of voice, Q1 to Q4 2016</span></div>
+            <div class="stat" role="listitem"><strong>13% → 8%</strong><span>Lion share of voice, same period</span></div>
+          </div>
         </header>
-
-        <div class="section-divider">
-          <span class="knot">✦</span>
-        </div>
-      
-        <section class="data-section" style="margin-top: 3rem;">
-          <h5>APAC FMCG vs. Indonesia Biscuit Growth</h5>
-          <p>While overall FMCG nominal growth across APAC decelerated from 13.1% in 2016 down to 6.4% in 2018, Indonesia’s biscuit market demonstrated strong resilience 
-            with 9.4% value sales growth in 2018. However, value growth outpaced volume sales growth (2.3% volume growth in 2018), indicating that overall market value was 
-            increasingly driven by price adjustments or reduced promotional frequency rather than pure volume expansion.</p>  
+ 
+        <!-- MARKET CONTEXT + TREND CHART -->
+        <section class="block">
+          <div class="block-head"><h5>APAC FMCG vs. Indonesia Biscuit Growth</h5></div>
+          <p class="prose">While overall FMCG nominal growth across APAC decelerated from 13.1% in 2016 down to 6.4% in 2018, Indonesia’s biscuit market demonstrated strong resilience with 9.4% value sales growth in 2018. However, value growth outpaced volume sales growth (2.3% volume growth in 2018), indicating that overall market value was increasingly driven by price adjustments or reduced promotional frequency rather than pure volume expansion.</p>
         </section>
-        <!-- CHART DATA SECTION -->
-        <section class="data-section" style="margin-top: 4rem;">
-          <div class="project-row" style="display: block;">
-            <div style="text-align: center; margin-bottom: 20px;">
-              <h5>Performance Trends</h5>
-              <p class="project-meta">Value Sales (Billion IDR) • Lion vs Olio vs Festo</p>
-              <div id="wrapper-revenue" style="width: 100%; height: 400px; position: relative;"></div>
-            </div>
+ 
+        <section class="block">
+          <div class="block-head">
+            <h5>Performance Trends</h5>
+            <p class="project-meta">Value Sales (Billion IDR) • Lion vs Olio vs Festo</p>
           </div>
-        <section class="impact-section" style="margin-top: 3rem;">
-          <h5 class="font-hand section-title" style="margin-bottom: 1rem; text-align: center;">Key Diagnostic Findings</h5>
+          <div id="wrapper-revenue" class="chart-box"></div>
+          <div class="chart-legend">
+            <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
+            <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
+            <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+          </div>
+        </section>
+ 
+        <!-- FINDINGS -->
+        <section class="block">
+          <div class="block-head"><h5 class="font-hand section-title">Key Diagnostic Findings</h5></div>
           <div class="card-grid">
+ 
             <div class="stitch-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
-                  <polyline points="17 18 23 18 23 12"></polyline>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
               </div>
               <h5>Media Share of Voice (SOV) Erosion</h5>
-              <p>Competitor Festo outspent rivals on TV advertising General Rating Points (GRPs), expanding its Share of Voice (SOV) from 32% in Q1 2016 to 42% in Q4 2016. 
-                Over the same period, Lion’s SOV plummeted from 13% to 8%, while Olio dropped to 3%. <bold>Impact:</bold> Festo paired heavy Above-The-Line (ATL) advertising with aggressive in-store activations, 
-                directly capturing market share from both Lion and Olio</p>
+              <p>Competitor Festo outspent rivals on TV advertising General Rating Points (GRPs), expanding its Share of Voice (SOV) from 32% in Q1 2016 to 42% in Q4 2016. Over the same period, Lion’s SOV plummeted from 13% to 8%, while Olio dropped to 3%.</p>
+              <p class="impact"><b>Impact</b>Festo paired heavy Above-The-Line (ATL) advertising with aggressive in-store activations, directly capturing market share from both Lion and Olio.</p>
             </div>
-
+ 
             <div class="stitch-card highlight-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                  <line x1="6" y1="6" x2="6" y2="6"></line>
-                  <line x1="6" y1="18" x2="6" y2="18"></line>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
               </div>
               <h5>The Emotional Messaging Gap</h5>
-              <p class="strong">Lion’s "Be Passionate" TV campaign focused strictly on child empowerment (“Gives my kid passion to do what he loves”). Meanwhile, competitors Festo and Olio 
-                deployed ads emphasizing family togetherness (“Inspires creating family moments” / “Everyone loves Festo”). <bold>Impact:</bold> Campaigns featuring family togetherness and sharing moments 
-                generated higher purchase consideration than child-centered empowerment messaging</p>
+              <p>Lion’s “Be Passionate” TV campaign focused strictly on child empowerment (“Gives my kid passion to do what he loves”). Meanwhile, competitors Festo and Olio deployed ads emphasizing family togetherness (“Inspires creating family moments” / “Everyone loves Festo”).</p>
+              <p class="impact"><b>Impact</b>Campaigns featuring family togetherness and sharing moments generated higher purchase consideration than child-centered empowerment messaging.</p>
             </div>
-
+ 
             <div class="stitch-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
-                  <line x1="4" y1="22" x2="4" y2="15"></line>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
               </div>
               <h5>Brand Imagery Priority Paradox</h5>
-              <p>Lion retained top-tier performance in high-priority category drivers, leading in Brand Trust (82%), Favorite Brand (63%), and Great Taste (66%). However, 
-                Festo achieved market growth by dominating low-priority attributes where Lion was weak, such as "Is suitable for the whole family" (55% vs. Lion’s 47%) and 
-                "Enlighten the family moment" (52% vs. Lion’s 53%). <bold>Impact:</bold> By monopolizing family-sharing perceptions, Festo built broad household appeal despite lower baseline brand trust</p>
+              <p>Lion retained top-tier performance in high-priority category drivers, leading in Brand Trust (82%), Favorite Brand (63%), and Great Taste (66%). However, Festo achieved market growth by dominating low-priority attributes where Lion was weak, such as “Is suitable for the whole family” (55% vs. Lion’s 47%) and “Enlighten the family moment” (52% vs. Lion’s 53%).</p>
+              <p class="impact"><b>Impact</b>By monopolizing family-sharing perceptions, Festo built broad household appeal despite lower baseline brand trust.</p>
             </div>
-          </div>
-              <div class="stitch-card highlight-card">
+ 
+            <div class="stitch-card highlight-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                  <line x1="6" y1="6" x2="6" y2="6"></line>
-                  <line x1="6" y1="18" x2="6" y2="18"></line>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
               </div>
-              <h5>Pack Size Limitation & Declining Repetition</h5>
-              <p class="strong">Lion experienced a steady decline in purchase repetition because its product portfolio was limited strictly to single-serving format packs (e.g., 17g, 20g, 21g, and 23g)
-                <bold>Impact:</bold> Single-serving packs restricted Lion to individual consumption occasions, preventing the brand from capturing multi-person household sharing moments</p>
+              <h5>Pack Size Limitation &amp; Declining Repetition</h5>
+              <p>Lion experienced a steady decline in purchase repetition because its product portfolio was limited strictly to single-serving format packs (e.g., 17g, 20g, 21g, and 23g).</p>
+              <p class="impact"><b>Impact</b>Single-serving packs restricted Lion to individual consumption occasions, preventing the brand from capturing multi-person household sharing moments.</p>
             </div>
-        </section>
-          
-          <div class="project-row" style="display: block; margin-top: 3rem;">
-            <div style="text-align: center; margin-bottom: 20px;">
-              <h5>Brand Health Profiles</h5>
-              <p class="project-meta">Funnel Metrics (Awareness → Loyalty)</p>
-
-              <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
-                <div style="font-size: 11px; color: #555;"><span style="color:#A0C4FF;">●</span> Top of Mind</div>
-                <div style="font-size: 11px; color: #555;"><span style="color:#72EFDD;">●</span> Spontaneous</div>
-                <div style="font-size: 11px; color: #555;"><span style="color:#FFD166;">●</span> Regularly</div>
-                <div style="font-size: 11px; color: #555;"><span style="color:#EF476F;">●</span> Most Often</div>
-              </div>
-            </div>
-
-            <div class="brand-grid">
-              <div style="min-width: 0;">
-                <div class="brand-header" style="color: #FF6B6B;">Lion</div>
-                <div id="chart-lion" style="width: 100%;"></div>
-              </div>
-
-              <div style="min-width: 0;">
-                <div class="brand-header" style="color: #4ECDC4;">Olio</div>
-                <div id="chart-olio" style="width: 100%;"></div>
-              </div>
-
-              <div style="min-width: 0;">
-                <div class="brand-header" style="color: #FFE66D;">Festo</div>
-                <div id="chart-festo" style="width: 100%;"></div>
-              </div>
-            </div>
+ 
           </div>
         </section>
-        <section class="data-section" style="margin-top: 3rem;">
-          <h5>Strategic Action Plan (The Way Forward)</h5>
-<section class="activation-roadmap">
-  <h2>1. Channel &amp; Activation Roadmap</h2>
-  <ul>
-    <li>
-      <strong>E-Commerce Growth:</strong>
-      Establish formal e-commerce partnerships to capitalize on FMCG online
-      share, projected to grow from <strong>7.3% in 2017 to 15% by 2025</strong>.
-    </li>
-    <li>
-      <strong>In-Store &amp; Price Promotions:</strong>
-      Deploy targeted in-store promotions to boost consumer purchasing power
-      in response to value sales growing faster than volume.
-    </li>
-    <li>
-      <strong>Upper-Funnel Social Ads:</strong>
-      Implement desktop and mobile display advertising on Facebook and Instagram
-      to rebuild upper-funnel brand awareness.
-    </li>
-  </ul>
-</section>
-
-<section class="creative-narrative">
-  <h2>2. Creative Narrative Refinement</h2>
-  <ul>
-    <li>
-      <strong>Bridging Passion &amp; Family:</strong>
-      Evolve the <em>"Be Passionate"</em> narrative to explain <em>why</em>
-      passion matters within the family context, improving emotional relevance.
-    </li>
-    <li>
-      <strong>Functional Benefit Layering:</strong>
-      Complement emotional storytelling with explicit functional health claims,
-      such as highlighting
-      <strong>"Fortified with Vitamins and Minerals"</strong>
-      alongside energy benefits.
-    </li>
-  </ul>
-</section>
-
-<section class="product-packaging">
-  <h2>3. Product Packaging Diversification</h2>
-  <ul>
-    <li>
-      <strong>Multi-Serving Offerings:</strong>
-      Introduce multi-serving family packs alongside single-serving options.
-    </li>
-    <li>
-      <strong>Household Sharing Position:</strong>
-      Frame multi-person household consumption as a cognitive shortcut for
-      purchasing the safest, most versatile family snack, directly driving
-      purchase repetition.
-    </li>
-  </ul>
-</section>
+ 
+        <!-- BRAND HEALTH -->
+        <section class="block">
+          <div class="block-head">
+            <h5>Brand Health Profiles</h5>
+            <p class="project-meta">Funnel Metrics (Awareness → Loyalty)</p>
+            <div class="chart-legend">
+              <span><span class="color-dot" style="background:#A0C4FF"></span>Top of Mind</span>
+              <span><span class="color-dot" style="background:#72EFDD"></span>Spontaneous</span>
+              <span><span class="color-dot" style="background:#FFD166"></span>Regularly</span>
+              <span><span class="color-dot" style="background:#EF476F"></span>Most Often</span>
+            </div>
+          </div>
+          <div class="brand-grid">
+            <div><div class="brand-header" style="color:#FF6B6B">Lion</div><div id="chart-lion" class="chart-box"></div></div>
+            <div><div class="brand-header" style="color:#4ECDC4">Olio</div><div id="chart-olio" class="chart-box"></div></div>
+            <div><div class="brand-header" style="color:#d4b400">Festo</div><div id="chart-festo" class="chart-box"></div></div>
+          </div>
         </section>
-        
-        <section class="data-section" style="margin-top: 3rem;">
-          <p>Although I do not have data on purchase volume by brand, I can infer patterns based on advertising
-            effectiveness, as outlined in the documents. Store activation emerged as a key driver of the market share
-            gains Festo achieved at the expense of Lion and Olio. By combining strong store activation with ATL efforts,
-            Festo successfully accelerated brand growth, delivering a notably greater impact than in the first quarter.
-            Additionally, messaging that emphasized togetherness tended to increase consideration. This approach was
-            adopted by Olio and Festo but was absent from Lion’s advertising, which may explain the difference in
-            performance.</p>
+ 
+        <!-- ACTION PLAN -->
+        <section class="block">
+          <div class="block-head"><h5>Strategic Action Plan (The Way Forward)</h5></div>
+          <div class="plan-grid">
+ 
+            <section class="plan-col activation-roadmap">
+              <h2>Channel &amp; Activation Roadmap</h2>
+              <ul>
+                <li><strong>E-Commerce Growth:</strong> Establish formal e-commerce partnerships to capitalize on FMCG online share, projected to grow from <strong>7.3% in 2017 to 15% by 2025</strong>.</li>
+                <li><strong>In-Store &amp; Price Promotions:</strong> Deploy targeted in-store promotions to boost consumer purchasing power in response to value sales growing faster than volume.</li>
+                <li><strong>Upper-Funnel Social Ads:</strong> Implement desktop and mobile display advertising on Facebook and Instagram to rebuild upper-funnel brand awareness.</li>
+              </ul>
+            </section>
+ 
+            <section class="plan-col creative-narrative">
+              <h2>Creative Narrative Refinement</h2>
+              <ul>
+                <li><strong>Bridging Passion &amp; Family:</strong> Evolve the <em>“Be Passionate”</em> narrative to explain <em>why</em> passion matters within the family context, improving emotional relevance.</li>
+                <li><strong>Functional Benefit Layering:</strong> Complement emotional storytelling with explicit functional health claims, such as highlighting <strong>“Fortified with Vitamins and Minerals”</strong> alongside energy benefits.</li>
+              </ul>
+            </section>
+ 
+            <section class="plan-col product-packaging">
+              <h2>Product Packaging Diversification</h2>
+              <ul>
+                <li><strong>Multi-Serving Offerings:</strong> Introduce multi-serving family packs alongside single-serving options.</li>
+                <li><strong>Household Sharing Position:</strong> Frame multi-person household consumption as a cognitive shortcut for purchasing the safest, most versatile family snack, directly driving purchase repetition.</li>
+              </ul>
+            </section>
+ 
+          </div>
         </section>
-
-        <!-- PDF SECTION -->
-        <section class="source-material-section" style="margin-top: 4rem;">
-          <div class="pdf-header-row">
+ 
+        <!-- ANALYST NOTE -->
+        <section class="block">
+          <aside class="note">
+            <h5>A note on the data</h5>
+            <p style="margin:0">Although I do not have data on purchase volume by brand, I can infer patterns based on advertising effectiveness, as outlined in the documents. Store activation emerged as a key driver of the market share gains Festo achieved at the expense of Lion and Olio. By combining strong store activation with ATL efforts, Festo successfully accelerated brand growth, delivering a notably greater impact than in the first quarter. Additionally, messaging that emphasized togetherness tended to increase consideration. This approach was adopted by Olio and Festo but was absent from Lion’s advertising, which may explain the difference in performance.</p>
+          </aside>
+        </section>
+ 
+        <!-- PDF -->
+        <section class="block source-material-section">
+          <div class="block-head">
             <h5 class="font-hand">The Deliverable</h5>
+            <p class="context-text">This detailed document outlines the full methodology, competitive dynamics of “Festo vs. Lion,” and strategic recommendations.</p>
           </div>
-
-          <p class="context-text">
-            This detailed document outlines the full methodology, competitive dynamics of "Festo vs. Lion," and strategic recommendations.
-          </p>
-
-          <div class="pdf-window" style="margin-top: 20px; border: 1px solid #ccc; border-radius: 12px; overflow: hidden;">
-            <iframe src="assets/lion-fmcg.pdf" width="100%" height="600px" style="border: none;">
-              <div class="pdf-fallback" style="padding: 20px; text-align: center;">
-                <p>Your browser does not support inline PDF viewing.</p>
-                <a href="assets/lion-fmcg.pdf" target="_blank" class="highlight-word">Click here to view the PDF</a>
-              </div>
-            </iframe>
+          <div class="pdf-window">
+            <iframe src="assets/lion-fmcg.pdf" title="Lion FMCG strategy deliverable (PDF)" loading="lazy"></iframe>
           </div>
+          <a class="pdf-link highlight-word" href="assets/lion-fmcg.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>
         </section>
-
-        <footer class="project-footer" style="margin-top: 4rem;">
+ 
+        <!-- FOOTER -->
+        <footer class="block project-footer">
           <h5 class="font-hand">Retrospective</h5>
-          <p>This project taught me that data is only as good as the story it tells. By identifying the
-            emotional gap, we turned a "biscuit" problem into a "connection" solution.</p>
-
-          <div class="section-divider">
-            <span class="knot">✦</span>
-          </div>
-
-          <a href="/portfolio" class="button-primary-3 w-button" style="display: inline-block; margin-top: 15px;">
-            Back to Project List
-          </a>
+          <p>This project taught me that data is only as good as the story it tells. By identifying the emotional gap, we turned a “biscuit” problem into a “connection” solution.</p>
+          <div class="section-divider"><span class="knot">✦</span></div>
+          <a href="/portfolio" class="button-primary-3 w-button" style="display:inline-block;margin-top:15px;">Back to Project List</a>
         </footer>
-
+ 
       </div>
     </section>
   </main>
-
+ 
   {% include footer.html %}
-
-  <!-- INLINE D3 CHART LOGIC FOR GUARANTEED PREVIEW & DEPLOYMENT RENDERING -->
+ 
   <script>
     (function () {
-      const dateFormatter = d3.timeFormat("%b %Y");
-
-      function parseFlexibleDate(dateStr) {
-        if (!dateStr) return null;
-        if (dateStr instanceof Date) return dateStr;
-        const str = String(dateStr).trim();
-        const formats = [
-          d3.timeParse("%Y-%m-%d"),
-          d3.timeParse("%Y/%m/%d"),
-          d3.timeParse("%b %Y"),
-          d3.timeParse("%b-%y"),
-          d3.timeParse("%m/%d/%Y")
-        ];
-        for (const fmt of formats) {
-          const parsed = fmt(str);
-          if (parsed && !isNaN(parsed.getTime())) return parsed;
-        }
-        const jsDate = new Date(str);
-        return !isNaN(jsDate.getTime()) ? jsDate : null;
+      const fmtMonth = d3.timeFormat("%b %Y");
+      const fmtShort = d3.timeFormat("%b %y");
+      const parsers = ["%Y-%m-%d", "%Y/%m/%d", "%b %Y", "%b-%y", "%m/%d/%Y"].map(f => d3.timeParse(f));
+ 
+      function parseDate(v) {
+        if (!v) return null;
+        const s = String(v).trim();
+        for (const p of parsers) { const d = p(s); if (d) return d; }
+        const j = new Date(s);
+        return isNaN(j) ? null : j;
       }
-
-      function getTooltip() {
-        let tooltip = d3.select("#global-tooltip");
-        if (tooltip.empty()) {
-          tooltip = d3.select("body").append("div").attr("id", "global-tooltip");
-        }
-        return tooltip;
+ 
+      function tooltip() {
+        let t = d3.select("#global-tooltip");
+        if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip");
+        return t;
       }
-
-      async function fetchOrFallback(csvPath, fallbackData) {
-        try {
-          const raw = await d3.csv(csvPath);
-          if (raw && raw.length > 0) return raw;
-        } catch (e) {
-          // File fetch unavailable in sandbox/local preview; use fallback
-        }
-        return fallbackData;
-      }
-
-      function addInteraction(bounds, w, h, data, xScale, keys, colorScale) {
-        const tooltip = getTooltip();
-        const hoverLine = bounds.append("line")
-          .attr("y1", 0).attr("y2", h)
-          .attr("stroke", "#999")
-          .attr("stroke-dasharray", "4 4")
-          .style("opacity", 0);
-
-        bounds.append("rect")
-          .attr("width", w).attr("height", h)
-          .attr("fill", "transparent")
+ 
+      function addHover(g, w, h, data, x, keys, color) {
+        const tip = tooltip();
+        const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
+        const bisect = d3.bisector(d => d.Date).center;
+        g.append("rect").attr("width", w).attr("height", h).attr("fill", "transparent")
           .on("mousemove", function (event) {
-            const [mouseX] = d3.pointer(event);
-            const hoveredDate = xScale.invert(mouseX);
-            const getDist = d => Math.abs(d.Date - hoveredDate);
-            const closestIndex = d3.leastIndex
-              ? d3.leastIndex(data, (a, b) => getDist(a) - getDist(b))
-              : 0;
-
-            const d = data[closestIndex];
-
-            if (d) {
-              const x = xScale(d.Date);
-              hoverLine.style("opacity", 1).attr("x1", x).attr("x2", x);
-              const sortedKeys = keys.slice().sort((a, b) => d[b] - d[a]);
-
-              let html = `<span class="tooltip-date">${dateFormatter(d.Date)}</span>`;
-              sortedKeys.forEach(k => {
-                html += `<div class="tooltip-row">
-                  <span><span class="color-dot" style="background:${colorScale(k)}"></span>${k}</span>
-                  <b>${d[k] !== undefined ? (+d[k]).toLocaleString() : 0}</b>
-                </div>`;
-              });
-
-              tooltip.style("opacity", 1).html(html)
-                .style("left", (event.pageX + 15) + "px")
-                .style("top", (event.pageY - 15) + "px");
-            }
+            const d = data[bisect(data, x.invert(d3.pointer(event)[0]))];
+            if (!d) return;
+            guide.style("opacity", 1).attr("x1", x(d.Date)).attr("x2", x(d.Date));
+            let html = `<span class="tooltip-date">${fmtMonth(d.Date)}</span>`;
+            keys.slice().sort((a, b) => d[b] - d[a]).forEach(k => {
+              html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${(+d[k] || 0).toLocaleString()}</b></div>`;
+            });
+            tip.style("opacity", 1).html(html).style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px");
           })
-          .on("mouseleave", () => {
-            hoverLine.style("opacity", 0);
-            tooltip.style("opacity", 0);
-          });
+          .on("mouseleave", () => { guide.style("opacity", 0); tip.style("opacity", 0); });
       }
-
-      async function drawCompetitorChart(containerId, csvFilePath, fallback) {
-        const rawData = await fetchOrFallback(csvFilePath, fallback);
-        const companies = ["Lion", "Olio", "Festo"];
-
-        const cleanData = rawData.map(d => ({
-          Date: parseFlexibleDate(d.Date || d.date),
-          Lion: +d.Lion || +d.lion || 0,
-          Olio: +d.Olio || +d.olio || 0,
-          Festo: +d.Festo || +d.festo || 0
-        })).filter(d => d.Date && !isNaN(d.Date.getTime()));
-
-        cleanData.sort((a, b) => a.Date - b.Date);
-
-        const wrapper = document.querySelector(containerId);
-        if (!wrapper) return;
-
-        const width = wrapper.clientWidth || 800;
-        const height = 400;
-        const margin = { top: 20, right: 80, bottom: 40, left: 60 };
-        const boundsWidth = width - margin.left - margin.right;
-        const boundsHeight = height - margin.top - margin.bottom;
-
-        d3.select(containerId).html("");
-        const svg = d3.select(containerId).append("svg")
-          .attr("width", width)
-          .attr("height", height);
-
-        const bounds = svg.append("g")
-          .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
-
-        const xScale = d3.scaleTime()
-          .domain(d3.extent(cleanData, d => d.Date))
-          .range([0, boundsWidth]);
-
-        const allValues = cleanData.flatMap(d => companies.map(c => d[c]));
-        const minY = d3.min(allValues) || 0;
-        const maxY = d3.max(allValues) || 100;
-
-        const yScale = d3.scaleLinear()
-          .domain([minY * 0.9, maxY * 1.1])
-          .range([boundsHeight, 0]);
-
-        const colorScale = d3.scaleOrdinal()
-          .domain(companies)
-          .range(["#FF6B6B", "#4ECDC4", "#FFE66D"]);
-
-        bounds.append("g").call(d3.axisLeft(yScale).ticks(5));
-        bounds.append("g")
-          .style("transform", `translateY(${boundsHeight}px)`)
-          .call(d3.axisBottom(xScale).ticks(6).tickFormat(dateFormatter));
-
-        const lineGenerator = d3.line()
-          .x(d => xScale(d.Date))
-          .y(d => yScale(d.value))
-          .curve(d3.curveMonotoneX);
-
-        const formattedData = companies.map(c => ({
-          name: c,
-          values: cleanData.map(d => ({ Date: d.Date, value: d[c] }))
-        }));
-
-        bounds.selectAll(".line-path")
-          .data(formattedData).enter().append("path")
-          .attr("class", d => `line-path line-${d.name}`)
-          .attr("fill", "none")
-          .attr("stroke-width", 3)
-          .attr("d", d => lineGenerator(d.values))
-          .attr("stroke", d => colorScale(d.name));
-
-        bounds.selectAll(".label")
-          .data(formattedData).enter().append("text")
-          .attr("x", boundsWidth + 10)
-          .attr("y", d => yScale(d.values[d.values.length - 1].value))
-          .text(d => d.name)
-          .style("fill", d => colorScale(d.name))
-          .style("font-weight", "bold")
-          .style("font-size", "12px")
-          .attr("alignment-baseline", "middle");
-
-        addInteraction(bounds, boundsWidth, boundsHeight, cleanData, xScale, companies, colorScale);
+ 
+      // One responsive line-chart for all four charts (viewBox scales with its container)
+      async function drawLines(sel, csv, keys, colors, o) {
+        const box = d3.select(sel);
+        if (box.empty()) return;
+        let raw = [];
+        try { raw = await d3.csv(csv); } catch (e) {}
+        const data = raw.map(r => {
+          const row = { Date: parseDate(r.Date || r.date) };
+          keys.forEach(k => { row[k] = +(r[k] ?? r[k.toLowerCase()]) || 0; });
+          return row;
+        }).filter(r => r.Date).sort((a, b) => a.Date - b.Date);
+ 
+        box.html("");
+        if (!data.length) { box.append("div").attr("class", "chart-empty").text("Chart data is unavailable right now."); return; }
+ 
+        const W = o.w, H = o.h, m = o.m, w = W - m.left - m.right, h = H - m.top - m.bottom;
+        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+ 
+        const x = d3.scaleTime().domain(d3.extent(data, d => d.Date)).range([0, w]);
+        const vals = data.flatMap(d => keys.map(k => d[k]));
+        const lo = o.zero ? 0 : (d3.min(vals) || 0) * 0.9;
+        const y = d3.scaleLinear().domain([lo, (d3.max(vals) || 100) * 1.1]).range([h, 0]).nice();
+        const color = d3.scaleOrdinal().domain(keys).range(colors);
+ 
+        g.append("g").attr("class", "axis").style("font-size", o.fs + "px").call(d3.axisLeft(y).ticks(5));
+        g.append("g").attr("class", "axis").style("font-size", o.fs + "px").attr("transform", `translate(0,${h})`)
+          .call(d3.axisBottom(x).ticks(o.xt).tickFormat(o.xt > 4 ? fmtMonth : fmtShort));
+ 
+        const line = d3.line().x(d => x(d.Date)).y(d => y(d.v)).curve(d3.curveMonotoneX);
+        const series = keys.map(k => ({ name: k, values: data.map(d => ({ Date: d.Date, v: d[k] })) }));
+ 
+        g.selectAll(".line-path").data(series).enter().append("path")
+          .attr("class", "line-path").attr("stroke-width", o.sw)
+          .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
+ 
+        if (o.endLabels) {
+          g.selectAll(".end-label").data(series).enter().append("text")
+            .attr("x", w + 8).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
+            .text(d => d.name).style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "12px");
+        }
+        addHover(g, w, h, data, x, keys, color);
       }
-
-      async function drawBrandChart(containerId, csvFilePath, fallback) {
-        const rawData = await fetchOrFallback(csvFilePath, fallback);
-        const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
-
-        const cleanData = rawData.map(d => {
-          const rowObj = { Date: parseFlexibleDate(d.Date || d.date) };
-          metrics.forEach(m => { rowObj[m] = +d[m] || 0; });
-          return rowObj;
-        }).filter(d => d.Date && !isNaN(d.Date.getTime()));
-
-        cleanData.sort((a, b) => a.Date - b.Date);
-
-        const width = 450;
-        const height = 300;
-        const margin = { top: 20, right: 15, bottom: 40, left: 35 };
-
-        const boundsWidth = width - margin.left - margin.right;
-        const boundsHeight = height - margin.top - margin.bottom;
-
-        d3.select(containerId).html("");
-        const svg = d3.select(containerId).append("svg")
-          .attr("viewBox", `0 0 ${width} ${height}`)
-          .style("width", "100%")
-          .style("height", "auto")
-          .style("display", "block");
-
-        const bounds = svg.append("g")
-          .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
-
-        const xScale = d3.scaleTime()
-          .domain(d3.extent(cleanData, d => d.Date))
-          .range([0, boundsWidth]);
-
-        const allValues = cleanData.flatMap(d => metrics.map(m => d[m]));
-        const maxY = d3.max(allValues) || 100;
-
-        const yScale = d3.scaleLinear()
-          .domain([0, maxY * 1.1])
-          .range([boundsHeight, 0]);
-
-        const colorScale = d3.scaleOrdinal()
-          .domain(metrics)
-          .range(["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"]);
-
-        bounds.append("g").call(d3.axisLeft(yScale).ticks(5)).style("font-size", "10px").style("color", "#888");
-        bounds.append("g").style("transform", `translateY(${boundsHeight}px)`).call(d3.axisBottom(xScale).ticks(4).tickFormat(d3.timeFormat("%b %y"))).style("font-size", "10px").style("color", "#888");
-
-        const lineGenerator = d3.line()
-          .x(d => xScale(d.Date))
-          .y(d => yScale(d.value))
-          .curve(d3.curveMonotoneX);
-
-        const formattedData = metrics.map(m => ({
-          name: m,
-          values: cleanData.map(d => ({ Date: d.Date, value: d[m] }))
-        }));
-
-        bounds.selectAll(".line-path")
-          .data(formattedData).enter().append("path")
-          .attr("class", "line-path")
-          .attr("fill", "none")
-          .attr("stroke-width", 2)
-          .attr("d", d => lineGenerator(d.values))
-          .attr("stroke", d => colorScale(d.name));
-
-        addInteraction(bounds, boundsWidth, boundsHeight, cleanData, xScale, metrics, colorScale);
+ 
+      const trend = { w: 800, h: 400, m: { top: 20, right: 70, bottom: 40, left: 60 }, fs: 12, xt: 6, sw: 3, zero: false, endLabels: true, label: "Value sales trend for Lion, Olio and Festo" };
+      const funnel = { w: 450, h: 300, m: { top: 16, right: 12, bottom: 36, left: 36 }, fs: 11, xt: 4, sw: 2, zero: true, endLabels: false };
+      const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
+      const mColors = ["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"];
+ 
+      function render() {
+        drawLines("#wrapper-revenue", "data/data_revenue.csv", ["Lion", "Olio", "Festo"], ["#FF6B6B", "#4ECDC4", "#FFE66D"], trend);
+        ["lion", "olio", "festo"].forEach(b =>
+          drawLines("#chart-" + b, `data/data_${b}.csv`, metrics, mColors, { ...funnel, label: `Brand funnel metrics for ${b}` }));
       }
-
-      function renderAllCharts() {
-        drawCompetitorChart("#wrapper-revenue", "data/data_revenue.csv",);
-        drawBrandChart("#chart-lion", "data/data_lion.csv",);
-        drawBrandChart("#chart-olio", "data/data_olio.csv",);
-        drawBrandChart("#chart-festo", "data/data_festo.csv",);
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", renderAllCharts);
-      } else {
-        renderAllCharts();
-      }
+ 
+      document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
     })();
   </script>
 </body>
