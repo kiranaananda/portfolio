@@ -229,7 +229,7 @@
           its primary brand selection weakened, with the proportion of consumers who bought Lion most often falling from 39% in February 2017 to 27% in December 2018.</p>
          <p class="prose">In contrast, Festo demonstrated the strongest conversion efficiency across every stage of the brand funnel. Consumer brand perceptions moved in direct alignment 
           with overall sales performance, as Festo achieved significantly better funnel conversion than Lion or Olio. This suggests that improvements in brand awareness translated into 
-          stronger purchasing behavior, reinforcing Festo's gains in value sales and market share.
+          stronger purchasing behavior, reinforcing Festo's gains in value sales and market share.</p>
         </section>
  <section>
 <div class="combo-grid">
@@ -252,6 +252,56 @@
     <div id="wrapper-share" class="chart-box"></div>
   </div>
 </div>
+</section>
+       
+        <!-- TV SPENDING -->
+<section class="block">
+  <div class="block-head">
+    <h5>TV Spending, 2016</h5>
+  </div>
+  <div class="combo-grid">
+    <div>
+      <div class="brand-header">Category GRPs</div>
+      <div id="chart-grps" class="chart-box"></div>
+    </div>
+    <div>
+      <div class="brand-header">Share of Voice</div>
+      <div class="chart-legend">
+        <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
+        <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
+        <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+      </div>
+      <div id="chart-sov" class="chart-box"></div>
+    </div>
+  </div>
+    <p class="prose">Before reaching the turning point in early 2017, Festo preceded the strategy by increasing share of voice. </p>
+</section>
+       
+<section class="block">
+  <details class="glossary" open>
+    <summary>Campaign Details</summary>
+
+    <div class="glossary-grid">
+      <div>
+        <dl>
+          <dt>Festo: Sustained and Aggressive Campaign Rotation</dt>
+          <dd>Festo maintained a strong and continuous television advertising presence through multiple high-volume campaign bursts, 
+           including X6 (7,289 GRPs), X7 (8,030 GRPs), and X8 (1,359 GRPs). This sustained investment helped Festo continuously expand 
+           its TV Share of Voice (SOV) throughout 2016.</dd>
+
+          <dt>Lion ("Be Passionate"): The Q3 2016 Media Blackout</dt>
+          <dd>Lion's television advertising activity was more intermittent, with 7,473 GRPs allocated to "Be Passionate" and another 2,906 GRPs to "Be Passionate II". 
+           Despite this investment, Lion went completely off-air in Q3 2016, recording 0% Share of Voice. Its SOV had already declined from 13% in Q1 to 9% in Q2 before 
+           dropping to zero in Q3, recovering only slightly to 8% in Q4. This quarter-long absence created an opportunity for competitors, particularly Festo, to capture 
+           greater share of voice during the period.</dd>
+
+          <dt>Olio: Steady Media Withdrawal</dt>
+          <dd>Olio gradually reduced its television advertising presence throughout 2016. Its campaigns included C5 (5,797 GRPs), C6 (2,968 GRPs), and another campaign execution 
+           with 2,906 GRPs. This declining investment was reflected in its Share of Voice, which fell consistently from 15% in Q1 to 11% in Q2, 9% in Q3, and just 3% in Q4.</dd>
+        </dl>
+      </div>
+    </div>
+  </details>
 </section>
  
         <!-- FINDINGS -->
@@ -383,6 +433,18 @@
         }
       };
 
+      const slide4SOV = {
+        years: ['Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016'],
+        GRPsCategory: {
+          GRPs: [32941, 38315, 22536, 36327]
+        },
+        ShareofVoice: {
+          Lion: [13, 9, 0, 8],
+          Olio: [15, 11, 9, 3],
+          Festo: [32, 35, 37, 42]
+        }
+      };
+
       /* ---------- Helpers ---------- */
       const fmtMonth = d3.timeFormat("%b %Y");
       const fmtShort = d3.timeFormat("%b %y");
@@ -402,8 +464,13 @@
         return t;
       }
 
+      function showTip(event, html) {
+        tooltip().style("opacity", 1).html(html)
+          .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px");
+      }
+      function hideTip() { tooltip().style("opacity", 0); }
+
       function addHover(g, w, h, data, x, keys, color, suffix = "") {
-        const tip = tooltip();
         const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
         const bisect = d3.bisector(d => d.Date).center;
         g.append("rect").attr("width", w).attr("height", h).attr("fill", "transparent")
@@ -415,9 +482,9 @@
             keys.slice().sort((a, b) => d[b] - d[a]).forEach(k => {
               html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${(+d[k] || 0).toLocaleString()}${suffix}</b></div>`;
             });
-            tip.style("opacity", 1).html(html).style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px");
+            showTip(event, html);
           })
-          .on("mouseleave", () => { guide.style("opacity", 0); tip.style("opacity", 0); });
+          .on("mouseleave", () => { guide.style("opacity", 0); hideTip(); });
       }
 
       /* ---------- Line chart (CSV-driven: sales, share, funnels) ---------- */
@@ -485,7 +552,6 @@
         const rows = years.map((yr, i) => ({ yr, vol: volume[i], pr: price[i], tot: total[i] }));
         const cx = d => x(d.yr) + x.bandwidth() / 2;
 
-        // Stacked bars: volume at the bottom, price on top
         g.selectAll(".vol").data(rows).enter().append("rect")
           .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
           .attr("y", d => y(d.vol)).attr("height", d => h - y(d.vol)).attr("fill", "#4FAEEA");
@@ -493,7 +559,6 @@
           .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
           .attr("y", d => y(d.vol + d.pr)).attr("height", d => y(d.vol) - y(d.vol + d.pr)).attr("fill", "#3B7FC9");
 
-        // Segment labels
         const seg = (key, base) => g.selectAll(".t-" + key).data(rows).enter().append("text")
           .attr("x", cx).attr("y", d => y(base(d) + d[key] / 2)).attr("text-anchor", "middle")
           .attr("dominant-baseline", "middle").style("fill", "#fff").style("font-size", "11px").style("font-weight", "600")
@@ -501,7 +566,6 @@
         seg("vol", () => 0);
         seg("pr", d => d.vol);
 
-        // Overlay line: total growth
         g.append("path").datum(rows).attr("class", "line-path").attr("stroke", "#E53935").attr("stroke-width", 3)
           .attr("d", d3.line().x(cx).y(d => y(d.tot)).curve(d3.curveMonotoneX));
         g.selectAll(".dot").data(rows).enter().append("circle")
@@ -510,18 +574,97 @@
           .attr("x", cx).attr("y", d => y(d.tot) - 12).attr("text-anchor", "middle")
           .style("fill", "#E53935").style("font-size", "12px").style("font-weight", "700").text(d => d.tot.toFixed(1) + "%");
 
-        // Tooltip per year
-        const tip = tooltip();
         g.selectAll(".hit").data(rows).enter().append("rect")
           .attr("x", d => x(d.yr) - 8).attr("width", x.bandwidth() + 16).attr("y", 0).attr("height", h).attr("fill", "transparent")
-          .on("mousemove", (event, d) => {
-            tip.style("opacity", 1).style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px")
-              .html(`<span class="tooltip-date">${d.yr}</span>
-                <div class="tooltip-row"><span><span class="color-dot" style="background:#E53935"></span>${o.totalName}</span><b>${d.tot}%</b></div>
-                <div class="tooltip-row"><span><span class="color-dot" style="background:#3B7FC9"></span>${o.priceName}</span><b>${d.pr}%</b></div>
-                <div class="tooltip-row"><span><span class="color-dot" style="background:#4FAEEA"></span>Volume</span><b>${d.vol}%</b></div>`);
+          .on("mousemove", (event, d) => showTip(event, `<span class="tooltip-date">${d.yr}</span>
+            <div class="tooltip-row"><span><span class="color-dot" style="background:#E53935"></span>${o.totalName}</span><b>${d.tot}%</b></div>
+            <div class="tooltip-row"><span><span class="color-dot" style="background:#3B7FC9"></span>${o.priceName}</span><b>${d.pr}%</b></div>
+            <div class="tooltip-row"><span><span class="color-dot" style="background:#4FAEEA"></span>Volume</span><b>${d.vol}%</b></div>`))
+          .on("mouseleave", hideTip);
+      }
+
+      /* ---------- Simple bar chart (one series, categorical x) ---------- */
+      function drawBars(sel, labels, values, o) {
+        const box = d3.select(sel);
+        if (box.empty()) return;
+        box.html("");
+
+        const W = 480, H = 340, m = { top: 28, right: 16, bottom: 36, left: 56 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        const rows = labels.map((l, i) => ({ l, v: values[i] }));
+        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.35);
+        const y = d3.scaleLinear().domain([0, d3.max(values) * 1.15]).range([h, 0]).nice();
+
+        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(",")));
+        g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
+
+        g.selectAll(".bar").data(rows).enter().append("rect")
+          .attr("x", d => x(d.l)).attr("width", x.bandwidth())
+          .attr("y", d => y(d.v)).attr("height", d => h - y(d.v))
+          .attr("rx", 3).attr("fill", o.color)
+          .on("mousemove", (event, d) => showTip(event, `<span class="tooltip-date">${d.l}</span>
+            <div class="tooltip-row"><span>${o.seriesName}</span><b>${d.v.toLocaleString()}</b></div>`))
+          .on("mouseleave", hideTip);
+
+        g.selectAll(".val").data(rows).enter().append("text")
+          .attr("x", d => x(d.l) + x.bandwidth() / 2).attr("y", d => y(d.v) - 8).attr("text-anchor", "middle")
+          .style("font-size", "12px").style("font-weight", "600").style("fill", "#444")
+          .text(d => d.v.toLocaleString());
+      }
+
+      /* ---------- Multi-series line chart on a categorical x axis ---------- */
+      function drawCatLines(sel, labels, seriesObj, colors, o) {
+        const box = d3.select(sel);
+        if (box.empty()) return;
+        box.html("");
+
+        const keys = Object.keys(seriesObj), suffix = o.suffix || "";
+        const W = 480, H = 340, m = { top: 28, right: 44, bottom: 36, left: 42 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.3);
+        const y = d3.scaleLinear().domain([0, o.max]).range([h, 0]);
+        const color = d3.scaleOrdinal().domain(keys).range(colors);
+
+        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + suffix));
+        g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
+
+        const line = d3.line().x(d => x(d.l)).y(d => y(d.v)).curve(d3.curveMonotoneX);
+        const series = keys.map(k => ({ name: k, values: labels.map((l, i) => ({ l, v: seriesObj[k][i] })) }));
+
+        g.selectAll(".line-path").data(series).enter().append("path")
+          .attr("class", "line-path").attr("stroke-width", 3)
+          .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
+        series.forEach(s => g.selectAll(".dot-" + s.name).data(s.values).enter().append("circle")
+          .attr("cx", d => x(d.l)).attr("cy", d => y(d.v)).attr("r", 4.5)
+          .attr("fill", color(s.name)).attr("stroke", "#fff").attr("stroke-width", 1.5));
+
+        // End labels: value at the last point, brand name beside it
+        g.selectAll(".end-label").data(series).enter().append("text")
+          .attr("x", w + 6).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
+          .style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "11px")
+          .text(d => d.name);
+
+        // Hover guide per quarter
+        const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
+        const step = w / labels.length;
+        g.selectAll(".hit").data(labels).enter().append("rect")
+          .attr("x", d => x(d) - step / 2).attr("width", step).attr("y", 0).attr("height", h).attr("fill", "transparent")
+          .on("mousemove", (event, l) => {
+            const i = labels.indexOf(l);
+            guide.style("opacity", 1).attr("x1", x(l)).attr("x2", x(l));
+            let html = `<span class="tooltip-date">${l}</span>`;
+            keys.slice().sort((a, b) => seriesObj[b][i] - seriesObj[a][i]).forEach(k => {
+              html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${seriesObj[k][i]}${suffix}</b></div>`;
+            });
+            showTip(event, html);
           })
-          .on("mouseleave", () => tip.style("opacity", 0));
+          .on("mouseleave", () => { guide.style("opacity", 0); hideTip(); });
       }
 
       /* ---------- Chart configs ---------- */
@@ -541,6 +684,13 @@
           { max, label: "APAC FMCG growth split into volume and unit value", totalName: "Nominal growth", priceName: "Unit value change" });
         drawCombo("#chart-idn", d.years, d.indonesiaBiscuit.volumeSalesGrowth, d.indonesiaBiscuit.priceGrowth, d.indonesiaBiscuit.valueSalesGrowth,
           { max, label: "Indonesia biscuit growth split into volume and price", totalName: "Value sales growth", priceName: "Price growth" });
+
+        // Media: category GRPs (bars) + share of voice (lines)
+        const s = slide4SOV;
+        drawBars("#chart-grps", s.years, s.GRPsCategory.GRPs,
+          { color: "#8E9AAF", seriesName: "Category GRPs", label: "Quarterly category GRPs, 2016" });
+        drawCatLines("#chart-sov", s.years, s.ShareofVoice, brandColors,
+          { max: 50, suffix: "%", label: "Quarterly share of voice by brand, 2016" });
 
         // Brand charts (CSV-driven)
         drawLines("#wrapper-revenue", "data/data_revenue.csv", brands, brandColors, trend);
