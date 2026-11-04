@@ -55,6 +55,11 @@
       .lion-case .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); width: 100%; }
       .lion-case .brand-grid > div { min-width: 0; }
       .lion-case .brand-header { text-align: center; font-weight: bold; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+
+     /* APAC */
+     .lion-case .combo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+     .lion-case .combo-grid > div { min-width: 0; }
+     @media (max-width: 700px) { .lion-case .combo-grid { grid-template-columns: 1fr; } }
  
       /* Action plan: 3 columns */
       .lion-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
@@ -123,11 +128,26 @@
           <div class="block-head"><h5>APAC FMCG vs. Indonesia Biscuit Growth</h5></div>
           <p class="prose">While overall FMCG nominal growth across APAC decelerated from 13.1% in 2016 down to 6.4% in 2018, Indonesia’s biscuit market demonstrated strong resilience with 9.4% value sales growth in 2018. However, value growth outpaced volume sales growth (2.3% volume growth in 2018), indicating that overall market value was increasingly driven by price adjustments or reduced promotional frequency rather than pure volume expansion.</p>
         </section>
- 
+       <section class="block">
+        <div class="block-head">
+        <h5>What Drove Growth: Volume vs. Price</h5>
+        <p class="project-meta">Annual growth, % • Bars = volume + price, line = total value growth</p>
+        <div class="chart-legend">
+        <span><span class="color-dot" style="background:#4FAEEA"></span>Volume growth</span>
+        <span><span class="color-dot" style="background:#3B7FC9"></span>Price / unit value growth</span>
+        <span><span class="color-dot" style="background:#E53935"></span>Total value growth</span>
+       </div>
+      </div>
+     <div class="combo-grid">
+      <div><div class="brand-header">APAC FMCG</div><div id="chart-apac" class="chart-box"></div></div>
+      <div><div class="brand-header">Indonesia Biscuits</div><div id="chart-idn" class="chart-box"></div></div>
+      </div>
+    </section>
+       
         <section class="block">
           <div class="block-head">
-            <h5>Performance Trends</h5>
-            <p class="project-meta">Value Sales (Billion IDR) • Lion vs Olio vs Festo</p>
+            <h5>Value Sales (Billion IDR)</h5>
+            <p class="project-meta">Lion vs Olio vs Festo</p>
           </div>
           <div id="wrapper-revenue" class="chart-box"></div>
           <div class="chart-legend">
@@ -267,12 +287,28 @@
  
   {% include footer.html %}
  
-  <script>
+<script>
     (function () {
+      /* ---------- Data ---------- */
+      const slide4MarketData = {
+        years: ['2016', '2017', '2018'],
+        apac: {
+          nominalGrowth: [13.1, 12.4, 6.4],
+          volumeChange: [6.2, 6.9, 2.8],
+          unitValueChange: [6.9, 5.5, 3.5]
+        },
+        indonesiaBiscuit: {
+          valueSalesGrowth: [11.6, 8.4, 9.4],
+          volumeSalesGrowth: [6.5, 1.8, 2.3],
+          priceGrowth: [5.1, 6.5, 7.0]
+        }
+      };
+
+      /* ---------- Helpers ---------- */
       const fmtMonth = d3.timeFormat("%b %Y");
       const fmtShort = d3.timeFormat("%b %y");
       const parsers = ["%Y-%m-%d", "%Y/%m/%d", "%b %Y", "%b-%y", "%m/%d/%Y"].map(f => d3.timeParse(f));
- 
+
       function parseDate(v) {
         if (!v) return null;
         const s = String(v).trim();
@@ -280,13 +316,13 @@
         const j = new Date(s);
         return isNaN(j) ? null : j;
       }
- 
+
       function tooltip() {
         let t = d3.select("#global-tooltip");
         if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip");
         return t;
       }
- 
+
       function addHover(g, w, h, data, x, keys, color) {
         const tip = tooltip();
         const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
@@ -304,8 +340,8 @@
           })
           .on("mouseleave", () => { guide.style("opacity", 0); tip.style("opacity", 0); });
       }
- 
-      // One responsive line-chart for all four charts (viewBox scales with its container)
+
+      /* ---------- Line chart (CSV-driven; used for trend + funnels) ---------- */
       async function drawLines(sel, csv, keys, colors, o) {
         const box = d3.select(sel);
         if (box.empty()) return;
@@ -316,31 +352,31 @@
           keys.forEach(k => { row[k] = +(r[k] ?? r[k.toLowerCase()]) || 0; });
           return row;
         }).filter(r => r.Date).sort((a, b) => a.Date - b.Date);
- 
+
         box.html("");
         if (!data.length) { box.append("div").attr("class", "chart-empty").text("Chart data is unavailable right now."); return; }
- 
+
         const W = o.w, H = o.h, m = o.m, w = W - m.left - m.right, h = H - m.top - m.bottom;
         const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
         const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
- 
+
         const x = d3.scaleTime().domain(d3.extent(data, d => d.Date)).range([0, w]);
         const vals = data.flatMap(d => keys.map(k => d[k]));
         const lo = o.zero ? 0 : (d3.min(vals) || 0) * 0.9;
         const y = d3.scaleLinear().domain([lo, (d3.max(vals) || 100) * 1.1]).range([h, 0]).nice();
         const color = d3.scaleOrdinal().domain(keys).range(colors);
- 
+
         g.append("g").attr("class", "axis").style("font-size", o.fs + "px").call(d3.axisLeft(y).ticks(5));
         g.append("g").attr("class", "axis").style("font-size", o.fs + "px").attr("transform", `translate(0,${h})`)
           .call(d3.axisBottom(x).ticks(o.xt).tickFormat(o.xt > 4 ? fmtMonth : fmtShort));
- 
+
         const line = d3.line().x(d => x(d.Date)).y(d => y(d.v)).curve(d3.curveMonotoneX);
         const series = keys.map(k => ({ name: k, values: data.map(d => ({ Date: d.Date, v: d[k] })) }));
- 
+
         g.selectAll(".line-path").data(series).enter().append("path")
           .attr("class", "line-path").attr("stroke-width", o.sw)
           .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
- 
+
         if (o.endLabels) {
           g.selectAll(".end-label").data(series).enter().append("text")
             .attr("x", w + 8).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
@@ -348,18 +384,86 @@
         }
         addHover(g, w, h, data, x, keys, color);
       }
- 
+
+      /* ---------- Combo chart: stacked bars (volume + price) with total-growth line ---------- */
+      function drawCombo(sel, years, volume, price, total, o) {
+        const box = d3.select(sel);
+        if (box.empty()) return;
+        box.html("");
+
+        const W = 480, H = 340, m = { top: 28, right: 16, bottom: 36, left: 42 };
+        const w = W - m.left - m.right, h = H - m.top - m.bottom;
+        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+
+        const x = d3.scaleBand().domain(years).range([0, w]).padding(0.35);
+        const y = d3.scaleLinear().domain([0, o.max]).range([h, 0]); // shared max keeps both panels comparable
+        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + "%"));
+        g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
+
+        const rows = years.map((yr, i) => ({ yr, vol: volume[i], pr: price[i], tot: total[i] }));
+        const cx = d => x(d.yr) + x.bandwidth() / 2;
+
+        // Stacked bars: volume at the bottom, price on top
+        g.selectAll(".vol").data(rows).enter().append("rect")
+          .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
+          .attr("y", d => y(d.vol)).attr("height", d => h - y(d.vol)).attr("fill", "#4FAEEA");
+        g.selectAll(".pr").data(rows).enter().append("rect")
+          .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
+          .attr("y", d => y(d.vol + d.pr)).attr("height", d => y(d.vol) - y(d.vol + d.pr)).attr("fill", "#3B7FC9");
+
+        // Segment labels
+        const seg = (key, base) => g.selectAll(".t-" + key).data(rows).enter().append("text")
+          .attr("x", cx).attr("y", d => y(base(d) + d[key] / 2)).attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle").style("fill", "#fff").style("font-size", "11px").style("font-weight", "600")
+          .text(d => d[key].toFixed(1) + "%");
+        seg("vol", () => 0);
+        seg("pr", d => d.vol);
+
+        // Overlay line: total growth
+        g.append("path").datum(rows).attr("class", "line-path").attr("stroke", "#E53935").attr("stroke-width", 3)
+          .attr("d", d3.line().x(cx).y(d => y(d.tot)).curve(d3.curveMonotoneX));
+        g.selectAll(".dot").data(rows).enter().append("circle")
+          .attr("cx", cx).attr("cy", d => y(d.tot)).attr("r", 5).attr("fill", "#E53935").attr("stroke", "#fff").attr("stroke-width", 1.5);
+        g.selectAll(".tot").data(rows).enter().append("text")
+          .attr("x", cx).attr("y", d => y(d.tot) - 12).attr("text-anchor", "middle")
+          .style("fill", "#E53935").style("font-size", "12px").style("font-weight", "700").text(d => d.tot.toFixed(1) + "%");
+
+        // Tooltip per year
+        const tip = tooltip();
+        g.selectAll(".hit").data(rows).enter().append("rect")
+          .attr("x", d => x(d.yr) - 8).attr("width", x.bandwidth() + 16).attr("y", 0).attr("height", h).attr("fill", "transparent")
+          .on("mousemove", (event, d) => {
+            tip.style("opacity", 1).style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px")
+              .html(`<span class="tooltip-date">${d.yr}</span>
+                <div class="tooltip-row"><span><span class="color-dot" style="background:#E53935"></span>${o.totalName}</span><b>${d.tot}%</b></div>
+                <div class="tooltip-row"><span><span class="color-dot" style="background:#3B7FC9"></span>${o.priceName}</span><b>${d.pr}%</b></div>
+                <div class="tooltip-row"><span><span class="color-dot" style="background:#4FAEEA"></span>Volume</span><b>${d.vol}%</b></div>`);
+          })
+          .on("mouseleave", () => tip.style("opacity", 0));
+      }
+
+      /* ---------- Chart configs ---------- */
       const trend = { w: 800, h: 400, m: { top: 20, right: 70, bottom: 40, left: 60 }, fs: 12, xt: 6, sw: 3, zero: false, endLabels: true, label: "Value sales trend for Lion, Olio and Festo" };
       const funnel = { w: 450, h: 300, m: { top: 16, right: 12, bottom: 36, left: 36 }, fs: 11, xt: 4, sw: 2, zero: true, endLabels: false };
       const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
       const mColors = ["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"];
- 
+
+      /* ---------- Render (single function) ---------- */
       function render() {
+        // Annual growth: stacked bars + overlay line
+        const d = slide4MarketData, max = 15;
+        drawCombo("#chart-apac", d.years, d.apac.volumeChange, d.apac.unitValueChange, d.apac.nominalGrowth,
+          { max, label: "APAC FMCG growth split into volume and unit value", totalName: "Nominal growth", priceName: "Unit value change" });
+        drawCombo("#chart-idn", d.years, d.indonesiaBiscuit.volumeSalesGrowth, d.indonesiaBiscuit.priceGrowth, d.indonesiaBiscuit.valueSalesGrowth,
+          { max, label: "Indonesia biscuit growth split into volume and price", totalName: "Value sales growth", priceName: "Price growth" });
+
+        // Brand charts (CSV-driven)
         drawLines("#wrapper-revenue", "data/data_revenue.csv", ["Lion", "Olio", "Festo"], ["#FF6B6B", "#4ECDC4", "#FFE66D"], trend);
         ["lion", "olio", "festo"].forEach(b =>
           drawLines("#chart-" + b, `data/data_${b}.csv`, metrics, mColors, { ...funnel, label: `Brand funnel metrics for ${b}` }));
       }
- 
+
       document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
     })();
   </script>
