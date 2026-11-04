@@ -85,6 +85,25 @@
       .lion-case .glossary-read { margin: 0; padding-left: 1.1rem; line-height: 1.55; }
       .lion-case .glossary-note { margin: 1rem 0 0; font-size: .85rem; color: var(--muted); }
       @media (max-width: 700px) { .lion-case .glossary-grid { grid-template-columns: 1fr; } }
+     
+      /* Category Drivers */
+       .lion-case .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+       .lion-case .drivers-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 12px; color: #555; margin-bottom: 1rem; }
+       .lion-case .drivers-legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+       .lion-case .sw-g { background: rgba(76,175,80,.28); }
+       .lion-case .sw-r { background: rgba(229,57,53,.24); }
+       .lion-case .drivers-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.6); }
+       .lion-case table.drivers { width: 100%; border-collapse: collapse; min-width: 520px; font-size: .95rem; }
+       .lion-case .drivers th, .lion-case .drivers td { padding: .55rem .8rem; border-bottom: 1px solid var(--line); }
+       .lion-case .drivers thead th { text-align: center; font-weight: 700; letter-spacing: .5px; }
+       .lion-case .drivers thead th:first-child, .lion-case .drivers tbody th { text-align: left; }
+       .lion-case .drivers tbody th { font-weight: 400; position: sticky; left: 0; background: #fff; }
+       .lion-case .drivers td { text-align: center; white-space: nowrap; }
+       .lion-case .drivers td b { font-weight: 700; }
+       .lion-case .drivers td small { margin-left: 6px; font-size: .72rem; color: #777; }
+       .lion-case .drivers td.g { background: rgba(76,175,80,.22); }
+       .lion-case .drivers td.r { background: rgba(229,57,53,.18); }
+       .lion-case .drivers tr.grp th { text-align: left; background: #f6f3e8; font-size: .8rem; letter-spacing: .8px; text-transform: uppercase; color: #6b5b00; position: static; }
  
       /* PDF */
       .lion-case .pdf-window { margin-top: 1rem; border: 1px solid #ccc; border-radius: 12px; overflow: hidden; }
@@ -313,6 +332,30 @@
       </div>
     </div>
   </details>
+</section>
+
+       <section class="block">
+  <div class="block-head">
+    <h5>Category Drivers, 2016</h5>
+    <p class="prose">Perception of each brand on 24 category drivers, grouped by importance (most important first).</p>
+  </div>
+ 
+  <div class="drivers-legend">
+    <span><i class="sw sw-g"></i>Relatively strong vs. the other two brands</span>
+    <span><i class="sw sw-r"></i>Relatively weak</span>
+    <span class="drivers-key"><b>63%</b> = actual perception &nbsp;·&nbsp; <small>+3</small> = normalized index (sums to ≈ 0)</span>
+  </div>
+ 
+  <div class="drivers-scroll" tabindex="0" role="region" aria-label="Category drivers table">
+    <table class="drivers" id="drivers-table">
+      <caption class="sr-only">Category drivers in 2016: perception % and normalized score for Lion, Olio and Festo</caption>
+      <thead>
+        <tr><th scope="col">Driver</th><th scope="col" style="color:#FF6B6B">Lion</th><th scope="col" style="color:#4ECDC4">Olio</th><th scope="col" style="color:#d4b400">Festo</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="glossary-note">The % is the actual perception. The small number is a separate normalized index centred on zero (it sums to about 0, rounding aside), not a change vs. last year and not an adjustment to the %. Positive means relative strength and negative means relative weakness across the three brands, and the colours mark the same thing. That is why Festo’s 52% on “Enlighten the family moment” reads as a strength (+23) while Lion’s 53% reads as a weakness (−9).</p>
 </section>
  
         <!-- FINDINGS -->
@@ -713,6 +756,61 @@
       document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
     })();
   </script>
+
+ <script>
+  (function () {
+    const groups = [
+      { name: "High priorities", rows: [
+        ["Favorite brand",                       [63,-3,""],  [59,1,""],   [33,2,""]],
+        ["Is a trusted brand",                   [82,-2,""],  [66,-7,"r"], [49,9,"g"]],
+        ["It has great taste",                   [66,3,"g"],  [52,-3,""],  [29,-1,""]],
+        ["Can be eaten anytime, anywhere",       [76,7,"g"],  [60,-1,""],  [27,-6,"r"]],
+        ["Modern",                               [73,4,"g"],  [59,-1,""],  [30,-3,""]],
+        ["Gives my kids passion to do what they love", [71,8,"g"], [52,-3,""], [24,-6,"r"]]
+      ]},
+      { name: "Middle priorities", rows: [
+        ["My kid’s favorite brand",              [71,7,"g"],  [62,6,"g"],  [17,-13,"r"]],
+        ["A snack for a healthier life",         [74,-1,""],  [60,-6,"r"], [42,6,"g"]],
+        ["Provides the benefit and goodness of milk", [91,3,"g"], [74,-3,""], [41,-1,""]],
+        ["To enjoy alone while relaxing",        [60,2,""],   [50,-1,""],  [26,-1,""]],
+        ["Makes kids creative",                  [74,7,"g"],  [62,3,"g"],  [22,-10,"r"]],
+        ["Is good value for money",              [73,-2,""],  [68,2,""],   [35,-1,""]],
+        ["Provides energy for my children",      [76,8,"g"],  [45,-14,"r"],[38,6,"g"]],
+        ["Helps make kids strong",               [80,12,"g"], [52,-8,"r"], [29,-3,""]],
+        ["Keep introducing new products",        [75,12,"g"], [60,4,"g"],  [14,-16,"r"]],
+        ["Has ingredients of good quality",      [70,-9,"r"], [67,-2,""],  [48,11,"g"]],
+        ["Makes me closer to my child",          [76,3,""],   [77,13,"g"], [19,-16,"r"]],
+        ["Suitable to be consumed in sharing",   [52,-12,"r"],[61,5,""],   [38,8,"g"]]
+      ]},
+      { name: "Low priorities", rows: [
+        ["Is suitable for children",             [78,-1,""],  [91,22,"g"], [17,-21,"r"]],
+        ["Fortified with Vitamins and Minerals", [83,8,"g"],  [54,-12,"r"],[39,3,""]],
+        ["Enlighten the family moment",          [53,-9,"r"], [41,-13,"r"],[52,23,"g"]],
+        ["Goes well with milk",                  [63,-17,"r"],[79,9,"g"],  [46,8,"g"]],
+        ["Fun way of eating",                    [52,-16,"r"],[80,21,"g"], [27,-5,""]],
+        ["Is suitable for the whole family",     [47,-14,"r"],[42,-12,"r"],[55,26,"g"]]
+      ]}
+    ];
+ 
+    const sign = n => (n > 0 ? "+" : n < 0 ? "\u2212" : "") + Math.abs(n);
+    const arrow = () => "";   // no arrows: they would read as a trend; the +/- sign already carries direction
+    const hint = f => f === "g" ? "Relatively strong" : f === "r" ? "Relatively weak" : "";
+ 
+    function renderDrivers() {
+      const body = document.querySelector("#drivers-table tbody");
+      if (!body) return;
+      body.innerHTML = groups.map(g =>
+        `<tr class="grp"><th colspan="4" scope="colgroup">${g.name}</th></tr>` +
+        g.rows.map(r => `<tr><th scope="row">${r[0]}</th>` +
+          r.slice(1).map(([pct, idx, f]) =>
+            `<td class="${f}" ${hint(f) ? `title="${hint(f)}"` : ""}><b>${pct}%</b><small>${arrow(f)}${sign(idx)}</small></td>`
+          ).join("") + `</tr>`).join("")
+      ).join("");
+    }
+ 
+    document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", renderDrivers) : renderDrivers();
+  })();
+</script>
  
 </body>
 </html>
