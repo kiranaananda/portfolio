@@ -128,10 +128,10 @@
           <p class="subtitle lede">Biscuito International led the Indonesian biscuit category in 2010 with Lion as its flagship product and Olio as a secondary line-up. Following a sales deterioration starting in 2015, a comprehensive diagnostic of 2016–2018 market data was conducted to re-establish Lion’s category dominance.</p>
  
           <div class="stat-strip" role="list">
-            <div class="stat" role="listitem"><strong>13.1% → 6.4%</strong><span>APAC FMCG nominal growth, 2016 to 2018</span></div>
-            <div class="stat" role="listitem"><strong>9.4% vs 2.3%</strong><span>Indonesia biscuit value vs volume growth, 2018</span></div>
-            <div class="stat" role="listitem"><strong>32% → 42%</strong><span>Festo share of voice, Q1 to Q4 2016</span></div>
-            <div class="stat" role="listitem"><strong>13% → 8%</strong><span>Lion share of voice, same period</span></div>
+            <div class="stat" role="listitem"><strong>13.1% → 6.4%</strong><span>APAC FMCG nominal growth, <br>2016 to 2018</span></div>
+            <div class="stat" role="listitem"><strong>9.4% vs 2.3%</strong><span>Indonesia biscuit <br>value vs volume growth in 2018</span></div>
+            <div class="stat" role="listitem"><strong>32% → 42%</strong><span>Festo share of voice, <br>Q1 to Q4 2016</span></div>
+            <div class="stat" role="listitem"><strong>13% → 8%</strong><span>Lion share of voice, <br>Q1 to Q4 2016</span></div>
           </div>
         </header>
  
@@ -162,12 +162,12 @@
     <div id="chart-idn" class="chart-box"></div>
   </div>
 </div>
-<p class="project-meta" style="text-align:center;margin-top:.75rem">APAC uses unit value change (includes mix); Indonesia uses price growth as reported by Kantar. Components may not sum to the total due to rounding.</p>
+<p class="glossary-note">Components may not sum to the total due to rounding.</p>
 </section>
        
 <section class="block">
   <details class="glossary" open>
-    <summary>How to read these metrics</summary>
+    <summary>How to read these Kantar metrics</summary>
 
     <div class="glossary-grid">
       <div>
@@ -207,6 +207,49 @@
     <p class="glossary-note">In this case study, APAC figures use unit value change and Indonesia figures use price growth as reported by Kantar, so the two price numbers aren’t directly comparable.</p>
   </details>
 </section>
+
+        <!-- BRAND HEALTH -->
+        <section class="block">
+          <div class="block-head">
+            <h5>Brand Health Profiles</h5>
+            <p class="project-meta">Funnel Metrics (Awareness → Loyalty)</p>
+            <div class="chart-legend">
+              <span><span class="color-dot" style="background:#A0C4FF"></span>Top of Mind</span>
+              <span><span class="color-dot" style="background:#72EFDD"></span>Spontaneous</span>
+              <span><span class="color-dot" style="background:#FFD166"></span>Regularly</span>
+              <span><span class="color-dot" style="background:#EF476F"></span>Most Often</span>
+            </div>
+          </div>
+          <div class="brand-grid">
+            <div><div class="brand-header" style="color:#FF6B6B">Lion</div><div id="chart-lion" class="chart-box"></div></div>
+            <div><div class="brand-header" style="color:#4ECDC4">Olio</div><div id="chart-olio" class="chart-box"></div></div>
+            <div><div class="brand-header" style="color:#d4b400">Festo</div><div id="chart-festo" class="chart-box"></div></div>
+          </div>
+        </section>
+
+ <section>
+<div class="combo-grid">
+  <div>
+    <div class="brand-header">Value Sales (Billion IDR)</div>
+    <div class="chart-legend">
+            <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
+            <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
+            <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+    </div>
+       <div id="wrapper-revenue" class="chart-box"></div>
+  </div>
+  <div>
+    <div class="brand-header">Value % Share</div>
+    <div class="chart-legend">
+            <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
+            <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
+            <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+    </div>
+    <div id="chart-idn" class="chart-box"></div>
+  </div>
+</div>
+</section>
+
        
         <section class="block">
           <div class="block-head">
@@ -264,25 +307,7 @@
  
           </div>
         </section>
- 
-        <!-- BRAND HEALTH -->
-        <section class="block">
-          <div class="block-head">
-            <h5>Brand Health Profiles</h5>
-            <p class="project-meta">Funnel Metrics (Awareness → Loyalty)</p>
-            <div class="chart-legend">
-              <span><span class="color-dot" style="background:#A0C4FF"></span>Top of Mind</span>
-              <span><span class="color-dot" style="background:#72EFDD"></span>Spontaneous</span>
-              <span><span class="color-dot" style="background:#FFD166"></span>Regularly</span>
-              <span><span class="color-dot" style="background:#EF476F"></span>Most Often</span>
-            </div>
-          </div>
-          <div class="brand-grid">
-            <div><div class="brand-header" style="color:#FF6B6B">Lion</div><div id="chart-lion" class="chart-box"></div></div>
-            <div><div class="brand-header" style="color:#4ECDC4">Olio</div><div id="chart-olio" class="chart-box"></div></div>
-            <div><div class="brand-header" style="color:#d4b400">Festo</div><div id="chart-festo" class="chart-box"></div></div>
-          </div>
-        </section>
+
  
         <!-- ACTION PLAN -->
         <section class="block">
@@ -387,7 +412,7 @@
         return t;
       }
 
-      function addHover(g, w, h, data, x, keys, color) {
+      function addHover(g, w, h, data, x, keys, color, suffix = "") {
         const tip = tooltip();
         const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
         const bisect = d3.bisector(d => d.Date).center;
@@ -398,14 +423,14 @@
             guide.style("opacity", 1).attr("x1", x(d.Date)).attr("x2", x(d.Date));
             let html = `<span class="tooltip-date">${fmtMonth(d.Date)}</span>`;
             keys.slice().sort((a, b) => d[b] - d[a]).forEach(k => {
-              html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${(+d[k] || 0).toLocaleString()}</b></div>`;
+              html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${(+d[k] || 0).toLocaleString()}${suffix}</b></div>`;
             });
             tip.style("opacity", 1).html(html).style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px");
           })
           .on("mouseleave", () => { guide.style("opacity", 0); tip.style("opacity", 0); });
       }
 
-      /* ---------- Line chart (CSV-driven; used for trend + funnels) ---------- */
+      /* ---------- Line chart (CSV-driven: sales, share, funnels) ---------- */
       async function drawLines(sel, csv, keys, colors, o) {
         const box = d3.select(sel);
         if (box.empty()) return;
@@ -420,6 +445,7 @@
         box.html("");
         if (!data.length) { box.append("div").attr("class", "chart-empty").text("Chart data is unavailable right now."); return; }
 
+        const suffix = o.suffix || "";
         const W = o.w, H = o.h, m = o.m, w = W - m.left - m.right, h = H - m.top - m.bottom;
         const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
         const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
@@ -430,7 +456,8 @@
         const y = d3.scaleLinear().domain([lo, (d3.max(vals) || 100) * 1.1]).range([h, 0]).nice();
         const color = d3.scaleOrdinal().domain(keys).range(colors);
 
-        g.append("g").attr("class", "axis").style("font-size", o.fs + "px").call(d3.axisLeft(y).ticks(5));
+        g.append("g").attr("class", "axis").style("font-size", o.fs + "px")
+          .call(d3.axisLeft(y).ticks(5).tickFormat(d => d3.format(",")(d) + suffix));
         g.append("g").attr("class", "axis").style("font-size", o.fs + "px").attr("transform", `translate(0,${h})`)
           .call(d3.axisBottom(x).ticks(o.xt).tickFormat(o.xt > 4 ? fmtMonth : fmtShort));
 
@@ -446,7 +473,7 @@
             .attr("x", w + 8).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
             .text(d => d.name).style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "12px");
         }
-        addHover(g, w, h, data, x, keys, color);
+        addHover(g, w, h, data, x, keys, color, suffix);
       }
 
       /* ---------- Combo chart: stacked bars (volume + price) with total-growth line ---------- */
@@ -508,12 +535,15 @@
       }
 
       /* ---------- Chart configs ---------- */
+      const brands = ["Lion", "Olio", "Festo"];
+      const brandColors = ["#FF6B6B", "#4ECDC4", "#FFE66D"];
       const trend = { w: 800, h: 400, m: { top: 20, right: 70, bottom: 40, left: 60 }, fs: 12, xt: 6, sw: 3, zero: false, endLabels: true, label: "Value sales trend for Lion, Olio and Festo" };
+      const share = { ...trend, zero: true, suffix: "%", label: "Value share trend for Lion, Olio and Festo" };
       const funnel = { w: 450, h: 300, m: { top: 16, right: 12, bottom: 36, left: 36 }, fs: 11, xt: 4, sw: 2, zero: true, endLabels: false };
       const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
       const mColors = ["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"];
 
-      /* ---------- Render (single function) ---------- */
+      /* ---------- Render ---------- */
       function render() {
         // Annual growth: stacked bars + overlay line
         const d = slide4MarketData, max = 15;
@@ -523,7 +553,8 @@
           { max, label: "Indonesia biscuit growth split into volume and price", totalName: "Value sales growth", priceName: "Price growth" });
 
         // Brand charts (CSV-driven)
-        drawLines("#wrapper-revenue", "data/data_revenue.csv", ["Lion", "Olio", "Festo"], ["#FF6B6B", "#4ECDC4", "#FFE66D"], trend);
+        drawLines("#wrapper-revenue", "data/data_revenue.csv", brands, brandColors, trend);
+        drawLines("#wrapper-share", "data/data_revenue_share.csv", brands, brandColors, share);
         ["lion", "olio", "festo"].forEach(b =>
           drawLines("#chart-" + b, `data/data_${b}.csv`, metrics, mColors, { ...funnel, label: `Brand funnel metrics for ${b}` }));
       }
@@ -531,5 +562,6 @@
       document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
     })();
   </script>
+ 
 </body>
 </html>
