@@ -1,814 +1,835 @@
 ---
 ---
 <!DOCTYPE html>
-<html lang="en">
- 
+<html>
 <head>
-  {% include head.html %}
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+	<title></title>
 </head>
- 
 <body>
- 
-  {% include navbar.html %}
- 
-  <canvas id="watercolor-canvas"></canvas>
-  <div class="full-screen-glass"></div>
-  <script src="/script/bubbleglassbackground.js"></script>
- 
-  <div id="global-tooltip"></div>
- 
-  <main>
-    <style>
-      /* ---------- Scoped layout (everything lives under .lion-case) ---------- */
-      .lion-case { --gap: clamp(16px, 2.5vw, 28px); --block: clamp(2.5rem, 6vw, 4.5rem); --muted: #5f6368; --line: #e3e3e3; }
-      .lion-case .block { margin-top: var(--block); }
-      .lion-case .block > h5, .lion-case .block-head h5 { margin-bottom: .5rem; }
-      .lion-case .block-head { text-align: center; max-width: 60ch; margin: 0 auto 1.5rem; }
-      .lion-case .lede, .lion-case .prose {line-height: 1.65; }
-      .lion-case .prose { margin-left: auto; margin-right: auto; }
-      .lion-case .project-header { text-align: center; }
-      .lion-case .project-header .lede { margin: 1rem auto 0; }
-      .lion-case .tags-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 1rem; }
- 
-      /* Key figures */
-      .lion-case .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-top: 2rem; padding: 1.25rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-      .lion-case .stat strong { display: block; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
-      .lion-case .stat span { display: block; margin-top: .35rem; font-size: .85rem; color: var(--muted); line-height: 1.4; }
- 
-      /* Charts */
-      .lion-case .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: .75rem 0 0; font-size: 12px; color: #555; }
-      .lion-case .chart-legend .color-dot { margin-right: 5px; }
-      .lion-case .chart-box { width: 100%; position: relative; }
-      .lion-case .chart-box svg { display: block; width: 100%; height: auto; overflow: visible; }
-      .lion-case .chart-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: .9rem; }
- 
-      /* Findings: 2 x 2 */
-      .lion-case .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); align-items: stretch; }
-      .lion-case .card-grid .stitch-card { margin: 0; height: 100%; display: flex; flex-direction: column; }
-      .lion-case .card-grid .stitch-card p { line-height: 1.6; }
-      .lion-case .impact { display: block; margin-top: auto; padding-top: .9rem; font-size: .92rem; }
-      .lion-case .impact b { display: block; margin-bottom: .2rem; }
- 
-      /* Brand funnels */
-      .lion-case .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); width: 100%; }
-      .lion-case .brand-grid > div { min-width: 0; }
-      .lion-case .brand-header { text-align: center; font-weight: bold; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+	--- --- {% include head.html %}
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<script src="https://d3js.org/d3.v7.min.js">
+	</script> {% include navbar.html %}
+	<canvas id="watercolor-canvas"></canvas>
+	<div class="full-screen-glass"></div>
+	<script src="/script/bubbleglassbackground.js">
+	</script>
+	<div id="global-tooltip"></div>
+	<main>
+		<style>
+		    /* ---------- Scoped layout (everything lives under .lion-case) ---------- */
+		    .lion-case { --gap: clamp(16px, 2.5vw, 28px); --block: clamp(2.5rem, 6vw, 4.5rem); --muted: #5f6368; --line: #e3e3e3; }
+		    .lion-case .block { margin-top: var(--block); }
+		    .lion-case .block > h5, .lion-case .block-head h5 { margin-bottom: .5rem; }
+		    .lion-case .block-head { text-align: center; max-width: 60ch; margin: 0 auto 1.5rem; }
+		    .lion-case .lede, .lion-case .prose {line-height: 1.65; }
+		    .lion-case .prose { margin-left: auto; margin-right: auto; }
+		    .lion-case .project-header { text-align: center; }
+		    .lion-case .project-header .lede { margin: 1rem auto 0; }
+		    .lion-case .tags-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 1rem; }
 
-     /* APAC */
-     .lion-case .combo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
-     .lion-case .combo-grid > div { min-width: 0; }
-     @media (max-width: 700px) { .lion-case .combo-grid { grid-template-columns: 1fr; } }
- 
-      /* Action plan: 3 columns */
-      .lion-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
-      .lion-case .plan-col { padding-top: 1rem; border-top: 3px solid var(--accent, #999); }
-      .lion-case .plan-col h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
-      .lion-case .plan-col ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .8rem; line-height: 1.55; }
-      .lion-case .plan-col:nth-child(1) { --accent: #4ECDC4; }
-      .lion-case .plan-col:nth-child(2) { --accent: #FF6B6B; }
-      .lion-case .plan-col:nth-child(3) { --accent: #FFE66D; }
- 
-      /* Analyst note */
-      .lion-case .note { margin: 0 auto; padding: 1.1rem 1.4rem; border-left: 3px solid #bbb; background: rgba(255,255,255,.55); line-height: 1.65; }
-      .lion-case .note h5 { margin: 0 0 .4rem; }
-     
-     /* Glossary */
-      .lion-case .glossary { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.4rem; background: rgba(255,255,255,.55); }
-      .lion-case .glossary summary { cursor: pointer; font-weight: 600; }
-      .lion-case .glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); margin-top: 1rem; }
-      .lion-case .glossary h6 { margin: 0 0 .5rem; font-size: 1rem; }
-      .lion-case .glossary dt { font-weight: 600; margin-top: .8rem; }
-      .lion-case .glossary dd { margin: .15rem 0 0; line-height: 1.55; color: var(--muted); }
-      .lion-case .glossary-rule { margin: 1.25rem 0 .5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
-      .lion-case .glossary-read { margin: 0; padding-left: 1.1rem; line-height: 1.55; }
-      .lion-case .glossary-note { margin: 1rem 0 0; font-size: .85rem; color: var(--muted); }
-      @media (max-width: 700px) { .lion-case .glossary-grid { grid-template-columns: 1fr; } }
-     
-      /* Category Drivers */
-       .lion-case .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-       .lion-case .drivers-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 12px; color: #555; margin-bottom: 1rem; }
-       .lion-case .drivers-legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
-       .lion-case .sw-g { background: rgba(76,175,80,.28); }
-       .lion-case .sw-r { background: rgba(229,57,53,.24); }
-       .lion-case .drivers-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.6); }
-       .lion-case table.drivers { width: 100%; border-collapse: collapse; min-width: 520px; font-size: .95rem; }
-       .lion-case .drivers th, .lion-case .drivers td { padding: .55rem .8rem; border-bottom: 1px solid var(--line); }
-       .lion-case .drivers thead th { text-align: center; font-weight: 700; letter-spacing: .5px; }
-       .lion-case .drivers thead th:first-child, .lion-case .drivers tbody th { text-align: left; }
-       .lion-case .drivers tbody th { font-weight: 400; position: sticky; left: 0; background: #fff; }
-       .lion-case .drivers td { text-align: center; white-space: nowrap; }
-       .lion-case .drivers td b { font-weight: 700; }
-       .lion-case .drivers td small { margin-left: 6px; font-size: .72rem; color: #777; }
-       .lion-case .drivers td.g { background: rgba(76,175,80,.22); }
-       .lion-case .drivers td.r { background: rgba(229,57,53,.18); }
-       .lion-case .drivers tr.grp th { text-align: left; background: #f6f3e8; font-size: .8rem; letter-spacing: .8px; text-transform: uppercase; color: #6b5b00; position: static; }
- 
-      /* PDF */
-      .lion-case .pdf-window { margin-top: 1rem; border: 1px solid #ccc; border-radius: 12px; overflow: hidden; }
-      .lion-case .pdf-window iframe { display: block; width: 100%; height: clamp(420px, 75vh, 800px); border: 0; }
-      .lion-case .pdf-link { display: inline-block; margin-top: .75rem; font-size: .9rem; }
- 
-      .lion-case .project-footer { text-align: center; }
-      .lion-case .project-footer p { max-width: 60ch; margin-left: auto; margin-right: auto; line-height: 1.65; }
- 
-      /* Tooltip */
-      #global-tooltip { position: absolute; opacity: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(6px); padding: 12px 16px; border: 1px solid #e0e0e0; box-shadow: 0 8px 20px rgba(0,0,0,.12); pointer-events: none; font-size: 12px; border-radius: 8px; z-index: 1000; font-family: var(--font-sans, sans-serif); transition: opacity .15s ease; }
-      .tooltip-date { display: block; font-weight: bold; margin-bottom: 6px; border-bottom: 1px solid #eee; padding-bottom: 4px; color: #333; }
-      .tooltip-row { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 4px; }
-      .color-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-      .line-path { fill: none; stroke-linejoin: round; stroke-linecap: round; }
-      .lion-case .axis text { fill: #666; }
-      .lion-case .axis .domain, .lion-case .axis .tick line { stroke: #ddd; }
- 
-      /* ---------- Breakpoints ---------- */
-      @media (max-width: 1000px) {
-        .lion-case .brand-grid, .lion-case .plan-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
-        .lion-case .stat-strip { grid-template-columns: repeat(2, 1fr); }
-      }
-      @media (max-width: 700px) {
-        .lion-case .card-grid { grid-template-columns: 1fr; }
-      }
-    </style>
- 
-    <section class="impact-section lion-case">
-      <div class="main-container">
- 
-        <!-- HEADER -->
-        <header class="project-header">
-          <div class="tags-row">
-            <span class="tag">FMCG Strategy</span>
-            <span class="tag">Market Research</span>
-            <span class="tag">Brand Management</span>
-            <span class="tag">Media &amp; Channel Planning</span>
-          </div>
-          <h4 class="font-hand">FMCG Market Assessment &amp; Brand Revival Strategy: Lion Biscuits</h4>
-          <p class="subtitle lede">Biscuito International led the Indonesian biscuit category in 2010 with Lion as its flagship product and Olio as a secondary line-up. Following a sales deterioration starting in 2015, a comprehensive diagnostic of 2016–2018 market data was conducted to re-establish Lion’s category dominance.</p>
- 
-          <div class="stat-strip" role="list">
-            <div class="stat" role="listitem"><strong>13.1% → 6.4%</strong><span>APAC FMCG nominal growth, <br>2016 to 2018</span></div>
-            <div class="stat" role="listitem"><strong>9.4% vs 2.3%</strong><span>Indonesia biscuit <br>value vs volume growth in 2018</span></div>
-            <div class="stat" role="listitem"><strong>32% → 42%</strong><span>Festo share of voice, <br>Q1 to Q4 2016</span></div>
-            <div class="stat" role="listitem"><strong>13% → 8%</strong><span>Lion share of voice, <br>Q1 to Q4 2016</span></div>
-          </div>
-        </header>
- 
-        <!-- MARKET CONTEXT + TREND CHART -->
-        <section class="block">
-          <div class="block-head"><h5>APAC FMCG vs. Indonesia Biscuit Growth</h5></div>
-          <p class="prose">While overall FMCG nominal growth across APAC decelerated from 13.1% in 2016 down to 6.4% in 2018, Indonesia’s biscuit market demonstrated strong resilience with 9.4% value sales growth in 2018. However, value growth outpaced volume sales growth (2.3% volume growth in 2018), indicating that overall market value was increasingly driven by price adjustments or reduced promotional frequency rather than pure volume expansion.</p>
-        </section>
-       
-<section>
-<div class="combo-grid">
-  <div>
-    <div class="brand-header">APAC FMCG</div>
-    <div class="chart-legend">
-      <span><span class="color-dot" style="background:#4FAEEA"></span>Volume change</span>
-      <span><span class="color-dot" style="background:#3B7FC9"></span>Unit value change</span>
-      <span><span class="color-dot" style="background:#E53935"></span>Nominal growth</span>
-    </div>
-    <div id="chart-apac" class="chart-box"></div>
-  </div>
-  <div>
-    <div class="brand-header">Indonesia Biscuits</div>
-    <div class="chart-legend">
-      <span><span class="color-dot" style="background:#4FAEEA"></span>Volume sales growth</span>
-      <span><span class="color-dot" style="background:#3B7FC9"></span>Price growth</span>
-      <span><span class="color-dot" style="background:#E53935"></span>Value sales growth</span>
-    </div>
-    <div id="chart-idn" class="chart-box"></div>
-  </div>
-</div>
-<p class="glossary-note">Components may not sum to the total due to rounding.</p>
-</section>
-       
-<section class="block">
-  <details class="glossary" open>
-    <summary>Kantar Metrics Definition</summary>
+		    /* Key figures */
+		    .lion-case .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-top: 2rem; padding: 1.25rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+		    .lion-case .stat strong { display: block; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
+		    .lion-case .stat span { display: block; margin-top: .35rem; font-size: .85rem; color: var(--muted); line-height: 1.4; }
 
-    <div class="glossary-grid">
-      <div>
-        <h6>Volume & value structure</h6>
-        <dl>
-          <dt>Volume change</dt>
-          <dd>Change in the physical quantity sold between two periods, measured in weight or standard units rather than money.</dd>
+		    /* Charts */
+		    .lion-case .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: .75rem 0 0; font-size: 12px; color: #555; }
+		    .lion-case .chart-legend .color-dot { margin-right: 5px; }
+		    .lion-case .chart-box { width: 100%; position: relative; }
+		    .lion-case .chart-box svg { display: block; width: 100%; height: auto; overflow: visible; }
+		    .lion-case .chart-empty { padding: 2rem; text-align: center; color: var(--muted); font-size: .9rem; }
 
-          <dt>Unit value change</dt>
-          <dd>Change in the average price paid per unit or kilo. It reflects shelf prices, promotion intensity and mix shift, such as shoppers trading up to premium biscuits.</dd>
+		    /* Findings: 2 x 2 */
+		    .lion-case .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); align-items: stretch; }
+		    .lion-case .card-grid .stitch-card { margin: 0; height: 100%; display: flex; flex-direction: column; }
+		    .lion-case .card-grid .stitch-card p { line-height: 1.6; }
+		    .lion-case .impact { display: block; margin-top: auto; padding-top: .9rem; font-size: .92rem; }
+		    .lion-case .impact b { display: block; margin-bottom: .2rem; }
 
-          <dt>Nominal growth</dt>
-          <dd>Raw growth in total value sales, before adjusting for inflation. It answers: how much more money passed through the tills than last year?</dd>
-        </dl>
-      </div>
+		    /* Brand funnels */
+		    .lion-case .brand-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); width: 100%; }
+		    .lion-case .brand-grid > div { min-width: 0; }
+		    .lion-case .brand-header { text-align: center; font-weight: bold; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
 
-      <div>
-        <h6>Sales performance growth</h6>
-        <dl>
-          <dt>Volume sales growth</dt>
-          <dd>Growth rate of physical volume sold. Example: 1,000 kg to 1,050 kg is +5%.</dd>
+		   /* APAC */
+		   .lion-case .combo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+		   .lion-case .combo-grid > div { min-width: 0; }
+		   @media (max-width: 700px) { .lion-case .combo-grid { grid-template-columns: 1fr; } }
 
-          <dt>Price growth</dt>
-          <dd>Change in the shelf price of the product or category. In theory it removes mix effects, unlike unit value change.</dd>
+		    /* Action plan: 3 columns */
+		    .lion-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+		    .lion-case .plan-col { padding-top: 1rem; border-top: 3px solid var(--accent, #999); }
+		    .lion-case .plan-col h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
+		    .lion-case .plan-col ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .8rem; line-height: 1.55; }
+		    .lion-case .plan-col:nth-child(1) { --accent: #4ECDC4; }
+		    .lion-case .plan-col:nth-child(2) { --accent: #FF6B6B; }
+		    .lion-case .plan-col:nth-child(3) { --accent: #FFE66D; }
 
-          <dt>Value sales growth</dt>
-          <dd>Growth rate of total revenue. Example: $10,000 to $10,800 is +8%.</dd>
-        </dl>
-      </div>
-    </div>
+		    /* Analyst note */
+		    .lion-case .note { margin: 0 auto; padding: 1.1rem 1.4rem; border-left: 3px solid #bbb; background: rgba(255,255,255,.55); line-height: 1.65; }
+		    .lion-case .note h5 { margin: 0 0 .4rem; }
+		   
+		   /* Glossary */
+		    .lion-case .glossary { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.4rem; background: rgba(255,255,255,.55); }
+		    .lion-case .glossary summary { cursor: pointer; font-weight: 600; }
+		    .lion-case .glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); margin-top: 1rem; }
+		    .lion-case .glossary h6 { margin: 0 0 .5rem; font-size: 1rem; }
+		    .lion-case .glossary dt { font-weight: 600; margin-top: .8rem; }
+		    .lion-case .glossary dd { margin: .15rem 0 0; line-height: 1.55; color: var(--muted); }
+		    .lion-case .glossary-rule { margin: 1.25rem 0 .5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+		    .lion-case .glossary-read { margin: 0; padding-left: 1.1rem; line-height: 1.55; }
+		    .lion-case .glossary-note { margin: 1rem 0 0; font-size: .85rem; color: var(--muted); }
+		    @media (max-width: 700px) { .lion-case .glossary-grid { grid-template-columns: 1fr; } }
+		   
+		    /* Category Drivers */
+		     .lion-case .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+		     .lion-case .drivers-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 12px; color: #555; margin-bottom: 1rem; }
+		     .lion-case .drivers-legend .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+		     .lion-case .sw-g { background: rgba(76,175,80,.28); }
+		     .lion-case .sw-r { background: rgba(229,57,53,.24); }
+		     .lion-case .drivers-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.6); }
+		     .lion-case table.drivers { width: 100%; border-collapse: collapse; min-width: 520px; font-size: .95rem; }
+		     .lion-case .drivers th, .lion-case .drivers td { padding: .55rem .8rem; border-bottom: 1px solid var(--line); }
+		     .lion-case .drivers thead th { text-align: center; font-weight: 700; letter-spacing: .5px; }
+		     .lion-case .drivers thead th:first-child, .lion-case .drivers tbody th { text-align: left; }
+		     .lion-case .drivers tbody th { font-weight: 400; position: sticky; left: 0; background: #fff; }
+		     .lion-case .drivers td { text-align: center; white-space: nowrap; }
+		     .lion-case .drivers td b { font-weight: 700; }
+		     .lion-case .drivers td small { margin-left: 6px; font-size: .72rem; color: #777; }
+		     .lion-case .drivers td.g { background: rgba(76,175,80,.22); }
+		     .lion-case .drivers td.r { background: rgba(229,57,53,.18); }
+		     .lion-case .drivers tr.grp th { text-align: left; background: #f6f3e8; font-size: .8rem; letter-spacing: .8px; text-transform: uppercase; color: #6b5b00; position: static; }
 
-    <p class="glossary-rule"><strong>The decomposition rule:</strong> Value growth ≈ Volume growth + Price (or unit value) growth.</p>
-    <ul class="glossary-read">
-      <li><strong>Healthy:</strong> +6% value from +4% volume and +2% price. Consumers are buying more.</li>
-      <li><strong>Risky:</strong> +6% value from −3% volume and +9% price. Revenue grows only because prices rose, while the buyer footprint shrinks.</li>
-    </ul>
-    <p class="glossary-note">In this case study, APAC figures use unit value change and Indonesia figures use price growth as reported by Kantar, so the two price numbers aren’t directly comparable.</p>
-  </details>
-</section>
+		    /* PDF */
+		    .lion-case .pdf-window { margin-top: 1rem; border: 1px solid #ccc; border-radius: 12px; overflow: hidden; }
+		    .lion-case .pdf-window iframe { display: block; width: 100%; height: clamp(420px, 75vh, 800px); border: 0; }
+		    .lion-case .pdf-link { display: inline-block; margin-top: .75rem; font-size: .9rem; }
 
-        <!-- BRAND HEALTH -->
-        <section class="block">
-          <div class="block-head">
-            <h5>Brand Health Profiles</h5>
-            <div class="chart-legend">
-              <span><span class="color-dot" style="background:#A0C4FF"></span>Top of Mind</span>
-              <span><span class="color-dot" style="background:#72EFDD"></span>Spontaneous</span>
-              <span><span class="color-dot" style="background:#FFD166"></span>Regularly</span>
-              <span><span class="color-dot" style="background:#EF476F"></span>Most Often</span>
-            </div>
-          </div>
-          <div class="brand-grid">
-            <div><div class="brand-header" style="color:#FF6B6B">Lion</div><div id="chart-lion" class="chart-box"></div></div>
-            <div><div class="brand-header" style="color:#4ECDC4">Olio</div><div id="chart-olio" class="chart-box"></div></div>
-            <div><div class="brand-header" style="color:#d4b400">Festo</div><div id="chart-festo" class="chart-box"></div></div>
-          </div>
-         <p class="prose">Lion maintained relatively high spontaneous brand awareness at 88%–93% but experienced <bold>progressive erosion in lower-funnel</bold> performance. 
-          Its 'top of mind' awareness <bold>dropped sharply</bold> from 52% in April 2016 to 33% in December 2018, while regular purchasing declined from 85% to 81%. More notably, 
-          its primary brand selection weakened, with the proportion of consumers who bought Lion most often falling from 39% in February 2017 to 27% in December 2018.</p>
-         <p class="prose">In contrast, Festo demonstrated the strongest conversion efficiency across every stage of the brand funnel. Consumer brand perceptions moved in direct alignment 
-          with overall sales performance, as Festo achieved significantly better funnel conversion than Lion or Olio. This suggests that improvements in brand awareness translated into 
-          stronger purchasing behavior, reinforcing Festo's gains in value sales and market share.</p>
-        </section>
- <section>
-<div class="combo-grid">
-  <div>
-    <div class="brand-header">Value Sales (Billion IDR)</div>
-    <div class="chart-legend">
-            <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
-            <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
-            <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
-    </div>
-       <div id="wrapper-revenue" class="chart-box"></div>
-  </div>
-  <div>
-    <div class="brand-header">Value % Share</div>
-    <div class="chart-legend">
-            <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
-            <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
-            <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
-    </div>
-    <div id="wrapper-share" class="chart-box"></div>
-  </div>
-</div>
-</section>
-       
-        <!-- TV SPENDING -->
-<section class="block">
-  <div class="block-head">
-    <h5>TV Spending, 2016</h5>
-  </div>
-  <p class="prose">Before reaching the turning point in early 2017, Festo preceded the strategy by increasing share of voice. A key message that emphasised togetherness 
-   tended to increase consideration, a strategy used by Olio and Festo that hadn't delivered in any of Lion's ads. </p>
-  <div class="combo-grid">
-    <div>
-      <div class="brand-header">Category GRPs</div>
-      <div id="chart-grps" class="chart-box"></div>
-    </div>
-    <div>
-      <div class="brand-header">Share of Voice</div>
-      <div class="chart-legend">
-        <span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span>
-        <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span>
-        <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
-      </div>
-      <div id="chart-sov" class="chart-box"></div>
-    </div>
-  </div>
-</section>
-       
-<section class="block">
-  <details class="glossary" open>
-    <summary>Campaign Details</summary>
+		    .lion-case .project-footer { text-align: center; }
+		    .lion-case .project-footer p { max-width: 60ch; margin-left: auto; margin-right: auto; line-height: 1.65; }
 
-    <div class="glossary-grid">
-      <div>
-        <dl>
-          <dt class="plan-col product-packaging">Festo: Sustained and Aggressive Campaign Rotation</dt>
-          <dd>Festo maintained a strong and continuous television advertising presence through multiple high-volume campaign bursts, 
-           including X6 (7,289 GRPs), X7 (8,030 GRPs), and X8 (1,359 GRPs). This sustained investment helped Festo continuously expand 
-           its TV Share of Voice (SOV) throughout 2016.</dd>
-          <dt>Festo Key Message</dt>
-          <dd>X6: Everyone loves Festo <br> X7: Helps my child to do what he/she likes</dd>
+		    /* Tooltip */
+		    #global-tooltip { position: absolute; opacity: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(6px); padding: 12px 16px; border: 1px solid #e0e0e0; box-shadow: 0 8px 20px rgba(0,0,0,.12); pointer-events: none; font-size: 12px; border-radius: 8px; z-index: 1000; font-family: var(--font-sans, sans-serif); transition: opacity .15s ease; }
+		    .tooltip-date { display: block; font-weight: bold; margin-bottom: 6px; border-bottom: 1px solid #eee; padding-bottom: 4px; color: #333; }
+		    .tooltip-row { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 4px; }
+		    .color-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+		    .line-path { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+		    .lion-case .axis text { fill: #666; }
+		    .lion-case .axis .domain, .lion-case .axis .tick line { stroke: #ddd; }
 
-          <dt class="plan-col activation-roadmap">Olio: Steady Media Withdrawal</dt>
-          <dd>Olio gradually reduced its television advertising presence throughout 2016. Its campaigns included C5 (5,797 GRPs), C6 (2,968 GRPs), and another campaign execution 
-           with 2,906 GRPs. This declining investment was reflected in its Share of Voice, which fell consistently from 15% in Q1 to 11% in Q2, 9% in Q3, and just 3% in Q4.</dd>
-          <dt>Olio Key Message</dt>
-          <dd>C5: Inspires creating family moments <br> C6: Olio is a thoughtful gift for Hari Raya</dd>
-        </dl>
-      </div>
+		    /* ---------- Breakpoints ---------- */
+		    @media (max-width: 1000px) {
+		      .lion-case .brand-grid, .lion-case .plan-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+		      .lion-case .stat-strip { grid-template-columns: repeat(2, 1fr); }
+		    }
+		    @media (max-width: 700px) {
+		      .lion-case .card-grid { grid-template-columns: 1fr; }
+		    }
+		</style>
+		<section class="impact-section lion-case">
+			<div class="main-container">
+				<!-- HEADER -->
+				<header class="project-header">
+					<div class="tags-row">
+						<span class="tag">FMCG Strategy</span> <span class="tag">Market Research</span> <span class="tag">Brand Management</span> <span class="tag">Media &amp; Channel Planning</span>
+					</div>
+					<h4 class="font-hand">FMCG Market Assessment &amp; Brand Revival Strategy: Lion Biscuits</h4>
+					<p class="subtitle lede">Biscuito International led the Indonesian biscuit category in 2010 with Lion as its flagship product and Olio as a secondary line-up. Following a sales deterioration starting in 2015, a comprehensive diagnostic of 2016–2018 market data was conducted to re-establish Lion’s category dominance.</p>
+					<div class="stat-strip" role="list">
+						<div class="stat" role="listitem">
+							<strong>13.1% → 6.4%</strong><span>APAC FMCG nominal growth,<br>
+							2016 to 2018</span>
+						</div>
+						<div class="stat" role="listitem">
+							<strong>9.4% vs 2.3%</strong><span>Indonesia biscuit<br>
+							value vs volume growth in 2018</span>
+						</div>
+						<div class="stat" role="listitem">
+							<strong>32% → 42%</strong><span>Festo share of voice,<br>
+							Q1 to Q4 2016</span>
+						</div>
+						<div class="stat" role="listitem">
+							<strong>13% → 8%</strong><span>Lion share of voice,<br>
+							Q1 to Q4 2016</span>
+						</div>
+					</div>
+				</header><!-- MARKET CONTEXT + TREND CHART -->
+				<section class="block">
+					<div class="block-head">
+						<h5>APAC FMCG vs. Indonesia Biscuit Growth</h5>
+					</div>
+					<p class="prose">While overall FMCG nominal growth across APAC decelerated from 13.1% in 2016 down to 6.4% in 2018, Indonesia’s biscuit market demonstrated strong resilience with 9.4% value sales growth in 2018. However, value growth outpaced volume sales growth (2.3% volume growth in 2018), indicating that overall market value was increasingly driven by price adjustments or reduced promotional frequency rather than pure volume expansion.</p>
+				</section>
+				<section class="block&gt; &lt;div class=">
+					<div>
+						<div class="brand-header">
+							APAC FMCG
+						</div>
+						<div class="chart-legend">
+							<span><span class="color-dot" style="background:#4FAEEA"></span>Volume change</span> <span><span class="color-dot" style="background:#3B7FC9"></span>Unit value change</span> <span><span class="color-dot" style="background:#E53935"></span>Nominal growth</span>
+						</div>
+						<div class="chart-box" id="chart-apac"></div>
+					</div>
+					<div>
+						<div class="brand-header">
+							Indonesia Biscuits
+						</div>
+						<div class="chart-legend">
+							<span><span class="color-dot" style="background:#4FAEEA"></span>Volume sales growth</span> <span><span class="color-dot" style="background:#3B7FC9"></span>Price growth</span> <span><span class="color-dot" style="background:#E53935"></span>Value sales growth</span>
+						</div>
+						<div class="chart-box" id="chart-idn"></div>
+					</div>
+				</section>
+			</div>
+			<p class="glossary-note">Components may not sum to the total due to rounding.</p>
+		</section>
+		<section class="block">
+			<details class="glossary" open="">
+				<summary>
+					Kantar Metrics Definition
+				</summary>
+				<div class="glossary-grid">
+					<div>
+						<h6>Volume & value structure</h6>
+						<dl>
+							<dt>Volume change</dt>
+							<dd>Change in the physical quantity sold between two periods, measured in weight or standard units rather than money.</dd>
+							<dt>Unit value change</dt>
+							<dd>Change in the average price paid per unit or kilo. It reflects shelf prices, promotion intensity and mix shift, such as shoppers trading up to premium biscuits.</dd>
+							<dt>Nominal growth</dt>
+							<dd>Raw growth in total value sales, before adjusting for inflation. It answers: how much more money passed through the tills than last year?</dd>
+						</dl>
+					</div>
+					<div>
+						<h6>Sales performance growth</h6>
+						<dl>
+							<dt>Volume sales growth</dt>
+							<dd>Growth rate of physical volume sold. Example: 1,000 kg to 1,050 kg is +5%.</dd>
+							<dt>Price growth</dt>
+							<dd>Change in the shelf price of the product or category. In theory it removes mix effects, unlike unit value change.</dd>
+							<dt>Value sales growth</dt>
+							<dd>Growth rate of total revenue. Example: $10,000 to $10,800 is +8%.</dd>
+						</dl>
+					</div>
+				</div>
+				<p class="glossary-rule"><strong>The decomposition rule:</strong> Value growth ≈ Volume growth + Price (or unit value) growth.</p>
+				<ul class="glossary-read">
+					<li><strong>Healthy:</strong> +6% value from +4% volume and +2% price. Consumers are buying more.</li>
+					<li><strong>Risky:</strong> +6% value from −3% volume and +9% price. Revenue grows only because prices rose, while the buyer footprint shrinks.</li>
+				</ul>
+				<p class="glossary-note">In this case study, APAC figures use unit value change and Indonesia figures use price growth as reported by Kantar, so the two price numbers aren’t directly comparable.</p>
+			</details>
+		</section><!-- BRAND HEALTH -->
+		<section class="block">
+			<div class="block-head">
+				<h5>Brand Health Profiles</h5>
+				<div class="chart-legend">
+					<span><span class="color-dot" style="background:#A0C4FF"></span>Top of Mind</span> <span><span class="color-dot" style="background:#72EFDD"></span>Spontaneous</span> <span><span class="color-dot" style="background:#FFD166"></span>Regularly</span> <span><span class="color-dot" style="background:#EF476F"></span>Most Often</span>
+				</div>
+			</div>
+			<div class="brand-grid">
+				<div>
+					<div class="brand-header" style="color:#FF6B6B">
+						Lion
+					</div>
+					<div class="chart-box" id="chart-lion"></div>
+				</div>
+				<div>
+					<div class="brand-header" style="color:#4ECDC4">
+						Olio
+					</div>
+					<div class="chart-box" id="chart-olio"></div>
+				</div>
+				<div>
+					<div class="brand-header" style="color:#d4b400">
+						Festo
+					</div>
+					<div class="chart-box" id="chart-festo"></div>
+				</div>
+			</div>
+			<p class="prose">Lion maintained relatively high spontaneous brand awareness at 88%–93% but experienced progressive erosion in lower-funnel performance. Its 'top of mind' awareness dropped sharply from 52% in April 2016 to 33% in December 2018, while regular purchasing declined from 85% to 81%. More notably, its primary brand selection weakened, with the proportion of consumers who bought Lion most often falling from 39% in February 2017 to 27% in December 2018.</p>
+			<p class="prose">In contrast, Festo demonstrated the strongest conversion efficiency across every stage of the brand funnel. Consumer brand perceptions moved in direct alignment with overall sales performance, as Festo achieved significantly better funnel conversion than Lion or Olio. This suggests that improvements in brand awareness translated into stronger purchasing behavior, reinforcing Festo's gains in value sales and market share.</p>
+		</section>
+		<section class="block&gt; &lt;div class=">
+			<div>
+				<div class="brand-header">
+					Value Sales (Billion IDR)
+				</div>
+				<div class="chart-legend">
+					<span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span> <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span> <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+				</div>
+				<div class="chart-box" id="wrapper-revenue"></div>
+			</div>
+			<div>
+				<div class="brand-header">
+					Value % Share
+				</div>
+				<div class="chart-legend">
+					<span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span> <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span> <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+				</div>
+				<div class="chart-box" id="wrapper-share"></div>
+			</div>
+		</section><!-- TV SPENDING -->
+		<section class="block">
+			<div class="block-head">
+				<h5>TV Spending, 2016</h5>
+			</div>
+			<p class="prose">Before reaching the turning point in early 2017, Festo preceded the strategy by increasing share of voice. A key message that emphasised togetherness tended to increase consideration, a strategy used by Olio and Festo that hadn't delivered in any of Lion's ads.</p>
+			<div class="combo-grid">
+				<div>
+					<div class="brand-header">
+						Category GRPs
+					</div>
+					<div class="chart-box" id="chart-grps"></div>
+				</div>
+				<div>
+					<div class="brand-header">
+						Share of Voice
+					</div>
+					<div class="chart-legend">
+						<span><span class="color-dot" style="background:#FF6B6B"></span>Lion</span> <span><span class="color-dot" style="background:#4ECDC4"></span>Olio</span> <span><span class="color-dot" style="background:#FFE66D"></span>Festo</span>
+					</div>
+					<div class="chart-box" id="chart-sov"></div>
+				</div>
+			</div>
+		</section>
+		<section class="block">
+			<details class="glossary" open="">
+				<summary>
+					Campaign Details
+				</summary>
+				<div class="glossary-grid">
+					<div>
+						<dl>
+							<dt class="plan-col">Festo: Sustained and Aggressive Campaign Rotation</dt>
+							<dd>Festo maintained a strong and continuous television advertising presence through multiple high-volume campaign bursts, including X6 (7,289 GRPs), X7 (8,030 GRPs), and X8 (1,359 GRPs). This sustained investment helped Festo continuously expand its TV Share of Voice (SOV) throughout 2016.</dd>
+							<dt>Festo Key Message</dt>
+							<dd>X6: Everyone loves Festo<br>
+							X7: Helps my child to do what he/she likes</dd>
+							<dt class="plan-col">Olio: Steady Media Withdrawal</dt>
+							<dd>Olio gradually reduced its television advertising presence throughout 2016. Its campaigns included C5 (5,797 GRPs), C6 (2,968 GRPs), and another campaign execution with 2,906 GRPs. This declining investment was reflected in its Share of Voice, which fell consistently from 15% in Q1 to 11% in Q2, 9% in Q3, and just 3% in Q4.</dd>
+							<dt>Olio Key Message</dt>
+							<dd>C5: Inspires creating family moments<br>
+							C6: Olio is a thoughtful gift for Hari Raya</dd>
+						</dl>
+					</div>
+					<div>
+						<dl>
+							<dt class="plan-col">Lion ("Be Passionate"): The Q3 2016 Media Blackout</dt>
+							<dd>Lion's television advertising activity was more intermittent, with 7,473 GRPs allocated to "Be Passionate" and another 2,906 GRPs to "Be Passionate II". Despite this investment, Lion went completely off-air in Q3 2016, recording 0% Share of Voice. Its SOV had already declined from 13% in Q1 to 9% in Q2 before dropping to zero in Q3, recovering only slightly to 8% in Q4. This quarter-long absence created an opportunity for competitors, particularly Festo, to capture greater share of voice during the period.</dd>
+							<dt>Lion Key Message</dt>
+							<dd>Be Passionate: Gives my kid passion to do what he loves<br>
+							Be Passionate II: Supports mothers in actively teaching their children to follow their passion</dd>
+						</dl>
+					</div>
+				</div>
+			</details>
+		</section>
+		<section class="block">
+			<div class="block-head">
+				<h5>Media Touchpoints by Brand, 2016</h5>
+			</div>
+			<p class="prose">Store activation appeared to be one of the driving force behind the increase in market share that both Lion and Olio lost to Festo. Festo was able to grow the brand through store activation and ATL, which resulted in a significant impact compared to the first quarter.</p>
+			<div class="chart-legend">
+				<span><span class="color-dot" style="background:#4472C4"></span>TV</span> <span><span class="color-dot" style="background:#A6A6A6"></span>Posters</span> <span><span class="color-dot" style="background:#44546A"></span>Newspapers/Magazines</span> <span><span class="color-dot" style="background:#ED7D31"></span>In the shops</span>
+			</div>
+			<div class="brand-grid">
+				<div>
+					<div class="brand-header" style="color:#FF6B6B">
+						Lion
+					</div>
+					<div class="chart-box" id="chart-touch-lion"></div>
+				</div>
+				<div>
+					<div class="brand-header" style="color:#4ECDC4">
+						Olio
+					</div>
+					<div class="chart-box" id="chart-touch-olio"></div>
+				</div>
+				<div>
+					<div class="brand-header" style="color:#d4b400">
+						Festo
+					</div>
+					<div class="chart-box" id="chart-touch-festo"></div>
+				</div>
+			</div>
+		</section><!-- BRAND IMAGE -->
+		<section class="block">
+			<div class="block-head">
+				<h5>Brand Image and Importance Analysis, 2016</h5>
+			</div>
+			<div class="drivers-legend">
+				<span><i class="sw sw-g"></i>Relative strength (index ≥ +3)</span> <span><i class="sw sw-r"></i>Relative weakness (index ≤ −3)</span> <span class="drivers-key"><b>63%</b> = actual perception &nbsp;·&nbsp; <small>+3</small> = normalized index (sums to ≈ 0)</span>
+			</div>
+			<div aria-label="Category drivers table" class="drivers-scroll" role="region" tabindex="0">
+				<table class="drivers" id="drivers-table">
+					<caption class="sr-only">
+						Category drivers in 2016: perception % and normalized score for Lion, Olio and Festo
+					</caption>
+					<thead>
+						<tr>
+							<th scope="col">Brand Image</th>
+							<th scope="col" style="color:#FF6B6B">Lion</th>
+							<th scope="col" style="color:#4ECDC4">Olio</th>
+							<th scope="col" style="color:#d4b400">Festo</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+			<p class="glossary-note">The % is the actual perception. The small number is a separate normalized index centred on zero (it sums to about 0, rounding aside), not a change vs. last year and not an adjustment to the %. Positive means relative strength and negative means relative weakness across the three brands, and the colours apply a fixed rule: green when the index is +3 or higher, red when it is −3 or lower. That is why Festo’s 52% on “Enlighten the family moment” reads as a strength (+23) while Lion’s 53% reads as a weakness (−9).</p>
+		</section><!-- FINDINGS -->
+		<section class="block">
+			<div class="block-head">
+				<h5 class="font-hand section-title">Key Diagnostic Findings</h5>
+			</div>
+			<div class="card-grid">
+				<div class="stitch-card">
+					<div class="icon-box">
+						<svg height="24" viewbox="0 0 24 24" width="24">
+						<polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+						<polyline points="17 18 23 18 23 12"></polyline></svg>
+					</div>
+					<h5>Media Share of Voice (SOV) Erosion</h5>
+					<p>Competitor Festo outspent rivals on TV advertising General Rating Points (GRPs), expanding its Share of Voice (SOV) from 32% in Q1 2016 to 42% in Q4 2016. Over the same period, Lion’s SOV plummeted from 13% to 8%, while Olio dropped to 3%.</p>
+					<p class="impact"><b>Impact</b>Festo paired heavy Above-The-Line (ATL) advertising with aggressive in-store activations, directly capturing market share from both Lion and Olio.</p>
+				</div>
+				<div class="stitch-card highlight-card">
+					<div class="icon-box">
+						<svg height="24" viewbox="0 0 24 24" width="24">
+						<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+					</div>
+					<h5>The Emotional Messaging Gap</h5>
+					<p>Lion’s “Be Passionate” TV campaign focused strictly on child empowerment (“Gives my kid passion to do what he loves”). Meanwhile, competitors Festo and Olio deployed ads emphasizing family togetherness (“Inspires creating family moments” / “Everyone loves Festo”).</p>
+					<p class="impact"><b>Impact</b>Campaigns featuring family togetherness and sharing moments generated higher purchase consideration than child-centered empowerment messaging.</p>
+				</div>
+				<div class="stitch-card">
+					<div class="icon-box">
+						<svg height="24" viewbox="0 0 24 24" width="24">
+						<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+						<line x1="4" x2="4" y1="22" y2="15"></line></svg>
+					</div>
+					<h5>Brand Imagery Priority Paradox</h5>
+					<p>Lion retained top-tier performance in high-priority category drivers, leading in Brand Trust (82%), Favorite Brand (63%), and Great Taste (66%). However, Festo achieved market growth by dominating low-priority attributes where Lion was weak, such as “Is suitable for the whole family” (55% vs. Lion’s 47%) and “Enlighten the family moment” (52% vs. Lion’s 53%).</p>
+					<p class="impact"><b>Impact</b>By monopolizing family-sharing perceptions, Festo built broad household appeal despite lower baseline brand trust.</p>
+				</div>
+				<div class="stitch-card highlight-card">
+					<div class="icon-box">
+						<svg height="24" viewbox="0 0 24 24" width="24">
+						<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+					</div>
+					<h5>Pack Size Limitation &amp; Declining Repetition</h5>
+					<p>Lion experienced a steady decline in purchase repetition because its product portfolio was limited strictly to single-serving format packs (e.g., 17g, 20g, 21g, and 23g).</p>
+					<p class="impact"><b>Impact</b>Single-serving packs restricted Lion to individual consumption occasions, preventing the brand from capturing multi-person household sharing moments.</p>
+				</div>
+			</div>
+		</section><!-- ACTION PLAN -->
+		<section class="block">
+			<div class="block-head">
+				<h5>Strategic Action Plan (The Way Forward)</h5>
+			</div>
+			<div class="plan-grid">
+				<section class="plan-col activation-roadmap">
+					<h2>Channel &amp; Activation Roadmap</h2>
+					<ul>
+						<li><strong>E-Commerce Growth:</strong> Establish formal e-commerce partnerships to capitalize on FMCG online share, projected to grow from <strong>7.3% in 2017 to 15% by 2025</strong>.</li>
+						<li><strong>In-Store &amp; Price Promotions:</strong> Deploy targeted in-store promotions to boost consumer purchasing power in response to value sales growing faster than volume.</li>
+						<li><strong>Upper-Funnel Social Ads:</strong> Implement desktop and mobile display advertising on Facebook and Instagram to rebuild upper-funnel brand awareness.</li>
+					</ul>
+				</section>
+				<section class="plan-col creative-narrative">
+					<h2>Creative Narrative Refinement</h2>
+					<ul>
+						<li><strong>Bridging Passion &amp; Family:</strong> Evolve the <em>“Be Passionate”</em> narrative to explain <em>why</em> passion matters within the family context, improving emotional relevance.</li>
+						<li><strong>Functional Benefit Layering:</strong> Complement emotional storytelling with explicit functional health claims, such as highlighting <strong>“Fortified with Vitamins and Minerals”</strong> alongside energy benefits.</li>
+					</ul>
+				</section>
+				<section class="plan-col product-packaging">
+					<h2>Product Packaging Diversification</h2>
+					<ul>
+						<li><strong>Multi-Serving Offerings:</strong> Introduce multi-serving family packs alongside single-serving options.</li>
+						<li><strong>Household Sharing Position:</strong> Frame multi-person household consumption as a cognitive shortcut for purchasing the safest, most versatile family snack, directly driving purchase repetition.</li>
+					</ul>
+				</section>
+			</div>
+		</section><!-- ANALYST NOTE -->
+		<section class="block">
+			<aside class="note">
+				<h5>A note on the data</h5>
+				<p style="margin:0">Although I do not have data on purchase volume by brand, I can infer patterns based on advertising effectiveness, as outlined in the documents. Store activation emerged as a key driver of the market share gains Festo achieved at the expense of Lion and Olio. By combining strong store activation with ATL efforts, Festo successfully accelerated brand growth, delivering a notably greater impact than in the first quarter. Additionally, messaging that emphasized togetherness tended to increase consideration. This approach was adopted by Olio and Festo but was absent from Lion’s advertising, which may explain the difference in performance.</p>
+			</aside>
+		</section><!-- PDF -->
+		<section class="block source-material-section">
+			<div class="block-head">
+				<h5 class="font-hand">The Deliverable</h5>
+				<p class="context-text">This detailed document outlines the full methodology, competitive dynamics of “Festo vs. Lion,” and strategic recommendations.</p>
+			</div>
+			<div class="pdf-window">
+				<iframe src="assets/lion-fmcg.pdf" title="Lion FMCG strategy deliverable (PDF)"></iframe>
+			</div><a class="pdf-link highlight-word" href="assets/lion-fmcg.pdf" rel="noopener" target="_blank">Open the PDF in a new tab</a>
+		</section><!-- FOOTER -->
+		<footer class="block project-footer">
+			<h5 class="font-hand">Retrospective</h5>
+			<p>This project taught me that data is only as good as the story it tells. By identifying the emotional gap, we turned a “biscuit” problem into a “connection” solution.</p>
+			<div class="section-divider">
+				<span class="knot">✦</span>
+			</div><a class="button-primary-3 w-button" href="/portfolio" style="display:inline-block;margin-top:15px;">Back to Project List</a>
+		</footer>
+	</main>{% include footer.html %} 
+	<script>
+	   (function () {
+	     /* ---------- Data ---------- */
+	     const slide4MarketData = {
+	       years: ['2016', '2017', '2018'],
+	       apac: {
+	         nominalGrowth: [13.1, 12.4, 6.4],
+	         volumeChange: [6.2, 6.9, 2.8],
+	         unitValueChange: [6.9, 5.5, 3.5]
+	       },
+	       indonesiaBiscuit: {
+	         valueSalesGrowth: [11.6, 8.4, 9.4],
+	         volumeSalesGrowth: [6.5, 1.8, 2.3],
+	         priceGrowth: [5.1, 6.5, 7.0]
+	       }
+	     };
 
-           <div>
-        <dl>
-          <dt class="plan-col creative-narrative">Lion ("Be Passionate"): The Q3 2016 Media Blackout</dt>
-          <dd>Lion's television advertising activity was more intermittent, with 7,473 GRPs allocated to "Be Passionate" and another 2,906 GRPs to "Be Passionate II". 
-           Despite this investment, Lion went completely off-air in Q3 2016, recording 0% Share of Voice. Its SOV had already declined from 13% in Q1 to 9% in Q2 before 
-           dropping to zero in Q3, recovering only slightly to 8% in Q4. This quarter-long absence created an opportunity for competitors, particularly Festo, to capture 
-           greater share of voice during the period.</dd>
-          <dt>Lion Key Message</dt>
-          <dd>Be Passionate: Gives my kid passion to do what he loves <br> Be Passionate II: Supports mothers in actively teaching their children to follow their passion</dd>
-        </dl>
-      </div>
-    </div>
-  </details>
-</section>
+	     const slide4SOV = {
+	       years: ['Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016'],
+	       GRPsCategory: {
+	         GRPs: [32941, 38315, 22536, 36327]
+	       },
+	       ShareofVoice: {
+	         Lion: [13, 9, 0, 8],
+	         Olio: [15, 11, 9, 3],
+	         Festo: [32, 35, 37, 42]
+	       }
+	     };
 
-       <section class="block">
-  <div class="block-head">
-    <h5>Brand Image and Importance Analysis, 2016</h5>
-  </div>
- 
-<div class="drivers-legend">
-  <span><i class="sw sw-g"></i>Relative strength (index ≥ +3)</span>
-  <span><i class="sw sw-r"></i>Relative weakness (index ≤ −3)</span>
-  <span class="drivers-key"><b>63%</b> = actual perception &nbsp;·&nbsp; <small>+3</small> = normalized index (sums to ≈ 0)</span>
-</div>
- 
-  <div class="drivers-scroll" tabindex="0" role="region" aria-label="Category drivers table">
-    <table class="drivers" id="drivers-table">
-      <caption class="sr-only">Category drivers in 2016: perception % and normalized score for Lion, Olio and Festo</caption>
-      <thead>
-        <tr><th scope="col">Brand Image</th><th scope="col" style="color:#FF6B6B">Lion</th><th scope="col" style="color:#4ECDC4">Olio</th><th scope="col" style="color:#d4b400">Festo</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <p class="glossary-note">The % is the actual perception. The small number is a separate normalized index centred on zero (it sums to about 0, rounding aside), not a change vs. last year and not an adjustment to the %. Positive means relative strength and negative means relative weakness across the three brands, and the colours apply a fixed rule: green when the index is +3 or higher, red when it is −3 or lower. That is why Festo’s 52% on “Enlighten the family moment” reads as a strength (+23) while Lion’s 53% reads as a weakness (−9).</p>
-</section>
- 
-        <!-- FINDINGS -->
-        <section class="block">
-          <div class="block-head"><h5 class="font-hand section-title">Key Diagnostic Findings</h5></div>
-          <div class="card-grid">
- 
-            <div class="stitch-card">
-              <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
-              </div>
-              <h5>Media Share of Voice (SOV) Erosion</h5>
-              <p>Competitor Festo outspent rivals on TV advertising General Rating Points (GRPs), expanding its Share of Voice (SOV) from 32% in Q1 2016 to 42% in Q4 2016. Over the same period, Lion’s SOV plummeted from 13% to 8%, while Olio dropped to 3%.</p>
-              <p class="impact"><b>Impact</b>Festo paired heavy Above-The-Line (ATL) advertising with aggressive in-store activations, directly capturing market share from both Lion and Olio.</p>
-            </div>
- 
-            <div class="stitch-card highlight-card">
-              <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-              </div>
-              <h5>The Emotional Messaging Gap</h5>
-              <p>Lion’s “Be Passionate” TV campaign focused strictly on child empowerment (“Gives my kid passion to do what he loves”). Meanwhile, competitors Festo and Olio deployed ads emphasizing family togetherness (“Inspires creating family moments” / “Everyone loves Festo”).</p>
-              <p class="impact"><b>Impact</b>Campaigns featuring family togetherness and sharing moments generated higher purchase consideration than child-centered empowerment messaging.</p>
-            </div>
- 
-            <div class="stitch-card">
-              <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-              </div>
-              <h5>Brand Imagery Priority Paradox</h5>
-              <p>Lion retained top-tier performance in high-priority category drivers, leading in Brand Trust (82%), Favorite Brand (63%), and Great Taste (66%). However, Festo achieved market growth by dominating low-priority attributes where Lion was weak, such as “Is suitable for the whole family” (55% vs. Lion’s 47%) and “Enlighten the family moment” (52% vs. Lion’s 53%).</p>
-              <p class="impact"><b>Impact</b>By monopolizing family-sharing perceptions, Festo built broad household appeal despite lower baseline brand trust.</p>
-            </div>
- 
-            <div class="stitch-card highlight-card">
-              <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-              </div>
-              <h5>Pack Size Limitation &amp; Declining Repetition</h5>
-              <p>Lion experienced a steady decline in purchase repetition because its product portfolio was limited strictly to single-serving format packs (e.g., 17g, 20g, 21g, and 23g).</p>
-              <p class="impact"><b>Impact</b>Single-serving packs restricted Lion to individual consumption occasions, preventing the brand from capturing multi-person household sharing moments.</p>
-            </div>
- 
-          </div>
-        </section>
+	     const touchQuarters = ["Q1 2016", "Q2 2016", "Q3 2016", "Q4 2016"];
+	     const touchpoints = {
+	       Lion:  { "TV": [33, 37, 39, 34], "Posters": [4, 2, 1, 1], "Newspapers/Magazines": [1, 1, 1, 0], "In the shops": [81, 77, 86, 85] },
+	       Olio:  { "TV": [49, 51, 55, 53], "Posters": [5, 3, 2, 2], "Newspapers/Magazines": [3, 2, 2, 0], "In the shops": [77, 79, 88, 85] },
+	       Festo: { "TV": [14, 23, 22, 30], "Posters": [4, 4, 5, 6], "Newspapers/Magazines": [3, 1, 2, 0], "In the shops": [76, 79, 89, 88] }
+	     };
 
- 
-        <!-- ACTION PLAN -->
-        <section class="block">
-          <div class="block-head"><h5>Strategic Action Plan (The Way Forward)</h5></div>
-          <div class="plan-grid">
- 
-            <section class="plan-col activation-roadmap">
-              <h2>Channel &amp; Activation Roadmap</h2>
-              <ul>
-                <li><strong>E-Commerce Growth:</strong> Establish formal e-commerce partnerships to capitalize on FMCG online share, projected to grow from <strong>7.3% in 2017 to 15% by 2025</strong>.</li>
-                <li><strong>In-Store &amp; Price Promotions:</strong> Deploy targeted in-store promotions to boost consumer purchasing power in response to value sales growing faster than volume.</li>
-                <li><strong>Upper-Funnel Social Ads:</strong> Implement desktop and mobile display advertising on Facebook and Instagram to rebuild upper-funnel brand awareness.</li>
-              </ul>
-            </section>
- 
-            <section class="plan-col creative-narrative">
-              <h2>Creative Narrative Refinement</h2>
-              <ul>
-                <li><strong>Bridging Passion &amp; Family:</strong> Evolve the <em>“Be Passionate”</em> narrative to explain <em>why</em> passion matters within the family context, improving emotional relevance.</li>
-                <li><strong>Functional Benefit Layering:</strong> Complement emotional storytelling with explicit functional health claims, such as highlighting <strong>“Fortified with Vitamins and Minerals”</strong> alongside energy benefits.</li>
-              </ul>
-            </section>
- 
-            <section class="plan-col product-packaging">
-              <h2>Product Packaging Diversification</h2>
-              <ul>
-                <li><strong>Multi-Serving Offerings:</strong> Introduce multi-serving family packs alongside single-serving options.</li>
-                <li><strong>Household Sharing Position:</strong> Frame multi-person household consumption as a cognitive shortcut for purchasing the safest, most versatile family snack, directly driving purchase repetition.</li>
-              </ul>
-            </section>
- 
-          </div>
-        </section>
- 
-        <!-- ANALYST NOTE -->
-        <section class="block">
-          <aside class="note">
-            <h5>A note on the data</h5>
-            <p style="margin:0">Although I do not have data on purchase volume by brand, I can infer patterns based on advertising effectiveness, as outlined in the documents. Store activation emerged as a key driver of the market share gains Festo achieved at the expense of Lion and Olio. By combining strong store activation with ATL efforts, Festo successfully accelerated brand growth, delivering a notably greater impact than in the first quarter. Additionally, messaging that emphasized togetherness tended to increase consideration. This approach was adopted by Olio and Festo but was absent from Lion’s advertising, which may explain the difference in performance.</p>
-          </aside>
-        </section>
- 
-        <!-- PDF -->
-        <section class="block source-material-section">
-          <div class="block-head">
-            <h5 class="font-hand">The Deliverable</h5>
-            <p class="context-text">This detailed document outlines the full methodology, competitive dynamics of “Festo vs. Lion,” and strategic recommendations.</p>
-          </div>
-          <div class="pdf-window">
-            <iframe src="assets/lion-fmcg.pdf" title="Lion FMCG strategy deliverable (PDF)" loading="lazy"></iframe>
-          </div>
-          <a class="pdf-link highlight-word" href="assets/lion-fmcg.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>
-        </section>
- 
-        <!-- FOOTER -->
-        <footer class="block project-footer">
-          <h5 class="font-hand">Retrospective</h5>
-          <p>This project taught me that data is only as good as the story it tells. By identifying the emotional gap, we turned a “biscuit” problem into a “connection” solution.</p>
-          <div class="section-divider"><span class="knot">✦</span></div>
-          <a href="/portfolio" class="button-primary-3 w-button" style="display:inline-block;margin-top:15px;">Back to Project List</a>
-        </footer>
- 
-      </div>
-    </section>
-  </main>
- 
-  {% include footer.html %}
- 
-<script>
-    (function () {
-      /* ---------- Data ---------- */
-      const slide4MarketData = {
-        years: ['2016', '2017', '2018'],
-        apac: {
-          nominalGrowth: [13.1, 12.4, 6.4],
-          volumeChange: [6.2, 6.9, 2.8],
-          unitValueChange: [6.9, 5.5, 3.5]
-        },
-        indonesiaBiscuit: {
-          valueSalesGrowth: [11.6, 8.4, 9.4],
-          volumeSalesGrowth: [6.5, 1.8, 2.3],
-          priceGrowth: [5.1, 6.5, 7.0]
-        }
-      };
+	     /* ---------- Helpers ---------- */
+	     const fmtMonth = d3.timeFormat("%b %Y");
+	     const fmtShort = d3.timeFormat("%b %y");
+	     const parsers = ["%Y-%m-%d", "%Y/%m/%d", "%b %Y", "%b-%y", "%m/%d/%Y"].map(f => d3.timeParse(f));
 
-      const slide4SOV = {
-        years: ['Q1 2016', 'Q2 2016', 'Q3 2016', 'Q4 2016'],
-        GRPsCategory: {
-          GRPs: [32941, 38315, 22536, 36327]
-        },
-        ShareofVoice: {
-          Lion: [13, 9, 0, 8],
-          Olio: [15, 11, 9, 3],
-          Festo: [32, 35, 37, 42]
-        }
-      };
+	     function parseDate(v) {
+	       if (!v) return null;
+	       const s = String(v).trim();
+	       for (const p of parsers) { const d = p(s); if (d) return d; }
+	       const j = new Date(s);
+	       return isNaN(j) ? null : j;
+	     }
 
-      /* ---------- Helpers ---------- */
-      const fmtMonth = d3.timeFormat("%b %Y");
-      const fmtShort = d3.timeFormat("%b %y");
-      const parsers = ["%Y-%m-%d", "%Y/%m/%d", "%b %Y", "%b-%y", "%m/%d/%Y"].map(f => d3.timeParse(f));
+	     function tooltip() {
+	       let t = d3.select("#global-tooltip");
+	       if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip");
+	       return t;
+	     }
 
-      function parseDate(v) {
-        if (!v) return null;
-        const s = String(v).trim();
-        for (const p of parsers) { const d = p(s); if (d) return d; }
-        const j = new Date(s);
-        return isNaN(j) ? null : j;
-      }
+	     function showTip(event, html) {
+	       tooltip().style("opacity", 1).html(html)
+	         .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px");
+	     }
+	     function hideTip() { tooltip().style("opacity", 0); }
 
-      function tooltip() {
-        let t = d3.select("#global-tooltip");
-        if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip");
-        return t;
-      }
+	     function addHover(g, w, h, data, x, keys, color, suffix = "") {
+	       const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
+	       const bisect = d3.bisector(d => d.Date).center;
+	       g.append("rect").attr("width", w).attr("height", h).attr("fill", "transparent")
+	         .on("mousemove", function (event) {
+	           const d = data[bisect(data, x.invert(d3.pointer(event)[0]))];
+	           if (!d) return;
+	           guide.style("opacity", 1).attr("x1", x(d.Date)).attr("x2", x(d.Date));
+	           let html = `<span class="tooltip-date">${fmtMonth(d.Date)}<\/span>`;
+	           keys.slice().sort((a, b) => d[b] - d[a]).forEach(k => {
+	             html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"><\/span>${k}<\/span><b>${(+d[k] || 0).toLocaleString()}${suffix}<\/b><\/div>`;
+	           });
+	           showTip(event, html);
+	         })
+	         .on("mouseleave", () => { guide.style("opacity", 0); hideTip(); });
+	     }
 
-      function showTip(event, html) {
-        tooltip().style("opacity", 1).html(html)
-          .style("left", (event.pageX + 15) + "px").style("top", (event.pageY - 15) + "px");
-      }
-      function hideTip() { tooltip().style("opacity", 0); }
+	     /* ---------- Line chart (CSV-driven: sales, share, funnels) ---------- */
+	     async function drawLines(sel, csv, keys, colors, o) {
+	       const box = d3.select(sel);
+	       if (box.empty()) return;
+	       let raw = [];
+	       try { raw = await d3.csv(csv); } catch (e) {}
+	       const data = raw.map(r => {
+	         const row = { Date: parseDate(r.Date || r.date) };
+	         keys.forEach(k => { row[k] = +(r[k] ?? r[k.toLowerCase()]) || 0; });
+	         return row;
+	       }).filter(r => r.Date).sort((a, b) => a.Date - b.Date);
 
-      function addHover(g, w, h, data, x, keys, color, suffix = "") {
-        const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
-        const bisect = d3.bisector(d => d.Date).center;
-        g.append("rect").attr("width", w).attr("height", h).attr("fill", "transparent")
-          .on("mousemove", function (event) {
-            const d = data[bisect(data, x.invert(d3.pointer(event)[0]))];
-            if (!d) return;
-            guide.style("opacity", 1).attr("x1", x(d.Date)).attr("x2", x(d.Date));
-            let html = `<span class="tooltip-date">${fmtMonth(d.Date)}</span>`;
-            keys.slice().sort((a, b) => d[b] - d[a]).forEach(k => {
-              html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${(+d[k] || 0).toLocaleString()}${suffix}</b></div>`;
-            });
-            showTip(event, html);
-          })
-          .on("mouseleave", () => { guide.style("opacity", 0); hideTip(); });
-      }
+	       box.html("");
+	       if (!data.length) { box.append("div").attr("class", "chart-empty").text("Chart data is unavailable right now."); return; }
 
-      /* ---------- Line chart (CSV-driven: sales, share, funnels) ---------- */
-      async function drawLines(sel, csv, keys, colors, o) {
-        const box = d3.select(sel);
-        if (box.empty()) return;
-        let raw = [];
-        try { raw = await d3.csv(csv); } catch (e) {}
-        const data = raw.map(r => {
-          const row = { Date: parseDate(r.Date || r.date) };
-          keys.forEach(k => { row[k] = +(r[k] ?? r[k.toLowerCase()]) || 0; });
-          return row;
-        }).filter(r => r.Date).sort((a, b) => a.Date - b.Date);
+	       const suffix = o.suffix || "";
+	       const W = o.w, H = o.h, m = o.m, w = W - m.left - m.right, h = H - m.top - m.bottom;
+	       const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+	       const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
 
-        box.html("");
-        if (!data.length) { box.append("div").attr("class", "chart-empty").text("Chart data is unavailable right now."); return; }
+	       const x = d3.scaleTime().domain(d3.extent(data, d => d.Date)).range([0, w]);
+	       const vals = data.flatMap(d => keys.map(k => d[k]));
+	       const lo = o.zero ? 0 : (d3.min(vals) || 0) * 0.9;
+	       const y = d3.scaleLinear().domain([lo, (d3.max(vals) || 100) * 1.1]).range([h, 0]).nice();
+	       const color = d3.scaleOrdinal().domain(keys).range(colors);
 
-        const suffix = o.suffix || "";
-        const W = o.w, H = o.h, m = o.m, w = W - m.left - m.right, h = H - m.top - m.bottom;
-        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
-        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+	       g.append("g").attr("class", "axis").style("font-size", o.fs + "px")
+	         .call(d3.axisLeft(y).ticks(5).tickFormat(d => d3.format(",")(d) + suffix));
+	       g.append("g").attr("class", "axis").style("font-size", o.fs + "px").attr("transform", `translate(0,${h})`)
+	         .call(d3.axisBottom(x).ticks(o.xt).tickFormat(o.xt > 4 ? fmtMonth : fmtShort));
 
-        const x = d3.scaleTime().domain(d3.extent(data, d => d.Date)).range([0, w]);
-        const vals = data.flatMap(d => keys.map(k => d[k]));
-        const lo = o.zero ? 0 : (d3.min(vals) || 0) * 0.9;
-        const y = d3.scaleLinear().domain([lo, (d3.max(vals) || 100) * 1.1]).range([h, 0]).nice();
-        const color = d3.scaleOrdinal().domain(keys).range(colors);
+	       const line = d3.line().x(d => x(d.Date)).y(d => y(d.v)).curve(d3.curveMonotoneX);
+	       const series = keys.map(k => ({ name: k, values: data.map(d => ({ Date: d.Date, v: d[k] })) }));
 
-        g.append("g").attr("class", "axis").style("font-size", o.fs + "px")
-          .call(d3.axisLeft(y).ticks(5).tickFormat(d => d3.format(",")(d) + suffix));
-        g.append("g").attr("class", "axis").style("font-size", o.fs + "px").attr("transform", `translate(0,${h})`)
-          .call(d3.axisBottom(x).ticks(o.xt).tickFormat(o.xt > 4 ? fmtMonth : fmtShort));
+	       g.selectAll(".line-path").data(series).enter().append("path")
+	         .attr("class", "line-path").attr("stroke-width", o.sw)
+	         .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
 
-        const line = d3.line().x(d => x(d.Date)).y(d => y(d.v)).curve(d3.curveMonotoneX);
-        const series = keys.map(k => ({ name: k, values: data.map(d => ({ Date: d.Date, v: d[k] })) }));
+	       if (o.endLabels) {
+	         g.selectAll(".end-label").data(series).enter().append("text")
+	           .attr("x", w + 8).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
+	           .text(d => d.name).style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "12px");
+	       }
+	       addHover(g, w, h, data, x, keys, color, suffix);
+	     }
 
-        g.selectAll(".line-path").data(series).enter().append("path")
-          .attr("class", "line-path").attr("stroke-width", o.sw)
-          .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
+	     /* ---------- Combo chart: stacked bars (volume + price) with total-growth line ---------- */
+	     function drawCombo(sel, years, volume, price, total, o) {
+	       const box = d3.select(sel);
+	       if (box.empty()) return;
+	       box.html("");
 
-        if (o.endLabels) {
-          g.selectAll(".end-label").data(series).enter().append("text")
-            .attr("x", w + 8).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
-            .text(d => d.name).style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "12px");
-        }
-        addHover(g, w, h, data, x, keys, color, suffix);
-      }
+	       const W = 480, H = 340, m = { top: 28, right: 16, bottom: 36, left: 42 };
+	       const w = W - m.left - m.right, h = H - m.top - m.bottom;
+	       const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+	       const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
 
-      /* ---------- Combo chart: stacked bars (volume + price) with total-growth line ---------- */
-      function drawCombo(sel, years, volume, price, total, o) {
-        const box = d3.select(sel);
-        if (box.empty()) return;
-        box.html("");
+	       const x = d3.scaleBand().domain(years).range([0, w]).padding(0.35);
+	       const y = d3.scaleLinear().domain([0, o.max]).range([h, 0]); // shared max keeps both panels comparable
+	       g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + "%"));
+	       g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
 
-        const W = 480, H = 340, m = { top: 28, right: 16, bottom: 36, left: 42 };
-        const w = W - m.left - m.right, h = H - m.top - m.bottom;
-        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
-        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+	       const rows = years.map((yr, i) => ({ yr, vol: volume[i], pr: price[i], tot: total[i] }));
+	       const cx = d => x(d.yr) + x.bandwidth() / 2;
 
-        const x = d3.scaleBand().domain(years).range([0, w]).padding(0.35);
-        const y = d3.scaleLinear().domain([0, o.max]).range([h, 0]); // shared max keeps both panels comparable
-        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + "%"));
-        g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
+	       g.selectAll(".vol").data(rows).enter().append("rect")
+	         .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
+	         .attr("y", d => y(d.vol)).attr("height", d => h - y(d.vol)).attr("fill", "#4FAEEA");
+	       g.selectAll(".pr").data(rows).enter().append("rect")
+	         .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
+	         .attr("y", d => y(d.vol + d.pr)).attr("height", d => y(d.vol) - y(d.vol + d.pr)).attr("fill", "#3B7FC9");
 
-        const rows = years.map((yr, i) => ({ yr, vol: volume[i], pr: price[i], tot: total[i] }));
-        const cx = d => x(d.yr) + x.bandwidth() / 2;
+	       const seg = (key, base) => g.selectAll(".t-" + key).data(rows).enter().append("text")
+	         .attr("x", cx).attr("y", d => y(base(d) + d[key] / 2)).attr("text-anchor", "middle")
+	         .attr("dominant-baseline", "middle").style("fill", "#fff").style("font-size", "11px").style("font-weight", "600")
+	         .text(d => d[key].toFixed(1) + "%");
+	       seg("vol", () => 0);
+	       seg("pr", d => d.vol);
 
-        g.selectAll(".vol").data(rows).enter().append("rect")
-          .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
-          .attr("y", d => y(d.vol)).attr("height", d => h - y(d.vol)).attr("fill", "#4FAEEA");
-        g.selectAll(".pr").data(rows).enter().append("rect")
-          .attr("x", d => x(d.yr)).attr("width", x.bandwidth())
-          .attr("y", d => y(d.vol + d.pr)).attr("height", d => y(d.vol) - y(d.vol + d.pr)).attr("fill", "#3B7FC9");
+	       g.append("path").datum(rows).attr("class", "line-path").attr("stroke", "#E53935").attr("stroke-width", 3)
+	         .attr("d", d3.line().x(cx).y(d => y(d.tot)).curve(d3.curveMonotoneX));
+	       g.selectAll(".dot").data(rows).enter().append("circle")
+	         .attr("cx", cx).attr("cy", d => y(d.tot)).attr("r", 5).attr("fill", "#E53935").attr("stroke", "#fff").attr("stroke-width", 1.5);
+	       g.selectAll(".tot").data(rows).enter().append("text")
+	         .attr("x", cx).attr("y", d => y(d.tot) - 12).attr("text-anchor", "middle")
+	         .style("fill", "#E53935").style("font-size", "12px").style("font-weight", "700").text(d => d.tot.toFixed(1) + "%");
 
-        const seg = (key, base) => g.selectAll(".t-" + key).data(rows).enter().append("text")
-          .attr("x", cx).attr("y", d => y(base(d) + d[key] / 2)).attr("text-anchor", "middle")
-          .attr("dominant-baseline", "middle").style("fill", "#fff").style("font-size", "11px").style("font-weight", "600")
-          .text(d => d[key].toFixed(1) + "%");
-        seg("vol", () => 0);
-        seg("pr", d => d.vol);
+	       g.selectAll(".hit").data(rows).enter().append("rect")
+	         .attr("x", d => x(d.yr) - 8).attr("width", x.bandwidth() + 16).attr("y", 0).attr("height", h).attr("fill", "transparent")
+	         .on("mousemove", (event, d) => showTip(event, `<span class="tooltip-date">${d.yr}<\/span>
+	           <div class="tooltip-row"><span><span class="color-dot" style="background:#E53935"><\/span>${o.totalName}<\/span><b>${d.tot}%<\/b><\/div>
+	           <div class="tooltip-row"><span><span class="color-dot" style="background:#3B7FC9"><\/span>${o.priceName}<\/span><b>${d.pr}%<\/b><\/div>
+	           <div class="tooltip-row"><span><span class="color-dot" style="background:#4FAEEA"><\/span>Volume<\/span><b>${d.vol}%<\/b><\/div>`))
+	         .on("mouseleave", hideTip);
+	     }
 
-        g.append("path").datum(rows).attr("class", "line-path").attr("stroke", "#E53935").attr("stroke-width", 3)
-          .attr("d", d3.line().x(cx).y(d => y(d.tot)).curve(d3.curveMonotoneX));
-        g.selectAll(".dot").data(rows).enter().append("circle")
-          .attr("cx", cx).attr("cy", d => y(d.tot)).attr("r", 5).attr("fill", "#E53935").attr("stroke", "#fff").attr("stroke-width", 1.5);
-        g.selectAll(".tot").data(rows).enter().append("text")
-          .attr("x", cx).attr("y", d => y(d.tot) - 12).attr("text-anchor", "middle")
-          .style("fill", "#E53935").style("font-size", "12px").style("font-weight", "700").text(d => d.tot.toFixed(1) + "%");
+	     /* ---------- Simple bar chart (one series, categorical x) ---------- */
+	     function drawBars(sel, labels, values, o) {
+	       const box = d3.select(sel);
+	       if (box.empty()) return;
+	       box.html("");
 
-        g.selectAll(".hit").data(rows).enter().append("rect")
-          .attr("x", d => x(d.yr) - 8).attr("width", x.bandwidth() + 16).attr("y", 0).attr("height", h).attr("fill", "transparent")
-          .on("mousemove", (event, d) => showTip(event, `<span class="tooltip-date">${d.yr}</span>
-            <div class="tooltip-row"><span><span class="color-dot" style="background:#E53935"></span>${o.totalName}</span><b>${d.tot}%</b></div>
-            <div class="tooltip-row"><span><span class="color-dot" style="background:#3B7FC9"></span>${o.priceName}</span><b>${d.pr}%</b></div>
-            <div class="tooltip-row"><span><span class="color-dot" style="background:#4FAEEA"></span>Volume</span><b>${d.vol}%</b></div>`))
-          .on("mouseleave", hideTip);
-      }
+	       const W = 480, H = 340, m = { top: 28, right: 16, bottom: 36, left: 56 };
+	       const w = W - m.left - m.right, h = H - m.top - m.bottom;
+	       const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+	       const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
 
-      /* ---------- Simple bar chart (one series, categorical x) ---------- */
-      function drawBars(sel, labels, values, o) {
-        const box = d3.select(sel);
-        if (box.empty()) return;
-        box.html("");
+	       const rows = labels.map((l, i) => ({ l, v: values[i] }));
+	       const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.35);
+	       const y = d3.scaleLinear().domain([0, d3.max(values) * 1.15]).range([h, 0]).nice();
 
-        const W = 480, H = 340, m = { top: 28, right: 16, bottom: 36, left: 56 };
-        const w = W - m.left - m.right, h = H - m.top - m.bottom;
-        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
-        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+	       g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(",")));
+	       g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
 
-        const rows = labels.map((l, i) => ({ l, v: values[i] }));
-        const x = d3.scaleBand().domain(labels).range([0, w]).padding(0.35);
-        const y = d3.scaleLinear().domain([0, d3.max(values) * 1.15]).range([h, 0]).nice();
+	       g.selectAll(".bar").data(rows).enter().append("rect")
+	         .attr("x", d => x(d.l)).attr("width", x.bandwidth())
+	         .attr("y", d => y(d.v)).attr("height", d => h - y(d.v))
+	         .attr("rx", 3).attr("fill", o.color)
+	         .on("mousemove", (event, d) => showTip(event, `<span class="tooltip-date">${d.l}<\/span>
+	           <div class="tooltip-row"><span>${o.seriesName}<\/span><b>${d.v.toLocaleString()}<\/b><\/div>`))
+	         .on("mouseleave", hideTip);
 
-        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(",")));
-        g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
+	       g.selectAll(".val").data(rows).enter().append("text")
+	         .attr("x", d => x(d.l) + x.bandwidth() / 2).attr("y", d => y(d.v) - 8).attr("text-anchor", "middle")
+	         .style("font-size", "12px").style("font-weight", "600").style("fill", "#444")
+	         .text(d => d.v.toLocaleString());
+	     }
 
-        g.selectAll(".bar").data(rows).enter().append("rect")
-          .attr("x", d => x(d.l)).attr("width", x.bandwidth())
-          .attr("y", d => y(d.v)).attr("height", d => h - y(d.v))
-          .attr("rx", 3).attr("fill", o.color)
-          .on("mousemove", (event, d) => showTip(event, `<span class="tooltip-date">${d.l}</span>
-            <div class="tooltip-row"><span>${o.seriesName}</span><b>${d.v.toLocaleString()}</b></div>`))
-          .on("mouseleave", hideTip);
+	     /* ---------- Multi-series line chart on a categorical x axis ---------- */
+	     function drawCatLines(sel, labels, seriesObj, colors, o) {
+	       const box = d3.select(sel);
+	       if (box.empty()) return;
+	       box.html("");
 
-        g.selectAll(".val").data(rows).enter().append("text")
-          .attr("x", d => x(d.l) + x.bandwidth() / 2).attr("y", d => y(d.v) - 8).attr("text-anchor", "middle")
-          .style("font-size", "12px").style("font-weight", "600").style("fill", "#444")
-          .text(d => d.v.toLocaleString());
-      }
+	       const keys = Object.keys(seriesObj), suffix = o.suffix || "";
+	       const W = o.w || 480, H = o.h || 340, m = o.m || { top: 28, right: 44, bottom: 36, left: 42 };
+	       const w = W - m.left - m.right, h = H - m.top - m.bottom;
+	       const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
+	       const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
 
-      /* ---------- Multi-series line chart on a categorical x axis ---------- */
-      function drawCatLines(sel, labels, seriesObj, colors, o) {
-        const box = d3.select(sel);
-        if (box.empty()) return;
-        box.html("");
+	       const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.3);
+	       const y = d3.scaleLinear().domain([0, o.max]).range([h, 0]);
+	       const color = d3.scaleOrdinal().domain(keys).range(colors);
 
-        const keys = Object.keys(seriesObj), suffix = o.suffix || "";
-        const W = 480, H = 340, m = { top: 28, right: 44, bottom: 36, left: 42 };
-        const w = W - m.left - m.right, h = H - m.top - m.bottom;
-        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", o.label);
-        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+	       g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + suffix));
+	       g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
 
-        const x = d3.scalePoint().domain(labels).range([0, w]).padding(0.3);
-        const y = d3.scaleLinear().domain([0, o.max]).range([h, 0]);
-        const color = d3.scaleOrdinal().domain(keys).range(colors);
+	       const line = d3.line().x(d => x(d.l)).y(d => y(d.v)).curve(d3.curveMonotoneX);
+	       const series = keys.map(k => ({ name: k, values: labels.map((l, i) => ({ l, v: seriesObj[k][i] })) }));
 
-        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5).tickFormat(d => d + suffix));
-        g.append("g").attr("class", "axis").style("font-size", "12px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x));
+	       g.selectAll(".line-path").data(series).enter().append("path")
+	         .attr("class", "line-path").attr("stroke-width", o.sw || 3)
+	         .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
+	       series.forEach(s => g.append("g").selectAll("circle").data(s.values).enter().append("circle")
+	         .attr("cx", d => x(d.l)).attr("cy", d => y(d.v)).attr("r", o.r || 4.5)
+	         .attr("fill", color(s.name)).attr("stroke", "#fff").attr("stroke-width", 1.5));
 
-        const line = d3.line().x(d => x(d.l)).y(d => y(d.v)).curve(d3.curveMonotoneX);
-        const series = keys.map(k => ({ name: k, values: labels.map((l, i) => ({ l, v: seriesObj[k][i] })) }));
+	       // End labels: value at the last point, brand name beside it
+	       if (o.endLabels !== false) g.selectAll(".end-label").data(series).enter().append("text")
+	         .attr("x", w + 6).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
+	         .style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "11px")
+	         .text(d => d.name);
 
-        g.selectAll(".line-path").data(series).enter().append("path")
-          .attr("class", "line-path").attr("stroke-width", 3)
-          .attr("stroke", d => color(d.name)).attr("d", d => line(d.values));
-        series.forEach(s => g.selectAll(".dot-" + s.name).data(s.values).enter().append("circle")
-          .attr("cx", d => x(d.l)).attr("cy", d => y(d.v)).attr("r", 4.5)
-          .attr("fill", color(s.name)).attr("stroke", "#fff").attr("stroke-width", 1.5));
+	       // Hover guide per quarter
+	       const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
+	       const step = w / labels.length;
+	       g.selectAll(".hit").data(labels).enter().append("rect")
+	         .attr("x", d => x(d) - step / 2).attr("width", step).attr("y", 0).attr("height", h).attr("fill", "transparent")
+	         .on("mousemove", (event, l) => {
+	           const i = labels.indexOf(l);
+	           guide.style("opacity", 1).attr("x1", x(l)).attr("x2", x(l));
+	           let html = `<span class="tooltip-date">${l}<\/span>`;
+	           keys.slice().sort((a, b) => seriesObj[b][i] - seriesObj[a][i]).forEach(k => {
+	             html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"><\/span>${k}<\/span><b>${seriesObj[k][i]}${suffix}<\/b><\/div>`;
+	           });
+	           showTip(event, html);
+	         })
+	         .on("mouseleave", () => { guide.style("opacity", 0); hideTip(); });
+	     }
 
-        // End labels: value at the last point, brand name beside it
-        g.selectAll(".end-label").data(series).enter().append("text")
-          .attr("x", w + 6).attr("y", d => y(d.values[d.values.length - 1].v)).attr("dominant-baseline", "middle")
-          .style("fill", d => color(d.name)).style("font-weight", "bold").style("font-size", "11px")
-          .text(d => d.name);
+	     /* ---------- Chart configs ---------- */
+	     const brands = ["Lion", "Olio", "Festo"];
+	     const brandColors = ["#FF6B6B", "#4ECDC4", "#FFE66D"];
+	     const trend = { w: 800, h: 400, m: { top: 20, right: 70, bottom: 40, left: 60 }, fs: 12, xt: 6, sw: 3, zero: false, endLabels: true, label: "Value sales trend for Lion, Olio and Festo" };
+	     const share = { ...trend, zero: true, suffix: "%", label: "Value share trend for Lion, Olio and Festo" };
+	     const funnel = { w: 450, h: 300, m: { top: 16, right: 12, bottom: 36, left: 36 }, fs: 11, xt: 4, sw: 2, zero: true, endLabels: false };
+	     const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
+	     const mColors = ["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"];
 
-        // Hover guide per quarter
-        const guide = g.append("line").attr("y1", 0).attr("y2", h).attr("stroke", "#999").attr("stroke-dasharray", "4 4").style("opacity", 0);
-        const step = w / labels.length;
-        g.selectAll(".hit").data(labels).enter().append("rect")
-          .attr("x", d => x(d) - step / 2).attr("width", step).attr("y", 0).attr("height", h).attr("fill", "transparent")
-          .on("mousemove", (event, l) => {
-            const i = labels.indexOf(l);
-            guide.style("opacity", 1).attr("x1", x(l)).attr("x2", x(l));
-            let html = `<span class="tooltip-date">${l}</span>`;
-            keys.slice().sort((a, b) => seriesObj[b][i] - seriesObj[a][i]).forEach(k => {
-              html += `<div class="tooltip-row"><span><span class="color-dot" style="background:${color(k)}"></span>${k}</span><b>${seriesObj[k][i]}${suffix}</b></div>`;
-            });
-            showTip(event, html);
-          })
-          .on("mouseleave", () => { guide.style("opacity", 0); hideTip(); });
-      }
+	     const touch = { w: 450, h: 300, m: { top: 16, right: 12, bottom: 36, left: 36 }, max: 100, sw: 2.5, r: 3.5, endLabels: false };
+	     const touchColors = ["#4472C4", "#A6A6A6", "#44546A", "#ED7D31"]; // TV, Posters, Newspapers/Magazines, In the shops
 
-      /* ---------- Chart configs ---------- */
-      const brands = ["Lion", "Olio", "Festo"];
-      const brandColors = ["#FF6B6B", "#4ECDC4", "#FFE66D"];
-      const trend = { w: 800, h: 400, m: { top: 20, right: 70, bottom: 40, left: 60 }, fs: 12, xt: 6, sw: 3, zero: false, endLabels: true, label: "Value sales trend for Lion, Olio and Festo" };
-      const share = { ...trend, zero: true, suffix: "%", label: "Value share trend for Lion, Olio and Festo" };
-      const funnel = { w: 450, h: 300, m: { top: 16, right: 12, bottom: 36, left: 36 }, fs: 11, xt: 4, sw: 2, zero: true, endLabels: false };
-      const metrics = ["Top of Mind", "Spontaneous", "Regularly", "Most Often"];
-      const mColors = ["#A0C4FF", "#72EFDD", "#FFD166", "#EF476F"];
+	     /* ---------- Render ---------- */
+	     function render() {
+	       // Annual growth: stacked bars + overlay line
+	       const d = slide4MarketData, max = 15;
+	       drawCombo("#chart-apac", d.years, d.apac.volumeChange, d.apac.unitValueChange, d.apac.nominalGrowth,
+	         { max, label: "APAC FMCG growth split into volume and unit value", totalName: "Nominal growth", priceName: "Unit value change" });
+	       drawCombo("#chart-idn", d.years, d.indonesiaBiscuit.volumeSalesGrowth, d.indonesiaBiscuit.priceGrowth, d.indonesiaBiscuit.valueSalesGrowth,
+	         { max, label: "Indonesia biscuit growth split into volume and price", totalName: "Value sales growth", priceName: "Price growth" });
 
-      /* ---------- Render ---------- */
-      function render() {
-        // Annual growth: stacked bars + overlay line
-        const d = slide4MarketData, max = 15;
-        drawCombo("#chart-apac", d.years, d.apac.volumeChange, d.apac.unitValueChange, d.apac.nominalGrowth,
-          { max, label: "APAC FMCG growth split into volume and unit value", totalName: "Nominal growth", priceName: "Unit value change" });
-        drawCombo("#chart-idn", d.years, d.indonesiaBiscuit.volumeSalesGrowth, d.indonesiaBiscuit.priceGrowth, d.indonesiaBiscuit.valueSalesGrowth,
-          { max, label: "Indonesia biscuit growth split into volume and price", totalName: "Value sales growth", priceName: "Price growth" });
+	       // Media: category GRPs (bars) + share of voice (lines)
+	       const s = slide4SOV;
+	       drawBars("#chart-grps", s.years, s.GRPsCategory.GRPs,
+	         { color: "#8E9AAF", seriesName: "Category GRPs", label: "Quarterly category GRPs, 2016" });
+	       drawCatLines("#chart-sov", s.years, s.ShareofVoice, brandColors,
+	         { max: 50, suffix: "%", label: "Quarterly share of voice by brand, 2016" });
 
-        // Media: category GRPs (bars) + share of voice (lines)
-        const s = slide4SOV;
-        drawBars("#chart-grps", s.years, s.GRPsCategory.GRPs,
-          { color: "#8E9AAF", seriesName: "Category GRPs", label: "Quarterly category GRPs, 2016" });
-        drawCatLines("#chart-sov", s.years, s.ShareofVoice, brandColors,
-          { max: 50, suffix: "%", label: "Quarterly share of voice by brand, 2016" });
+	       // Media touchpoints by brand (same panel style as Brand Health)
+	       Object.keys(touchpoints).forEach(b =>
+	         drawCatLines("#chart-touch-" + b.toLowerCase(), touchQuarters, touchpoints[b], touchColors,
+	           { ...touch, label: `Media touchpoints for ${b}, 2016` }));
 
-        // Brand charts (CSV-driven)
-        drawLines("#wrapper-revenue", "data/data_revenue.csv", brands, brandColors, trend);
-        drawLines("#wrapper-share", "data/data_revenue_share.csv", brands, brandColors, share);
-        ["lion", "olio", "festo"].forEach(b =>
-          drawLines("#chart-" + b, `data/data_${b}.csv`, metrics, mColors, { ...funnel, label: `Brand funnel metrics for ${b}` }));
-      }
+	       // Brand charts (CSV-driven)
+	       drawLines("#wrapper-revenue", "data/data_revenue.csv", brands, brandColors, trend);
+	       drawLines("#wrapper-share", "data/data_revenue_share.csv", brands, brandColors, share);
+	       ["lion", "olio", "festo"].forEach(b =>
+	         drawLines("#chart-" + b, `data/data_${b}.csv`, metrics, mColors, { ...funnel, label: `Brand funnel metrics for ${b}` }));
+	     }
 
-      document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
-    })();
-  </script>
+	     document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
+	   })();
+	</script> 
+	<script>
+	 (function () {
+	   const groups = [
+	     { name: "High priorities", rows: [
+	       ["Favorite brand",                       [63,-3,""],  [59,1,""],   [33,2,""]],
+	       ["Is a trusted brand",                   [82,-2,""],  [66,-7,"r"], [49,9,"g"]],
+	       ["It has great taste",                   [66,3,"g"],  [52,-3,""],  [29,-1,""]],
+	       ["Can be eaten anytime, anywhere",       [76,7,"g"],  [60,-1,""],  [27,-6,"r"]],
+	       ["Modern",                               [73,4,"g"],  [59,-1,""],  [30,-3,""]],
+	       ["Gives my kids passion to do what they love", [71,8,"g"], [52,-3,""], [24,-6,"r"]]
+	     ]},
+	     { name: "Middle priorities", rows: [
+	       ["My kid’s favorite brand",              [71,7,"g"],  [62,6,"g"],  [17,-13,"r"]],
+	       ["A snack for a healthier life",         [74,-1,""],  [60,-6,"r"], [42,6,"g"]],
+	       ["Provides the benefit and goodness of milk", [91,3,"g"], [74,-3,""], [41,-1,""]],
+	       ["To enjoy alone while relaxing",        [60,2,""],   [50,-1,""],  [26,-1,""]],
+	       ["Makes kids creative",                  [74,7,"g"],  [62,3,"g"],  [22,-10,"r"]],
+	       ["Is good value for money",              [73,-2,""],  [68,2,""],   [35,-1,""]],
+	       ["Provides energy for my children",      [76,8,"g"],  [45,-14,"r"],[38,6,"g"]],
+	       ["Helps make kids strong",               [80,12,"g"], [52,-8,"r"], [29,-3,""]],
+	       ["Keep introducing new products",        [75,12,"g"], [60,4,"g"],  [14,-16,"r"]],
+	       ["Has ingredients of good quality",      [70,-9,"r"], [67,-2,""],  [48,11,"g"]],
+	       ["Makes me closer to my child",          [76,3,""],   [77,13,"g"], [19,-16,"r"]],
+	       ["Suitable to be consumed in sharing",   [52,-12,"r"],[61,5,""],   [38,8,"g"]]
+	     ]},
+	     { name: "Low priorities", rows: [
+	       ["Is suitable for children",             [78,-1,""],  [91,22,"g"], [17,-21,"r"]],
+	       ["Fortified with Vitamins and Minerals", [83,8,"g"],  [54,-12,"r"],[39,3,""]],
+	       ["Enlighten the family moment",          [53,-9,"r"], [41,-13,"r"],[52,23,"g"]],
+	       ["Goes well with milk",                  [63,-17,"r"],[79,9,"g"],  [46,8,"g"]],
+	       ["Fun way of eating",                    [52,-16,"r"],[80,21,"g"], [27,-5,""]],
+	       ["Is suitable for the whole family",     [47,-14,"r"],[42,-12,"r"],[55,26,"g"]]
+	     ]}
+	   ];
 
- <script>
-  (function () {
-    const groups = [
-      { name: "High priorities", rows: [
-        ["Favorite brand",                       [63,-3,""],  [59,1,""],   [33,2,""]],
-        ["Is a trusted brand",                   [82,-2,""],  [66,-7,"r"], [49,9,"g"]],
-        ["It has great taste",                   [66,3,"g"],  [52,-3,""],  [29,-1,""]],
-        ["Can be eaten anytime, anywhere",       [76,7,"g"],  [60,-1,""],  [27,-6,"r"]],
-        ["Modern",                               [73,4,"g"],  [59,-1,""],  [30,-3,""]],
-        ["Gives my kids passion to do what they love", [71,8,"g"], [52,-3,""], [24,-6,"r"]]
-      ]},
-      { name: "Middle priorities", rows: [
-        ["My kid’s favorite brand",              [71,7,"g"],  [62,6,"g"],  [17,-13,"r"]],
-        ["A snack for a healthier life",         [74,-1,""],  [60,-6,"r"], [42,6,"g"]],
-        ["Provides the benefit and goodness of milk", [91,3,"g"], [74,-3,""], [41,-1,""]],
-        ["To enjoy alone while relaxing",        [60,2,""],   [50,-1,""],  [26,-1,""]],
-        ["Makes kids creative",                  [74,7,"g"],  [62,3,"g"],  [22,-10,"r"]],
-        ["Is good value for money",              [73,-2,""],  [68,2,""],   [35,-1,""]],
-        ["Provides energy for my children",      [76,8,"g"],  [45,-14,"r"],[38,6,"g"]],
-        ["Helps make kids strong",               [80,12,"g"], [52,-8,"r"], [29,-3,""]],
-        ["Keep introducing new products",        [75,12,"g"], [60,4,"g"],  [14,-16,"r"]],
-        ["Has ingredients of good quality",      [70,-9,"r"], [67,-2,""],  [48,11,"g"]],
-        ["Makes me closer to my child",          [76,3,""],   [77,13,"g"], [19,-16,"r"]],
-        ["Suitable to be consumed in sharing",   [52,-12,"r"],[61,5,""],   [38,8,"g"]]
-      ]},
-      { name: "Low priorities", rows: [
-        ["Is suitable for children",             [78,-1,""],  [91,22,"g"], [17,-21,"r"]],
-        ["Fortified with Vitamins and Minerals", [83,8,"g"],  [54,-12,"r"],[39,3,""]],
-        ["Enlighten the family moment",          [53,-9,"r"], [41,-13,"r"],[52,23,"g"]],
-        ["Goes well with milk",                  [63,-17,"r"],[79,9,"g"],  [46,8,"g"]],
-        ["Fun way of eating",                    [52,-16,"r"],[80,21,"g"], [27,-5,""]],
-        ["Is suitable for the whole family",     [47,-14,"r"],[42,-12,"r"],[55,26,"g"]]
-      ]}
-    ];
- 
-    const sign = n => (n > 0 ? "+" : n < 0 ? "\u2212" : "") + Math.abs(n);
-    const band = idx => idx >= 3 ? "g" : idx <= -3 ? "r" : "";   // colour rule
-    const hint = f => f === "g" ? "Relatively strong" : f === "r" ? "Relatively weak" : "";
- 
-    function renderDrivers() {
-      const body = document.querySelector("#drivers-table tbody");
-      if (!body) return;
-      body.innerHTML = groups.map(g =>
-        `<tr class="grp"><th colspan="4" scope="colgroup">${g.name}</th></tr>` +
-        g.rows.map(r => `<tr><th scope="row">${r[0]}</th>` +
-          r.slice(1).map(([pct, idx]) => { const f = band(idx); return `<td class="${f}" ${hint(f) ? `title="${hint(f)}"` : ""}><b>${pct}%</b><small>${sign(idx)}</small></td>`; }
-          ).join("") + `</tr>`).join("")
-      ).join("");
-    }
- 
-    document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", renderDrivers) : renderDrivers();
-  })();
-</script>
- 
+	   const sign = n => (n > 0 ? "+" : n < 0 ? "\u2212" : "") + Math.abs(n);
+	   const band = idx => idx >= 3 ? "g" : idx <= -3 ? "r" : "";   // colour rule
+	   const hint = f => f === "g" ? "Relatively strong" : f === "r" ? "Relatively weak" : "";
+
+	   function renderDrivers() {
+	     const body = document.querySelector("#drivers-table tbody");
+	     if (!body) return;
+	     body.innerHTML = groups.map(g =>
+	       `<tr class="grp"><th colspan="4" scope="colgroup">${g.name}<\/th><\/tr>` +
+	       g.rows.map(r => `<tr><th scope="row">${r[0]}<\/th>` +
+	         r.slice(1).map(([pct, idx]) => { const f = band(idx); return `<td class="${f}" ${hint(f) ? `title="${hint(f)}"` : ""}><b>${pct}%<\/b><small>${sign(idx)}<\/small><\/td>`; }
+	         ).join("") + `<\/tr>`).join("")
+	     ).join("");
+	   }
+
+	   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", renderDrivers) : renderDrivers();
+	 })();
+	</script>
 </body>
 </html>
