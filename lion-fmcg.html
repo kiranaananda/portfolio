@@ -336,26 +336,25 @@
 
        <section class="block">
   <div class="block-head">
-    <h5>Category Drivers, 2016</h5>
-    <p class="prose">Perception of each brand on 24 category drivers, grouped by importance (most important first).</p>
+    <h5>Brand Image and Importance Analysis, 2016</h5>
   </div>
  
-  <div class="drivers-legend">
-    <span><i class="sw sw-g"></i>Relatively strong vs. the other two brands</span>
-    <span><i class="sw sw-r"></i>Relatively weak</span>
-    <span class="drivers-key"><b>63%</b> = actual perception &nbsp;·&nbsp; <small>+3</small> = normalized index (sums to ≈ 0)</span>
-  </div>
+<div class="drivers-legend">
+  <span><i class="sw sw-g"></i>Relative strength (index ≥ +3)</span>
+  <span><i class="sw sw-r"></i>Relative weakness (index ≤ −3)</span>
+  <span class="drivers-key"><b>63%</b> = actual perception &nbsp;·&nbsp; <small>+3</small> = normalized index (sums to ≈ 0)</span>
+</div>
  
   <div class="drivers-scroll" tabindex="0" role="region" aria-label="Category drivers table">
     <table class="drivers" id="drivers-table">
       <caption class="sr-only">Category drivers in 2016: perception % and normalized score for Lion, Olio and Festo</caption>
       <thead>
-        <tr><th scope="col">Driver</th><th scope="col" style="color:#FF6B6B">Lion</th><th scope="col" style="color:#4ECDC4">Olio</th><th scope="col" style="color:#d4b400">Festo</th></tr>
+        <tr><th scope="col">Brand Image</th><th scope="col" style="color:#FF6B6B">Lion</th><th scope="col" style="color:#4ECDC4">Olio</th><th scope="col" style="color:#d4b400">Festo</th></tr>
       </thead>
       <tbody></tbody>
     </table>
   </div>
-  <p class="glossary-note">The % is the actual perception. The small number is a separate normalized index centred on zero (it sums to about 0, rounding aside), not a change vs. last year and not an adjustment to the %. Positive means relative strength and negative means relative weakness across the three brands, and the colours mark the same thing. That is why Festo’s 52% on “Enlighten the family moment” reads as a strength (+23) while Lion’s 53% reads as a weakness (−9).</p>
+  <p class="glossary-note">The % is the actual perception. The small number is a separate normalized index centred on zero (it sums to about 0, rounding aside), not a change vs. last year and not an adjustment to the %. Positive means relative strength and negative means relative weakness across the three brands, and the colours apply a fixed rule: green when the index is +3 or higher, red when it is −3 or lower. That is why Festo’s 52% on “Enlighten the family moment” reads as a strength (+23) while Lion’s 53% reads as a weakness (−9).</p>
 </section>
  
         <!-- FINDINGS -->
@@ -793,7 +792,7 @@
     ];
  
     const sign = n => (n > 0 ? "+" : n < 0 ? "\u2212" : "") + Math.abs(n);
-    const arrow = () => "";   // no arrows: they would read as a trend; the +/- sign already carries direction
+    const band = idx => idx >= 3 ? "g" : idx <= -3 ? "r" : "";   // colour rule
     const hint = f => f === "g" ? "Relatively strong" : f === "r" ? "Relatively weak" : "";
  
     function renderDrivers() {
@@ -802,8 +801,7 @@
       body.innerHTML = groups.map(g =>
         `<tr class="grp"><th colspan="4" scope="colgroup">${g.name}</th></tr>` +
         g.rows.map(r => `<tr><th scope="row">${r[0]}</th>` +
-          r.slice(1).map(([pct, idx, f]) =>
-            `<td class="${f}" ${hint(f) ? `title="${hint(f)}"` : ""}><b>${pct}%</b><small>${arrow(f)}${sign(idx)}</small></td>`
+          r.slice(1).map(([pct, idx]) => { const f = band(idx); return `<td class="${f}" ${hint(f) ? `title="${hint(f)}"` : ""}><b>${pct}%</b><small>${sign(idx)}</small></td>`; }
           ).join("") + `</tr>`).join("")
       ).join("");
     }
