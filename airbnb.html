@@ -46,6 +46,7 @@
 
       /* Market map */
       .airbnb-case .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: .75rem 0 0; font-size: 12px; color: #555; }
+      .airbnb-case .color-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
       .airbnb-case .chart-box { width: 100%; position: relative; }
       .airbnb-case .chart-box svg { display: block; width: 100%; height: auto; overflow: visible; }
       .airbnb-case .map-qlabel { fill: #888; font-size: 12px; }
@@ -60,6 +61,12 @@
       .airbnb-case .persona-stats strong { display: block; font-size: 1.3rem; line-height: 1.1; }
       .airbnb-case .persona-stats span { font-size: .8rem; color: var(--muted); }
       .airbnb-case .persona-panel p { margin: 0; line-height: 1.6; }
+
+      /* City / persona side-by-side */
+      .airbnb-case .combo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+      .airbnb-case .combo-grid > div { min-width: 0; }
+      .airbnb-case .brand-header { text-align: center; font-weight: bold; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+      @media (max-width: 700px) { .airbnb-case .combo-grid { grid-template-columns: 1fr; } }
 
       /* Plan columns */
       .airbnb-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
@@ -186,9 +193,9 @@
             </div>
             <p class="glossary-note">Dashed lines mark the average across all listings in each view.</p>
           </section>
-          <p class="prose">At city level, Denver and Austin sit in the high-demand quadrant, Los Angeles is an emerging opportunity, NYC is low demand, and Chicago and Dallas are underperforming favourites. At persona level across all cities, Backyard bliss, BBQ escape and Family retreat are high demand, with Patio paradise just inside the line. Active leisure and Workspace serenity are underperforming favourites, and Pet haven is low demand.</p>
+          <p class="prose" style="margin-top:1.25rem">At city level, Denver and Austin sit in the high-demand quadrant, Los Angeles is an emerging opportunity, NYC is low demand, and Chicago and Dallas are underperforming favourites. At persona level across all cities, Backyard bliss, BBQ escape and Family retreat are high demand, with Patio paradise just inside the line. Active leisure and Workspace serenity are underperforming favourites, and Pet haven is low demand.</p>
         </section>
- 
+
         <!-- MARKET MAP: CHICAGO -->
         <section class="block">
           <div class="block-head"><h5>Chicago Market Map by Persona</h5></div>
@@ -217,7 +224,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
               </div>
               <h5>Chicago’s Demand Profile Is Split</h5>
-              <p>Chicago combines high review volume with above-average availability. Backyard bliss and Family retreat sit closest to the high-demand quadrant, while Active leisure sits furthest out on availability.</p>
+              <p>Chicago combines high review volume with above-average availability. Within it, Family retreat and Backyard bliss sit in the high-demand quadrant, while Active leisure sits furthest out on availability.</p>
               <p class="impact"><b>Impact</b>Backyard bliss and Family retreat are the natural first targets for lifting Chicago’s position.</p>
             </div>
 
@@ -287,9 +294,7 @@
         <section class="block">
           <aside class="note">
             <h5>A note on the data</h5>
-            <p style="margin:0">This project was completed as part of the <em>Data Driven Decision Making: Managerial</em> MBA elective course (MKTG-GB.2344) at <strong>NYU Stern School of Business</strong>. 
-    The analysis utilizes raw open-source short-term rental data sourced from <a href="https://insideairbnb.com/" target="_blank" style="color: #0284c7; font-weight: 600;">Inside Airbnb</a>, 
-    covering 153,833 listing records across six major US metropolitan markets.</p>
+            <p style="margin:0">This project was completed as part of the Data-Driven Decision Making (D3M): Managerial MBA elective course (MKTG-GB.2344) at NYU Stern School of Business. The analysis utilizes raw open-source short-term rental data sourced from <a href="https://insideairbnb.com/" target="_blank">Inside Airbnb</a>, covering 153,833 listing records across six major US metropolitan markets.</p>
           </aside>
         </section>
 
@@ -302,7 +307,7 @@
           <div class="pdf-window">
             <iframe src="assets/airbnb-segmentation.pdf" title="Airbnb segmentation deliverable (PDF)" loading="lazy"></iframe>
           </div>
-          <a class="pdf-link highlight-word" href="assets/airbnb-segmentation.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>
+          <a class="pdf-link highlight-word" href="assets/airbnb.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>
         </section>
 
         <!-- FOOTER -->
@@ -324,33 +329,33 @@
   const col = { "Backyard bliss": "#4ECDC4", "Family retreat": "#FFD166", "BBQ escape": "#FF6B6B", "Active leisure": "#EF476F", "Patio paradise": "#A0C4FF", "Workspace serenity": "#72EFDD", "Pet haven": "#8E9AAF" };
   const lab = (dx, dy, a) => ({ dx, dy, a });
   const S = lab(12, 4, "start"), E = lab(-12, 4, "end");
- 
+
   const cityCfg = { sel: "#chart-map-city", W: 480, H: 360, m: { top: 16, right: 16, bottom: 46, left: 40 }, fs: 11, xd: [188, 236], avg: [209.09, 11.74], pts: [
     { n: "Denver", x: 191.6, y: 15.6, c: "#A0C4FF", l: S }, { n: "Austin", x: 195.5, y: 13.5, c: "#A0C4FF", l: S },
     { n: "Los Angeles", x: 208.1, y: 11.4, c: "#A0C4FF", l: lab(-12, 16, "end") }, { n: "NYC", x: 213.8, y: 8.4, c: "#A0C4FF", l: S },
     { n: "Chicago", x: 215.6, y: 15.8, c: "#FF6B6B", l: lab(12, -8, "start") }, { n: "Dallas", x: 233, y: 13.9, c: "#A0C4FF", l: E } ] };
- 
+
   const personaCfg = { sel: "#chart-map-persona", W: 480, H: 360, m: { top: 16, right: 16, bottom: 46, left: 40 }, fs: 11, xd: [195, 235], avg: [209.1, 11.7], pts: [
     { n: "Backyard bliss", x: 199.1, y: 14.6, l: lab(-6, -14, "start") }, { n: "BBQ escape", x: 205.9, y: 14.3, l: lab(0, 22, "middle") },
     { n: "Family retreat", x: 207.9, y: 15.1, l: lab(0, -14, "middle") }, { n: "Patio paradise", x: 208.0, y: 11.8, l: E },
     { n: "Active leisure", x: 217.0, y: 12.5, l: lab(-4, 22, "end") }, { n: "Workspace serenity", x: 218.0, y: 12.5, l: lab(4, -14, "start") },
     { n: "Pet haven", x: 231.6, y: 8.9, l: E } ].map(d => ({ ...d, c: col[d.n] })) };
- 
+
   const info = {
     "Backyard bliss": { tag: "“Serenity”", med: "132 USD", under: "74%", home: "76%", acc: 4, peak: "Summer (150 USD)", loc: "47% in the West", am: "Backyard, outdoor activities, patio or balcony view" },
     "Family retreat": { tag: "“Great”", med: "165 USD", under: "60%", home: "82%", acc: 5, peak: "Summer (203 USD)", loc: "43% in the North", am: "Housekeeping, playground, direct access to a recreation spot" },
     "BBQ escape": { tag: "“Comfortable”", med: "181 USD", under: "56%", home: "81%", acc: 5, peak: "Summer and fall (198 / 191 USD)", loc: "49% in the West", am: "BBQ, lounge" },
     "Active leisure": { tag: "", med: "213.5 USD", under: "45%", home: "99%", acc: 5, peak: "Summer (305 USD)", loc: "49% in the Central Loop", am: "Sports, hot tub, pool, spa and wellness" }
   };
- 
+
   const chiCfg = { sel: "#chart-map", W: 760, H: 420, m: { top: 20, right: 24, bottom: 52, left: 56 }, fs: 12, xd: [198, 250], avg: [215.6, 15.8], select: true, pts: [
     { n: "Patio paradise", x: 202.7, y: 15.5, l: lab(12, 22, "start") }, { n: "Family retreat", x: 212.7, y: 16.5, l: lab(-12, -4, "end") },
     { n: "Backyard bliss", x: 213.8, y: 15.9, l: lab(-12, 14, "end") }, { n: "Pet haven", x: 215.9, y: 12.2, l: S },
     { n: "Workspace serenity", x: 217.1, y: 16.6, l: lab(12, -6, "start") }, { n: "BBQ escape", x: 218.7, y: 14.6, l: S },
     { n: "Active leisure", x: 246.1, y: 13.4, l: E } ].map(d => ({ ...d, c: col[d.n] })) };
- 
+
   function tip() { let t = d3.select("#global-tooltip"); if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip"); return t; }
- 
+
   function panel(d) {
     const el = document.getElementById("persona-panel"), p = info[d.n];
     if (!el) return;
@@ -364,7 +369,7 @@
       </div>
       <p><strong>Price peak:</strong> ${p.peak}<br><strong>Where:</strong> ${p.loc}<br><strong>Key amenities:</strong> ${p.am}</p>`;
   }
- 
+
   function drawMap(o) {
     const box = d3.select(o.sel);
     if (box.empty()) return;
@@ -373,35 +378,35 @@
     const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", "Market map of average availability against reviews in the last 12 months");
     const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
     const x = d3.scaleLinear().domain(o.xd).range([0, w]), y = d3.scaleLinear().domain([0, 20]).range([h, 0]);
- 
+
     g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5));
     g.append("g").attr("class", "axis").style("font-size", "11px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x).ticks(5));
     g.append("line").attr("x1", x(o.avg[0])).attr("x2", x(o.avg[0])).attr("y1", 0).attr("y2", h).attr("stroke", "#FF6B6B").attr("stroke-dasharray", "6 5");
     g.append("line").attr("x1", 0).attr("x2", w).attr("y1", y(o.avg[1])).attr("y2", y(o.avg[1])).attr("stroke", "#FF6B6B").attr("stroke-dasharray", "6 5");
- 
+
     [["High demand", 6, 14, "start"], ["Underperforming favourite", w - 6, 14, "end"], ["Emerging opportunity", 6, h - 6, "start"], ["Low demand", w - 6, h - 6, "end"]]
       .forEach(q => g.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("x", q[1]).attr("y", q[2]).attr("text-anchor", q[3]).text(q[0]));
     svg.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("x", m.left + w / 2).attr("y", H - 8).attr("text-anchor", "middle").text("Availability 365");
     svg.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("transform", `translate(12,${m.top + h / 2}) rotate(-90)`).attr("text-anchor", "middle").text("Reviews, last 12 months");
- 
+
     const pts = g.selectAll(".map-point").data(o.pts).enter().append("circle")
       .attr("class", "map-point").attr("cx", d => x(d.x)).attr("cy", d => y(d.y)).attr("r", o.select ? 9 : 8).attr("fill", d => d.c)
       .attr("role", o.select ? "button" : "img").attr("aria-label", d => d.n);
     if (o.select) pts.attr("tabindex", 0);
     g.selectAll(".map-name").data(o.pts).enter().append("text").attr("class", "map-name").style("font-size", o.fs + "px")
       .attr("x", d => x(d.x) + d.l.dx).attr("y", d => y(d.y) + d.l.dy).attr("text-anchor", d => d.l.a).text(d => d.n);
- 
+
     pts.on("mousemove", (e, d) => tip().style("opacity", 1).html(`<span class="tooltip-date">${d.n}</span><div class="tooltip-row"><span>Availability 365</span><b>${d.x}</b></div><div class="tooltip-row"><span>Reviews LTM</span><b>${d.y}</b></div>`)
         .style("left", (e.pageX + 15) + "px").style("top", (e.pageY - 15) + "px"))
       .on("mouseleave", () => tip().style("opacity", 0));
- 
+
     if (o.select) {
       const pick = d => { pts.attr("stroke", p => p === d ? "#333" : "#fff"); panel(d); };
       pts.on("click", (e, d) => pick(d)).on("keydown", (e, d) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(d); } });
       pick(o.pts.find(d => d.n === "Family retreat"));
     }
   }
- 
+
   function render() { [cityCfg, personaCfg, chiCfg].forEach(drawMap); }
   document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
 })();
