@@ -132,7 +132,7 @@
 
         <!-- Q1 RECAP -->
         <section class="block">
-          <div class="block-head"><h5>Q1 Recap: What Drives Price</h5></div>
+          <div class="block-head"><h5>Q1 2025 Recap: What Drives Price</h5></div>
           <p class="prose">Seasonality shifts prices unevenly across cities. Chicago varies the most, while Austin is the only city to peak in spring, likely because of events like SXSW. An ANOVA showed room type and “accommodates” had the strongest influence on price, and adding “accommodates” improved prediction accuracy by 22%.</p><!-- TODO: state the metric behind the 22% -->
           <p class="prose">That pointed to two strategies: a location-based one with Chicago as the proof of concept, and a persona-based one built on variables that describe the stay itself.</p>
         </section>
@@ -166,10 +166,26 @@
         <section class="block">
           <div class="block-head"><h5>Market Map: City and Persona Baselines</h5></div>
           <p class="prose">Each point plots a group’s average availability against its average reviews in the last 12 months. The dashed lines mark the average across all listings, which splits each map into four quadrants.</p>
-          <div class="combo-grid">
-            <div><div class="brand-header">By City</div><div id="chart-map-city" class="chart-box"></div></div>
-            <div><div class="brand-header">By Persona</div><div id="chart-map-persona" class="chart-box"></div></div>
-          </div>
+          <section>
+            <div class="combo-grid">
+              <div>
+                <div class="brand-header">By City</div>
+                <div class="chart-legend">
+                  <span><span class="color-dot" style="background:#FF6B6B"></span>Chicago</span>
+                  <span><span class="color-dot" style="background:#A0C4FF"></span>Other cities</span>
+                </div>
+                <div id="chart-map-city" class="chart-box"></div>
+              </div>
+              <div>
+                <div class="brand-header">By Persona</div>
+                <div class="chart-legend">
+                  <span><span class="color-dot" style="background:#4ECDC4"></span>Backyard bliss</span><span><span class="color-dot" style="background:#FFD166"></span>Family retreat</span><span><span class="color-dot" style="background:#FF6B6B"></span>BBQ escape</span><span><span class="color-dot" style="background:#EF476F"></span>Active leisure</span><span><span class="color-dot" style="background:#A0C4FF"></span>Patio paradise</span><span><span class="color-dot" style="background:#72EFDD"></span>Workspace serenity</span><span><span class="color-dot" style="background:#8E9AAF"></span>Pet haven</span>
+                </div>
+                <div id="chart-map-persona" class="chart-box"></div>
+              </div>
+            </div>
+            <p class="glossary-note">Dashed lines mark the average across all listings in each view.</p>
+          </section>
           <p class="prose">At city level, Denver and Austin sit in the high-demand quadrant, Los Angeles is an emerging opportunity, NYC is low demand, and Chicago and Dallas are underperforming favourites. At persona level across all cities, Backyard bliss, BBQ escape and Family retreat are high demand, with Patio paradise just inside the line. Active leisure and Workspace serenity are underperforming favourites, and Pet haven is low demand.</p>
         </section>
  
@@ -271,7 +287,9 @@
         <section class="block">
           <aside class="note">
             <h5>A note on the data</h5>
-            <p style="margin:0">Demand here is a proxy. High availability can mean a blocked calendar, and review counts depend on how long a listing has existed. Equal samples per city make cities comparable but may distort each city’s real amenity mix. Next steps are adding listing age and calendar occupancy, testing persona stability across resamples, and using review text to check the persona names against what guests write.</p>
+            <p style="margin:0">This project was completed as part of the <em>Data Driven Decision Making: Managerial</em> MBA elective course (MKTG-GB.2344) at <strong>NYU Stern School of Business</strong>. 
+    The analysis utilizes raw open-source short-term rental data sourced from <a href="https://insideairbnb.com/" target="_blank" style="color: #0284c7; font-weight: 600;">Inside Airbnb</a>, 
+    covering 153,833 listing records across six major US metropolitan markets.</p>
           </aside>
         </section>
 
