@@ -22,96 +22,436 @@
   <main>
     <style>
       /* ---------- Scoped layout (everything lives under .airbnb-case) ---------- */
-      .airbnb-case { --gap: clamp(16px, 2.5vw, 28px); --block: clamp(2.5rem, 6vw, 4.5rem); --muted: #5f6368; --line: #e3e3e3; }
-      .airbnb-case .block { margin-top: var(--block); }
-      .airbnb-case .block > h5, .airbnb-case .block-head h5 { margin-bottom: .5rem; }
-      .airbnb-case .block-head { text-align: center; max-width: 60ch; margin: 0 auto 1.5rem; }
-      .airbnb-case .lede, .airbnb-case .prose { line-height: 1.65; }
-      .airbnb-case .prose { margin-left: auto; margin-right: auto; }
-      .airbnb-case .project-header { text-align: center; }
-      .airbnb-case .project-header .lede { margin: 1rem auto 0; }
-      .airbnb-case .tags-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 1rem; }
+      .airbnb-case {
+        --gap: clamp(16px, 2.5vw, 28px);
+        --block: clamp(2.5rem, 6vw, 4.5rem);
+        --muted: #5f6368;
+        --line: #e3e3e3;
+      }
+
+      .airbnb-case .block {
+        margin-top: var(--block);
+      }
+
+      .airbnb-case .block>h5,
+      .airbnb-case .block-head h5 {
+        margin-bottom: .5rem;
+      }
+
+      .airbnb-case .block-head {
+        text-align: center;
+        max-width: 60ch;
+        margin: 0 auto 1.5rem;
+      }
+
+      .airbnb-case .lede,
+      .airbnb-case .prose {
+        line-height: 1.65;
+      }
+
+      .airbnb-case .prose {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .airbnb-case .project-header {
+        text-align: center;
+      }
+
+      .airbnb-case .project-header .lede {
+        margin: 1rem auto 0;
+      }
+
+      .airbnb-case .tags-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 1rem;
+      }
 
       /* Key figures */
-      .airbnb-case .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-top: 2rem; padding: 1.25rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-      .airbnb-case .stat strong { display: block; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
-      .airbnb-case .stat span { display: block; margin-top: .35rem; font-size: .85rem; color: var(--muted); line-height: 1.4; }
+      .airbnb-case .stat-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap);
+        margin-top: 2rem;
+        padding: 1.25rem 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .airbnb-case .stat strong {
+        display: block;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        line-height: 1.1;
+      }
+
+      .airbnb-case .stat span {
+        display: block;
+        margin-top: .35rem;
+        font-size: .85rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
 
       /* Findings: 2 x 2 */
-      .airbnb-case .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); align-items: stretch; }
-      .airbnb-case .card-grid .stitch-card { margin: 0; height: 100%; display: flex; flex-direction: column; }
-      .airbnb-case .card-grid .stitch-card p { line-height: 1.6; }
-      .airbnb-case .impact { display: block; margin-top: auto; padding-top: .9rem; font-size: .92rem; }
-      .airbnb-case .impact b { display: block; margin-bottom: .2rem; }
+      .airbnb-case .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--gap);
+        align-items: stretch;
+      }
+
+      .airbnb-case .card-grid .stitch-card {
+        margin: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .airbnb-case .card-grid .stitch-card p {
+        line-height: 1.6;
+      }
+
+      .airbnb-case .impact {
+        display: block;
+        margin-top: auto;
+        padding-top: .9rem;
+        font-size: .92rem;
+      }
+
+      .airbnb-case .impact b {
+        display: block;
+        margin-bottom: .2rem;
+      }
 
       /* Market map */
-      .airbnb-case .chart-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: .75rem 0 0; font-size: 12px; color: #555; }
-      .airbnb-case .color-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
-      .airbnb-case .chart-box { width: 100%; position: relative; }
-      .airbnb-case .chart-box svg { display: block; width: 100%; height: auto; overflow: visible; }
-      .airbnb-case .map-qlabel { fill: #888; font-size: 12px; }
-      .airbnb-case .map-point { cursor: pointer; stroke: #fff; stroke-width: 2; }
-      .airbnb-case .map-point:focus { outline: none; stroke: #333; stroke-width: 3; }
-      .airbnb-case .map-name { font-size: 12px; fill: #333; pointer-events: none; }
-      .airbnb-case .axis text { fill: #666; }
-      .airbnb-case .axis .domain, .airbnb-case .axis .tick line { stroke: #ddd; }
-      .airbnb-case .persona-panel { margin-top: 1rem; padding: 1.1rem 1.4rem; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.6); min-height: 140px; }
-      .airbnb-case .persona-panel h6 { margin: 0 0 .25rem; font-size: 1.2rem; }
-      .airbnb-case .persona-stats { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: .7rem 0; }
-      .airbnb-case .persona-stats strong { display: block; font-size: 1.3rem; line-height: 1.1; }
-      .airbnb-case .persona-stats span { font-size: .8rem; color: var(--muted); }
-      .airbnb-case .persona-panel p { margin: 0; line-height: 1.6; }
+      .airbnb-case .chart-legend {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px 18px;
+        margin: .75rem 0 0;
+        font-size: 12px;
+        color: #555;
+      }
+
+      .airbnb-case .color-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+
+      .airbnb-case .chart-box {
+        width: 100%;
+        position: relative;
+      }
+
+      .airbnb-case .chart-box svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .airbnb-case .map-qlabel {
+        fill: #888;
+        font-size: 12px;
+      }
+
+      .airbnb-case .map-point {
+        cursor: pointer;
+        stroke: #fff;
+        stroke-width: 2;
+      }
+
+      .airbnb-case .map-point:focus {
+        outline: none;
+        stroke: #333;
+        stroke-width: 3;
+      }
+
+      .airbnb-case .map-name {
+        font-size: 12px;
+        fill: #333;
+        pointer-events: none;
+      }
+
+      .airbnb-case .axis text {
+        fill: #666;
+      }
+
+      .airbnb-case .axis .domain,
+      .airbnb-case .axis .tick line {
+        stroke: #ddd;
+      }
+
+      .airbnb-case .persona-panel {
+        margin-top: 1rem;
+        padding: 1.1rem 1.4rem;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, .6);
+        min-height: 140px;
+      }
+
+      .airbnb-case .persona-panel h6 {
+        margin: 0 0 .25rem;
+        font-size: 1.2rem;
+      }
+
+      .airbnb-case .persona-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 26px;
+        margin: .7rem 0;
+      }
+
+      .airbnb-case .persona-stats strong {
+        display: block;
+        font-size: 1.3rem;
+        line-height: 1.1;
+      }
+
+      .airbnb-case .persona-stats span {
+        font-size: .8rem;
+        color: var(--muted);
+      }
+
+      .airbnb-case .persona-panel p {
+        margin: 0;
+        line-height: 1.6;
+      }
 
       /* City / persona side-by-side */
-      .airbnb-case .combo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
-      .airbnb-case .combo-grid > div { min-width: 0; }
-      .airbnb-case .brand-header { text-align: center; font-weight: bold; margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
-      @media (max-width: 700px) { .airbnb-case .combo-grid { grid-template-columns: 1fr; } }
+      .airbnb-case .combo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--gap);
+      }
+
+      .airbnb-case .combo-grid>div {
+        min-width: 0;
+      }
+
+      .airbnb-case .brand-header {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 6px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 700px) {
+        .airbnb-case .combo-grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
       /* Plan columns */
-      .airbnb-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
-      .airbnb-case .season-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
-      .airbnb-case .plan-col { padding-top: 1rem; border-top: 3px solid var(--accent, #999); }
-      .airbnb-case .plan-col h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
-      .airbnb-case .plan-col ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .8rem; line-height: 1.55; }
-      .airbnb-case .plan-col p { margin: 0 0 .6rem; line-height: 1.55; }
-      .airbnb-case .plan-grid .plan-col:nth-child(1) { --accent: #4ECDC4; }
-      .airbnb-case .plan-grid .plan-col:nth-child(2) { --accent: #FF6B6B; }
-      .airbnb-case .plan-grid .plan-col:nth-child(3) { --accent: #FFE66D; }
-      .airbnb-case .season-grid .plan-col:nth-child(1) { --accent: #72EFDD; }
-      .airbnb-case .season-grid .plan-col:nth-child(2) { --accent: #FF6B6B; }
-      .airbnb-case .season-grid .plan-col:nth-child(3) { --accent: #FFD166; }
-      .airbnb-case .season-grid .plan-col:nth-child(4) { --accent: #A0C4FF; }
+      .airbnb-case .plan-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--gap);
+      }
+
+      .airbnb-case .season-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--gap);
+      }
+
+      .airbnb-case .plan-col {
+        padding-top: 1rem;
+        border-top: 3px solid var(--accent, #999);
+      }
+
+      .airbnb-case .plan-col h2 {
+        font-size: 1.15rem;
+        margin: 0 0 .75rem;
+      }
+
+      .airbnb-case .plan-col ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        display: grid;
+        gap: .8rem;
+        line-height: 1.55;
+      }
+
+      .airbnb-case .plan-col p {
+        margin: 0 0 .6rem;
+        line-height: 1.55;
+      }
+
+      .airbnb-case .plan-grid .plan-col:nth-child(1) {
+        --accent: #4ECDC4;
+      }
+
+      .airbnb-case .plan-grid .plan-col:nth-child(2) {
+        --accent: #FF6B6B;
+      }
+
+      .airbnb-case .plan-grid .plan-col:nth-child(3) {
+        --accent: #FFE66D;
+      }
+
+      .airbnb-case .season-grid .plan-col:nth-child(1) {
+        --accent: #72EFDD;
+      }
+
+      .airbnb-case .season-grid .plan-col:nth-child(2) {
+        --accent: #FF6B6B;
+      }
+
+      .airbnb-case .season-grid .plan-col:nth-child(3) {
+        --accent: #FFD166;
+      }
+
+      .airbnb-case .season-grid .plan-col:nth-child(4) {
+        --accent: #A0C4FF;
+      }
 
       /* Analyst note + details */
-      .airbnb-case .note { margin: 0 auto; padding: 1.1rem 1.4rem; border-left: 3px solid #bbb; background: rgba(255,255,255,.55); line-height: 1.65; }
-      .airbnb-case .note h5 { margin: 0 0 .4rem; }
-      .airbnb-case .glossary { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.4rem; background: rgba(255,255,255,.55); }
-      .airbnb-case .glossary summary { cursor: pointer; font-weight: 600; }
-      .airbnb-case .glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); margin-top: 1rem; }
-      .airbnb-case .glossary dt { font-weight: 600; margin-top: .8rem; }
-      .airbnb-case .glossary dd { margin: .15rem 0 0; line-height: 1.55; color: var(--muted); }
-      .airbnb-case .glossary-note { margin: 1rem 0 0; font-size: .85rem; color: var(--muted); }
+      .airbnb-case .note {
+        margin: 0 auto;
+        padding: 1.1rem 1.4rem;
+        border-left: 3px solid #bbb;
+        background: rgba(255, 255, 255, .55);
+        line-height: 1.65;
+      }
+
+      .airbnb-case .note h5 {
+        margin: 0 0 .4rem;
+      }
+
+      .airbnb-case .glossary {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 1rem 1.4rem;
+        background: rgba(255, 255, 255, .55);
+      }
+
+      .airbnb-case .glossary summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .airbnb-case .glossary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--gap);
+        margin-top: 1rem;
+      }
+
+      .airbnb-case .glossary dt {
+        font-weight: 600;
+        margin-top: .8rem;
+      }
+
+      .airbnb-case .glossary dd {
+        margin: .15rem 0 0;
+        line-height: 1.55;
+        color: var(--muted);
+      }
+
+      .airbnb-case .glossary-note {
+        margin: 1rem 0 0;
+        font-size: .85rem;
+        color: var(--muted);
+      }
 
       /* PDF */
-      .airbnb-case .pdf-window { margin-top: 1rem; border: 1px solid #ccc; border-radius: 12px; overflow: hidden; }
-      .airbnb-case .pdf-window iframe { display: block; width: 100%; height: clamp(420px, 75vh, 800px); border: 0; }
-      .airbnb-case .pdf-link { display: inline-block; margin-top: .75rem; font-size: .9rem; }
-      .airbnb-case .project-footer { text-align: center; }
-      .airbnb-case .project-footer p { max-width: 60ch; margin-left: auto; margin-right: auto; line-height: 1.65; }
+      .airbnb-case .pdf-window {
+        margin-top: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .airbnb-case .pdf-window iframe {
+        display: block;
+        width: 100%;
+        height: clamp(420px, 75vh, 800px);
+        border: 0;
+      }
+
+      .airbnb-case .pdf-link {
+        display: inline-block;
+        margin-top: .75rem;
+        font-size: .9rem;
+      }
+
+      .airbnb-case .project-footer {
+        text-align: center;
+      }
+
+      .airbnb-case .project-footer p {
+        max-width: 60ch;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.65;
+      }
 
       /* Tooltip */
-      #global-tooltip { position: absolute; opacity: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(6px); padding: 12px 16px; border: 1px solid #e0e0e0; box-shadow: 0 8px 20px rgba(0,0,0,.12); pointer-events: none; font-size: 12px; border-radius: 8px; z-index: 1000; font-family: var(--font-sans, sans-serif); transition: opacity .15s ease; }
-      .tooltip-date { display: block; font-weight: bold; margin-bottom: 6px; border-bottom: 1px solid #eee; padding-bottom: 4px; color: #333; }
-      .tooltip-row { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 4px; }
+      #global-tooltip {
+        position: absolute;
+        opacity: 0;
+        background: rgba(255, 255, 255, .98);
+        backdrop-filter: blur(6px);
+        padding: 12px 16px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+        pointer-events: none;
+        font-size: 12px;
+        border-radius: 8px;
+        z-index: 1000;
+        font-family: var(--font-sans, sans-serif);
+        transition: opacity .15s ease;
+      }
+
+      .tooltip-date {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 4px;
+        color: #333;
+      }
+
+      .tooltip-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 4px;
+      }
 
       @media (max-width: 1000px) {
-        .airbnb-case .plan-grid { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
-        .airbnb-case .season-grid { grid-template-columns: repeat(2, 1fr); }
-        .airbnb-case .stat-strip { grid-template-columns: repeat(2, 1fr); }
+        .airbnb-case .plan-grid {
+          grid-template-columns: 1fr;
+          max-width: 560px;
+          margin-inline: auto;
+        }
+
+        .airbnb-case .season-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .airbnb-case .stat-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
+
       @media (max-width: 700px) {
-        .airbnb-case .card-grid, .airbnb-case .glossary-grid, .airbnb-case .season-grid { grid-template-columns: 1fr; }
+
+        .airbnb-case .card-grid,
+        .airbnb-case .glossary-grid,
+        .airbnb-case .season-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
 
@@ -127,21 +467,33 @@
             <span class="tag">Seasonal Demand</span>
           </div>
           <h4 class="font-hand">Airbnb Persona Segmentation &amp; Seasonal Content Strategy: Chicago</h4>
-          <p class="subtitle lede">Chicago is an “underperforming favourite” on Airbnb: plenty of reviews, but listings sit open more often than average. This project clusters listings by amenities into seven guest personas and matches each one to a season, building a content plan to lift Chicago into the “high demand” quadrant.</p>
+          <p class="subtitle lede">Chicago is an “underperforming favourite” on Airbnb: plenty of reviews, but listings
+            sit open more often than average. This project clusters listings by amenities into seven guest personas and
+            matches each one to a season, building a content plan to lift Chicago into the “high demand” quadrant.</p>
 
           <div class="stat-strip" role="list">
-            <div class="stat" role="listitem"><strong>514 → 27</strong><span>amenities regrouped <br>for clustering</span></div>
-            <div class="stat" role="listitem"><strong>6 × 5,000</strong><span>listings sampled <br>across six US cities</span></div>
-            <div class="stat" role="listitem"><strong>8 → 7</strong><span>clusters tested, personas kept <br>after dropping an outlier</span></div>
-            <div class="stat" role="listitem"><strong>159 → 119</strong><span>Chicago median price (USD), <br>summer to winter</span></div>
+            <div class="stat" role="listitem"><strong>514 → 27</strong><span>amenities regrouped <br>for
+                clustering</span></div>
+            <div class="stat" role="listitem"><strong>6 × 5,000</strong><span>listings sampled <br>across six US
+                cities</span></div>
+            <div class="stat" role="listitem"><strong>8 → 7</strong><span>clusters tested, personas kept <br>after
+                dropping an outlier</span></div>
+            <div class="stat" role="listitem"><strong>159 → 119</strong><span>Chicago median price (USD), <br>summer to
+                winter</span></div>
           </div>
         </header>
 
         <!-- Q1 RECAP -->
         <section class="block">
-          <div class="block-head"><h5>Q1 2025 Recap: What Drives Price</h5></div>
-          <p class="prose">Seasonality shifts prices unevenly across cities. Chicago varies the most, while Austin is the only city to peak in spring, likely because of events like SXSW. An ANOVA showed room type and “accommodates” had the strongest influence on price, and adding “accommodates” improved prediction accuracy by 22%.</p><!-- TODO: state the metric behind the 22% -->
-          <p class="prose">That pointed to two strategies: a location-based one with Chicago as the proof of concept, and a persona-based one built on variables that describe the stay itself.</p>
+          <div class="block-head">
+            <h5>Q1 2025 Recap: What Drives Price</h5>
+          </div>
+          <p class="prose">Seasonality shifts prices unevenly across cities. Chicago varies the most, while Austin is
+            the only city to peak in spring, likely because of events like SXSW. An ANOVA showed room type and
+            “accommodates” had the strongest influence on price, and adding “accommodates” improved prediction accuracy
+            by 22%.</p><!-- TODO: state the metric behind the 22% -->
+          <p class="prose">That pointed to two strategies: a location-based one with Chicago as the proof of concept,
+            and a persona-based one built on variables that describe the stay itself.</p>
         </section>
 
         <!-- APPROACH -->
@@ -152,17 +504,22 @@
               <div>
                 <dl>
                   <dt>Data preparation</dt>
-                  <dd>Amenities with fewer than 100 occurrences were removed, the rest were grouped by hand from 514 to 40 categories, then merged to 27 where a category exceeded 100k occurrences. I resampled 5,000 listings per city (LA, NYC, Austin, Chicago, Denver, Dallas).</dd>
+                  <dd>Amenities with fewer than 100 occurrences were removed, the rest were grouped by hand from 514 to
+                    40 categories, then merged to 27 where a category exceeded 100k occurrences. I resampled 5,000
+                    listings per city (LA, NYC, Austin, Chicago, Denver, Dallas).</dd>
                   <dt>Demand proxy</dt>
-                  <dd>Reviews in the last 12 months against availability over 365 days, split into four quadrants: high demand, underperforming favourite, emerging opportunity and low demand.</dd>
+                  <dd>Reviews in the last 12 months against availability over 365 days, split into four quadrants: high
+                    demand, underperforming favourite, emerging opportunity and low demand.</dd>
                 </dl>
               </div>
               <div>
                 <dl>
                   <dt>Why complete linkage on Jaccard distance</dt>
-                  <dd>Amenity flags are binary, so Jaccard fits. Ward isn’t suited to dummy variables, and average linkage produced one dominant cluster. Complete linkage kept distant outliers from merging in.</dd>
+                  <dd>Amenity flags are binary, so Jaccard fits. Ward isn’t suited to dummy variables, and average
+                    linkage produced one dominant cluster. Complete linkage kept distant outliers from merging in.</dd>
                   <dt>Why eight clusters</dt>
-                  <dd>I compared 8, 9 and 10. At eight, each cluster had a clearer z-score signature. One cluster (n=32) had no meaningful amenities, so I treated it as an outlier, leaving seven personas.</dd>
+                  <dd>I compared 8, 9 and 10. At eight, each cluster had a clearer z-score signature. One cluster (n=32)
+                    had no meaningful amenities, so I treated it as an outlier, leaving seven personas.</dd>
                 </dl>
               </div>
             </div>
@@ -171,8 +528,12 @@
 
         <!-- MARKET MAP: CITY + PERSONA -->
         <section class="block">
-          <div class="block-head"><h5>Market Map: City and Persona Baselines</h5></div>
-          <p class="prose">Each point plots a group’s average availability against its average reviews in the last 12 months. The dashed lines mark the average across all listings, which splits each map into four quadrants.</p>
+          <div class="block-head">
+            <h5>Market Map: City and Persona Baselines</h5>
+          </div>
+          <p class="prose">Each point plots a group’s average availability against its average reviews in the last 12
+            months. The dashed lines mark the average across all listings, which splits each map into four quadrants.
+          </p>
           <section>
             <div class="combo-grid">
               <div>
@@ -186,20 +547,35 @@
               <div>
                 <div class="brand-header">By Persona</div>
                 <div class="chart-legend">
-                  <span><span class="color-dot" style="background:#4ECDC4"></span>Backyard bliss</span><span><span class="color-dot" style="background:#FFD166"></span>Family retreat</span><span><span class="color-dot" style="background:#FF6B6B"></span>BBQ escape</span><span><span class="color-dot" style="background:#EF476F"></span>Active leisure</span><span><span class="color-dot" style="background:#A0C4FF"></span>Patio paradise</span><span><span class="color-dot" style="background:#72EFDD"></span>Workspace serenity</span><span><span class="color-dot" style="background:#8E9AAF"></span>Pet haven</span>
+                  <span><span class="color-dot" style="background:#4ECDC4"></span>Backyard bliss</span><span><span
+                      class="color-dot" style="background:#FFD166"></span>Family retreat</span><span><span
+                      class="color-dot" style="background:#FF6B6B"></span>BBQ escape</span><span><span class="color-dot"
+                      style="background:#EF476F"></span>Active leisure</span><span><span class="color-dot"
+                      style="background:#A0C4FF"></span>Patio paradise</span><span><span class="color-dot"
+                      style="background:#72EFDD"></span>Workspace serenity</span><span><span class="color-dot"
+                      style="background:#8E9AAF"></span>Pet haven</span>
                 </div>
                 <div id="chart-map-persona" class="chart-box"></div>
               </div>
             </div>
             <p class="glossary-note">Dashed lines mark the average across all listings in each view.</p>
           </section>
-          <p class="prose" style="margin-top:1.25rem">At city level, Denver and Austin sit in the high-demand quadrant, Los Angeles is an emerging opportunity, NYC is low demand, and Chicago and Dallas are underperforming favourites. At persona level across all cities, Backyard bliss, BBQ escape and Family retreat are high demand, with Patio paradise just inside the line. Active leisure and Workspace serenity are underperforming favourites, and Pet haven is low demand.</p>
+          <p class="prose" style="margin-top:1.25rem">At city level, Denver and Austin sit in the high-demand quadrant,
+            Los Angeles is an emerging opportunity, NYC is low demand, and Chicago and Dallas are underperforming
+            favourites. At persona level across all cities, Backyard bliss, BBQ escape and Family retreat are high
+            demand, with Patio paradise just inside the line. Active leisure and Workspace serenity are underperforming
+            favourites, and Pet haven is low demand.</p>
         </section>
 
         <!-- MARKET MAP: CHICAGO -->
         <section class="block">
-          <div class="block-head"><h5>Chicago Market Map by Persona</h5></div>
-          <p class="prose">Within Chicago the picture shifts. Family retreat and Backyard bliss are the only personas in the high-demand quadrant, Workspace serenity is an underperforming favourite, Patio paradise is an emerging opportunity, and BBQ escape, Pet haven and Active leisure are low demand. Select a persona to see its profile.</p>
+          <div class="block-head">
+            <h5>Chicago Market Map by Persona</h5>
+          </div>
+          <p class="prose">Within Chicago the picture shifts. Family retreat and Backyard bliss are the only personas in
+            the high-demand quadrant, Workspace serenity is an underperforming favourite, Patio paradise is an emerging
+            opportunity, and BBQ escape, Pet haven and Active leisure are low demand. Select a persona to see its
+            profile.</p>
           <div id="chart-map" class="chart-box"></div>
           <p class="glossary-note">Dashed lines mark Chicago’s average (215.6 availability, 15.8 reviews).</p>
           <div id="persona-panel" class="persona-panel" aria-live="polite"></div>
@@ -207,43 +583,71 @@
 
         <!-- FINDINGS -->
         <section class="block">
-          <div class="block-head"><h5 class="font-hand section-title">Key Diagnostic Findings</h5></div>
+          <div class="block-head">
+            <h5 class="font-hand section-title">Key Diagnostic Findings</h5>
+          </div>
           <div class="card-grid">
 
             <div class="stitch-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
               </div>
               <h5>Price Variables Don’t Describe Preference</h5>
-              <p>Room type and group size explain what a stay costs, not what the guest wants from it. Amenities were the best available stand-in for stay intent, so personas rest on what listings offer rather than on price tiers.</p>
-              <p class="impact"><b>Impact</b>Each persona can carry its own message instead of a single Chicago pitch.</p>
+              <p>Room type and group size explain what a stay costs, not what the guest wants from it. Amenities were
+                the best available stand-in for stay intent, so personas rest on what listings offer rather than on
+                price tiers.</p>
+              <p class="impact"><b>Impact</b>Each persona can carry its own message instead of a single Chicago pitch.
+              </p>
             </div>
 
             <div class="stitch-card highlight-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                  <polyline points="17 18 23 18 23 12"></polyline>
+                </svg>
               </div>
               <h5>Chicago’s Demand Profile Is Split</h5>
-              <p>Chicago combines high review volume with above-average availability. Within it, Family retreat and Backyard bliss sit in the high-demand quadrant, while Active leisure sits furthest out on availability.</p>
-              <p class="impact"><b>Impact</b>Backyard bliss and Family retreat are the natural first targets for lifting Chicago’s position.</p>
+              <p>Chicago combines high review volume with above-average availability. Within it, Family retreat and
+                Backyard bliss sit in the high-demand quadrant, while Active leisure sits furthest out on availability.
+              </p>
+              <p class="impact"><b>Impact</b>Backyard bliss and Family retreat are the natural first targets for lifting
+                Chicago’s position.</p>
+            </div>
+
+            <div class="stitch-card highlight-card">
+              <div class="icon-box">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                  <line x1="4" y1="22" x2="4" y2="15"></line>
+                </svg>
+              </div>
+              <h5>Each Persona Peaks in a Different Season</h5>
+              <p>Active leisure’s median price reaches 305 USD in summer against 173.5 in winter. Backyard bliss rises
+                from 115 in spring to 150 in summer, and Family retreat from 149.5 to 203.</p>
+              <p class="impact"><b>Impact</b>A staggered persona-by-season calendar fits the data better than a single
+                Chicago campaign.</p>
             </div>
 
             <div class="stitch-card">
               <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
-              </div>
-              <h5>Each Persona Peaks in a Different Season</h5>
-              <p>Active leisure’s median price reaches 305 USD in summer against 173.5 in winter. Backyard bliss rises from 115 in spring to 150 in summer, and Family retreat from 149.5 to 203.</p>
-              <p class="impact"><b>Impact</b>A staggered persona-by-season calendar fits the data better than a single Chicago campaign.</p>
-            </div>
-
-            <div class="stitch-card highlight-card">
-              <div class="icon-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                  </path>
+                </svg>
               </div>
               <h5>The Personas Cover a Subset of the Market</h5>
-              <p>A large generic group of listings (roughly 30k) has no distinctive amenity profile, and several personas sit close to the quadrant lines.</p>
-              <p class="impact"><b>Impact</b>Personas work as targeting angles for part of the market, and “high demand” labels need confidence intervals before they’re treated as firm.</p>
+              <p>A large generic group of listings (roughly 30k) has no distinctive amenity profile, and several
+                personas sit close to the quadrant lines.</p>
+              <p class="impact"><b>Impact</b>Personas work as targeting angles for part of the market, and “high demand”
+                labels need confidence intervals before they’re treated as firm.</p>
             </div>
 
           </div>
@@ -251,14 +655,18 @@
 
         <!-- ACTION PLAN -->
         <section class="block">
-          <div class="block-head"><h5>Strategic Action Plan (The Way Forward)</h5></div>
+          <div class="block-head">
+            <h5>Strategic Action Plan (The Way Forward)</h5>
+          </div>
           <div class="plan-grid">
 
             <section class="plan-col activation-roadmap">
               <h2>Channel &amp; Content Roadmap</h2>
               <ul>
-                <li><strong>Seasonal Blog Series:</strong> Highlight key trends, attractions and activities for each persona’s window.</li>
-                <li><strong>Omni-channel Social:</strong> Run campaigns built on guest-generated content that shows each seasonal experience.</li>
+                <li><strong>Seasonal Blog Series:</strong> Highlight key trends, attractions and activities for each
+                  persona’s window.</li>
+                <li><strong>Omni-channel Social:</strong> Run campaigns built on guest-generated content that shows each
+                  seasonal experience.</li>
               </ul>
             </section>
 
@@ -266,27 +674,47 @@
               <h2>Positioning by Persona</h2>
               <ul>
                 <li><strong>Family Retreat:</strong> Outdoor fun and summer attractions.</li>
-                <li><strong>Active Leisure:</strong> A deliberate off-season pitch, winter activity at the best price.</li>
-                <li><strong>Workspace Serenity:</strong> The cheapest property type, built for a work-from-anywhere escape.</li>
+                <li><strong>Active Leisure:</strong> A deliberate off-season pitch, winter activity at the best price.
+                </li>
+                <li><strong>Workspace Serenity:</strong> The cheapest property type, built for a work-from-anywhere
+                  escape.</li>
               </ul>
             </section>
 
             <section class="plan-col product-packaging">
               <h2>Measurement</h2>
               <ul>
-                <li><strong>Market Map Position:</strong> Track Chicago moving toward lower availability while holding review volume.</li>
-                <li><strong>A/B Test:</strong> Compare persona creative against generic Chicago creative on booking conversion by season.</li>
+                <li><strong>Market Map Position:</strong> Track Chicago moving toward lower availability while holding
+                  review volume.</li>
+                <li><strong>A/B Test:</strong> Compare persona creative against generic Chicago creative on booking
+                  conversion by season.</li>
               </ul>
             </section>
 
           </div>
 
-          <div class="block-head" style="margin-top:2.5rem"><h5>Seasonal Calendar</h5></div>
+          <div class="block-head" style="margin-top:2.5rem">
+            <h5>Seasonal Calendar</h5>
+          </div>
           <div class="season-grid">
-            <section class="plan-col"><h2>Spring</h2><p><strong>Workspace serenity</strong><br>The ‘work from anywhere’ productive escape.</p></section>
-            <section class="plan-col"><h2>Summer</h2><p><strong>Backyard bliss</strong><br>‘Summer in the city’ with friends and family.</p><p><strong>Family retreat</strong><br>Outdoor fun and summer attractions.</p><p><strong>BBQ escape</strong><br>A summer staycation.</p></section>
-            <section class="plan-col"><h2>Fall</h2><p><strong>Patio paradise</strong><br>Book early for the fall breeze in Chicago.</p></section>
-            <section class="plan-col"><h2>Winter</h2><p><strong>Active leisure</strong><br>Stay active in winter at the best price.</p></section>
+            <section class="plan-col">
+              <h2>Spring</h2>
+              <p><strong>Workspace serenity</strong><br>The ‘work from anywhere’ productive escape.</p>
+            </section>
+            <section class="plan-col">
+              <h2>Summer</h2>
+              <p><strong>Backyard bliss</strong><br>‘Summer in the city’ with friends and family.</p>
+              <p><strong>Family retreat</strong><br>Outdoor fun and summer attractions.</p>
+              <p><strong>BBQ escape</strong><br>A summer staycation.</p>
+            </section>
+            <section class="plan-col">
+              <h2>Fall</h2>
+              <p><strong>Patio paradise</strong><br>Book early for the fall breeze in Chicago.</p>
+            </section>
+            <section class="plan-col">
+              <h2>Winter</h2>
+              <p><strong>Active leisure</strong><br>Stay active in winter at the best price.</p>
+            </section>
           </div>
         </section>
 
@@ -294,7 +722,10 @@
         <section class="block">
           <aside class="note">
             <h5>A note on the data</h5>
-            <p style="margin:0">This project was completed as part of the Data-Driven Decision Making (D3M): Managerial MBA elective course (MKTG-GB.2344) at NYU Stern School of Business. The analysis utilizes raw open-source short-term rental data sourced from <a href="https://insideairbnb.com/" target="_blank">Inside Airbnb</a>, covering 153,833 listing records across six major US metropolitan markets.</p>
+            <p style="margin:0">This project was completed as part of the Data-Driven Decision Making (D3M): Managerial
+              MBA elective course (MKTG-GB.2344) at NYU Stern School of Business. The analysis utilizes raw open-source
+              short-term rental data sourced from <a href="https://insideairbnb.com/" target="_blank" class="pdf-link highlight-word">Inside Airbnb</a>,
+              covering 153,833 listing records across six major US metropolitan markets.</p>
           </aside>
         </section>
 
@@ -302,20 +733,27 @@
         <section class="block source-material-section">
           <div class="block-head">
             <h5 class="font-hand">The Deliverable</h5>
-            <p class="prose">This slide deck outlines the full methodology, the persona profiles and the content plan.</p>
+            <p class="prose">This slide deck outlines the full methodology, the persona profiles and the content plan.
+            </p>
           </div>
           <div class="pdf-window">
-            <iframe src="assets/airbnb-segmentation.pdf" title="Airbnb segmentation deliverable (PDF)" loading="lazy"></iframe>
+            <iframe src="assets/airbnb.pdf" title="Airbnb segmentation deliverable (PDF)"
+              loading="lazy"></iframe>
           </div>
-          <a class="pdf-link highlight-word" href="assets/airbnb.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>
+          <a class="pdf-link highlight-word" href="assets/airbnb.pdf" target="_blank" rel="noopener">Open the PDF in a
+            new tab</a>
         </section>
 
         <!-- FOOTER -->
         <footer class="block project-footer">
           <h5 class="font-hand">Retrospective</h5>
-          <p class="prose">The project turns a messy listing dataset into a business decision: a demand map, seven personas, and a calendar that says who to talk to and when. The strongest lesson was that a persona is only useful once it has a place, a season and a message attached. Next time I’d test cluster stability before building the plan on top of it.</p>
+          <p class="prose">The project turns a messy listing dataset into a business decision: a demand map, seven
+            personas, and a calendar that says who to talk to and when. The strongest lesson was that a persona is only
+            useful once it has a place, a season and a message attached. Next time I’d test cluster stability before
+            building the plan on top of it.</p>
           <div class="section-divider"><span class="knot">✦</span></div>
-          <a href="/portfolio" class="button-primary-3 w-button" style="display:inline-block;margin-top:15px;">Back to Project List</a>
+          <a href="/portfolio" class="button-primary-3 w-button" style="display:inline-block;margin-top:15px;">Back to
+            Project List</a>
         </footer>
 
       </div>
@@ -324,43 +762,49 @@
 
   {% include footer.html %}
 
-<script>
-(function () {
-  const col = { "Backyard bliss": "#4ECDC4", "Family retreat": "#FFD166", "BBQ escape": "#FF6B6B", "Active leisure": "#EF476F", "Patio paradise": "#A0C4FF", "Workspace serenity": "#72EFDD", "Pet haven": "#8E9AAF" };
-  const lab = (dx, dy, a) => ({ dx, dy, a });
-  const S = lab(12, 4, "start"), E = lab(-12, 4, "end");
+  <script>
+    (function () {
+      const col = { "Backyard bliss": "#4ECDC4", "Family retreat": "#FFD166", "BBQ escape": "#FF6B6B", "Active leisure": "#EF476F", "Patio paradise": "#A0C4FF", "Workspace serenity": "#72EFDD", "Pet haven": "#8E9AAF" };
+      const lab = (dx, dy, a) => ({ dx, dy, a });
+      const S = lab(12, 4, "start"), E = lab(-12, 4, "end");
 
-  const cityCfg = { sel: "#chart-map-city", W: 480, H: 360, m: { top: 16, right: 16, bottom: 46, left: 40 }, fs: 11, xd: [188, 236], avg: [209.09, 11.74], pts: [
-    { n: "Denver", x: 191.6, y: 15.6, c: "#A0C4FF", l: S }, { n: "Austin", x: 195.5, y: 13.5, c: "#A0C4FF", l: S },
-    { n: "Los Angeles", x: 208.1, y: 11.4, c: "#A0C4FF", l: lab(-12, 16, "end") }, { n: "NYC", x: 213.8, y: 8.4, c: "#A0C4FF", l: S },
-    { n: "Chicago", x: 215.6, y: 15.8, c: "#FF6B6B", l: lab(12, -8, "start") }, { n: "Dallas", x: 233, y: 13.9, c: "#A0C4FF", l: E } ] };
+      const cityCfg = {
+        sel: "#chart-map-city", W: 480, H: 360, m: { top: 16, right: 16, bottom: 46, left: 40 }, fs: 11, xd: [188, 236], avg: [209.09, 11.74], pts: [
+          { n: "Denver", x: 191.6, y: 15.6, c: "#A0C4FF", l: S }, { n: "Austin", x: 195.5, y: 13.5, c: "#A0C4FF", l: S },
+          { n: "Los Angeles", x: 208.1, y: 11.4, c: "#A0C4FF", l: lab(-12, 16, "end") }, { n: "NYC", x: 213.8, y: 8.4, c: "#A0C4FF", l: S },
+          { n: "Chicago", x: 215.6, y: 15.8, c: "#FF6B6B", l: lab(12, -8, "start") }, { n: "Dallas", x: 233, y: 13.9, c: "#A0C4FF", l: E }]
+      };
 
-  const personaCfg = { sel: "#chart-map-persona", W: 480, H: 360, m: { top: 16, right: 16, bottom: 46, left: 40 }, fs: 11, xd: [195, 235], avg: [209.1, 11.7], pts: [
-    { n: "Backyard bliss", x: 199.1, y: 14.6, l: lab(-6, -14, "start") }, { n: "BBQ escape", x: 205.9, y: 14.3, l: lab(0, 22, "middle") },
-    { n: "Family retreat", x: 207.9, y: 15.1, l: lab(0, -14, "middle") }, { n: "Patio paradise", x: 208.0, y: 11.8, l: E },
-    { n: "Active leisure", x: 217.0, y: 12.5, l: lab(-4, 22, "end") }, { n: "Workspace serenity", x: 218.0, y: 12.5, l: lab(4, -14, "start") },
-    { n: "Pet haven", x: 231.6, y: 8.9, l: E } ].map(d => ({ ...d, c: col[d.n] })) };
+      const personaCfg = {
+        sel: "#chart-map-persona", W: 480, H: 360, m: { top: 16, right: 16, bottom: 46, left: 40 }, fs: 11, xd: [195, 235], avg: [209.1, 11.7], pts: [
+          { n: "Backyard bliss", x: 199.1, y: 14.6, l: lab(-6, -14, "start") }, { n: "BBQ escape", x: 205.9, y: 14.3, l: lab(0, 22, "middle") },
+          { n: "Family retreat", x: 207.9, y: 15.1, l: lab(0, -14, "middle") }, { n: "Patio paradise", x: 208.0, y: 11.8, l: E },
+          { n: "Active leisure", x: 217.0, y: 12.5, l: lab(-4, 22, "end") }, { n: "Workspace serenity", x: 218.0, y: 12.5, l: lab(4, -14, "start") },
+          { n: "Pet haven", x: 231.6, y: 8.9, l: E }].map(d => ({ ...d, c: col[d.n] }))
+      };
 
-  const info = {
-    "Backyard bliss": { tag: "“Serenity”", med: "132 USD", under: "74%", home: "76%", acc: 4, peak: "Summer (150 USD)", loc: "47% in the West", am: "Backyard, outdoor activities, patio or balcony view" },
-    "Family retreat": { tag: "“Great”", med: "165 USD", under: "60%", home: "82%", acc: 5, peak: "Summer (203 USD)", loc: "43% in the North", am: "Housekeeping, playground, direct access to a recreation spot" },
-    "BBQ escape": { tag: "“Comfortable”", med: "181 USD", under: "56%", home: "81%", acc: 5, peak: "Summer and fall (198 / 191 USD)", loc: "49% in the West", am: "BBQ, lounge" },
-    "Active leisure": { tag: "", med: "213.5 USD", under: "45%", home: "99%", acc: 5, peak: "Summer (305 USD)", loc: "49% in the Central Loop", am: "Sports, hot tub, pool, spa and wellness" }
-  };
+      const info = {
+        "Backyard bliss": { tag: "“Serenity”", med: "132 USD", under: "74%", home: "76%", acc: 4, peak: "Summer (150 USD)", loc: "47% in the West", am: "Backyard, outdoor activities, patio or balcony view" },
+        "Family retreat": { tag: "“Great”", med: "165 USD", under: "60%", home: "82%", acc: 5, peak: "Summer (203 USD)", loc: "43% in the North", am: "Housekeeping, playground, direct access to a recreation spot" },
+        "BBQ escape": { tag: "“Comfortable”", med: "181 USD", under: "56%", home: "81%", acc: 5, peak: "Summer and fall (198 / 191 USD)", loc: "49% in the West", am: "BBQ, lounge" },
+        "Active leisure": { tag: "", med: "213.5 USD", under: "45%", home: "99%", acc: 5, peak: "Summer (305 USD)", loc: "49% in the Central Loop", am: "Sports, hot tub, pool, spa and wellness" }
+      };
 
-  const chiCfg = { sel: "#chart-map", W: 760, H: 420, m: { top: 20, right: 24, bottom: 52, left: 56 }, fs: 12, xd: [198, 250], avg: [215.6, 15.8], select: true, pts: [
-    { n: "Patio paradise", x: 202.7, y: 15.5, l: lab(12, 22, "start") }, { n: "Family retreat", x: 212.7, y: 16.5, l: lab(-12, -4, "end") },
-    { n: "Backyard bliss", x: 213.8, y: 15.9, l: lab(-12, 14, "end") }, { n: "Pet haven", x: 215.9, y: 12.2, l: S },
-    { n: "Workspace serenity", x: 217.1, y: 16.6, l: lab(12, -6, "start") }, { n: "BBQ escape", x: 218.7, y: 14.6, l: S },
-    { n: "Active leisure", x: 246.1, y: 13.4, l: E } ].map(d => ({ ...d, c: col[d.n] })) };
+      const chiCfg = {
+        sel: "#chart-map", W: 760, H: 420, m: { top: 20, right: 24, bottom: 52, left: 56 }, fs: 12, xd: [198, 250], avg: [215.6, 15.8], select: true, pts: [
+          { n: "Patio paradise", x: 202.7, y: 15.5, l: lab(12, 22, "start") }, { n: "Family retreat", x: 212.7, y: 16.5, l: lab(-12, -4, "end") },
+          { n: "Backyard bliss", x: 213.8, y: 15.9, l: lab(-12, 14, "end") }, { n: "Pet haven", x: 215.9, y: 12.2, l: S },
+          { n: "Workspace serenity", x: 217.1, y: 16.6, l: lab(12, -6, "start") }, { n: "BBQ escape", x: 218.7, y: 14.6, l: S },
+          { n: "Active leisure", x: 246.1, y: 13.4, l: E }].map(d => ({ ...d, c: col[d.n] }))
+      };
 
-  function tip() { let t = d3.select("#global-tooltip"); if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip"); return t; }
+      function tip() { let t = d3.select("#global-tooltip"); if (t.empty()) t = d3.select("body").append("div").attr("id", "global-tooltip"); return t; }
 
-  function panel(d) {
-    const el = document.getElementById("persona-panel"), p = info[d.n];
-    if (!el) return;
-    if (!p) { el.innerHTML = `<h6>${d.n}</h6><p style="color:#5f6368">Persona profile to be added.</p>`; return; }
-    el.innerHTML = `<h6>${d.n}</h6>${p.tag ? `<p style="color:#5f6368">${p.tag}</p>` : ""}
+      function panel(d) {
+        const el = document.getElementById("persona-panel"), p = info[d.n];
+        if (!el) return;
+        if (!p) { el.innerHTML = `<h6>${d.n}</h6><p style="color:#5f6368">Persona profile to be added.</p>`; return; }
+        el.innerHTML = `<h6>${d.n}</h6>${p.tag ? `<p style="color:#5f6368">${p.tag}</p>` : ""}
       <div class="persona-stats">
         <div><strong>${p.med}</strong><span>median price</span></div>
         <div><strong>${p.under}</strong><span>under 200 USD</span></div>
@@ -368,49 +812,50 @@
         <div><strong>${p.acc}</strong><span>guests</span></div>
       </div>
       <p><strong>Price peak:</strong> ${p.peak}<br><strong>Where:</strong> ${p.loc}<br><strong>Key amenities:</strong> ${p.am}</p>`;
-  }
+      }
 
-  function drawMap(o) {
-    const box = d3.select(o.sel);
-    if (box.empty()) return;
-    box.html("");
-    const m = o.m, W = o.W, H = o.H, w = W - m.left - m.right, h = H - m.top - m.bottom;
-    const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", "Market map of average availability against reviews in the last 12 months");
-    const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
-    const x = d3.scaleLinear().domain(o.xd).range([0, w]), y = d3.scaleLinear().domain([0, 20]).range([h, 0]);
+      function drawMap(o) {
+        const box = d3.select(o.sel);
+        if (box.empty()) return;
+        box.html("");
+        const m = o.m, W = o.W, H = o.H, w = W - m.left - m.right, h = H - m.top - m.bottom;
+        const svg = box.append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", "Market map of average availability against reviews in the last 12 months");
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
+        const x = d3.scaleLinear().domain(o.xd).range([0, w]), y = d3.scaleLinear().domain([0, 20]).range([h, 0]);
 
-    g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5));
-    g.append("g").attr("class", "axis").style("font-size", "11px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x).ticks(5));
-    g.append("line").attr("x1", x(o.avg[0])).attr("x2", x(o.avg[0])).attr("y1", 0).attr("y2", h).attr("stroke", "#FF6B6B").attr("stroke-dasharray", "6 5");
-    g.append("line").attr("x1", 0).attr("x2", w).attr("y1", y(o.avg[1])).attr("y2", y(o.avg[1])).attr("stroke", "#FF6B6B").attr("stroke-dasharray", "6 5");
+        g.append("g").attr("class", "axis").style("font-size", "11px").call(d3.axisLeft(y).ticks(5));
+        g.append("g").attr("class", "axis").style("font-size", "11px").attr("transform", `translate(0,${h})`).call(d3.axisBottom(x).ticks(5));
+        g.append("line").attr("x1", x(o.avg[0])).attr("x2", x(o.avg[0])).attr("y1", 0).attr("y2", h).attr("stroke", "#FF6B6B").attr("stroke-dasharray", "6 5");
+        g.append("line").attr("x1", 0).attr("x2", w).attr("y1", y(o.avg[1])).attr("y2", y(o.avg[1])).attr("stroke", "#FF6B6B").attr("stroke-dasharray", "6 5");
 
-    [["High demand", 6, 14, "start"], ["Underperforming favourite", w - 6, 14, "end"], ["Emerging opportunity", 6, h - 6, "start"], ["Low demand", w - 6, h - 6, "end"]]
-      .forEach(q => g.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("x", q[1]).attr("y", q[2]).attr("text-anchor", q[3]).text(q[0]));
-    svg.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("x", m.left + w / 2).attr("y", H - 8).attr("text-anchor", "middle").text("Availability 365");
-    svg.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("transform", `translate(12,${m.top + h / 2}) rotate(-90)`).attr("text-anchor", "middle").text("Reviews, last 12 months");
+        [["High demand", 6, 14, "start"], ["Underperforming favourite", w - 6, 14, "end"], ["Emerging opportunity", 6, h - 6, "start"], ["Low demand", w - 6, h - 6, "end"]]
+          .forEach(q => g.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("x", q[1]).attr("y", q[2]).attr("text-anchor", q[3]).text(q[0]));
+        svg.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("x", m.left + w / 2).attr("y", H - 8).attr("text-anchor", "middle").text("Availability 365");
+        svg.append("text").attr("class", "map-qlabel").style("font-size", o.fs + "px").attr("transform", `translate(12,${m.top + h / 2}) rotate(-90)`).attr("text-anchor", "middle").text("Reviews, last 12 months");
 
-    const pts = g.selectAll(".map-point").data(o.pts).enter().append("circle")
-      .attr("class", "map-point").attr("cx", d => x(d.x)).attr("cy", d => y(d.y)).attr("r", o.select ? 9 : 8).attr("fill", d => d.c)
-      .attr("role", o.select ? "button" : "img").attr("aria-label", d => d.n);
-    if (o.select) pts.attr("tabindex", 0);
-    g.selectAll(".map-name").data(o.pts).enter().append("text").attr("class", "map-name").style("font-size", o.fs + "px")
-      .attr("x", d => x(d.x) + d.l.dx).attr("y", d => y(d.y) + d.l.dy).attr("text-anchor", d => d.l.a).text(d => d.n);
+        const pts = g.selectAll(".map-point").data(o.pts).enter().append("circle")
+          .attr("class", "map-point").attr("cx", d => x(d.x)).attr("cy", d => y(d.y)).attr("r", o.select ? 9 : 8).attr("fill", d => d.c)
+          .attr("role", o.select ? "button" : "img").attr("aria-label", d => d.n);
+        if (o.select) pts.attr("tabindex", 0);
+        g.selectAll(".map-name").data(o.pts).enter().append("text").attr("class", "map-name").style("font-size", o.fs + "px")
+          .attr("x", d => x(d.x) + d.l.dx).attr("y", d => y(d.y) + d.l.dy).attr("text-anchor", d => d.l.a).text(d => d.n);
 
-    pts.on("mousemove", (e, d) => tip().style("opacity", 1).html(`<span class="tooltip-date">${d.n}</span><div class="tooltip-row"><span>Availability 365</span><b>${d.x}</b></div><div class="tooltip-row"><span>Reviews LTM</span><b>${d.y}</b></div>`)
-        .style("left", (e.pageX + 15) + "px").style("top", (e.pageY - 15) + "px"))
-      .on("mouseleave", () => tip().style("opacity", 0));
+        pts.on("mousemove", (e, d) => tip().style("opacity", 1).html(`<span class="tooltip-date">${d.n}</span><div class="tooltip-row"><span>Availability 365</span><b>${d.x}</b></div><div class="tooltip-row"><span>Reviews LTM</span><b>${d.y}</b></div>`)
+          .style("left", (e.pageX + 15) + "px").style("top", (e.pageY - 15) + "px"))
+          .on("mouseleave", () => tip().style("opacity", 0));
 
-    if (o.select) {
-      const pick = d => { pts.attr("stroke", p => p === d ? "#333" : "#fff"); panel(d); };
-      pts.on("click", (e, d) => pick(d)).on("keydown", (e, d) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(d); } });
-      pick(o.pts.find(d => d.n === "Family retreat"));
-    }
-  }
+        if (o.select) {
+          const pick = d => { pts.attr("stroke", p => p === d ? "#333" : "#fff"); panel(d); };
+          pts.on("click", (e, d) => pick(d)).on("keydown", (e, d) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(d); } });
+          pick(o.pts.find(d => d.n === "Family retreat"));
+        }
+      }
 
-  function render() { [cityCfg, personaCfg, chiCfg].forEach(drawMap); }
-  document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
-})();
-</script>
+      function render() { [cityCfg, personaCfg, chiCfg].forEach(drawMap); }
+      document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", render) : render();
+    })();
+  </script>
 
 </body>
+
 </html>
