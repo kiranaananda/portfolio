@@ -50,6 +50,11 @@
       .gt-case .plan-col:nth-child(1) { --accent: var(--g); }
       .gt-case .plan-col:nth-child(2) { --accent: var(--y); }
       .gt-case .plan-col:nth-child(3) { --accent: var(--b); }
+      .gt-case .plan-grid.two { grid-template-columns: repeat(2, 1fr); max-width: none; }
+      .gt-case .insight { margin-top: var(--gap); border-left: 5px solid var(--r); border-radius: 0 14px 14px 0; padding: 1.2rem 1.6rem; background: rgba(234,67,53,.08); }
+      .gt-case .insight .tagline { background: rgba(234,67,53,.18); }
+      .gt-case .insight h5 { margin: .3rem 0 .6rem; }
+      .gt-case .insight ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .5rem; line-height: 1.6; }
       .gt-case .plan-col.red { --accent: var(--r) !important; }
 
       .gt-case .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.6); }
@@ -94,7 +99,7 @@
         .gt-case .stat-strip { grid-template-columns: repeat(2, 1fr); }
       }
       @media (max-width: 700px) {
-        .gt-case .card-grid, .gt-case .glossary-grid { grid-template-columns: 1fr; }
+        .gt-case .card-grid, .gt-case .glossary-grid, .gt-case .plan-grid.two { grid-template-columns: 1fr; }
       }
     </style>
 
@@ -131,21 +136,25 @@
         <section class="block">
           <div class="block-head"><h5>The UX Challenge: A Gap Between Two Mindsets</h5></div>
           <p class="prose">Users struggle to bridge planning and booking, which raises cognitive load and creates fragmentation. Planning tools like spreadsheets, Notion and email are slow and analytical, while booking sites are fast, urgent and emotional.</p>
-          <div class="plan-grid">
+          <div class="plan-grid two">
             <section class="plan-col">
               <h2>The Planning Phase</h2>
               <p>Users organize logic, budgets and desires. This is slow, analytical, calculating, <strong>System 2</strong> thinking.</p>
               <p style="color:var(--muted);font-size:.9rem">Tools: Google Sheets, Gmail, Notion, Tripadvisor, TripIt</p>
-            </section>
-            <section class="plan-col red">
-              <h2>The Failure</h2>
-              <p>Planning tools don’t book. Booking tools don’t plan. The user is left alone in the middle to manage the chaos, and some users do a System 2 task using System 1 tools built for sales.</p>
             </section>
             <section class="plan-col">
               <h2>The Booking Phase</h2>
               <p>Users execute transactions and lock in inventory. It is fast and urgent, <strong>System 1</strong> (“Only 1 room left!”), with a System 2 option of “let’s book it for later.”</p>
               <p style="color:var(--muted);font-size:.9rem">Tools: Google Flights, Booking.com, Airbnb, Expedia, Kayak</p>
             </section>
+          </div>
+          <div class="insight">
+            <span class="tagline">Insight</span>
+            <h5>The Failure: The User Is Left Alone in the Middle</h5>
+            <ul>
+              <li>Planning tools don’t book. Booking tools don’t plan. The user has to manage the chaos between them.</li>
+              <li>Some users do a System 2 task, complex planning, using System 1 tools, the sales-focused booking sites.</li>
+            </ul>
           </div>
         </section>
 
