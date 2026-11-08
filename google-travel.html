@@ -1,649 +1,418 @@
-<html>
+---
+---
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <style>
-    .wf-force-outline-none[tabindex="-1"]:focus {
-      outline: none;
-    }
-  </style>
-
-  <meta charset="utf-8">
-  <title>Kirana Ananda</title>
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
-  <link href="index.css" rel="stylesheet" type="text/css">
-  <script
-    type="text/javascript">!function (o, c) { var n = c.documentElement, t = " w-mod-"; n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch") }(window, document);</script>
-
-  <link href="https://static.thenounproject.com/png/4671690-200.png" rel="shortcut icon" type="image/x-icon">
-  <link href="https://static.thenounproject.com/png/4671690-200.png" rel="apple-touch-icon">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-
+  {% include head.html %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
+<body>
 
-<body data-new-gr-c-s-check-loaded="14.1155.0" data-gr-ext-installed="">
-  <div class="navbar-logo-left">
-    <div data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease"
-      role="banner" class="navbar-logo-left-container shadow-three w-nav">
-
-      <div class="container">
-        <div class="navbar-top">
-          <a href="https://kiranaananda.github.io/index.html" class="navbar-brand w-nav-brand"><img
-              src="https://static.thenounproject.com/png/1019185-200.png" width="20px"></a>
-
-          <nav role="navigation" class="nav-menu-wrapper w-nav-menu">
-            <ul role="list" class="nav-menu-two w-list-unstyled">
-              <li>
-                <a href="https://kiranaananda.github.io/portfolio/" class="nav-link-accent">Portfolio</a>
-              </li>
-
-              <li class="nav-divider">
-              </li>
-
-              <li>
-                <a href="https://kiranaananda.github.io/personal.html" class="nav-link-accent">Personal</a>
-              </li>
-            </ul>
-          </nav>
-
-          <div class="menu-button w-nav-button" style="-webkit-user-select: text; user-select: text;" aria-label="menu" role="button"
-            tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
-            <div class="w-icon-nav-menu"></div>
-          </div>
-        </div>
-      </div>
-      <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
-    </div>
-  </div>
-  <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=65d1262592604fbcdfade86f"
-    type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-    crossorigin="anonymous"></script>
-  <script src="https://assets-global.website-files.com/65d1262592604fbcdfade86f/js/webflow.b901f171c.js"
-    type="text/javascript"></script>
-
-  <!-- ---------------------------end of header--------------------- -->
+  {% include navbar.html %}
 
   <canvas id="watercolor-canvas"></canvas>
   <div class="full-screen-glass"></div>
-  <div class="main-container">
-  </div>
-  <script src="script/bubbleglassbackground.js"></script>
+  <script src="/script/bubbleglassbackground.js"></script>
 
-  <!-- --------------------------- MAIN PORTFOLIO --------------------- -->
-    <section class="impact-section">
+  <main>
+    <style>
+      /* ---------- Scoped layout (everything lives under .gt-case) ---------- */
+      .gt-case { --gap: clamp(16px, 2.5vw, 28px); --block: clamp(2.5rem, 6vw, 4.5rem); --muted: #5f6368; --line: #e3e3e3; --g: #34A853; --y: #FBBC04; --b: #4285F4; --r: #EA4335; }
+      .gt-case .block { margin-top: var(--block); }
+      .gt-case .block-head { text-align: center; max-width: 60ch; margin: 0 auto 1.5rem; }
+      .gt-case .block-head h5 { margin-bottom: .5rem; }
+      .gt-case .lede, .gt-case .prose { line-height: 1.65; }
+      .gt-case .prose { margin-left: auto; margin-right: auto; }
+      .gt-case .project-header { text-align: center; }
+      .gt-case .project-header .lede { margin: 1rem auto 0; }
+      .gt-case .tags-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 1rem; }
+      .gt-case .disclaimer { font-size: .85rem; color: var(--muted); margin-top: 1rem; }
+
+      .gt-case .stat-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-top: 2rem; padding: 1.25rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+      .gt-case .stat strong { display: block; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.1; }
+      .gt-case .stat span { display: block; margin-top: .35rem; font-size: .85rem; color: var(--muted); line-height: 1.4; }
+
+      .gt-case .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); align-items: stretch; }
+      .gt-case .card-grid.three { grid-template-columns: repeat(3, 1fr); }
+      .gt-case .card-grid .stitch-card { margin: 0; height: 100%; display: flex; flex-direction: column; }
+      .gt-case .card-grid .stitch-card p { line-height: 1.6; }
+      .gt-case .quote { margin: .5rem 0 0; padding-left: .9rem; border-left: 3px solid var(--b); font-style: italic; font-size: .92rem; line-height: 1.55; }
+      .gt-case .impact { display: block; margin-top: auto; padding-top: .9rem; font-size: .92rem; }
+      .gt-case .impact b { display: block; margin-bottom: .2rem; }
+
+      .gt-case .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+      .gt-case .plan-col { padding-top: 1rem; border-top: 3px solid var(--accent, #999); }
+      .gt-case .plan-col h2 { font-size: 1.15rem; margin: 0 0 .75rem; }
+      .gt-case .plan-col ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .6rem; line-height: 1.55; }
+      .gt-case .plan-col p { line-height: 1.55; margin: 0 0 .5rem; }
+      .gt-case .plan-col:nth-child(1) { --accent: var(--g); }
+      .gt-case .plan-col:nth-child(2) { --accent: var(--y); }
+      .gt-case .plan-col:nth-child(3) { --accent: var(--b); }
+      .gt-case .plan-col.red { --accent: var(--r) !important; }
+
+      .gt-case .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.6); }
+      .gt-case table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: .92rem; }
+      .gt-case th, .gt-case td { padding: .55rem .8rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; line-height: 1.45; }
+      .gt-case thead th { font-weight: 700; }
+      .gt-case td small { display: block; color: var(--muted); }
+      .gt-case .hl { background: rgba(66,133,244,.12); }
+
+      .gt-case .glossary, .gt-case .note, .gt-case .panel { border: 1px solid var(--line); border-radius: 12px; padding: 1rem 1.4rem; background: rgba(255,255,255,.55); }
+      .gt-case .glossary summary { cursor: pointer; font-weight: 600; }
+      .gt-case .glossary-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); margin-top: 1rem; }
+      .gt-case .glossary dt { font-weight: 600; margin-top: .8rem; }
+      .gt-case .glossary dd { margin: .15rem 0 0; line-height: 1.55; color: var(--muted); }
+      .gt-case .glossary-note { margin: 1rem 0 0; font-size: .85rem; color: var(--muted); }
+      .gt-case .note { border-left: 3px solid #bbb; line-height: 1.65; }
+      .gt-case .note h5 { margin: 0 0 .4rem; }
+
+      .gt-case .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 1.2rem; }
+      .gt-case .chips button { border: 1px solid var(--line); background: rgba(255,255,255,.7); border-radius: 99px; padding: 5px 16px; font: inherit; font-size: .88rem; cursor: pointer; }
+      .gt-case .chips button.on { border-color: #333; font-weight: 600; }
+      .gt-case .journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+      .gt-case .stage { border: 1px solid var(--line); border-top: 4px solid var(--c, #999); border-radius: 12px; padding: 14px; background: rgba(255,255,255,.65); display: flex; flex-direction: column; gap: 6px; }
+      .gt-case .stage h6 { margin: 0; font-size: .95rem; }
+      .gt-case .stage .em { font-size: 1.6rem; line-height: 1; }
+      .gt-case .stage .do { font-size: .85rem; color: var(--muted); line-height: 1.5; margin: 0; }
+      .gt-case .stage .th { font-size: .85rem; font-style: italic; line-height: 1.5; margin: 0; }
+      .gt-case .persona-line { text-align: center; max-width: 66ch; margin: 0 auto 1.2rem; line-height: 1.6; }
+
+      .gt-case .shot { margin: 0 0 1rem; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: rgba(255,255,255,.6); }
+      .gt-case .shot img { display: block; width: 100%; height: auto; }
+      .gt-case .tagline { display: inline-block; font-size: .78rem; font-weight: 600; border-radius: 99px; padding: 2px 10px; background: rgba(66,133,244,.14); margin: 0 6px 6px 0; }
+      .gt-case .panel ul { margin: .6rem 0 0; padding-left: 1.1rem; line-height: 1.6; }
+      .gt-case .pdf-window { margin-top: 1rem; border: 1px solid #ccc; border-radius: 12px; overflow: hidden; }
+      .gt-case .pdf-window iframe { display: block; width: 100%; height: clamp(420px, 75vh, 800px); border: 0; }
+      .gt-case .pdf-link { display: inline-block; margin-top: .75rem; font-size: .9rem; }
+      .gt-case .project-footer { text-align: center; }
+      .gt-case .project-footer p { max-width: 60ch; margin-left: auto; margin-right: auto; line-height: 1.65; }
+
+      @media (max-width: 1000px) {
+        .gt-case .plan-grid, .gt-case .card-grid.three { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+        .gt-case .stat-strip { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 700px) {
+        .gt-case .card-grid, .gt-case .glossary-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+
+    <section class="impact-section gt-case">
       <div class="main-container">
+
+        <!-- HEADER -->
         <header class="project-header">
           <div class="tags-row">
-            <span class="tag">Market Strategy</span>
-            <span class="tag">Data Visualization</span>
-            <span class="tag">Consumer Insights</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">Product Design</span>
+            <span class="tag">Journey Mapping</span>
+            <span class="tag">Wireframing</span>
           </div>
+          <h4 class="font-hand">Google Travel Revamp: Bridging Trip Planning and Booking</h4>
+          <p class="subtitle lede">Planning tools don’t book, and booking tools don’t plan. This one-month concept project asks how Google Travel could reduce cognitive load and fragmentation for people planning a trip, moving from competitive analysis and interviews to journey maps, an ideation workshop, wireframes and a usability test plan.</p>
 
-          <h4 class="font-hand">The Lion Share: A Strategic Turnoaround Analysis</h4>
-          <p class="subtitle">Revitalizing a heritage brand through strategic pack diversification.</p>
+          <div class="stat-strip" role="list">
+            <div class="stat" role="listitem"><strong>2</strong><span>in-depth interviews, <br>one per persona</span></div>
+            <div class="stat" role="listitem"><strong>3</strong><span>key themes where tools <br>miss user intent</span></div>
+            <div class="stat" role="listitem"><strong>2 × 7</strong><span>journey stages mapped <br>for two personas</span></div>
+            <div class="stat" role="listitem"><strong>5</strong><span>desktop wireframe <br>screens</span></div>
+          </div>
+          <p class="disclaimer">A one-month school project. An unofficial concept, not affiliated with or endorsed by Google.</p>
         </header>
 
-        <div class="section-divider">
-          <span class="knot">✦</span>
-        </div>
-        
-        <div class="meta-grid">
-          <div><strong>Role</strong><br>Market Research</div>
-          <div><strong>Tools</strong><br>Survey</div>
-          <div><strong>Method</strong><br>Cross-tabulation</div>
-        </div>
+        <!-- CONTEXT -->
+        <section class="block">
+          <div class="block-head"><h5>Company Context</h5></div>
+          <p class="prose">Google Travel launched in 2019 by consolidating Google Flights, Google Hotels and Google Trips into a single platform. Google doesn’t report its revenue separately, but the business model for travel is referral fees from airlines, hotels and online travel agencies, on top of its advertising business. The audience is B2C: anyone planning leisure or business travel. The goal I worked from is to become the primary source for travel planning and booking by capturing users at the inspiration phase.</p>
+        </section>
 
-    <!-- 01. Context & Business Goal -->
-    <section id="context">
-      <div class="container">
-        <div class="section-label">01. Context & Business Goal</div>
-        <h2 class="section-title">Understanding Google Travel’s Ecosystem</h2>
-        <p class="section-desc">Launched in 2019 by consolidating Google Flights, Google Hotels, and Google Trips, Google Travel generates tens of billions annually in referral ad revenue from airlines, hotel chains, and OTAs.</p>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Business Context</h3>
-            <div class="highlight-card" style="margin-top: 16px;">
-              <p><strong>Business Model:</strong> Targeted advertising and affiliate referral fees from airlines, hotels, and Online Travel Agencies (OTAs).</p>
-            </div>
-            <p>Google Travel's primary objective is to capture users during the <strong>"inspiration & decision"</strong> phase, serving as the default entry point for end-to-end travel research.</p>
+        <!-- UX CHALLENGE -->
+        <section class="block">
+          <div class="block-head"><h5>The UX Challenge: A Gap Between Two Mindsets</h5></div>
+          <p class="prose">Users struggle to bridge planning and booking, which raises cognitive load and creates fragmentation. Planning tools like spreadsheets, Notion and email are slow and analytical, while booking sites are fast, urgent and emotional.</p>
+          <div class="plan-grid">
+            <section class="plan-col">
+              <h2>The Planning Phase</h2>
+              <p>Users organize logic, budgets and desires. This is slow, analytical, calculating, <strong>System 2</strong> thinking.</p>
+              <p style="color:var(--muted);font-size:.9rem">Tools: Google Sheets, Gmail, Notion, Tripadvisor, TripIt</p>
+            </section>
+            <section class="plan-col red">
+              <h2>The Failure</h2>
+              <p>Planning tools don’t book. Booking tools don’t plan. The user is left alone in the middle to manage the chaos, and some users do a System 2 task using System 1 tools built for sales.</p>
+            </section>
+            <section class="plan-col">
+              <h2>The Booking Phase</h2>
+              <p>Users execute transactions and lock in inventory. It is fast and urgent, <strong>System 1</strong> (“Only 1 room left!”), with a System 2 option of “let’s book it for later.”</p>
+              <p style="color:var(--muted);font-size:.9rem">Tools: Google Flights, Booking.com, Airbnb, Expedia, Kayak</p>
+            </section>
           </div>
+        </section>
 
-          <div class="card">
-            <h3>Target Audience & Goals</h3>
-            <ul style="padding-left: 20px; line-height: 1.8; color: var(--color-text-muted);">
-              <li><strong>B2C Leisure & Business Travelers:</strong> Individuals planning complex vacations or managing spontaneous business itineraries.</li>
-              <li><strong>Key Business Goal:</strong> Transition from a passive search engine into the primary, active operating system for trip planning and decision execution.</li>
-            </ul>
+        <!-- APPROACH -->
+        <section class="block">
+          <div class="block-head"><h5>Approach: How Might We Reduce Cognitive Load and Fragmentation When Planning a Trip?</h5></div>
+          <div class="plan-grid">
+            <section class="plan-col"><h2>Discovery</h2><ul><li>Competitive landscape</li><li>Foundational research (in-depth interviews)</li></ul></section>
+            <section class="plan-col"><h2>Strategy</h2><ul><li>Conceptual components (journey maps)</li><li>Ideation workshop</li></ul></section>
+            <section class="plan-col"><h2>Execution</h2><ul><li>Wireframes</li><li>Usability test plan</li></ul></section>
           </div>
-        </div>
+        </section>
 
-        <div style="margin-top: 40px;">
-          <h3>Product Roadmap Framework</h3>
-          <div class="roadmap-grid">
-            <div class="roadmap-step">
-              <div class="num">01</div>
-              <div class="title">Competitive Audit</div>
-            </div>
-            <div class="roadmap-step">
-              <div class="num">02</div>
-              <div class="title">Foundational Research</div>
-            </div>
-            <div class="roadmap-step">
-              <div class="num">03</div>
-              <div class="title">Journey Mapping</div>
-            </div>
-            <div class="roadmap-step">
-              <div class="num">04</div>
-              <div class="title">Ideation Workshop</div>
-            </div>
-            <div class="roadmap-step">
-              <div class="num">05</div>
-              <div class="title">Wireframing</div>
-            </div>
-            <div class="roadmap-step">
-              <div class="num">06</div>
-              <div class="title">Usability Testing</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 02. The UX Challenge -->
-    <section id="challenge" style="background: var(--color-surface);">
-      <div class="container">
-        <div class="section-label">02. Problem Definition</div>
-        <h2 class="section-title">The Cognitive Gap: Planning vs. Booking</h2>
-        <p class="section-desc">Travelers are forced to bridge a disconnect between analytical planning tools and high-urgency transactional booking engines, leading to severe fragmentation.</p>
-
-        <div class="grid-2">
-          <div class="card" style="border-top: 4px solid var(--g-blue);">
-            <h3>1. The Planning Phase</h3>
-            <p style="color: var(--color-text-muted); margin-top: 8px;"><strong>Cognitive State: System 2</strong> (Slow, analytical, calculating, budget-oriented).</p>
-            <p style="margin-top: 12px; font-size: 0.95rem;"><strong>Tools Used:</strong> Google Sheets, Excel, Notion, WhatsApp, Tripadvisor.</p>
-            <div class="quote-box">
-              "Planning tools don't book. The data is dead — if a flight price changes or drops, my spreadsheet doesn't update."
-            </div>
-          </div>
-
-          <div class="card" style="border-top: 4px solid var(--g-red);">
-            <h3>2. The Booking Phase</h3>
-            <p style="color: var(--color-text-muted); margin-top: 8px;"><strong>Cognitive State: System 1</strong> (Fast, urgent, transactional, emotional).</p>
-            <p style="margin-top: 12px; font-size: 0.95rem;"><strong>Tools Used:</strong> Booking.com, Airbnb, Kayak, Expedia.</p>
-            <div class="quote-box" style="background-color: var(--g-red-bg); color: var(--g-red);">
-              "Booking tools don't plan. They push immediate checkout ('Only 1 room left!'), ignoring my overall budget and schedule options."
-            </div>
-          </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 40px; padding: 32px; background: #f1f5f9; border-radius: var(--radius-md);">
-          <h3 style="font-size: 1.3rem; color: var(--g-blue);">Core How Might We (HMW) Question</h3>
-          <p style="font-size: 1.15rem; font-weight: 600; margin-top: 8px;">"How might we reduce cognitive load and fragmentation for users when moving from trip inspiration to booking execution?"</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 03. Competitive Landscape -->
-    <section id="competitive">
-      <div class="container">
-        <div class="section-label">03. Competitive Landscape</div>
-        <h2 class="section-title">Market Opportunity: The "Live Planning" Quadrant</h2>
-        <p class="section-desc">Analyzing current travel tools revealed a distinct market white space: tools offering live updating data combined with flexible pre-booking planning.</p>
-
-        <table class="matrix-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Google Travel (Current)</th>
-              <th>TripIt</th>
-              <th>Wanderlog</th>
-              <th>Notion / Excel</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Primary Value</strong></td>
-              <td>Search & Book</td>
-              <td>Post-booking Organization</td>
-              <td>Visual Itinerary</td>
-              <td>Custom Organization</td>
-            </tr>
-            <tr>
-              <td><strong>Drafting Plan</strong></td>
-              <td>Non-existent (must book to save)</td>
-              <td>Good (manual)</td>
-              <td>Good</td>
-              <td>Excellent (total freedom)</td>
-            </tr>
-            <tr>
-              <td><strong>Price Tracking</strong></td>
-              <td>Hidden (Gmail updates)</td>
-              <td>None</td>
-              <td>None</td>
-              <td>Manual entry</td>
-            </tr>
-            <tr>
-              <td><strong>Cost Simulation</strong></td>
-              <td>None (User does mental math)</td>
-              <td>Medium (Sum up only)</td>
-              <td>Medium</td>
-              <td>High (Custom financial models)</td>
-            </tr>
-            <tr>
-              <td><strong>Group Collab</strong></td>
-              <td>Low (Share link only)</td>
-              <td>Medium (View only)</td>
-              <td>High</td>
-              <td>High (Real-time editing)</td>
-            </tr>
-            <tr>
-              <td><strong>Booking Actionability</strong></td>
-              <td>High (Direct links)</td>
-              <td>Low (Redirects)</td>
-              <td>Medium</td>
-              <td>None (Dead data)</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="highlight-card" style="margin-top: 32px; background: var(--g-green-bg); border-color: var(--g-green);">
-          <h4 style="color: var(--g-green); font-size: 1.1rem;">The Market Opportunity</h4>
-          <p style="color: #135225; margin-top: 4px;"><strong>Live Planning Space:</strong> Combine the real-time dynamic pricing of Google Flights/Hotels with the multi-scenario flexibility of custom spreadsheets.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04. Foundational Research -->
-    <section id="research" style="background: var(--color-surface);">
-      <div class="container">
-        <div class="section-label">04. Foundational Research</div>
-        <h2 class="section-title">In-Depth Qualitative Research (N=16)</h2>
-        <p class="section-desc">We conducted 16 structured interviews with target behavioral segments to uncover friction points in pre-booking workflows.</p>
-
-        <div class="grid-3">
-          <div class="card">
-            <div class="mock-pill" style="background: var(--g-blue-bg); color: var(--g-blue);">Theme 01</div>
-            <h3 style="margin-top: 12px; font-size: 1.15rem;">The Discovery Gap</h3>
-            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px;">Users choose destinations based on thematic preferences (e.g., "beach vacation") rather than strict geographic endpoints.</p>
-            <div class="quote-box">
-              "It's about the theme, not the place. If I want beaches, I'll compare alternative destinations that match the vibe."
-              <div class="quote-author">— Andrew, Spontaneous Explorer (28)</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="mock-pill" style="background: var(--g-yellow-bg); color: #855b00;">Theme 02</div>
-            <h3 style="margin-top: 12px; font-size: 1.15rem;">Anchor vs. Whole</h3>
-            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px;">Travelers plan non-linearly. They lock in an "anchor" (e.g. flight) first, leaving lodgings open-ended.</p>
-            <div class="quote-box">
-              "I don't book all hotels in advance. What if I like a place and decide to stay one extra day?"
-              <div class="quote-author">— Andrew, Spontaneous Explorer (28)</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="mock-pill" style="background: var(--g-green-bg); color: var(--g-green);">Theme 03</div>
-            <h3 style="margin-top: 12px; font-size: 1.15rem;">Total Cost Blind Spot</h3>
-            <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px;">Lack of automated scenario calculation forces heavy spreadsheet reliance for mental math.</p>
-            <div class="quote-box">
-              "In spreadsheets, I calculate estimated total costs (Flight + Hotel + Car) to test out different itinerary schemas."
-              <div class="quote-author">— Iztya, Analytical Planner (25)</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Persona Comparison Summary -->
-        <div style="margin-top: 40px; padding: 28px; background: var(--color-bg); border-radius: var(--radius-md); border: 1px solid var(--color-border);">
-          <h3>Persona Synthesis</h3>
-          <div class="grid-2" style="margin-top: 16px;">
-            <div>
-              <h4 style="color: var(--g-blue);">Iztya (The Planner)</h4>
-              <p style="font-size: 0.9rem; color: var(--color-text-muted);">Highly structured, budget-conscious group trip leader. Creates complex cost simulations in Google Sheets, sets price alerts across multiple date schemas, and desires shared collaborative dashboards.</p>
-            </div>
-            <div>
-              <h4 style="color: var(--g-green);">Andrew (The Spontaneous Explorer)</h4>
-              <p style="font-size: 0.9rem; color: var(--color-text-muted);">Value-focused, solo/partner traveler. Compares destinations side-by-side (e.g., Miami vs. Puerto Rico), books "anchor" flights, and books lodgings dynamically on-the-go.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 05. Strategy & Prioritization -->
-    <section id="strategy">
-      <div class="container">
-        <div class="section-label">05. Strategy & Prioritization</div>
-        <h2 class="section-title">Prioritizing Solutions via 2x2 Matrix</h2>
-        <p class="section-desc">From an intense cross-functional ideation workshop (Crazy 8s & Problem Mapping), features were categorized by User Value vs. Technical Effort.</p>
-
-        <div class="matrix-2x2">
-          <div class="quadrant win">
-            <h4>Quick Wins (High Value, Low/Med Effort)</h4>
-            <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.6;">
-              <li><strong>Anchor Booking Logic:</strong> Allow flight bookings without nagging hotel prompts; switch UI state to "Open-Ended".</li>
-              <li><strong>Active Trip Folders:</strong> Auto-group searched flights and hotels into editable pre-trip workspace dashboards.</li>
-            </ul>
-          </div>
-
-          <div class="quadrant bet">
-            <h4>Big Bets (High Value, High Effort)</h4>
-            <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.6;">
-              <li><strong>Complex Scenario Planner:</strong> Multi-destination AI scenario builder comparing Option A vs. Option B with real-time dynamic total prices.</li>
-            </ul>
-          </div>
-
-          <div class="quadrant fill">
-            <h4>Fills-In (Low Value, Low Effort)</h4>
-            <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.6;">
-              <li><strong>Trip Digest Notifications:</strong> Batch price drop updates instead of sending spammy individual Gmail alerts.</li>
-            </ul>
-          </div>
-
-          <div class="quadrant pit">
-            <h4>The Money Pit (Low Value, High Effort)</h4>
-            <ul style="padding-left: 18px; font-size: 0.85rem; line-height: 1.6;">
-              <li><strong>Tonight Mode:</strong> Panic-booking feature requiring real-time location-aware hotel availability.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 06. Wireframes & UX Solutions -->
-    <section id="wireframes" style="background: var(--color-surface);">
-      <div class="container">
-        <div class="section-label">06. Wireframes & UX Solutions</div>
-        <h2 class="section-title">The Revamped Google Travel Interface</h2>
-        <p class="section-desc">Explore the desktop wireframe flows designed to resolve cognitive overload using Hick's Law and visibility of system status.</p>
-
-        <!-- Interactive Tab Component -->
-        <div class="tab-container">
-          <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab-w1')">W1: Homepage & Active Trips</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-w2')">W2: Multi-Destination Builder</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-w3')">W3: AI Scenario Engine (Hick's Law)</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-w4')">W4: Live-Tracked Itinerary</button>
-          </div>
-
-          <!-- Tab 1 -->
-          <div id="tab-w1" class="tab-content active">
-            <div class="wireframe-box">
-              <div class="wireframe-header">
-                <span class="mock-pill">Screen W1</span>
-                <strong>Homepage Dashboard</strong>
-              </div>
-              <h3>"My Trips" Workspace & AI Entry</h3>
-              <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px;">Replaces fragmented search with an auto-saved "Active Trips" hub. Users can access saved routes or invoke AI Mode for multi-destination planning.</p>
-              
-              <div style="margin-top: 20px; padding: 20px; background: #fff; border: 1px solid var(--color-border); border-radius: 8px;">
-                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-                  <span style="background: var(--g-blue-bg); color: var(--g-blue); padding: 4px 12px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">✨ AI Mode for Planning</span>
-                  <span style="color: var(--color-text-muted); font-size: 0.85rem;">Import Google Maps saved lists or create live scenarios</span>
-                </div>
-                <div class="grid-2">
-                  <div style="padding: 12px; border: 1px dashed #cbd5e1; border-radius: 6px;">
-                    <strong>Washington State Trip</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-muted);">Aug 8 - Aug 19 • With Iztya + 2 more</div>
-                  </div>
-                  <div style="padding: 12px; border: 1px dashed #cbd5e1; border-radius: 6px;">
-                    <strong>Tokyo Adventure</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-muted);">Aug 24 - Aug 31 • With Andrew</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tab 2 -->
-          <div id="tab-w2" class="tab-content">
-            <div class="wireframe-box">
-              <div class="wireframe-header">
-                <span class="mock-pill">Screen W2</span>
-                <strong>Google Maps Integration</strong>
-              </div>
-              <h3>Flexible Multi-Destination Input</h3>
-              <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px;">Direct integration with Google Maps allows users to import pin collections or input sequential stops (Seattle -> Mt. Rainier -> Glacier -> Yellowstone) with customizable duration tags.</p>
-              
-              <div style="margin-top: 20px; padding: 20px; background: #fff; border: 1px solid var(--color-border); border-radius: 8px;">
-                <p style="font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;">Route: New York ➔ Seattle (2d) ➔ Mt. Rainier (2d) ➔ Glacier (3d) ➔ Yellowstone (2d)</p>
-                <div style="background: #e2e8f0; height: 120px; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-size: 0.85rem;">
-                  [ Map Interface displaying live price markers across Pacific Northwest ]
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tab 3 -->
-          <div id="tab-w3" class="tab-content">
-            <div class="wireframe-box">
-              <div class="wireframe-header">
-                <span class="mock-pill">Screen W3</span>
-                <strong>AI Scenario Engine</strong>
-              </div>
-              <h3>3 Scenarios to Eliminate "Mental Math" (Hick's Law)</h3>
-              <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px; margin-bottom: 20px;">Instead of bombarding users with endless price permutations, the engine generates 3 curated, end-to-end trip packages (Flight + Lodging + Car Rental) with total aggregated prices.</p>
-
-              <div class="grid-3">
-                <div class="scenario-card">
-                  <span class="scenario-badge badge-green">Cost-Saver</span>
-                  <h4>Start from Spokane</h4>
-                  <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 8px 0;">11 Days • 4 People</p>
-                  <p style="font-size: 1.1rem; font-weight: 800; color: var(--color-text);">$1,800 / person</p>
-                  <p style="font-size: 0.75rem; color: var(--g-green); margin-top: 4px;">✔ Flights ✔ Stay ✔ Car Included</p>
-                </div>
-
-                <div class="scenario-card" style="border-color: var(--g-blue);">
-                  <span class="scenario-badge badge-blue">Easy-Pace</span>
-                  <h4>Start from Seattle</h4>
-                  <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 8px 0;">12 Days • 4 People</p>
-                  <p style="font-size: 1.1rem; font-weight: 800; color: var(--color-text);">$2,000 / person</p>
-                  <p style="font-size: 0.75rem; color: var(--g-blue); margin-top: 4px;">✔ Flights ✔ Stay ✔ Car Included</p>
-                </div>
-
-                <div class="scenario-card">
-                  <span class="scenario-badge badge-yellow">Luxury</span>
-                  <h4>Start from Seattle Direct</h4>
-                  <p style="font-size: 0.85rem; color: var(--color-text-muted); margin: 8px 0;">12 Days • 4 People</p>
-                  <p style="font-size: 1.1rem; font-weight: 800; color: var(--color-text);">$3,600 / person</p>
-                  <p style="font-size: 0.75rem; color: var(--color-text-muted); margin-top: 4px;">✔ Flights ✔ Luxury Stay ✖ Car Excluded</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tab 4 -->
-          <div id="tab-w4" class="tab-content">
-            <div class="wireframe-box">
-              <div class="wireframe-header">
-                <span class="mock-pill">Screen W4</span>
-                <strong>Live Itinerary & Price Tracking</strong>
-              </div>
-              <h3>Collapsible Blocks & System Status Visibility</h3>
-              <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 8px;">Every block in the itinerary is collapsible and editable. Live status pills inform users whether prices are low, typical, or high without requiring manual re-searches.</p>
-
-              <div style="margin-top: 20px; padding: 16px; background: #fff; border: 1px solid var(--color-border); border-radius: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
-                  <div>
-                    <strong>Flight to Spokane (10:30 AM JFK)</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-muted);">Aug 8 • Segment 1</div>
-                  </div>
-                  <div style="display: flex; gap: 8px; align-items: center;">
-                    <span style="background: var(--g-green-bg); color: var(--g-green); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 700;">Price is currently low</span>
-                    <button style="background: var(--g-blue); color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">Select Flight</button>
-                  </div>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: 6px;">
-                  <div>
-                    <strong>Check-in: Seattle, WA (07:00 PM)</strong>
-                    <div style="font-size: 0.8rem; color: var(--color-text-muted);">Aug 8 - Aug 9 • Accommodation</div>
-                  </div>
-                  <div style="display: flex; gap: 8px; align-items: center;">
-                    <span style="background: var(--g-red-bg); color: var(--g-red); font-size: 0.75rem; padding: 4px 8px; border-radius: 4px; font-weight: 700;">Price is currently high</span>
-                    <button style="background: #e2e8f0; color: var(--color-text); border: none; padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">Track Price ON</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 07. Usability Testing Plan -->
-    <section id="testing">
-      <div class="container">
-        <div class="section-label">07. Usability Testing</div>
-        <h2 class="section-title">Validation & Metrics Plan</h2>
-        <p class="section-desc">Moderated remote usability testing (N=5) utilizing think-aloud protocol to validate if the new experience eliminates the "spreadsheet reflex."</p>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3>Test Tasks</h3>
-            <ol style="padding-left: 20px; margin-top: 12px; line-height: 1.8; font-size: 0.9rem; color: var(--color-text-muted);">
-              <li><strong>Task 1 (The Anchor Booking):</strong> "Book a flight to Miami to lock in price, but keep the trip 'Active' to add hotel later."</li>
-              <li><strong>Task 2 (Scenario Building):</strong> "Create two distinct trip options ('Luxury' vs. 'Budget') for a Tokyo group trip."</li>
-              <li><strong>Task 3 (Cost Comparison):</strong> "Compare total costs side-by-side without opening external calculators or notes."</li>
-            </ol>
-          </div>
-
-          <div class="card">
-            <h3>Success Benchmarks</h3>
-            <table class="test-table">
-              <thead>
-                <tr>
-                  <th>Metric</th>
-                  <th>Target Goal</th>
-                </tr>
-              </thead>
+        <!-- COMPETITIVE -->
+        <section class="block">
+          <div class="block-head"><h5>1. Competitive Landscape: The “Live Planning” Quadrant Is Empty</h5></div>
+          <p class="prose">I compared Google Travel with direct competitors (TripIt, Wanderlog) and indirect ones (Notion, Airtable, Excel). Planning tools hold static data and booking tools hold live data, but none do both. The opportunity is a tool where prices update automatically before you decide.</p>
+          <div class="scroll" tabindex="0" role="region" aria-label="Competitive comparison table">
+            <table>
+              <thead><tr><th>Feature</th><th class="hl">Google Travel</th><th>TripIt</th><th>Notion / Airtable / Excel</th></tr></thead>
               <tbody>
-                <tr>
-                  <td><strong>Task Completion Rate</strong></td>
-                  <td><strong style="color: var(--g-green);">> 90%</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>Time on Task</strong></td>
-                  <td><strong>< 2 mins</strong> (vs. 10+ mins in Excel)</td>
-                </tr>
-                <tr>
-                  <td><strong>Spreadsheet Reflex</strong></td>
-                  <td><strong>0 users</strong> reaching for pen/calculator</td>
-                </tr>
-                <tr>
-                  <td><strong>Single Ease Question (SEQ)</strong></td>
-                  <td><strong>> 5.5 / 7</strong> difficulty score</td>
-                </tr>
+                <tr><th>Primary value</th><td class="hl">Search and book</td><td>Post-booking organization</td><td>Custom organization</td></tr>
+                <tr><th>Drafting a plan</th><td class="hl">Non-existent <small>must book to save</small></td><td>Good <small>but manual</small></td><td>Excellent <small>total freedom</small></td></tr>
+                <tr><th>Price tracking</th><td class="hl">Hidden <small>updates arrive via Gmail only</small></td><td>None</td><td>Manual entry</td></tr>
+                <tr><th>Cost simulation</th><td class="hl">None <small>user does mental math</small></td><td>Medium <small>sum only</small></td><td>High <small>a financial model</small></td></tr>
+                <tr><th>Group collaboration</th><td class="hl">Low <small>share link only</small></td><td>Medium <small>view only</small></td><td>High <small>real-time editing</small></td></tr>
+                <tr><th>Booking actionability</th><td class="hl">High <small>direct links</small></td><td>Low <small>redirects</small></td><td>None <small>dead task</small></td></tr>
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-    </section>
+          <p class="glossary-note">Wanderlog (visual itinerary) was also assessed. This table reflects the products at the time of the project.</p>
+        </section>
 
-    <!-- Key Takeaways & Reflection -->
-    <section style="background: var(--color-surface);">
-      <div class="container">
-        <div class="section-label">08. Takeaways & Impact</div>
-        <h2 class="section-title">Key Learnings & Retrospective</h2>
-        
-        <div class="grid-3" style="margin-top: 24px;">
-          <div class="card">
-            <h4>1. Design for Mental Models</h4>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 8px;">Users don't think in isolated silos (Flights vs. Hotels). Designing around the unified "Trip" concept matches natural user intent.</p>
+        <!-- RESEARCH -->
+        <section class="block">
+          <div class="block-head"><h5>2. Foundational Research: In-depth Interviews</h5></div>
+          <details class="glossary" open>
+            <summary>Research Plan and Scope</summary>
+            <div class="glossary-grid">
+              <div>
+                <dl>
+                  <dt>Objective</dt>
+                  <dd>Understand the cognitive and emotional friction points in order to design a seamless planning-to-booking workflow.</dd>
+                  <dt>Research questions</dt>
+                  <dd>What emotional triggers make a traveler track a flight rather than book it? How do travelers react when their mental model of a trip conflicts with separate bookings? What creates a sense of confidence or control while planning and booking?</dd>
+                </dl>
+              </div>
+              <div>
+                <dl>
+                  <dt>Planned design</dt>
+                  <dd>Target of 16 participants, a 12-question screener, behavioral segments with hard, minimum and soft quotas, and a four-part discussion guide (about 45 minutes).</dd>
+                  <dt>What I completed</dt>
+                  <dd>Within the one-month timeline I completed 2 interviews, one for each persona. The themes below are exploratory and need more interviews to validate.</dd>
+                </dl>
+              </div>
+            </div>
+          </details>
+
+          <div class="block-head" style="margin-top:2.5rem"><h5>Three Key Areas Where Current Tools Fail to Match User Intent</h5></div>
+          <div class="card-grid three">
+            <div class="stitch-card">
+              <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+              <h5>The Discovery Gap</h5>
+              <p>Users will change destinations for value, but they have to hunt for alternatives by hand because search tools are rigid.</p>
+              <p class="quote">“It’s about the theme, not the place. If I like to have beaches, I’ll find alternatives that offer the same vibes.”</p>
+              <p class="impact"><b>Impact</b>Search needs a thematic entry point, not only a fixed destination.</p>
+            </div>
+            <div class="stitch-card highlight-card">
+              <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+              <h5>The “Anchor” vs. the “Whole”</h5>
+              <p>Users plan non-linearly, but tools force a linear checkout process.</p>
+              <p class="quote">“I don’t book all accommodations in advance because what if I like the place and I want to stay one more day here?”</p>
+              <p class="impact"><b>Impact</b>People should be able to book one anchor, such as a flight, and fill in the rest later.</p>
+            </div>
+            <div class="stitch-card">
+              <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+              <h5>Total Cost Blind Spot</h5>
+              <p>The lack of cost simulation is what drives spreadsheet usage.</p>
+              <p class="quote">“With spreadsheet I can calculate the estimated cost and make scenario about order of places and its price.”</p>
+              <p class="impact"><b>Impact</b>Showing total trip cost side by side could remove the need to leave for a spreadsheet.</p>
+            </div>
           </div>
-          <div class="card">
-            <h4>2. Reduce Mental Math</h4>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 8px;">Applying Hick's Law by auto-calculating aggregated scenario packages empowers quick confidence without cognitive fatigue.</p>
+          <!-- TODO: confirm participants consented to being named and quoted; pseudonyms are safer for a public page -->
+        </section>
+
+        <!-- JOURNEY MAPS -->
+        <section class="block">
+          <div class="block-head"><h5>3. Conceptual Components: Journey Maps</h5></div>
+          <p class="prose">Each interview became a persona and a journey map. Switch between them to compare how a planner and a spontaneous explorer move through the same trip.</p>
+          <div class="chips" id="persona-chips" role="group" aria-label="Choose a persona"></div>
+          <p class="persona-line" id="persona-line"></p>
+          <div class="journey" id="journey" aria-live="polite"></div>
+
+          <div class="block-head" style="margin-top:2.5rem"><h5>What the Two Journeys Suggest</h5></div>
+          <div class="plan-grid">
+            <section class="plan-col"><h2>Saved &amp; Discover</h2><p>A tab that handles locations and broad categories, for people who start with a theme rather than a destination.</p></section>
+            <section class="plan-col"><h2>Trip Dashboard</h2><p>A dashboard that is strict but also flexible and editable on the fly. An Airbnb-style itinerary with hierarchical views, where users can create, edit and share personalized schedules.</p></section>
+            <section class="plan-col"><h2>Trips Don’t End at Booking</h2><p>The system must understand that a trip isn’t finished just because a flight is booked.</p></section>
           </div>
-          <div class="card">
-            <h4>3. Support Non-Linearity</h4>
-            <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-top: 8px;">Accommodating "anchor bookings" recognizes that a trip isn't finished just because one component is locked in.</p>
+        </section>
+
+        <!-- WORKSHOP -->
+        <section class="block">
+          <div class="block-head"><h5>4. Ideation Workshop</h5></div>
+          <p class="prose">I structured a 90-minute workshop around a warm-up, problem mapping to find breakpoints in the journey, Crazy 8’s sketching, strategy prioritization on a value-versus-effort matrix, and detailed wireframe sketching. The breakpoints it surfaced: no shared inspiration board or group polling, limited thematic search, no collaborative workspace, no integrated booking for multi-part trips, no consolidated trip dashboard, no clear cost comparison across destinations, and no support for anchor bookings.</p>
+          <div class="card-grid">
+            <div class="stitch-card"><h5>The Quick Wins</h5>
+              <p><strong>Anchor booking logic:</strong> let users book a flight without nagging them to book a hotel, changing the trip’s state from “Incomplete” to “Open-ended.”</p>
+              <p><strong>The Active Trip:</strong> auto-group searched items into a Trip folder that can grow into a dashboard and later an itinerary.</p>
+              <p class="impact"><b>Value</b>High user and business value, low effort.</p></div>
+            <div class="stitch-card highlight-card"><h5>The Big Bets</h5>
+              <p><strong>Complex Scenario Planner:</strong> a tool that simulates “Option A vs Option B” with live pricing or with AI.</p>
+              <p class="impact"><b>Value</b>High user and business value, high effort.</p></div>
+            <div class="stitch-card highlight-card"><h5>Fills-in</h5>
+              <p><strong>The Trip Digest notification:</strong> batch price-change alerts instead of emailing every time a tracked flight moves.</p>
+              <p class="impact"><b>Value</b>Lower value, low effort.</p></div>
+            <div class="stitch-card"><h5>The Money Pit</h5>
+              <p><strong>Tonight Mode:</strong> location-aware logic and real-time hotel availability for a last-minute “panic” moment. HotelTonight and Kayak already offer similar functions.</p>
+              <p class="impact"><b>Value</b>Lower value, high effort, deprioritized.</p></div>
           </div>
-        </div>
+        </section>
+
+        <!-- WIREFRAMES -->
+        <section class="block">
+          <div class="block-head"><h5>5. Wireframes: Desktop Mode</h5></div>
+          <p class="prose">The Quick Win became the Active Trip on the homepage, and the Big Bet became AI mode for planning. Step through the flow to see how each screen answers a research theme.</p>
+          <div class="chips" id="wf-chips" role="group" aria-label="Choose a screen"></div>
+          <figure class="shot" id="wf-shot"><img id="wf-img" alt="" onerror="this.parentNode.style.display='none'"></figure>
+          <div class="panel" id="wf-panel" aria-live="polite"></div>
+        </section>
+
+        <!-- USABILITY PLAN -->
+        <section class="block">
+          <div class="block-head"><h5>6. Usability Testing Plan</h5></div>
+          <p class="prose">This step is a plan and has not been run. It would evaluate whether the Active Trip and Scenario Planner let users plan complex trips without resorting to spreadsheets or notes, using moderated remote sessions with a think-aloud protocol and five participants (three planners, two spontaneous explorers).</p>
+          <div class="card-grid three">
+            <div class="stitch-card"><h5>Task 1: The Anchor Booking</h5><p><em>Spontaneous explorer.</em> Book a flight to Miami while keeping the trip active so a hotel can be added later.</p><p class="impact"><b>Success</b>Books the flight without an error state or the urge to start a new search.</p></div>
+            <div class="stitch-card highlight-card"><h5>Task 2: Building Scenarios</h5><p><em>Planner.</em> From 3 saved flights and 3 hotels for a Tokyo trip, create a Luxury and a Budget option.</p><p class="impact"><b>Success</b>Uses the selection and group functions without asking for help.</p></div>
+            <div class="stitch-card"><h5>Task 3: The Comparison</h5><p><em>Planner.</em> Compare the total cost of both scenarios side by side and find the saving.</p><p class="impact"><b>Success</b>Finds the difference in the UI without a calculator or notes.</p></div>
+          </div>
+          <div class="scroll" style="margin-top:1.2rem" tabindex="0" role="region" aria-label="Planned success metrics">
+            <table>
+              <thead><tr><th>Type</th><th>Metric</th><th>Planned benchmark</th></tr></thead>
+              <tbody>
+                <tr><td>Quantitative</td><td>Task completion rate</td><td>Above 90%</td></tr>
+                <tr><td>Quantitative</td><td>Time on task</td><td>Under 2 minutes for the Scenario Planner</td></tr>
+                <tr><td>Qualitative</td><td>“Spreadsheet reflex” (reaching for a pen or calculator)</td><td>Pass / fail</td></tr>
+                <tr><td>Qualitative</td><td>Cognitive load (single ease question, 1–7)</td><td>Target above 5.5</td></tr>
+                <tr><td>Qualitative</td><td>Confidence that the total price is accurate</td><td>Self-reported</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- WHY IT MATTERS -->
+        <section class="block">
+          <div class="block-head"><h5>Why It Could Matter for Google</h5></div>
+          <p class="prose">These are hypotheses to test, not results. Keeping people in a single Trip from inspiration through booking could capture users who currently leave for spreadsheets and booking sites, which fits the goal of owning the inspiration phase. Anchor booking could turn a partial booking into a continuing relationship rather than a lost one. And a scenario view that shows total cost could raise confidence at the moment of choosing, which is where referral fees are earned.</p>
+        </section>
+
+        <!-- NOTE -->
+        <section class="block">
+          <aside class="note">
+            <h5>A note on the data</h5>
+            <p style="margin:0">This was a one-month academic project. Findings come from two interviews, so they are directional rather than representative, and I would validate them with the full planned sample before drawing conclusions. The usability test has not been run. Competitive observations reflect the products when I did the analysis and may have changed. Next steps are the full interview round, then running the test plan above and revising the wireframes from what it shows.</p>
+          </aside>
+        </section>
+
+        <!-- PDF -->
+        <section class="block source-material-section">
+          <div class="block-head">
+            <h5 class="font-hand">The Deliverable</h5>
+            <p class="prose">The full slide deck includes the research plan, screener and discussion guide, the journey maps and the annotated wireframes.</p>
+          </div>
+          <div class="pdf-window">
+            <iframe src="assets/google-travel.pdf" title="Google Travel revamp deliverable (PDF)" loading="lazy"></iframe>
+          </div>
+          <a class="pdf-link highlight-word" href="assets/google-travel.pdf" target="_blank" rel="noopener">Open the PDF in a new tab</a>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="block project-footer">
+          <h5 class="font-hand">Retrospective</h5>
+          <p class="prose">This project taught me to follow a design from a tension, planning versus booking, through to a specific screen, and to tag each design decision with the research theme behind it. With more time I would complete the interviews, run the usability test, and check which ideas are feasible with the people who would build them.</p>
+          <div class="section-divider"><span class="knot">✦</span></div>
+          <a href="/portfolio" class="button-primary-3 w-button" style="display:inline-block;margin-top:15px;">Back to Project List</a>
+        </footer>
+
       </div>
     </section>
   </main>
 
-      <!-- ---------------------------start of footer--------------------- -->
-  <!-- FOOTER -->
-  <footer class="footer-custom-wrapper">
-    <div class="container footer-content-layer">
+  {% include footer.html %}
 
-      <!-- COLUMN 1: Logo -->
-      <div class="footer-logo">
-      </div>
-
-      <!-- COLUMN 2: Middle Content Grouped Together -->
-      <div class="footer-middle">
-        <div class="footer-intro">
-          <h5>Curiosity brought you here.</h5>
-          <p>Thanks for exploring my work. Let's keep the conversation going.</p>
-        </div>
-
-        <nav class="footer-nav-container" aria-label="Footer Navigation">
-          <ul role="list" class="footer-nav-list">
-            <li>
-              <a href="https://www.linkedin.com/in/kiranaananda/" class="footer-nav-link" target="_blank"
-                rel="noopener noreferrer">
-                <img src="https://static.thenounproject.com/png/2386251-200.png" alt="" aria-hidden="true" width="20">
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/kiranaananda/" class="footer-nav-link" target="_blank"
-                rel="noopener noreferrer">
-                <img src="https://static.thenounproject.com/png/3350460-200.png" alt="" aria-hidden="true" width="20">
-                Instagram
-              </a>
-            </li>
-            <li class="footer-nav-divider-item" aria-hidden="true">
-              <div class="footer-nav-divider"></div>
-            </li>
-            <li>
-              <a href="mailto:kiranadwima@gmail.com" class="footer-nav-accent">
-                <img src="https://static.thenounproject.com/png/303076-200.png" alt="" aria-hidden="true" width="25">
-                Email Me
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <div class="footer-copyright">
-          <p>&copy; 2026 Kirana Ananda</p>
-        </div>
-      </div>
-
-      <!-- COLUMN 3: Side Info -->
-      <div class="footer-side">
-        <p><strong>Based in New York, NY</strong></p>
-        <p>Open to opportunities<br>and good conversations.</p>
-      </div>
-
-    </div>
-  </footer>
-
-  <!-- ---------------------------end of footer--------------------- -->
-
-
-  <script>
-    function switchTab(evt, tabId) {
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(content => content.classList.remove('active'));
-
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      tabBtns.forEach(btn => btn.classList.remove('active'));
-
-      document.getElementById(tabId).classList.add('active');
-      evt.currentTarget.classList.add('active');
+<script>
+(function () {
+  const journeys = {
+    "Iztya, the Planner": {
+      c: "#4285F4",
+      line: "Entry-level and budget-conscious, Iztya plans an adventurous group trip with Google Sheets and Google Flights. She expects clear, trip-labeled price alerts and a threaded itinerary that organizes plans and bookings by destination.",
+      s: [
+        ["Ideation", "🤔", "Checks the bucket list, picks destination options, finds people with shared interest.", "I want to go here. Who would want to come with me?"],
+        ["Group alignment", "🤓", "Creates a WhatsApp group, holds an initial meeting, prioritizes destinations.", "Okay, let’s get everyone on the same page."],
+        ["Planning & simulation", "😣", "Drafts a rough itinerary, finds flights and cars, builds spreadsheet simulations to find the best value.", "This is a lot of work."],
+        ["Tracking & waiting", "😐", "Bookmarks car options, sets Google Flights alerts, finds Airbnbs.", "Okay, my alerts are set. Now we wait for a good price."],
+        ["Booking", "🥳", "Gets a “cheap” alert, then books flights, cars and the Airbnbs.", "The price dropped! GO, GO, GO!"],
+        ["Pre-trip checkpoint", "😅", "Leaves all bookings scattered in email and stops using the spreadsheet.", "Okay… flights booked. Cars booked. Airbnb booked. Phew."],
+        ["On-trip experience", "😊", "Travels together, using the Airbnb itinerary style as the new guide.", "Who’s the leader today? What’s the plan?"]
+      ]
+    },
+    "Andrew, the Spontaneous Explorer": {
+      c: "#34A853",
+      line: "An accountant who is value-focused, Andrew wants a relaxing one-week birthday trip to beaches, finding everything on Expedia. He expects accessible price data without urgent notifications, and cost comparisons across destinations that fit his theme.",
+      s: [
+        ["Ideation", "😃", "Searches travel costs for broad regions or themes, then leaves without saving or booking.", "I’m just price-checking. I’m not ready to commit money yet."],
+        ["The return", "😐", "Returns days later and opens multiple tabs to compare destinations side by side.", "Okay, prices moved. I need to see which location offers better value now."],
+        ["The pivot & commit", "🤓", "Sorts by hotel cost and picks the destination with the lowest estimated total.", "My mental maths tells me that Puerto Rico is $200 cheaper right now. Let’s go to Puerto Rico!"],
+        ["Booking the anchor", "😊", "Books round-trip flights, the first 2–3 hotel nights and the car.", "I’ll lock in the essentials. I’ll figure out the rest of the week when I get there."],
+        ["Arrival & adaptation", "😬", "Picks up a rental car whose specs differ from what he booked, then drives on.", "The car isn’t what I booked, but whatever. I’m on vacation now."],
+        ["On-trip searching", "😅", "Opens Expedia at 4pm on day 3, narrows to 2–3 nearby options and filters by rating.", "I need a bed for tonight. I’m not paying more than X."],
+        ["The analog close", "😎", "Calls the hotel directly to confirm availability or negotiate, then books.", "I want to make sure a human knows I’m coming since it’s so last minute."]
+      ]
     }
-  </script>
+  };
+
+  const shots = [
+    ["W1 Homepage", "Homepage with My Trips and the AI mode entry point.", ["Quick Win", "Discovery gap"],
+      ["The “My Trips” area and Add New Trip card are the Active Trip, part of the Quick Wins strategy. Clicking from here goes to W2.", "The AI mode for planning button is the Complex Scenario Planner, part of the Big Bets strategy. Clicking from here goes to W3.", "Everything not annotated is already done by Google Travel."]],
+    ["W2 Add new trip", "Add New Trip screen with editable fields, map and price pins.", ["Quick Win", "Anchor vs whole"],
+      ["Trip fields are editable when clicked, and Save and Share let users keep the trip and invite others.", "A map with live price pins supports browsing destinations by value.", "The AI mode entry here leads to the Complex Scenario Planner (W3)."]],
+    ["W3 AI mode", "AI mode for planning with destination inputs and inspiration cards.", ["Big Bet", "Discovery gap"],
+      ["Holiday-themed inspiration cards help users who are unsure where to go, tackling the discovery gap.", "Destination inputs support User Control and Freedom by letting users add more destinations.", "Importing saved lists from Google Maps tackles fragmentation.", "Submit goes to W4."]],
+    ["W4 Scenarios", "Three plan scenarios: cost-saver, easy-pace and luxury.", ["Big Bet", "Total cost blind spot"],
+      ["Limiting the options to three scenarios reduces cognitive load, in line with Hick’s Law, by cutting the mental maths across different prices.", "Each plan has different pricing, so trade-offs are clear without overwhelming users with price variations."]],
+    ["W5 Itinerary", "Itinerary view with collapsible blocks and price tracking toggles.", ["Quick Win", "Anchor vs whole"],
+      ["Every block is collapsible and editable, reflecting the anchor-versus-whole theme.", "Labels show activities Google Travel supports, enabling direct selection and step-based status updates, with a Track Prices toggle.", "Price status shows even when tracking is off, supporting Visibility of System Status.", "Users can add a personal itinerary and modify it freely (User Control and Freedom)."]]
+  ];
+
+  // Journey maps
+  const chips = document.getElementById("persona-chips"), jr = document.getElementById("journey"), pl = document.getElementById("persona-line");
+  function showPersona(name) {
+    const p = journeys[name];
+    chips.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === name));
+    pl.textContent = p.line;
+    jr.innerHTML = p.s.map((s, i) => `<div class="stage" style="--c:${p.c}"><span class="em" aria-hidden="true">${s[1]}</span><h6>${i + 1}. ${s[0]}</h6><p class="do">${s[2]}</p><p class="th">“${s[3]}”</p></div>`).join("");
+  }
+  Object.keys(journeys).forEach(k => {
+    const b = document.createElement("button"); b.type = "button"; b.dataset.k = k; b.textContent = k;
+    b.addEventListener("click", () => showPersona(k)); chips.appendChild(b);
+  });
+  showPersona(Object.keys(journeys)[0]);
+
+  // Wireframe walkthrough (export each screen to assets/google-travel/w1.png ... w5.png)
+  const wc = document.getElementById("wf-chips"), wp = document.getElementById("wf-panel"), wi = document.getElementById("wf-img");
+  function showShot(i) {
+    const s = shots[i];
+    wc.querySelectorAll("button").forEach((b, j) => b.classList.toggle("on", j === i));
+    wi.parentNode.style.display = ""; wi.src = `assets/google-travel/w${i + 1}.png`; wi.alt = s[1];
+    wp.innerHTML = `<div>${s[2].map(t => `<span class="tagline">${t}</span>`).join("")}</div><ul>${s[3].map(t => `<li>${t}</li>`).join("")}</ul>`;
+  }
+  shots.forEach((s, i) => {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = s[0];
+    b.addEventListener("click", () => showShot(i)); wc.appendChild(b);
+  });
+  showShot(0);
+})();
+</script>
+
 </body>
 </html>
