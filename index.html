@@ -19,22 +19,24 @@
   <!-- ==========================================================================
        MAIN CONTENT
        ========================================================================== -->
-  <main>
-    <section class="portfolio-header">
+<main>
+  <section class="portfolio-header">
     <h4>Behind the Scenes</h4>
-    <p style="text-align: justify; margin-left:10%; margin-right:10%;">My work sits between analysis and executive decision-making, translating noisy market signals into actionable strategy. Please kindly check the case studies below. </p>
+    <p style="text-align: justify; margin-left:10%; margin-right:10%;">
+      My work sits between analysis and executive decision-making, translating noisy market signals into actionable strategy. Please kindly check the case studies below.
+    </p>
   </section>
 
+  <!-- Removed duplicate data-tabby-default from #casestudy -->
   <ul data-tabs>
     <li><a data-tabby-default href="#marketresearch">Market Research</a></li>
-    <li><a data-tabby-default href="#casestudy">UX/Product Research</a></li>
+    <li><a href="#casestudy">UX/Product Research</a></li>
     <li><a href="#reading">Insight Carousels</a></li>
   </ul>
 
   <div class="main-container">
 
     <div id="marketresearch">
-      
       <div class="project-row">
         <div class="project-visual">
           <a href="lion-fmcg.html">
@@ -65,17 +67,14 @@
           </a>
           <p class="project-meta"> Customer Segmentation • Persona-based Marketing • Cluster Analysis • Seasonal Demand </p>
           <p class="project-desc">
-            I clustered Airbnb listings by amenities into seven guest personas, then matched each one to a season to give Chicago 
-            a content plan aimed at moving it from “underperforming favourite” to “high demand.”
+            I clustered Airbnb listings by amenities into seven guest personas, then matched each one to a season to give Chicago a content plan aimed at moving it from “underperforming favourite” to “high demand.”
           </p>
           <a href="airbnb.html" class="highlight-word"> View Case Study </a>
         </div>
       </div>
-      
     </div>
 
     <div id="casestudy">
-      
       <div class="project-row">
         <div class="project-visual">
           <a href="google-travel.html">
@@ -93,7 +92,6 @@
           <a href="google-travel.html" class="highlight-word"> View Case Study </a>
         </div>
       </div>
-
     </div>
 
     <div id="reading">
@@ -157,11 +155,40 @@
       </section>
     </div>
 
-
   </div>
-  </main>
-
+</main>
+  
   {% include footer.html %}
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tabLinks = document.querySelectorAll('[data-tabs] a');
+  const tabPanels = document.querySelectorAll('.main-container > div');
+
+  function switchTab(targetId) {
+    tabPanels.forEach(panel => {
+      panel.style.display = `#${panel.id}` === targetId ? 'block' : 'none';
+    });
+    tabLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === targetId);
+    });
+  }
+
+  tabLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      switchTab(targetId);
+    });
+  });
+
+  // Activate initial tab
+  const defaultTab = document.querySelector('[data-tabs] a[data-tabby-default]') || tabLinks[0];
+  if (defaultTab) {
+    switchTab(defaultTab.getAttribute('href'));
+  }
+});
+</script>
+  
 </body>
 </html>
