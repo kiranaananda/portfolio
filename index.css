@@ -318,6 +318,10 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
+.marketresearch {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
 
 /* The "Experience" Layout */
 .project-row {
